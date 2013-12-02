@@ -29,7 +29,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	protected Server() throws RemoteException {
 		super();
 		this.ip="localhost";
-		this.puerto=3000;
+		this.puerto=3001;
 		this.fachada=FTERD.get();
 	}
 	
@@ -42,12 +42,12 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void conectar() throws RemoteException, MalformedURLException {
 		LocateRegistry.createRegistry(this.puerto);
 		try {
-			Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/terd", this);
+			Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
 		}
 		catch (AlreadyBoundException eABE) {
-			Naming.rebind("rmi://" + this.ip + ":" + this.puerto + "/terd", this);
+			Naming.rebind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
 		}
-		System.out.println("Servidor escuchando");
+		System.out.println("Servidor escuchando" + this.puerto);
 	}
 
 	/**** Métodos remotos ****/
@@ -56,8 +56,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.fachada.add(jugador);
 	}
 
-	public void delete(Jugador j) throws RemoteException {
-		this.fachada.delete(j);
+	public void delete(String email) throws RemoteException {
+		Jugador jugador=this.fachada.getJugador(email);
+		this.fachada.delete(jugador);
 	}
 	
 	public void register(String email, String passwd) throws RemoteException {

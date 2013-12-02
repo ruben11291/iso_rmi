@@ -2,6 +2,7 @@ package PruebaComunicacion;
 
 
 import esi.uclm.iso.ultimate_tttoe.comunicaciones.Cliente;
+import esi.uclm.iso.ultimate_tttoe.comunicaciones.Proxy;
 
 
 public class main {
@@ -14,12 +15,15 @@ public class main {
 		Cliente cliente;
 		System.out.println("En Conectar");
 		try {
-			cliente=new Cliente("pepeprueba");
-			cliente.setServer("rmi://172.19.212.87:3000/terd");
-			cliente.conectar();
+			cliente=new Cliente("pepeprueba@pepe.com");
+//			cliente.setServer("rmi://localhost:3001/servidor");
+//			//cliente.conectar();
+			@SuppressWarnings("unused")
+			Proxy p=Proxy.get();
 			System.out.println("Conectado");
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			System.out.println("error");
 		}
 	}
 }

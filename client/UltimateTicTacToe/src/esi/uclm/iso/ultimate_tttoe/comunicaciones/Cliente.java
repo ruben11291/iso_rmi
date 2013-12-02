@@ -6,26 +6,27 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
 
 import server.exportable.communications.IServer;
+import server.exportable.exceptions.CoordenadasNoValidasException;
+import server.exportable.exceptions.JugadorNoExisteException;
+import server.exportable.exceptions.NoEstaJugandoException;
+import server.exportable.exceptions.NoTienesElTurnoException;
 import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.ICliente;
-import esi.uclm.iso.ultimate_tttoe.dominio.Tablero9x9;
-import esi.uclm.iso.ultimate_tttoe.excepciones.CoordenadasNovalidasException;
-import esi.uclm.iso.ultimate_tttoe.excepciones.JugadorNoExisteException;
-import esi.uclm.iso.ultimate_tttoe.excepciones.NoEstaJugandoException;
-import esi.uclm.iso.ultimate_tttoe.excepciones.NoTienesElTurnoException;
-
-public class Cliente implements ICliente{
+//import esi.uclm.iso.ultimate_tttoe.dominio.Tablero9x9;
+public class Cliente extends UnicastRemoteObject implements ICliente{
 	
 	private String ip;
 	private int puerto;
 	private String email;
 	private IServer servidor;
-	private Tablero9x9 juego;
+	//private Tablero9x9 juego;
 	
 	public Cliente(String email) throws RemoteException{
+		super();
 		ip = "localhost";
-		puerto = 1099;              // Puerto por defecto para rmi
+		puerto = 4000;              // Puerto por defecto para rmi
 		this.email = email;
 		
 		boolean conectado= false;
@@ -33,7 +34,7 @@ public class Cliente implements ICliente{
 			try {
 				LocateRegistry.createRegistry(this.puerto);
 				//Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/ServicioAjedrez", this);
-				Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/terd", this);
+				Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/cliente", this);
 				conectado=true;
 			}
 			catch (AlreadyBoundException eABE) {
@@ -41,6 +42,7 @@ public class Cliente implements ICliente{
 			}
 			catch (MalformedURLException e) {}
 			catch (RemoteException e) {
+				System.err.println(e.toString());
 				this.puerto+=1;
 			}
 		}
@@ -91,9 +93,9 @@ public class Cliente implements ICliente{
 	@Override
 	public void poner(int cT, int fT, int cC, int fC) throws RemoteException,
 			NoTienesElTurnoException, JugadorNoExisteException,
-			NoEstaJugandoException, CoordenadasNovalidasException {
+			NoEstaJugandoException, CoordenadasNoValidasException {
 		
-		juego.colocar(cT, fT, cC, fC);
+		//juego.colocar(cT, fT, cC, fC);
 		
 	}
 

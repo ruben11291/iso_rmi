@@ -10,7 +10,6 @@ import server.exportable.exceptions.CoordenadasNoValidasException;
 import server.exportable.exceptions.JugadorNoExisteException;
 import server.exportable.exceptions.NoEstaJugandoException;
 import server.exportable.exceptions.NoTienesElTurnoException;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.*;
 
 public class FTERD {
 	private static FTERD yo;
