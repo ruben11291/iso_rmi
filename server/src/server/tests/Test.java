@@ -10,7 +10,7 @@ public class Test {
 	}
 
 	public void setUp(){
-		int a = 2;
+		int a = 3;
 	}
 
 }
