@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ProjectTreeState projectID="UMUTxEKD.AACAQTF" projectPath="/home/ruben/vpworkspace/TicTacToe.vpp">
 	<TreeState name="ModelRepository" viewX="0" viewY="0"/>
-	<TreeState name="DiagramNavigator" viewX="22" viewY="0">
+	<TreeState name="DiagramNavigator" viewX="0" viewY="342">
 		<ExpandedPath>DiagramNavigator</ExpandedPath>
 		<ExpandedPath>DiagramNavigator,UML Diagrams</ExpandedPath>
 		<ExpandedPath>UseCaseDiagram</ExpandedPath>
 		<ExpandedPath>ClassDiagram</ExpandedPath>
+		<ExpandedPath>StateDiagram</ExpandedPath>
 		<ExpandedPath>DiagramNavigator,Requirements Capturing</ExpandedPath>
 		<ExpandedPath>DiagramNavigator,Database Modeling</ExpandedPath>
 		<ExpandedPath>DiagramNavigator,Business Process Modeling</ExpandedPath>
@@ -13,7 +14,7 @@
 		<ExpandedPath>DiagramNavigator,Enterprise Modeling</ExpandedPath>
 		<ExpandedPath>DiagramNavigator,Impact Analysis</ExpandedPath>
 		<ExpandedPath>DiagramNavigator,Others</ExpandedPath>
-		<SelectedPath>UseCaseDiagram,Qg0TxEKD.AACAQZ5</SelectedPath>
+		<SelectedPath>StateDiagram,iXgtu0KD.AACAQm_</SelectedPath>
 	</TreeState>
 	<TreeState name="ClassBrowser" viewX="0" viewY="0"/>
 	<TreeState name="LogicalView" viewX="0" viewY="0"/>
