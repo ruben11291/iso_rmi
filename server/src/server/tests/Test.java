@@ -9,4 +9,8 @@ public class Test {
 		fail("Not yet implemented");
 	}
 
+	public void setUp(){
+		int a = 2;
+	}
+
 }
