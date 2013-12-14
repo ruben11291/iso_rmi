@@ -87,7 +87,7 @@ public class FTERD {
 	}
 
 
-	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException{
+	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, CoordenadasNovalidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException{
 		Jugador j = this.jugadores.get(email);
 		if (j==null)
 			throw new JugadorNoExisteException();
