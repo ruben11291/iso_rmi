@@ -14,7 +14,7 @@ public class DAOAutenticar {
 		boolean existe = false;
 		Broker broker=Broker.get();
 		Connection bd=broker.getBD();
-		System.out.println("1");
+		//System.out.println("1");
 		String query = "SELECT * FROM Jugador where email='"+email + "'";
 		Statement st = (Statement) bd.createStatement();
 		ResultSet rs = st.executeQuery(query);

@@ -19,6 +19,6 @@ public class Broker {
 	}
 
 	public Connection getBD() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/ISO2", "root", "");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/bdiso", "root", "root");
 	}
 }

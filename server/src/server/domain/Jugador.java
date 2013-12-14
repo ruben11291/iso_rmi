@@ -25,9 +25,17 @@ public class Jugador {
 		this.email=email;
 		this.passwd=passwd;
 	}
+	
+	public Jugador(String email){
+		this.email = email;
+	}
 
 	public void insert() throws ClassNotFoundException, SQLException {
 		DAOJugador.insert(this);
+	}
+	
+	public void delete() throws ClassNotFoundException, SQLException{
+		DAOJugador.delete(this);
 	}
 	
 	public void empezarPartida() {
@@ -53,9 +61,9 @@ public class Jugador {
 	public void poner(int cT, int fT, int cC, int fC) throws NoEstaJugandoException, NoTienesElTurnoException, CoordenadasNoValidasException {
 		if (this.tablero==null)
 			throw new NoEstaJugandoException(email);
-		if (this.tablero.getJugadorConElTurno()!=this)
-			throw new NoTienesElTurnoException();
-		this.tablero.colocar(cT, fT, cC, fC);
+//		if (this.tablero.getJugadorConElTurno()!=this)
+//			throw new NoTienesElTurnoException();
+//		this.tablero.colocar(cT, fT, cC, fC);
 	}
 
 	public void setTablero(Tablero9x9 tablero) {

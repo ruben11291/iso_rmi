@@ -89,7 +89,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return this.fachada.getJugadores();
 	}
 
-	public Hashtable<String, Tablero9x9> getTableros() throws RemoteException {
+	public Hashtable<Integer, Tablero9x9> getTableros() throws RemoteException {
 		return this.fachada.getTableros();
 	}
 
