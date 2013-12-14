@@ -15,7 +15,7 @@ import esi.uclm.iso.ultimate_tttoe.persistencia.Broker;
 public class testJugador {
 
 	@Test
-public void testInsertar() {
+	public void testInsertar() {
 		Jugador j = new Jugador ("macario7.polo@uclm.es");
 		try{
 		 

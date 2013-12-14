@@ -1,14 +1,14 @@
 package PruebaComunicacion;
 
 
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.Cliente;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.Proxy;
-
+import client.communications.*;
+import client.domain.Tablero9x9;
 
 public class main {
 	public static void main(String []args){
 		System.out.println("Conectando");
 		conectar();
+		Tablero9x9 prueba = new Tablero9x9();
 	}
 	
 	protected static void conectar() {
