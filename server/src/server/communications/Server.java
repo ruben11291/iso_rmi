@@ -10,35 +10,31 @@ import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import client.exportable.communications.ICliente;
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
 import server.exportable.communications.IServer;
 import server.exportable.exceptions.CoordenadasNoValidasException;
 import server.exportable.exceptions.JugadorNoExisteException;
+import server.exportable.exceptions.JugadorYaExisteException;
 import server.exportable.exceptions.NoEstaJugandoException;
 import server.exportable.exceptions.NoTienesElTurnoException;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.*;
 
 public class Server extends UnicastRemoteObject implements IServer {
 	private String ip;
 	private int puerto;
 	private FTERD fachada;
-	private static Server servo;
+	private Hashtable<String, ICliente> stubs;
 	
-	protected Server() throws RemoteException {
+	public Server() throws RemoteException {
 		super();
 		this.ip="localhost";
 		this.puerto=3001;
 		this.fachada=FTERD.get();
+		this.stubs = new Hashtable<String, ICliente>();
 	}
 	
-	public static Server get() throws RemoteException {
-		if (servo==null)
-			servo=new Server();
-		return servo;
-	}
-
 	public void conectar() throws RemoteException, MalformedURLException {
 		LocateRegistry.createRegistry(this.puerto);
 		try {
@@ -50,15 +46,29 @@ public class Server extends UnicastRemoteObject implements IServer {
 		System.out.println("Servidor escuchando" + this.puerto);
 	}
 
-	/**** Métodos remotos ****/
-	public void add(String email, ICliente cliente) throws RemoteException {
-		Jugador jugador=new Jugador(cliente, email);
-		this.fachada.add(jugador);
-	}
+	
+	
+	
+	/**** Métodos remotos 
+	 * @throws JugadorYaExisteException ****/
+	public void add(String email, ICliente cliente) throws RemoteException, JugadorYaExisteException {
+		if(!this.stubs.containsKey(email)){
+			this.stubs.put(email, cliente);
+			Jugador jugador=new Jugador(cliente, email);
+			this.fachada.add(jugador);
+			System.out.println("Jugador añadido "+email);
+			System.out.println(cliente.getEmail());
+			System.out.println("Size "+this.stubs.size());
+		}
+		else throw new JugadorYaExisteException(email);
 
+	}
 	public void delete(String email) throws RemoteException {
+		if( this.stubs.containsKey(email)){
 		Jugador jugador=this.fachada.getJugador(email);
 		this.fachada.delete(jugador);
+		this.stubs.remove(email);
+		}
 	}
 	
 	public void register(String email, String passwd) throws RemoteException {
@@ -76,6 +86,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	public void solicitudDeJuego(String email) throws RemoteException {
 		Jugador jugador=this.fachada.getJugador(email);
+		System.out.println("Solicitud de juego por parte de "+email);
 		this.fachada.solicitudDeJuego(jugador);
 	}
 
@@ -98,7 +109,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
-		Server s=Server.get();
+		Server s= new Server();
 		s.conectar();
 	}
 

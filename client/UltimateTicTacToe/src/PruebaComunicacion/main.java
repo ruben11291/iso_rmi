@@ -12,14 +12,18 @@ public class main {
 	}
 	
 	protected static void conectar() {
-		Cliente cliente;
+		Cliente cliente,cliente2,cliente3;
 		System.out.println("En Conectar");
 		try {
 			cliente=new Cliente("pepeprueba@pepe.com");
+			cliente2 = new Cliente("ruben@g.cmo");
+			cliente3 = new Cliente("pepeprueba@pepe.com");
 //			cliente.setServer("rmi://localhost:3001/servidor");
-//			//cliente.conectar();
-			@SuppressWarnings("unused")
-			Proxy p=Proxy.get();
+			cliente.conectar();
+			cliente2.conectar();
+			cliente3.conectar();
+			//@SuppressWarnings("unused")
+			//Proxy p=Proxy.get();
 			System.out.println("Conectado");
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

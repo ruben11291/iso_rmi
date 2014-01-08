@@ -7,14 +7,15 @@ import java.util.Vector;
 
 import server.exportable.exceptions.CoordenadasNoValidasException;
 import server.exportable.exceptions.JugadorNoExisteException;
+import server.exportable.exceptions.JugadorYaExisteException;
 import server.exportable.exceptions.NoEstaJugandoException;
 import server.exportable.exceptions.NoTienesElTurnoException;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.*;
+import client.exportable.communications.*;
 
 public interface IServer extends Remote {
-	public void add(String email, ICliente cliente) throws RemoteException;
+	public void add(String email, ICliente cliente) throws RemoteException, JugadorYaExisteException;
 	public void delete(String email) throws RemoteException;
 	public void register(String email, String passwd) throws RemoteException;
 	public void solicitudDeJuego(String email) throws RemoteException;

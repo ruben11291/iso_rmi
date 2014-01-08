@@ -8,22 +8,22 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+import client.exportable.communications.ICliente;
 import server.exportable.communications.IServer;
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.JugadorNoExisteException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.ICliente;
+import server.exportable.exceptions.*;
 //import esi.uclm.iso.ultimate_tttoe.dominio.Tablero9x9;
 public class Cliente extends UnicastRemoteObject implements ICliente{
 	
+	/**
+	 * 
+	 */
 	private String ip;
 	private int puerto;
 	private String email;
 	private IServer servidor;
 	//private Tablero9x9 juego;
 	
-	public Cliente(String email) throws RemoteException{
+	public Cliente(String email) throws RemoteException, NotBoundException{
 		super();
 		ip = "localhost";
 		puerto = 4000;              // Puerto por defecto para rmi
@@ -32,6 +32,8 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 		boolean conectado= false;
 		while (!conectado) {
 			try {
+				this.servidor=(IServer) Naming.lookup("rmi://localhost:3001/servidor");
+
 				LocateRegistry.createRegistry(this.puerto);
 				//Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/ServicioAjedrez", this);
 				Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/cliente", this);
@@ -56,15 +58,17 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 		System.out.print("Servicio recuperado");
 	}
 		
-	public void conectar() throws RemoteException {
+	public void conectar() throws RemoteException, JugadorYaExisteException {
 		//this.servidor.add(this.email, (IServer)this);
-		this.servidor.add(this.email, this);
-		
+		System.out.println("INIT CONECTAR");
+		if(this.servidor != null)
+			this.servidor.add(this.email, this);
+		else System.out.println("Error en servidor");
 	}
 
-//	public void solicitarJuego() throws RemoteException {
-//		this.servidor.solicitudDeJuego(this.email);
-//	}
+	public void solicitarJuego() throws RemoteException {
+		this.servidor.solicitudDeJuego(this.email);
+	}
 
 //	public void unirAPartida(String emailCreadorDePartida) throws RemoteException {
 //		this.servidor.unirAPartida(this.email, emailCreadorDePartida);
