@@ -132,7 +132,7 @@ public class FTERD {
 		tablero.setJugadorA(jugador);
 //		tablero.setJugadorConElTurno(jugador);
 //		this.tableros.put(jugador.getEmail(), tablero);
-		jugador.setMensaje("Has creado el tablero con id: " + tablero.getId());
+	//	jugador.setMensaje("Has creado el tablero con id: " + tablero.getId());
 	}
 	/* ESTE SOBRA. MODIFICAR INTERFAZ*/
 	public void unirAPartida(Jugador oponente, Jugador creador) throws RemoteException {
@@ -141,8 +141,8 @@ public class FTERD {
 		tablero.setJugadorB(oponente);
 		creador.setTablero(tablero);
 		oponente.setTablero(tablero);
-		creador.setMensaje("Se te ha unido " + oponente.getEmail());
-		oponente.setMensaje("Estás en la partida de " + creador.getEmail());
+	//	creador.setMensaje("Se te ha unido " + oponente.getEmail());
+	//	oponente.setMensaje("Estás en la partida de " + creador.getEmail());
 	}
 	/***********************************************************************************/
 	

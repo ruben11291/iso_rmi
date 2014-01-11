@@ -63,6 +63,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		else throw new JugadorYaExisteException(email);
 
 	}
+	@Override
 	public void delete(String email) throws RemoteException {
 		if( this.stubs.containsKey(email)){
 		Jugador jugador=this.fachada.getJugador(email);
@@ -71,6 +72,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 	}
 	
+	@Override
 	public void register(String email, String passwd) throws RemoteException {
 		Jugador jugador = new Jugador(email, passwd);
 		try {
@@ -84,10 +86,11 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 	}
 	
-	public void solicitudDeJuego(String email) throws RemoteException {
-		Jugador jugador=this.fachada.getJugador(email);
-		System.out.println("Solicitud de juego por parte de "+email);
-		this.fachada.solicitudDeJuego(jugador);
+	@Override
+	public void solicitudDeJuego(String emailOrigen,String emailDestino) throws RemoteException {
+	//	Jugador jugador=this.fachada.getJugador(email);
+	//	System.out.println("Solicitud de juego por parte de "+email);
+//		this.fachada.solicitudDeJuego(jugador);
 	}
 
 	public void unirAPartida(String emailOponente, String emailCreador) throws RemoteException {

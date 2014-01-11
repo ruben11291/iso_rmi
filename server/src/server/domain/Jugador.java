@@ -75,10 +75,10 @@ public class Jugador {
 		return this.email;
 	}
 
-	public void setMensaje(String msg) throws RemoteException {
-		if (cliente!=null)
-			this.cliente.mostrarUnMensaje(msg);
-	}
+//	public void setMensaje(String msg) throws RemoteException {
+//		if (cliente!=null)
+//			this.cliente.mostrarUnMensaje(msg);
+//	}
 
 	public Tablero9x9 getTablero() {
 		return tablero;
