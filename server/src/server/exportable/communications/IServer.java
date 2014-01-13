@@ -18,10 +18,12 @@ public interface IServer extends Remote {
 	public void add(String email, ICliente cliente) throws RemoteException, JugadorYaExisteException;
 	public void delete(String email) throws RemoteException;
 	public void register(String email, String passwd) throws RemoteException;
-	public void solicitudDeJuego(String emailOrigen, String emailDestino) throws RemoteException;
-	public void unirAPartida(String emailOponente, String emailCreador) throws RemoteException;
+	public void retar(String emailRetador, String emailRetado) throws RemoteException;
+	public void respuestaAPeticionDeReto(String emailRetador, String emailRetado, boolean respuesta) throws RemoteException;
+	//public void solicitudDeJuego(String emailOrigen, String emailDestino) throws RemoteException;
+	//public void unirAPartida(String emailOponente, String emailCreador) throws RemoteException;
 //	public Hashtable<String, Jugador> getJugadores() throws RemoteException;
 //	public Hashtable<String, Tablero9x9> getTableros() throws RemoteException;
-	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException, RemoteException;
+	public void poner(int idPartida,String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException, RemoteException;
 	public Vector<String> getClientesEnEspera() throws RemoteException;
 }

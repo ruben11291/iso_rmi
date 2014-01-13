@@ -49,8 +49,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	
 	
-	/**** Métodos remotos 
-	 * @throws JugadorYaExisteException ****/
+	////////////////////METODOS REMOTOS DEL SERVER//////////////////////
 	public void add(String email, ICliente cliente) throws RemoteException, JugadorYaExisteException {
 		if(!this.stubs.containsKey(email)){
 			this.stubs.put(email, cliente);
@@ -86,36 +85,26 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 	}
 	
-	@Override
-	public void solicitudDeJuego(String emailOrigen,String emailDestino) throws RemoteException {
-	//	Jugador jugador=this.fachada.getJugador(email);
-	//	System.out.println("Solicitud de juego por parte de "+email);
-//		this.fachada.solicitudDeJuego(jugador);
-	}
+//	@Override
+//	public void solicitudDeJuego(String emailOrigen,String emailDestino) throws RemoteException {
+//	//	Jugador jugador=this.fachada.getJugador(email);
+//	//	System.out.println("Solicitud de juego por parte de "+email);
+////		this.fachada.solicitudDeJuego(jugador);
+//	}
 
-	public void unirAPartida(String emailOponente, String emailCreador) throws RemoteException {
-		Jugador oponente=this.fachada.getJugador(emailOponente);
-		Jugador creador=this.fachada.getJugador(emailCreador);
-		this.fachada.unirAPartida(oponente, creador);
-	}
+//	public void unirAPartida(String emailOponente, String emailCreador) throws RemoteException {
+//		Jugador oponente=this.fachada.getJugador(emailOponente);
+//		Jugador creador=this.fachada.getJugador(emailCreador);
+//		this.fachada.unirAPartida(oponente, creador);
+//	}
 
-	public Hashtable<String, Jugador> getJugadores() throws RemoteException {
-		return this.fachada.getJugadores();
-	}
+	
 
-	public Hashtable<Integer, Tablero9x9> getTableros() throws RemoteException {
-		return this.fachada.getTableros();
-	}
+//	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException, RemoteException {
+//		this.fachada.poner(email, cT, fT, cC, fC);
+//	}
 
-	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException, RemoteException {
-		this.fachada.poner(email, cT, fT, cC, fC);
-	}
-
-	public static void main(String[] args) throws RemoteException, MalformedURLException {
-		Server s= new Server();
-		s.conectar();
-	}
-
+	
 	@Override
 	public Vector<String> getClientesEnEspera() throws RemoteException {
 		Vector<String> result=new Vector<String>();
@@ -124,4 +113,48 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 		return result;
 	}
+
+	@Override
+	public void retar(String emailRetador, String emailRetado)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void respuestaAPeticionDeReto(String emailRetador,
+			String emailRetado, boolean respuesta) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void poner(int idPartida, String email, int cT, int fT, int cC,
+			int fC) throws NoTienesElTurnoException, JugadorNoExisteException,
+			NoEstaJugandoException, CoordenadasNoValidasException,
+			RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	////////////////////////////////////////////////////////
+	
+	////////////////METODOS AUXILIARES/////////////////////////////////////
+	
+	public Hashtable<String, Jugador> getJugadores() throws RemoteException {
+		return this.fachada.getJugadores();
+	}
+
+	public Hashtable<Integer, Tablero9x9> getTableros() throws RemoteException {
+		return this.fachada.getTableros();
+	}
+	
+	
+	//////////////////////////////////////////////////////////////////////
+	
+	public static void main(String[] args) throws RemoteException, MalformedURLException {
+		Server s= new Server();
+		s.conectar();
+	}
+
 }
