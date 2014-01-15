@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import client.persistence.DAOJugador;
 import client.exceptions.*;
 
-public class Jugador  {
+public class Jugador {
 
 	String email;
 	private Tablero9x9 tablero;
@@ -38,7 +38,7 @@ public class Jugador  {
 		if(this.tablero.getJugadorConElTurno() != this)
 			throw new NoTienesElTurnoException();
 		
-	//	this.tablero.colocar(cT, fT, cC, fC);
+		this.tablero.colocar(cT, fT, cC, fC);
 		
 	}
 
@@ -58,9 +58,6 @@ public class Jugador  {
 		
 	}
 
-	@Override
-	public boolean equals(Object j){
-		if( this == j) return true;
-		else return (this.email.equals(((Jugador) j).getEmail()));
-		}
+
+	
 }

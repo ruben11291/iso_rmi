@@ -3,11 +3,11 @@ package server.domain;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-import client.exportable.communications.ICliente;
 import server.exportable.exceptions.CoordenadasNoValidasException;
 import server.exportable.exceptions.NoEstaJugandoException;
 import server.exportable.exceptions.NoTienesElTurnoException;
 import server.persistence.DAOJugador;
+import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.*;
 
 public class Jugador {
 	private String email;
@@ -75,10 +75,10 @@ public class Jugador {
 		return this.email;
 	}
 
-//	public void setMensaje(String msg) throws RemoteException {
-//		if (cliente!=null)
-//			this.cliente.mostrarUnMensaje(msg);
-//	}
+	public void setMensaje(String msg) throws RemoteException {
+		if (cliente!=null)
+			this.cliente.mostrarUnMensaje(msg);
+	}
 
 	public Tablero9x9 getTablero() {
 		return tablero;

@@ -9,7 +9,7 @@ import com.mysql.jdbc.Statement;
 
 public class DAOAutenticar {
 	
-	public static boolean autenticar(String email, String passwd) throws ClassNotFoundException, SQLException{
+	public static boolean autenticar(String email) throws ClassNotFoundException, SQLException{
 		boolean existe = false;
 		
 		Connection bd = Broker.getBD();

@@ -15,8 +15,6 @@ import server.exportable.exceptions.NoTienesElTurnoException;
 import server.persistence.DAOAutenticar;
 import server.persistence.DAOTablero;
 
-
-//Creo que la fachada no deberia de ser singleton
 public class FTERD {
 	private static FTERD yo;
 	private Hashtable<String, Jugador> jugadores;
@@ -120,32 +118,32 @@ public class FTERD {
 
 	/********************************************************************************/
 	/* ESTE SOBRE. MODIFICAR LA INTERFAZ*/
-//	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException {
-//		Jugador j=this.jugadores.get(email);
-//		if (j==null)
-//			throw new JugadorNoExisteException(email);
-//		j.poner(cT, fT, cC, fC);
-//	}
+	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException {
+		Jugador j=this.jugadores.get(email);
+		if (j==null)
+			throw new JugadorNoExisteException(email);
+		j.poner(cT, fT, cC, fC);
+	}
 	
 	
 	/* ESTE SOBRA. MODIFICAR INTERFAZ*/
-//	public void solicitudDeJuego(Jugador jugador) throws RemoteException {
-//		Tablero9x9 tablero=new Tablero9x9();
-//		tablero.setJugadorA(jugador);
-////		tablero.setJugadorConElTurno(jugador);
-////		this.tableros.put(jugador.getEmail(), tablero);
-//	//	jugador.setMensaje("Has creado el tablero con id: " + tablero.getId());
-//	}
-//	/* ESTE SOBRA. MODIFICAR INTERFAZ*/
-//	public void unirAPartida(Jugador oponente, Jugador creador) throws RemoteException {
-//		Tablero9x9 tablero=this.tableros.get(creador.getEmail());
-//		tablero.setJugadorA(creador);
-//		tablero.setJugadorB(oponente);
-//		creador.setTablero(tablero);
-//		oponente.setTablero(tablero);
-//	//	creador.setMensaje("Se te ha unido " + oponente.getEmail());
-//	//	oponente.setMensaje("Estás en la partida de " + creador.getEmail());
-//	}
+	public void solicitudDeJuego(Jugador jugador) throws RemoteException {
+		Tablero9x9 tablero=new Tablero9x9();
+		tablero.setJugadorA(jugador);
+//		tablero.setJugadorConElTurno(jugador);
+//		this.tableros.put(jugador.getEmail(), tablero);
+		jugador.setMensaje("Has creado el tablero con id: " + tablero.getId());
+	}
+	/* ESTE SOBRA. MODIFICAR INTERFAZ*/
+	public void unirAPartida(Jugador oponente, Jugador creador) throws RemoteException {
+		Tablero9x9 tablero=this.tableros.get(creador.getEmail());
+		tablero.setJugadorA(creador);
+		tablero.setJugadorB(oponente);
+		creador.setTablero(tablero);
+		oponente.setTablero(tablero);
+		creador.setMensaje("Se te ha unido " + oponente.getEmail());
+		oponente.setMensaje("Estás en la partida de " + creador.getEmail());
+	}
 	/***********************************************************************************/
 	
 	public Hashtable<String, Jugador> getJugadores() {

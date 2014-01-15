@@ -12,7 +12,6 @@ public class Tablero9x9 {
 	private Tablero3x3[][] tablerillos;
 	private Jugador jugadorA, jugadorB, vencedor;
 	private int last_cT, last_fT, last_cC, last_fC;
-	private VentanaJuegoI window;
 	
 	public Tablero9x9(){
 		this.ultimoValor =+ 1;
@@ -92,7 +91,7 @@ public class Tablero9x9 {
 	}
 	
 	
-	public void colocar(Jugador jCliente, int cT, int fT, int cC, int fC) throws CoordenadasNovalidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
+	public void colocar(int cT, int fT, int cC, int fC) throws CoordenadasNovalidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
 		if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
 			throw new CoordenadasNovalidasException(cT, fT, cC, fC);
 		if (this.last_cC != cT && this.last_fC != fT && this.last_cT != -1)
@@ -148,11 +147,5 @@ public class Tablero9x9 {
 		}
 		
 		return r;
-	}
-
-	public void delete() {
-		// TODO Auto-generated method stub
-		//Cierra la interfaz grafica
-		
 	}
 }
