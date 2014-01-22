@@ -6,7 +6,7 @@ import java.util.Hashtable;
 
 import client.exceptions.*;
 import client.persistence.DAOAutenticar;
-
+import client.exceptions.*;
 
 public class FTERD {
 	
@@ -87,10 +87,10 @@ public class FTERD {
 	}
 
 
-	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, CoordenadasNovalidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException{
+	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException{
 		Jugador j = this.jugadores.get(email);
 		if (j==null)
-			throw new JugadorNoExisteException();
+			throw new JugadorNoExisteException(email);
 		
 		j.poner(cT,fT,cC,fC);
 	}

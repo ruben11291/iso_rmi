@@ -2,7 +2,7 @@ package server.domain;
 
 import java.sql.SQLException;
 
-import server.exportable.exceptions.CoordenadasNoValidasException;
+import client.exceptions.*;
 import server.persistence.DAOTablero;
 
 public class Tablero9x9 {

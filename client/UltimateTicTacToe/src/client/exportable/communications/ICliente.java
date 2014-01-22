@@ -2,12 +2,7 @@ package client.exportable.communications;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.JugadorNoExisteException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
-
+import client.exceptions.*;
 
 public interface ICliente extends Remote{
 	

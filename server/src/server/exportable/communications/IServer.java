@@ -5,13 +5,10 @@ import java.rmi.RemoteException;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.JugadorNoExisteException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
+import client.exceptions.*;
+import client.exportable.communications.ICliente;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.*;
 
 public interface IServer extends Remote {
 	public void add(String email, ICliente cliente) throws RemoteException;

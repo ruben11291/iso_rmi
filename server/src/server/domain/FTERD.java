@@ -8,10 +8,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.JugadorNoExisteException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
+import client.exceptions.*;
 import server.persistence.DAOAutenticar;
 import server.persistence.DAOTablero;
 

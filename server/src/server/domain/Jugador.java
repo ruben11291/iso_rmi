@@ -3,11 +3,9 @@ package server.domain;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
+import client.exportable.communications.ICliente;
+import client.exceptions.*;
 import server.persistence.DAOJugador;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.*;
 
 public class Jugador {
 	private String email;

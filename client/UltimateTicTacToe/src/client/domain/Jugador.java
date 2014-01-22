@@ -30,7 +30,7 @@ public class Jugador {
 		return this.email;
 	}
 
-	public void poner(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNovalidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
+	public void poner(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
 		
 		if(this.tablero == null)
 			throw new NoEstaJugandoException(email);

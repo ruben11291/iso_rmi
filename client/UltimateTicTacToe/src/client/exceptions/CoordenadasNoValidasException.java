@@ -1,4 +1,4 @@
-package server.exportable.exceptions;
+package client.exceptions;
 
 public class CoordenadasNoValidasException extends Exception {
 

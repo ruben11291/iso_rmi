@@ -10,15 +10,13 @@ import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import client.exceptions.*;
+import client.exportable.communications.ICliente;
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
 import server.exportable.communications.IServer;
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.JugadorNoExisteException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.*;
+
 
 public class Server extends UnicastRemoteObject implements IServer {
 	private String ip;
@@ -52,7 +50,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	/**** Métodos remotos ****/
 	public void add(String email, ICliente cliente) throws RemoteException {
-		Jugador jugador=new Jugador(cliente, email);
+		Jugador jugador=new Jugador((ICliente)cliente, email);
 		this.fachada.add(jugador);
 	}
 

@@ -8,13 +8,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+import client.exceptions.CoordenadasNoValidasException;
+import client.exceptions.JugadorNoExisteException;
+import client.exceptions.NoEstaJugandoException;
+import client.exceptions.NoTienesElTurnoException;
+import client.exportable.communications.ICliente;
 import server.exportable.communications.IServer;
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.JugadorNoExisteException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
-import esi.uclm.iso.ultimate_tttoe.comunicaciones.exportable.ICliente;
-//import esi.uclm.iso.ultimate_tttoe.dominio.Tablero9x9;
+
 public class Cliente extends UnicastRemoteObject implements ICliente{
 	
 	private String ip;

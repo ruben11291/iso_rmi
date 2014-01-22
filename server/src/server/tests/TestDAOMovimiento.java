@@ -8,10 +8,7 @@ import org.junit.Test;
 
 import server.domain.FTERD;
 import server.domain.Jugador;
-import server.exportable.exceptions.CoordenadasNoValidasException;
-import server.exportable.exceptions.JugadorNoExisteException;
-import server.exportable.exceptions.NoEstaJugandoException;
-import server.exportable.exceptions.NoTienesElTurnoException;
+import client.exceptions.*;
 import server.persistence.DAOTablero;
 
 public class TestDAOMovimiento {

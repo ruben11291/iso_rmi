@@ -1,6 +1,6 @@
 package client.domain;
 
-import client.exceptions.CoordenadasNovalidasException;
+import client.exceptions.CoordenadasNoValidasException;
 import client.exceptions.MovimientoNoValidoException;
 import client.exceptions.PartidaFinalizadaException;
 import client.exceptions.TableroLlenoException;
@@ -91,9 +91,9 @@ public class Tablero9x9 {
 	}
 	
 	
-	public void colocar(int cT, int fT, int cC, int fC) throws CoordenadasNovalidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
+	public void colocar(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
 		if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
-			throw new CoordenadasNovalidasException(cT, fT, cC, fC);
+			throw new CoordenadasNoValidasException(cT, fT, cC, fC);
 		if (this.last_cC != cT && this.last_fC != fT && this.last_cT != -1)
 			if (!this.tablerillos[this.last_cC][this.last_fC].isFull())
 				throw new MovimientoNoValidoException(cT, fT, cC, fC);
