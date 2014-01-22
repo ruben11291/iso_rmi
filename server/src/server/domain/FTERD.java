@@ -8,7 +8,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
-import client.exceptions.*;
 import server.persistence.DAOAutenticar;
 import server.persistence.DAOTablero;
 
@@ -61,14 +60,26 @@ public class FTERD {
 	}
 	
 	/*AÑADIR A LA INTERFAZ*/
-	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws NoEstaJugandoException, NoTienesElTurnoException, CoordenadasNoValidasException, ClassNotFoundException, SQLException  {
+	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) {
 		Tablero9x9 partida = this.tableros.get(idPartida);
 		
 		if (partida!=null){
-			partida.colocar(email, cT, fT, cC, fC);
+			try {
+				partida.colocar(email, cT, fT, cC, fC);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
 			
 //			mandar movimiento a oponente
+			
 //			Jugador oponente = partida.getOpenenteDE(email);
+//			oponente.poner(idPartida,..,..,);
 			
 		}
 	}
@@ -82,7 +93,7 @@ public class FTERD {
 	}
 	
 	/*AÑADIR A LA INTERFAZ*/
-	public void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) throws ClassNotFoundException, SQLException{
+	public void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) {
 		if (retosEnEspera.containsKey(retador) &&
 				(retosEnEspera.get(retador)).equals(retado) ){
 			
@@ -96,7 +107,12 @@ public class FTERD {
 				tableroNuevo.setJugadorA(jugadorA);
 				tableroNuevo.setJugadorB(jugadorB);
 				this.tableros.put(tableroNuevo.getId(), tableroNuevo);
-				DAOTablero.nuevaPartida(tableroNuevo);
+				try {
+					DAOTablero.nuevaPartida(tableroNuevo);
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				//IMPLEMENTAR:
 				//mandar a retador: reto aceptado con tableroNuevo.getId()
@@ -113,36 +129,6 @@ public class FTERD {
 		}
 	}
 
-	/********************************************************************************/
-	/* ESTE SOBRE. MODIFICAR LA INTERFAZ*/
-	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException {
-		Jugador j=this.jugadores.get(email);
-		if (j==null)
-			throw new JugadorNoExisteException(email);
-		j.poner(cT, fT, cC, fC);
-	}
-	
-	
-	/* ESTE SOBRA. MODIFICAR INTERFAZ*/
-	public void solicitudDeJuego(Jugador jugador) throws RemoteException {
-		Tablero9x9 tablero=new Tablero9x9();
-		tablero.setJugadorA(jugador);
-//		tablero.setJugadorConElTurno(jugador);
-//		this.tableros.put(jugador.getEmail(), tablero);
-		jugador.setMensaje("Has creado el tablero con id: " + tablero.getId());
-	}
-	/* ESTE SOBRA. MODIFICAR INTERFAZ*/
-	public void unirAPartida(Jugador oponente, Jugador creador) throws RemoteException {
-		Tablero9x9 tablero=this.tableros.get(creador.getEmail());
-		tablero.setJugadorA(creador);
-		tablero.setJugadorB(oponente);
-		creador.setTablero(tablero);
-		oponente.setTablero(tablero);
-		creador.setMensaje("Se te ha unido " + oponente.getEmail());
-		oponente.setMensaje("Estás en la partida de " + creador.getEmail());
-	}
-	/***********************************************************************************/
-	
 	public Hashtable<String, Jugador> getJugadores() {
 		return jugadores;
 	}

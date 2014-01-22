@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 import client.exportable.communications.ICliente;
-import client.exceptions.*;
 import server.persistence.DAOJugador;
 
 public class Jugador {
@@ -56,14 +55,6 @@ public class Jugador {
 		this.email = email;
 	}
 
-	public void poner(int cT, int fT, int cC, int fC) throws NoEstaJugandoException, NoTienesElTurnoException, CoordenadasNoValidasException {
-		if (this.tablero==null)
-			throw new NoEstaJugandoException(email);
-//		if (this.tablero.getJugadorConElTurno()!=this)
-//			throw new NoTienesElTurnoException();
-//		this.tablero.colocar(cT, fT, cC, fC);
-	}
-
 	public void setTablero(Tablero9x9 tablero) {
 		this.tablero=tablero;
 	}
@@ -71,11 +62,6 @@ public class Jugador {
 	@Override
 	public String toString() {
 		return this.email;
-	}
-
-	public void setMensaje(String msg) throws RemoteException {
-		if (cliente!=null)
-			this.cliente.mostrarUnMensaje(msg);
 	}
 
 	public Tablero9x9 getTablero() {

@@ -2,7 +2,6 @@ package server.domain;
 
 import java.sql.SQLException;
 
-import client.exceptions.*;
 import server.persistence.DAOTablero;
 
 public class Tablero9x9 {
@@ -42,13 +41,13 @@ public class Tablero9x9 {
 	 * @throws ClassNotFoundException 
 	 *  */
 	
-	public void colocar(String email, int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, ClassNotFoundException, SQLException {
+	public void colocar(String email, int cT, int fT, int cC, int fC)throws SQLException, ClassNotFoundException {
 		
 		int ficha = 0;
 		
-		if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
-			throw new CoordenadasNoValidasException(cT, fT, cC, fC);
-		else{
+		//if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
+		//	throw new CoordenadasNoValidasException(cT, fT, cC, fC);
+		//else{
 			//Quien ha hecho el movimiento?
 			if (this.jugadorA.getEmail().equals(email))
 				ficha = 1;
@@ -60,7 +59,7 @@ public class Tablero9x9 {
 			DAOTablero.nuevoMovimiento(email, idCasilla, ficha);
 			
 //			cambiarTurno();
-		}
+		//}
 	}
 
 //	private void cambiarTurno() {

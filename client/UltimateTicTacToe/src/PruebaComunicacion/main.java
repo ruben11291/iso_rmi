@@ -1,6 +1,11 @@
 package PruebaComunicacion;
 
 
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
 import client.communications.*;
 import client.domain.Tablero9x9;
 
@@ -12,18 +17,31 @@ public class main {
 	}
 	
 	protected static void conectar() {
-		Cliente cliente;
+		Cliente cliente=null;
 		System.out.println("En Conectar");
-		try {
-			cliente=new Cliente("pepeprueba@pepe.com");
-//			cliente.setServer("rmi://localhost:3001/servidor");
-//			//cliente.conectar();
-			@SuppressWarnings("unused")
-			Proxy p=Proxy.get();
-			System.out.println("Conectado");
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.out.println("error");
-		}
+			try {
+				cliente=new Cliente("pepeprueba@pepe.com");
+			} catch (RemoteException | UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				cliente.setServer("rmi://localhost:3001/servidor");
+				;
+			} catch (MalformedURLException | RemoteException
+					| NotBoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				cliente.conectar();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			@SuppressWarnings("unused")
+//			Proxy p=Proxy.get();
+//			System.out.println("Conectado");
+
 	}
 }

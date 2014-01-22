@@ -1,6 +1,8 @@
 package server.communications;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -10,7 +12,6 @@ import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import client.exceptions.*;
 import client.exportable.communications.ICliente;
 import server.domain.FTERD;
 import server.domain.Jugador;
@@ -24,14 +25,15 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private FTERD fachada;
 	private static Server servo;
 	
-	protected Server() throws RemoteException {
+	protected Server() throws RemoteException, UnknownHostException {
 		super();
-		this.ip="localhost";
+		//this.ip="localhost";
+		this.ip = InetAddress.getLocalHost().getHostAddress();
 		this.puerto=3001;
 		this.fachada=FTERD.get();
 	}
 	
-	public static Server get() throws RemoteException {
+	public static Server get() throws RemoteException, UnknownHostException {
 		if (servo==null)
 			servo=new Server();
 		return servo;
@@ -52,6 +54,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void add(String email, ICliente cliente) throws RemoteException {
 		Jugador jugador=new Jugador((ICliente)cliente, email);
 		this.fachada.add(jugador);
+		System.out.println("Jugador añadido en servidor");
 	}
 
 	public void delete(String email) throws RemoteException {
@@ -71,17 +74,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 			e.printStackTrace();
 		}
 	}
-	
-	public void solicitudDeJuego(String email) throws RemoteException {
-		Jugador jugador=this.fachada.getJugador(email);
-		this.fachada.solicitudDeJuego(jugador);
-	}
-
-	public void unirAPartida(String emailOponente, String emailCreador) throws RemoteException {
-		Jugador oponente=this.fachada.getJugador(emailOponente);
-		Jugador creador=this.fachada.getJugador(emailCreador);
-		this.fachada.unirAPartida(oponente, creador);
-	}
 
 	public Hashtable<String, Jugador> getJugadores() throws RemoteException {
 		return this.fachada.getJugadores();
@@ -91,11 +83,11 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return this.fachada.getTableros();
 	}
 
-	public void poner(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException, RemoteException {
-		this.fachada.poner(email, cT, fT, cC, fC);
+	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
+		this.fachada.poner(idPartida, email, cT, fT, cC, fC);
 	}
 
-	public static void main(String[] args) throws RemoteException, MalformedURLException {
+	public static void main(String[] args) throws RemoteException, MalformedURLException, UnknownHostException {
 		Server s=Server.get();
 		s.conectar();
 	}
@@ -108,4 +100,19 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 		return result;
 	}
+
+	@Override
+	public void retar(String retador, String retado) throws RemoteException {
+		this.fachada.retar(retador, retado);
+		
+	}
+
+	@Override
+	public void respuestaAPeticionDeReto(String retador, String retado,
+			boolean respuesta) throws RemoteException {
+		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
+		
+	}
+
+
 }

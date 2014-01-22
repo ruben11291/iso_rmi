@@ -1,13 +1,17 @@
 package client.communications;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Vector;
 
+import client.domain.FTERD;
 import client.exceptions.CoordenadasNoValidasException;
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.NoEstaJugandoException;
@@ -21,11 +25,13 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	private int puerto;
 	private String email;
 	private IServer servidor;
+	private FTERD fachada;
 	//private Tablero9x9 juego;
 	
-	public Cliente(String email) throws RemoteException{
+	public Cliente(String email) throws RemoteException, UnknownHostException{
 		super();
-		ip = "localhost";
+		//ip = "localhost";
+		this.ip = InetAddress.getLocalHost().getHostAddress();
 		puerto = 4000;              // Puerto por defecto para rmi
 		this.email = email;
 		
@@ -46,7 +52,6 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 				this.puerto+=1;
 			}
 		}
-		mostrarUnMensaje("Escuchando en el puerto " + this.puerto);
 		
 	}
 	
@@ -62,42 +67,33 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 		
 	}
 
-//	public void solicitarJuego() throws RemoteException {
-//		this.servidor.solicitudDeJuego(this.email);
-//	}
-
-//	public void unirAPartida(String emailCreadorDePartida) throws RemoteException {
-//		this.servidor.unirAPartida(this.email, emailCreadorDePartida);
-//	}
-
-//	public void ponerARival(int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, JugadorNoExisteException, NoEstaJugandoException, CoordenadasNoValidasException {
-//		this.servidor.poner(this.email, cT,  fT,  cC,  fC);
-//	}
-
-//	public Vector<String> getListaDeJugadores() throws RemoteException {
-//		return this.servidor.geJugadores();
-//	}
-
 	@Override
-	public String getEmail() throws RemoteException {
-		return email;
-	}
-
-	@Override
-	public void mostrarUnMensaje(String msg) throws RemoteException {
-		System.out.println("CONSOLA DE " + email);
-		System.out.println("\t" + msg);
+	public void poner(int idPartida, int cT, int fT, int cC, int fC)
+			throws RemoteException {
+		
+		
 		
 	}
 
 	@Override
-	public void poner(int cT, int fT, int cC, int fC) throws RemoteException,
-			NoTienesElTurnoException, JugadorNoExisteException,
-			NoEstaJugandoException, CoordenadasNoValidasException {
+	public void respuestaAPeticionDeReto(String retador, String retado,
+			boolean respuesta) throws RemoteException {
 		
-		//juego.colocar(cT, fT, cC, fC);
+		;//this.fachada.
+	}
+
+	@Override
+	public void OponenteHaAbandonadoPartida(int idPartida)
+			throws RemoteException {
+		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	public void recibirListaDeJugadores(Vector<String> jugadores)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
