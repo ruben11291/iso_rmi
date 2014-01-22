@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 
 public class GameWindow extends JFrame implements IJuego {
@@ -970,13 +971,13 @@ public class GameWindow extends JFrame implements IJuego {
 	 }
 
 	@Override
-	public void ponerFicha() {
+	public void hayGanador(int jugador) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void hayGanador(int jugador) {
+	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {
 		// TODO Auto-generated method stub
 		
 	}

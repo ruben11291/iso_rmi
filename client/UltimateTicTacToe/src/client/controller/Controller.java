@@ -1,5 +1,9 @@
 package client.controller;
 
+import java.sql.SQLException;
+
+import client.domain.FTERD;
+import client.exceptions.*;
 import client.presentation.*;
 
 public class Controller implements IController {
@@ -7,11 +11,23 @@ public class Controller implements IController {
 	IListaJugadores lista;
 	ILogin login;
 	IRegistro registro;
-	FTERD fachadaModelo;
+	FTERD modelo;
 	
-	public boolean comprobarMovimientoValido(int jugador, int X, int Y, int x, int y) {
-		boolean valido = false;
-		
-		return valido;
+	public void comprobarMovimientoValido(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
+		modelo.poner(email, cT, fT, cC, fC);
+		juego.ponerFicha(email, cT, fT, cC, fC);
 	}
+	
+	public void enviarDatosLogin(String email, String passwd) throws ClassNotFoundException, SQLException {
+		modelo.autenticar(email);
+	}
+	
+	public void enviarDatosRegistro(String email, String passwd) throws ClassNotFoundException, SQLException {
+		modelo.registrarJugador(email);
+	}
+	
+	public void retarJugador() {
+		
+	}
+	
 }
