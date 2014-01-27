@@ -10,7 +10,7 @@ import server.domain.Jugador;
 import server.domain.Tablero9x9;
 
 public interface IServer extends Remote {
-	public void add(String email, ICliente cliente) throws RemoteException;
+	public void add(String email, String passwd, ICliente cliente) throws RemoteException;
 	public void delete(String email) throws RemoteException;
 	public void register(String email, String passwd) throws RemoteException;
 	

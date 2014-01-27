@@ -57,9 +57,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**** Métodos remotos ****/
 	
 	/////ADD Player///
-	public void add(String email, ICliente cliente) throws RemoteException {
+	public void add(String email, String passwd, ICliente cliente) throws RemoteException {
 		Jugador jugador=new Jugador((ICliente)cliente, email);
-		this.fachada.add(jugador);
+		this.fachada.add(email, passwd);
 		this.stubs.put(email, cliente);
 		System.out.println("Jugador añadido "+email+" en servidor ");
 		
@@ -147,6 +147,4 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
 		
 	}
-
-
 }

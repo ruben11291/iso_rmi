@@ -30,11 +30,26 @@ public class FTERD {
 		return yo;
 	}
 	
-	public void add(Jugador jugador) {
-		if (jugadores==null) {
-			this.jugadores=new Hashtable<String, Jugador>();
+	public void add(String email, String passwd) {
+		try {
+			if (DAOAutenticar.autenticar(email, passwd)) {
+				if (jugadores==null) {
+					this.jugadores=new Hashtable<String, Jugador>();
+				}
+				Jugador jugador = new Jugador(email, passwd);
+				this.jugadores.put(jugador.getEmail(), jugador);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		this.jugadores.put(jugador.getEmail(), jugador);
+	}
+	
+	public void add(Jugador j) {
+		
 	}
 	
 	public void delete(Jugador jugador) {
@@ -52,7 +67,7 @@ public class FTERD {
 		
 		if (DAOAutenticar.autenticar(email, passwd)){
 			j = new Jugador(email);
-			this.add(j);
+			this.add(email, passwd);
 		}
 		
 		return j;
