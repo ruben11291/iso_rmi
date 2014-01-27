@@ -20,7 +20,7 @@ public class main {
 		Cliente cliente=null;
 		System.out.println("En Conectar");
 			try {
-				cliente=new Cliente("pepeprueba@pepe.com");
+				cliente=new Cliente("pepe6prueba@pepe.com");
 			} catch (RemoteException | UnknownHostException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

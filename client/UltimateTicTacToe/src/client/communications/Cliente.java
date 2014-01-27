@@ -93,6 +93,7 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	public void recibirListaDeJugadores(Vector<String> jugadores)
 			throws RemoteException {
 		// TODO Auto-generated method stub
+		this.fachada.updateJugadoresConectados(jugadores);
 		
 	}
 

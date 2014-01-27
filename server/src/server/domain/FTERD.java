@@ -61,6 +61,10 @@ public class FTERD {
 	
 	/*AÑADIR A LA INTERFAZ*/
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) {
+		if(!this.tableros.containsKey(idPartida)){
+			System.out.println("NO CONTIENE PARTIDA");
+			return;
+		}
 		Tablero9x9 partida = this.tableros.get(idPartida);
 		
 		if (partida!=null){

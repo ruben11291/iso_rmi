@@ -3,6 +3,7 @@ package client.domain;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import client.exceptions.*;
 import client.persistence.DAOAutenticar;
@@ -117,6 +118,11 @@ public class FTERD {
 
 	public Hashtable<String, Jugador> getJugadores() {
 		return jugadores;
+	}
+	
+	public void updateJugadoresConectados(Vector <String> jugadores){
+		//pasarselo a ventana
+		System.out.println(jugadores);
 	}
 
 	
