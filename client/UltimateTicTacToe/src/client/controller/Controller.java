@@ -18,12 +18,12 @@ public class Controller implements IController {
 		juego.ponerFicha(email, cT, fT, cC, fC);
 	}
 	
-	public void enviarDatosLogin(String email, String passwd) throws ClassNotFoundException, SQLException {
-		modelo.autenticar(email);
+	public void enviarDatosLogin(String email, String passwd) {
+		modelo.autenticar(email, passwd);
 	}
 	
-	public void enviarDatosRegistro(String email, String passwd) throws ClassNotFoundException, SQLException {
-		modelo.registrarJugador(email);
+	public void enviarDatosRegistro(String email, String passwd) {
+		modelo.registrarJugador(email, passwd);
 	}
 	
 	public void retarJugador() {
