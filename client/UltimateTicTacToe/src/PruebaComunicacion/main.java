@@ -8,11 +8,20 @@ import java.rmi.RemoteException;
 
 import client.communications.*;
 import client.domain.Tablero9x9;
+import client.presentation.StartupWindow;
+
+import java.net.InetAddress;
+
+import javax.swing.JOptionPane;
 
 public class main {
+	private static StartupWindow startupWindow = null;
+	
 	public static void main(String []args) throws Exception{
+		startupWindow = new StartupWindow();
+		startupWindow.setLocationRelativeTo(null);
+		startupWindow.setVisible(true);		
 		System.out.println("Conectando");
-		conectar2();
 		Tablero9x9 prueba = new Tablero9x9();
 	}
 	
@@ -43,13 +52,5 @@ public class main {
 //			Proxy p=Proxy.get();
 //			System.out.println("Conectado");
 
-	}
-	
-	protected static void conectar2() throws Exception {
-		Cliente c = new Cliente("pepe");
-		Proxy proxy = Proxy.get();
-		System.out.println("Conectar2 (con proxy)");
-		proxy.register(c.getEmail(), "pepe");
-//		proxy.add(c.getEmail(), c);
 	}
 }

@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.SwingConstants;
 
+import client.controller.Controller;
+
 public class RegisterDialog extends JDialog implements IRegistro {
 
 	/**
@@ -34,9 +36,21 @@ public class RegisterDialog extends JDialog implements IRegistro {
 	private JLabel EmailLabel;
 	private JLabel PasswdLabel;
 
-	private JTextField RepPasswdField;
 	private JTextField EmailTextField;
+	public JTextField getEmailTextField() {
+		return EmailTextField;
+	}
+
+	public JPasswordField getPasswdField() {
+		return PasswdField;
+	}
+
+	public JPasswordField getRepPasswdField() {
+		return RepPasswdField;
+	}
+
 	private JPasswordField PasswdField;
+	private JPasswordField RepPasswdField;
 
 	private boolean selection;
 
@@ -167,11 +181,26 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		public void keyPressed(KeyEvent evt) {
 			if (evt.getKeyCode() == 10) {
 				dlg.selection = true;
+				try {
+					dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
+				} catch (Exception e) {
+					// TODO ANADIR LABEL DE ERROR EN REGISTRO
+					e.printStackTrace();
+				}				
 				dlg.setVisible(false);
 			} else if (evt.getKeyCode() == 27) {
 				dlg.selection = false;
 				dlg.setVisible(false);
 			}
+		}
+	}
+	
+	public void enviarDatosRegistro(String email, String passwd, String passwdcheck) throws Exception {
+		if (passwd.equals(passwdcheck)) {
+			Controller cntrl = Controller.get();
+			cntrl.enviarDatosRegistro(email, passwd);
+		} else {
+			//TODO label de repetir contraseña
 		}
 	}
 	

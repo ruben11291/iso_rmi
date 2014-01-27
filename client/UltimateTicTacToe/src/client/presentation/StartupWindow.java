@@ -20,9 +20,11 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
+import client.controller.Controller;
 import client.presentation.UltimateTicTacToe;
 
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 
 public class StartupWindow extends JFrame implements ILogin {
@@ -39,6 +41,14 @@ public class StartupWindow extends JFrame implements ILogin {
 	private JLabel PasswdLabel;
 
 	private JTextField EmailTextField;
+	public JTextField getEmailTextField() {
+		return EmailTextField;
+	}
+
+	public JPasswordField getPasswdField() {
+		return PasswdField;
+	}
+
 	private JPasswordField PasswdField;
 	Border border = BorderFactory.createLineBorder(Color.BLACK);
 
@@ -171,14 +181,25 @@ public class StartupWindow extends JFrame implements ILogin {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent event) {	
-			final PlayerListWindow playerListWindow = new PlayerListWindow();
-			playerListWindow.setLocationRelativeTo(null);
-			playerListWindow.setVisible(true);
+		public void actionPerformed(ActionEvent event) {
+			try {
+				win.enviarDatosLogin(win.getEmailTextField().getText(), win.getPasswdField().getText());
+				final PlayerListWindow playerListWindow = new PlayerListWindow();
+				playerListWindow.setLocationRelativeTo(null);
+				playerListWindow.setVisible(true);
+			} catch (Exception e) {
+				// TODO ANADIR LABEL DE ERROR EN REGISTRO
+				e.printStackTrace();
+			}
 		}
 
 	}
 
+	public void enviarDatosLogin(String email, String passwd) throws Exception {
+		Controller cntrl = Controller.get();
+		cntrl.enviarDatosLogin(email, passwd);
+	}	
+	
 	@Override
 	public void recibirRespuesta(boolean respuesta) {
 		// TODO Auto-generated method stub

@@ -1,9 +1,11 @@
 package client.domain;
 
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import client.communications.Proxy;
 import client.exceptions.*;
 import client.persistence.DAOAutenticar;
 import client.exceptions.*;
@@ -12,10 +14,12 @@ public class FTERD {
 	
 	private Hashtable<String, Jugador> jugadores;
 	private Hashtable<String, Tablero9x9> tableros;
+	private Proxy proxy;
 	
-	public FTERD(){
+	public FTERD() throws Exception{
 		this.jugadores = new Hashtable<String, Jugador>();
 		this.tableros  = new Hashtable<String, Tablero9x9>();
+		this.proxy = Proxy.get();
 	}
 	
 	
@@ -44,8 +48,8 @@ public class FTERD {
 			jugadores.remove(j);
 	}
 	
-	public void registrarJugador(String email, String passwd) {
-		Jugador j = new Jugador(email, passwd);		
+	public void registrarJugador(String email, String passwd) throws RemoteException {
+		proxy.register(email, passwd);
 	}
 	
 	public Jugador autenticar(String email, String passwd) {
