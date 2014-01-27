@@ -36,7 +36,7 @@ public class Controller implements IController {
 		modelo.autenticar(email, passwd);
 	}
 	
-	public void enviarDatosRegistro(String email, String passwd) throws RemoteException {
+	public void enviarDatosRegistro(String email, String passwd) {
 		modelo.registrarJugador(email, passwd);
 	}
 	

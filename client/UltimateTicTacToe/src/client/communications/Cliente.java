@@ -29,12 +29,11 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	private FTERD fachada;
 	//private Tablero9x9 juego;
 	
-	public Cliente(String email) throws RemoteException, UnknownHostException{
+	public Cliente() throws RemoteException, UnknownHostException{
 		super();
 		//ip = "localhost";
 		this.ip = InetAddress.getLocalHost().getHostAddress();
 		puerto = 4000;              // Puerto por defecto para rmi
-		this.email = email;
 		
 		boolean conectado= false;
 		while (!conectado) {
@@ -84,10 +83,13 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	@Override
 	public void recibirListaDeJugadores(Vector<String> jugadores)
 			throws RemoteException {
-		System.out.println("recibir jugadores");
+		System.out.println(jugadores);
 		// TODO Auto-generated method stub
-		this.fachada.updateJugadoresConectados(jugadores);
-		
+		try {
+			this.fachada.updateJugadoresConectados(jugadores);
+		} catch(NullPointerException e) {
+			System.out.println(e);
+		}
 	}
 
 	public String getEmail() {

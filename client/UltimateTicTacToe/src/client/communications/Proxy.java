@@ -18,7 +18,7 @@ public class Proxy {
 	private IServer server;
 	  
 	private Proxy() throws MalformedURLException, RemoteException, NotBoundException {
-		this.server=(IServer) Naming.lookup("rmi://192.168.0.100:3001/servidor");//172.19.177.184
+		this.server=(IServer) Naming.lookup("rmi://192.168.0.105:3001/servidor");//172.19.177.184
 	}
 	
 	public static Proxy get() throws Exception {
@@ -35,8 +35,8 @@ public class Proxy {
 	}
 	
 	//darse de alta en el sistema
-	public void add(String email, ICliente cliente) throws RemoteException{
-		server.add(email, cliente);
+	public void add(String email, String passwd, ICliente cliente) throws RemoteException{
+		server.add(email, passwd, cliente);
 	}
 	
 	//darse de baja del sistema

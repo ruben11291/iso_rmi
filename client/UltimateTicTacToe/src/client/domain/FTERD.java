@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import client.communications.Cliente;
 import client.communications.Proxy;
 import client.exceptions.*;
 import client.persistence.DAOAutenticar;
@@ -16,11 +17,13 @@ public class FTERD {
 	private Hashtable<String, Jugador> jugadores;
 	private Hashtable<String, Tablero9x9> tableros;
 	private Proxy proxy;
+	private Cliente cliente;
 	
 	public FTERD() throws Exception{
 		this.jugadores = new Hashtable<String, Jugador>();
 		this.tableros  = new Hashtable<String, Tablero9x9>();
 		this.proxy = Proxy.get();
+		this.cliente = new Cliente();
 	}
 	
 	
@@ -49,14 +52,22 @@ public class FTERD {
 			jugadores.remove(j);
 	}
 	
-	public void registrarJugador(String email, String passwd) throws RemoteException {
-		proxy.register(email, passwd);
+	public void registrarJugador(String email, String passwd) {
+		try {
+			proxy.register(email, passwd);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public Jugador autenticar(String email, String passwd) {
-		Jugador j = null;
-		return j;
-				
+	public void autenticar(String email, String passwd) {
+		try {
+			proxy.add(email, passwd, cliente);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void CerrarSesion(Jugador j){
