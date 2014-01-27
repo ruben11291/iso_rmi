@@ -10,9 +10,9 @@ import client.communications.*;
 import client.domain.Tablero9x9;
 
 public class main {
-	public static void main(String []args){
+	public static void main(String []args) throws Exception{
 		System.out.println("Conectando");
-		conectar();
+		conectar2();
 		Tablero9x9 prueba = new Tablero9x9();
 	}
 	
@@ -26,7 +26,7 @@ public class main {
 				e1.printStackTrace();
 			}
 			try {
-				cliente.setServer("rmi://localhost:3001/servidor");
+				cliente.setServer("rmi://192.168.0.100:3001/servidor");
 				;
 			} catch (MalformedURLException | RemoteException
 					| NotBoundException e) {
@@ -43,5 +43,13 @@ public class main {
 //			Proxy p=Proxy.get();
 //			System.out.println("Conectado");
 
+	}
+	
+	protected static void conectar2() throws Exception {
+		Cliente c = new Cliente("pepe");
+		Proxy proxy = Proxy.get();
+		System.out.println("Conectar2 (con proxy)");
+		proxy.register(c.getEmail(), "pepe");
+//		proxy.add(c.getEmail(), c);
 	}
 }

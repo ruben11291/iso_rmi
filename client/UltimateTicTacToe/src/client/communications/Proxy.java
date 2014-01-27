@@ -1,10 +1,16 @@
 package client.communications;
 
 import java.net.MalformedURLException;
+import java.rmi.AccessException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.ExportException;
 
+import client.exportable.communications.ICliente;
 import server.exportable.communications.IServer;
 
 public class Proxy {
@@ -12,7 +18,7 @@ public class Proxy {
 	private IServer server;
 	  
 	private Proxy() throws MalformedURLException, RemoteException, NotBoundException {
-		this.server=(IServer) Naming.lookup("rmi://localhost:3001/servidor");//172.19.177.184
+		this.server=(IServer) Naming.lookup("rmi://192.168.0.107:3001/servidor");//172.19.177.184
 	}
 	
 	public static Proxy get() throws Exception {
@@ -20,4 +26,31 @@ public class Proxy {
 			yo=new Proxy();
 		return yo;
 	}
+	
+	//////////// COMUNICACION CON EL SERVIDOR//////////////////
+	//registrar en el sistema
+	public void register(String email, String passwd) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.register(email, passwd);
+	}
+	
+	//darse de alta en el sistema
+	public void add(String email, ICliente cliente) throws RemoteException{
+		server.add(email, cliente);
+	}
+	
+	//darse de baja del sistema
+	public void delete(String email) throws RemoteException {
+		server.delete(email);
+	}
+	
+	//retar a un jugador
+	public void retar(String emailRetador, String emailRetado) throws RemoteException {
+		server.retar(emailRetador, emailRetado);
+	}
+	
+	//realizar movimiento
+	public void poner(int id_partida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
+		server.poner(id_partida, email, cT, fT, cC, fC);
+	}	
 }

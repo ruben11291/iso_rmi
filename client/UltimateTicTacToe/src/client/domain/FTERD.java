@@ -44,20 +44,12 @@ public class FTERD {
 			jugadores.remove(j);
 	}
 	
-	public void registrarJugador(String email) throws ClassNotFoundException, SQLException{
-		Jugador j = new Jugador(email);
-		j.insert();
-		
+	public void registrarJugador(String email, String passwd) {
+		Jugador j = new Jugador(email, passwd);		
 	}
 	
-	public Jugador autenticar(String email) throws ClassNotFoundException, SQLException{
+	public Jugador autenticar(String email, String passwd) {
 		Jugador j = null;
-		
-		if (DAOAutenticar.autenticar(email)){
-			j = new Jugador(email);
-			this.add(j);
-		}
-		
 		return j;
 				
 	}

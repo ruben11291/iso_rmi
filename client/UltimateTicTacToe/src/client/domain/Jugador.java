@@ -8,19 +8,14 @@ import client.exceptions.*;
 public class Jugador {
 
 	String email;
+	String passwd;
 	private Tablero9x9 tablero;
 	
-	public Jugador(String a){
-		this.email = a;
+	public Jugador(String email, String passwd){
+		this.email = email;
+		this.passwd = passwd;
 	}
 	
-	public void insert() throws ClassNotFoundException, SQLException{
-		DAOJugador.insert(this);
-	}
-	
-	public void delete() throws ClassNotFoundException, SQLException{
-		DAOJugador.delete(this);
-	}
 	public void empezarPartida(){
 		//comunicacion con ventana ifaz. y con rmi.
 	}
