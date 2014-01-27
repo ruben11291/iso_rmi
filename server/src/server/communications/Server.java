@@ -116,6 +116,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return this.fachada.getTableros();
 	}
 
+	
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
 		this.fachada.poner(idPartida, email, cT, fT, cC, fC);
 	}

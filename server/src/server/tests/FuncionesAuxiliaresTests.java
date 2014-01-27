@@ -17,10 +17,9 @@ public class FuncionesAuxiliaresTests {
 		j.insert();
 	}
 	
-	public static void autenticar(String email) throws ClassNotFoundException, SQLException{
+	public static void autenticar(String email, String passwd) throws ClassNotFoundException, SQLException{
 		FTERD fachada = FTERD.get();
-		fachada.autenticar(email);
-		fachada.autenticar(email);
+		fachada.autenticar(email,passwd);
 		
 	}
 	

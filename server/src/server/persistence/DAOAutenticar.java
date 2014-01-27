@@ -10,12 +10,12 @@ import server.persistence.Broker;
 
 public class DAOAutenticar {
 	
-	public static boolean autenticar(String email) throws ClassNotFoundException, SQLException{
+	public static boolean autenticar(String email,String passwd) throws ClassNotFoundException, SQLException{
 		boolean existe = false;
 		Broker broker=Broker.get();
 		Connection bd=broker.getBD();
 		//System.out.println("1");
-		String query = "SELECT * FROM Jugador where email='"+email + "'";
+		String query = "SELECT * FROM Jugador where email='"+email + "' and passwd='"+passwd+"'";
 		Statement st = (Statement) bd.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		

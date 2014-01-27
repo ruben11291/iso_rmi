@@ -8,6 +8,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Vector;
 
@@ -47,6 +48,8 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 				this.puerto+=1;
 			}
 			catch (MalformedURLException e) {}
+			catch (ExportException e){ 
+				this.puerto+=1;}
 			catch (RemoteException e) {
 				System.err.println(e.toString());
 				this.puerto+=1;
@@ -55,18 +58,7 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 		
 	}
 	
-	public void setServer(String url) throws MalformedURLException, RemoteException, NotBoundException {
-		System.out.println("Recuperando servicio");
-		this.servidor=(IServer) Naming.lookup(url);
-		System.out.print("Servicio recuperado");
-	}
-		
-	public void conectar() throws RemoteException {
-		//this.servidor.add(this.email, (IServer)this);
-		this.servidor.add(this.email, this);
-		
-	}
-
+	
 	@Override
 	public void poner(int idPartida, int cT, int fT, int cC, int fC)
 			throws RemoteException {

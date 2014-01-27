@@ -47,10 +47,10 @@ public class FTERD {
 		j.insert();
 	}
 	
-	public Jugador autenticar(String email) throws ClassNotFoundException, SQLException{
+	public Jugador autenticar(String email, String passwd) throws ClassNotFoundException, SQLException{
 		Jugador j = null;
 		
-		if (DAOAutenticar.autenticar(email)){
+		if (DAOAutenticar.autenticar(email, passwd)){
 			j = new Jugador(email);
 			this.add(j);
 		}

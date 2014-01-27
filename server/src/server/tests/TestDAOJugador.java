@@ -15,7 +15,7 @@ import server.domain.Tablero9x9;
 
 public class TestDAOJugador {
 
-	Jugador j = new Jugador ("jose.stalin@uclm.es");
+	Jugador j = new Jugador ("jose.stalin@uclm.es","jose");
 	@Test
 	public void test1InsertarYEliminar() {
 //		Jugador j = new Jugador ("jose.stalin@uclm.es");
@@ -30,11 +30,11 @@ public class TestDAOJugador {
 		
 	@Test
 	public void test2Autenticar() throws ClassNotFoundException, SQLException{
-		Jugador j = new Jugador("javierMarchan@uclm.es");
+		Jugador j = new Jugador("javierMarchan@uclm.es","javi");
 		FTERD fachada = FTERD.get();
 		try{
 			j.insert();
-			Jugador respuesta = fachada.autenticar(j.getEmail());
+			Jugador respuesta = fachada.autenticar(j.getEmail(),"javi");
 			assertTrue(j.getEmail().equals(respuesta.getEmail()));
 			
 			Hashtable<String, Jugador> jugadores = fachada.getJugadores();
