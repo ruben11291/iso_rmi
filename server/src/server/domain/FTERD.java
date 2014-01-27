@@ -47,10 +47,10 @@ public class FTERD {
 		j.insert();
 	}
 	
-	public Jugador autenticar(String email) throws ClassNotFoundException, SQLException{
+	public Jugador autenticar(String email, String passwd) throws ClassNotFoundException, SQLException{
 		Jugador j = null;
 		
-		if (DAOAutenticar.autenticar(email)){
+		if (DAOAutenticar.autenticar(email, passwd)){
 			j = new Jugador(email);
 			this.add(j);
 		}
@@ -61,6 +61,10 @@ public class FTERD {
 	
 	/*AÑADIR A LA INTERFAZ*/
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) {
+		if(!this.tableros.containsKey(idPartida)){
+			System.out.println("NO CONTIENE PARTIDA");
+			return;
+		}
 		Tablero9x9 partida = this.tableros.get(idPartida);
 		
 		if (partida!=null){

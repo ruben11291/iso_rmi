@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import client.communications.Proxy;
 import client.exceptions.*;
@@ -113,6 +114,11 @@ public class FTERD {
 
 	public Hashtable<String, Jugador> getJugadores() {
 		return jugadores;
+	}
+	
+	public void updateJugadoresConectados(Vector <String> jugadores){
+		//pasarselo a ventana
+		System.out.println(jugadores);
 	}
 
 	

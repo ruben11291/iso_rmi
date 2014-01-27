@@ -20,8 +20,8 @@ import server.persistence.DAOTablero;
 public class TestDAOCrearPartida extends TestCase{
 	
 	FTERD fachada = FTERD.get();
-	Jugador jA = new Jugador("jose.stalin@pcus.urrs");
-	Jugador jB = new Jugador("adol.hitler@nsdap.ger");
+	Jugador jA = new Jugador("jose.stalin@pcus.urrs","passwd1");
+	Jugador jB = new Jugador("adol.hitler@nsdap.ger","passwd2");
 	
 	Jugador x;
 	
@@ -32,8 +32,8 @@ public class TestDAOCrearPartida extends TestCase{
 		jA.insert();
 		jB.insert();
 
-		x = fachada.autenticar("jose.stalin@pcus.urrs");
-		x = fachada.autenticar("adol.hitler@nsdap.ger");
+		x = fachada.autenticar("jose.stalin@pcus.urrs","passwd1");
+		x = fachada.autenticar("adol.hitler@nsdap.ger","passwd2");
 		
 		
 		fachada.retar("jose.stalin@pcus.urrs", "adol.hitler@nsdap.ger");	

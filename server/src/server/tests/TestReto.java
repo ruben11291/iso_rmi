@@ -16,8 +16,8 @@ public class TestReto {
 	@org.junit.Test
 	public void testRetarYAceptarReto() throws ClassNotFoundException, SQLException {
 		FTERD fachada = FTERD.get();
-		Jugador jugadorA = new Jugador("stalin@gmail.com");
-		Jugador jugadorB = new Jugador("hitler@gmail.com");
+		Jugador jugadorA = new Jugador("stalin@gmail.com","stalin");
+		Jugador jugadorB = new Jugador("hitler@gmail.com","hitler");
 		
 		/* Iniciar sesion*/
 		fachada.add(jugadorA);
@@ -48,8 +48,8 @@ public class TestReto {
 	@org.junit.Test
 	public void testRetarYRechazarReto() throws ClassNotFoundException, SQLException {
 		FTERD fachada = FTERD.get();
-		Jugador jugadorA = new Jugador("stalin@gmail.com");
-		Jugador jugadorB = new Jugador("hitler@gmail.com");
+		Jugador jugadorA = new Jugador("stalin@gmail.com","stalin");
+		Jugador jugadorB = new Jugador("hitler@gmail.com","stalin");
 		
 		/* Iniciar sesion*/
 		fachada.add(jugadorA);

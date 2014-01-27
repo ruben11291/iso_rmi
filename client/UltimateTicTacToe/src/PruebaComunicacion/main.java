@@ -25,6 +25,7 @@ public class main {
 		Tablero9x9 prueba = new Tablero9x9();
 	}
 	
+<<<<<<< HEAD
 	protected static void conectar() {
 		Cliente cliente=null;
 		System.out.println("En Conectar");
@@ -52,5 +53,15 @@ public class main {
 //			Proxy p=Proxy.get();
 //			System.out.println("Conectado");
 
+=======
+	
+	
+	protected static void conectar2() throws Exception {
+		Cliente c = new Cliente("pepe");
+		Proxy proxy = Proxy.get();
+		System.out.println("Conectar2 (con proxy)");
+		proxy.register(c.getEmail(), "pepe");
+//		proxy.add(c.getEmail(), c);
+>>>>>>> bd71d4ee8765b56dbf872d4663578b6fe7120b5e
 	}
 }

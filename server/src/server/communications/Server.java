@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -24,13 +25,16 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private int puerto;
 	private FTERD fachada;
 	private static Server servo;
+	private Hashtable <String, ICliente>stubs;
 	
 	protected Server() throws RemoteException, UnknownHostException {
 		super();
 		//this.ip="localhost";
 		this.ip = InetAddress.getLocalHost().getHostAddress();
+		//System.out.println(ip);
 		this.puerto=3001;
 		this.fachada=FTERD.get();
+		this.stubs = new Hashtable <String, ICliente>();
 	}
 	
 	public static Server get() throws RemoteException, UnknownHostException {
@@ -51,17 +55,43 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	/**** Métodos remotos ****/
+	
+	/////ADD Player///
 	public void add(String email, ICliente cliente) throws RemoteException {
 		Jugador jugador=new Jugador((ICliente)cliente, email);
 		this.fachada.add(jugador);
-		System.out.println("Jugador añadido en servidor");
+		this.stubs.put(email, cliente);
+		System.out.println("Jugador añadido "+email+" en servidor ");
+		
+		Vector <String> emailJugadores = getEmailJugadores(stubs);
+		
+		Enumeration<ICliente> lista=this.stubs.elements();
+		while (lista.hasMoreElements()) {
+			ICliente t=lista.nextElement();
+			t.recibirListaDeJugadores(emailJugadores);
+		}
 	}
 
+	private Vector<String> getEmailJugadores(Hashtable<String, ICliente> stubs2) {
+		Vector <String> emailJugadores = new Vector <String>();
+		Enumeration<String> lista=stubs2.keys();
+		while (lista.hasMoreElements()) {
+			String t=lista.nextElement();
+			emailJugadores.add(t);
+		}
+		return emailJugadores;
+	}
+
+	
+	///Delete player////
 	public void delete(String email) throws RemoteException {
 		Jugador jugador=this.fachada.getJugador(email);
 		this.fachada.delete(jugador);
 	}
 	
+	
+	
+	///Registar jugador///
 	public void register(String email, String passwd) throws RemoteException {
 		Jugador jugador = new Jugador(email, passwd);
 		try {
@@ -75,14 +105,18 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 	}
 
+	
+	////////???????????????///////////////
 	public Hashtable<String, Jugador> getJugadores() throws RemoteException {
 		return this.fachada.getJugadores();
 	}
 
+	//////////??????????/////////////////
 	public Hashtable<Integer, Tablero9x9> getTableros() throws RemoteException {
 		return this.fachada.getTableros();
 	}
 
+	
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
 		this.fachada.poner(idPartida, email, cT, fT, cC, fC);
 	}

@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS `bdiso`.`Jugador` ;
 
 CREATE  TABLE IF NOT EXISTS `bdiso`.`Jugador` (
   `email` VARCHAR(45) NOT NULL ,
+  `passwd` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`email`) )
 ENGINE = InnoDB;
 
@@ -184,9 +185,9 @@ DROP procedure IF EXISTS `bdiso`.`insert_player`;
 
 DELIMITER $$
 USE `bdiso`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_player`(jemail VARCHAR(45))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_player`(jemail VARCHAR(45), passwd VARCHAR(45))
 BEGIN
-    insert into Jugador values(jemail);
+    insert into Jugador values(jemail,passwd);
 END$$
 
 DELIMITER ;

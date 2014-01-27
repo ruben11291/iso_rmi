@@ -12,9 +12,9 @@ public class DAOJugador {
 	public static void insert(Jugador jugador) throws ClassNotFoundException, SQLException {
 		Broker broker=Broker.get();
 		Connection bd=broker.getBD();
-		CallableStatement cs=bd.prepareCall("{call insert_player(?)}");
+		CallableStatement cs=bd.prepareCall("{call insert_player(?,?)}");
 		cs.setString(1, jugador.getEmail());
-//		cs.setString(2, jugador.getPasswd());
+		cs.setString(2, jugador.getPasswd());
 		cs.executeUpdate();
 		bd.close();
 	}

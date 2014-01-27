@@ -18,8 +18,8 @@ public class TestDAOMovimiento {
 		int valor;
 		String consulta;
 		/* Se prepara la partida*/
-		Jugador jugadorA = new Jugador("jose.stalin@pcus.urrs");
-		Jugador jugadorB = new Jugador("adol.hitler@nsdap.ger");
+		Jugador jugadorA = new Jugador("jose.stalin@pcus.urrs", "jose");
+		Jugador jugadorB = new Jugador("adol.hitler@nsdap.ger", "adol");
 		
 		try {
 			jugadorA.insert();
