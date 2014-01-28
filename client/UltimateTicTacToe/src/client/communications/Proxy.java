@@ -19,7 +19,7 @@ public class Proxy {
 	private IServer server;
 	  
 	private Proxy() throws MalformedURLException, RemoteException, NotBoundException {
-		this.server=(IServer) Naming.lookup("rmi://172.19.150.60:3001/servidor");//172.19.177.184
+		this.server=(IServer) Naming.lookup("rmi://172.19.212.247:3001/servidor");//172.19.177.184
 	}
 	
 	public static Proxy get() throws Exception {

@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import client.exceptions.JugadorNoExisteException;
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
@@ -32,8 +33,17 @@ public class TestDAOCrearPartida extends TestCase{
 		jA.insert();
 		jB.insert();
 
-		x = fachada.autenticar("jose.stalin@pcus.urrs","passwd1");
-		x = fachada.autenticar("adol.hitler@nsdap.ger","passwd2");
+		try {
+			x = fachada.autenticar("jose.stalin@pcus.urrs","passwd1");
+		} catch (JugadorNoExisteException e1) {
+			fail("NO se esperaba excepcion");
+		}
+		try {
+			x = fachada.autenticar("adol.hitler@nsdap.ger","passwd2");
+		} catch (JugadorNoExisteException e1) {
+			// TODO Auto-generated catch block
+			fail("NO se esperaba excepcion");
+		}
 		
 		
 		fachada.retar("jose.stalin@pcus.urrs", "adol.hitler@nsdap.ger");	

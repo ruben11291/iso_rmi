@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
+import client.exceptions.JugadorNoExisteException;
 import server.persistence.DAOAutenticar;
 import server.persistence.DAOTablero;
 
@@ -30,7 +31,7 @@ public class FTERD {
 		return yo;
 	}
 	
-	public void add(String email, String passwd) {
+	public void add(String email, String passwd) throws JugadorNoExisteException{
 		try {
 			if (DAOAutenticar.autenticar(email, passwd)) {
 				if (jugadores==null) {
@@ -39,12 +40,13 @@ public class FTERD {
 				Jugador jugador = new Jugador(email, passwd);
 				this.jugadores.put(jugador.getEmail(), jugador);
 			}
+			else throw new JugadorNoExisteException(email);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new JugadorNoExisteException(email);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new JugadorNoExisteException(email);
 		}
 	}
 	
@@ -62,12 +64,13 @@ public class FTERD {
 		j.insert();
 	}
 	
-	public Jugador autenticar(String email, String passwd) throws ClassNotFoundException, SQLException{
+	public Jugador autenticar(String email, String passwd) throws ClassNotFoundException, SQLException, JugadorNoExisteException{
 		Jugador j = null;
 		
 		if (DAOAutenticar.autenticar(email, passwd)){
 			j = new Jugador(email);
-			this.add(email, passwd);
+				this.add(email, passwd);
+			
 		}
 		
 		return j;

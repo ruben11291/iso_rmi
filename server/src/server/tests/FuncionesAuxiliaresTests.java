@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import client.exceptions.JugadorNoExisteException;
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
@@ -19,7 +20,12 @@ public class FuncionesAuxiliaresTests {
 	
 	public static void autenticar(String email, String passwd) throws ClassNotFoundException, SQLException{
 		FTERD fachada = FTERD.get();
-		fachada.autenticar(email,passwd);
+		try {
+			fachada.autenticar(email,passwd);
+		} catch (JugadorNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

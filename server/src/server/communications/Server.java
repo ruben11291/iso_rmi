@@ -13,6 +13,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import client.exceptions.JugadorNoExisteException;
 import client.exportable.communications.ICliente;
 import server.domain.FTERD;
 import server.domain.Jugador;
@@ -57,7 +58,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**** Métodos remotos ****/
 	
 	/////ADD Player///
-	public void add(String email, String passwd, ICliente cliente) throws RemoteException {
+	public void add(String email, String passwd, ICliente cliente) throws RemoteException,JugadorNoExisteException {
 		Jugador jugador=new Jugador((ICliente)cliente, email);
 		this.fachada.add(email, passwd);
 		this.stubs.put(email, cliente);
