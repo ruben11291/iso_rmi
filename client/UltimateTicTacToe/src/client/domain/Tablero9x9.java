@@ -10,6 +10,7 @@ public class Tablero9x9 {
 	private Jugador jugadorConElTurno;
 	private int ultimoValor;
 	private Tablero3x3[][] tablerillos;
+	private int id;
 	private Jugador jugadorA, jugadorB, vencedor;
 	private int last_cT, last_fT, last_cC, last_fC;
 	
@@ -25,6 +26,26 @@ public class Tablero9x9 {
 		this.jugadorB = null;
 	}
 
+	public Tablero9x9(int idPartida) {
+		this.id = idPartida;
+		this.ultimoValor =+ 1;
+		this.tablerillos = new Tablero3x3[3][3];
+		for(int fila=0; fila<3; fila++){
+			for(int col=0; col<3; col++){
+				this.tablerillos[col][fila] = new Tablero3x3();
+			}
+		}
+		this.jugadorA= null;
+		this.jugadorB = null;
+		
+	}
+
+	public void setId(int id){
+		this.id = id;
+	}
+	public int getId(){
+		return this.id;
+	}
 	public Jugador getJugadorConElTurno() {
 		return this.jugadorConElTurno;
 	}

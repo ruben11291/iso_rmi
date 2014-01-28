@@ -16,7 +16,9 @@ import client.exceptions.*;
 public class FTERD {
 	
 	private Hashtable<String, Jugador> jugadores;
+	private Jugador jugador;
 	private Hashtable<String, Tablero9x9> tableros;
+	private Vector<String> retosSolicitados;
 	private Proxy proxy;
 	private Cliente cliente;
 	
@@ -27,6 +29,13 @@ public class FTERD {
 		this.cliente = new Cliente(this);
 	}
 
+	public String getEmailJugador(){
+		if(jugador != null) 
+			return this.jugador.getEmail();
+		else return "";
+	}
+	
+	
 	public void registrarJugador(String email, String passwd) throws RemoteException {
 		proxy.register(email, passwd);
 	}
@@ -34,6 +43,7 @@ public class FTERD {
 	public void autenticar(String email, String passwd) throws JugadorNoExisteException {
 		try {
 			proxy.add(email, passwd, cliente);
+			this.jugador = new Jugador(email,passwd);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,15 +54,12 @@ public class FTERD {
 		proxy.poner(id_partida, email, cT, fT, cC, fC);
 	}
 
-	public void solicitudDeJuego(String creador, String oponente) throws RemoteException {
+	public void retar(String creador, String oponente) throws RemoteException {
 		proxy.retar(creador, oponente);
+		this.retosSolicitados.add(oponente);
 	}
 	
-	public void actualizarListaJugadores(Vector<String> jugadores2) {
-		// TODO LISTA DE JUGADORES
-		
-		
-	}
+	
 	
 	public void cerrarSesion(String email) {
 		try {
@@ -71,7 +78,31 @@ public class FTERD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void respuestaAPeticionDeReto(String retador, String retado,
+			boolean respuesta, int idPartida) {
 		
+		if(this.retosSolicitados.contains(retador)){
+			if(respuesta){
+				this.retosSolicitados.remove(retador);
+				creaPartida(retador,retado, idPartida);
+			}
+		}
+	}
+	
+	private void creaPartida(String retador, String retado, int idPartida){
+		Tablero9x9 tablero = new Tablero9x9(idPartida);
+		Jugador j1 = new Jugador(retador,"");
+		Jugador j2 = new Jugador(retado,"");
+		tablero.setJugadorA(j1);
+		tablero.setJugadorB(j2);
+		tablero.setJugadorConelTurno(j1);
+		this.tableros.put(retador, tablero);
+	}
+	
+	public void iniciarPartida(String retador, String retado, int idPartida){
+		creaPartida(retador, retado, idPartida);
 	}
 	
 }

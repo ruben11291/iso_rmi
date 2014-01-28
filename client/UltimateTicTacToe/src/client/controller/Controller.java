@@ -70,7 +70,7 @@ public class Controller implements IController {
 	
 	public void retarJugador(String creador, String oponente) {
 		try {
-			modelo.solicitudDeJuego(creador, oponente);
+			modelo.retar(creador, oponente);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
