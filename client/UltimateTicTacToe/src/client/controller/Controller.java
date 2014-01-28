@@ -65,7 +65,9 @@ public class Controller implements IController {
 
 	@Override
 	public void enviarListaJugadores(Vector<String> jugadores) {
-		lista.recibirRespuestaLista(jugadores);		
+		System.out.println(jugadores);
+		if (lista == null) System.out.println("nulo soy");
+		lista.recibirRespuestaLista(jugadores);
 	}
 	
 	public void retarJugador(String creador, String oponente) {

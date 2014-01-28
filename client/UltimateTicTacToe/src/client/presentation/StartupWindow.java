@@ -199,6 +199,9 @@ public class StartupWindow extends JFrame implements ILogin {
 		Controller cntrl;
 		try {
 			cntrl = Controller.get();
+			final PlayerListWindow playerListWindow = new PlayerListWindow();
+			playerListWindow.setLocationRelativeTo(null);
+			//playerListWindow.setVisible(true);
 			cntrl.enviarDatosLogin(email, passwd);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -215,9 +218,9 @@ public class StartupWindow extends JFrame implements ILogin {
 			NoticeLabel.setBorder(border);
 		} else {
 			this.setVisible(false);
-			final PlayerListWindow playerListWindow = new PlayerListWindow();
-			playerListWindow.setLocationRelativeTo(null);
-			playerListWindow.setVisible(true);
+			//final PlayerListWindow playerListWindow = new PlayerListWindow();
+			//playerListWindow.setLocationRelativeTo(null);
+			//playerListWindow.setVisible(true);
 		}		
 	}
 

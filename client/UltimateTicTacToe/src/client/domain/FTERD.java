@@ -78,6 +78,7 @@ public class FTERD {
 		System.out.println(jugadores);
 		try {
 			Controller c = Controller.get();
+			c.enviarListaJugadores(jugadores);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
