@@ -2,6 +2,7 @@ package client.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -35,6 +36,8 @@ public class RegisterDialog extends JDialog implements IRegistro {
 	private JLabel RepPasswdLabel;
 	private JLabel EmailLabel;
 	private JLabel PasswdLabel;
+	private JLabel NoticeLabel;
+	Border border = BorderFactory.createLineBorder(Color.BLACK);
 
 	private JTextField EmailTextField;
 	public JTextField getEmailTextField() {
@@ -134,6 +137,14 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		registerPanel.add(PasswdField);
 		registerPanel.add(RepPasswdLabel);
 		registerPanel.add(RepPasswdField);
+		
+		NoticeLabel = new JLabel();
+		NoticeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		NoticeLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		NoticeLabel.setText("");
+		NoticeLabel.setBounds(92, 12, 300, 25);
+		NoticeLabel.setForeground(Color.RED);
+		registerPanel.add(NoticeLabel);
 		registerPanel.add(AcceptButton);
 		registerPanel.add(CancelButton);
 		registerPanel.add(mapLabel);
@@ -185,6 +196,10 @@ public class RegisterDialog extends JDialog implements IRegistro {
 					dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
 				} catch (Exception e) {
 					// TODO ANADIR LABEL DE ERROR EN REGISTRO
+					NoticeLabel.setText("El Usuario introducido ya existe");
+					NoticeLabel.setForeground(new Color(200, 0, 0));
+					NoticeLabel.setOpaque(true);
+					NoticeLabel.setBorder(border);
 					e.printStackTrace();
 				}				
 				dlg.setVisible(false);
@@ -201,6 +216,10 @@ public class RegisterDialog extends JDialog implements IRegistro {
 			cntrl.enviarDatosRegistro(email, passwd);
 		} else {
 			//TODO label de repetir contraseña
+			NoticeLabel.setText("Las contraseñas no coinciden");
+			NoticeLabel.setForeground(new Color(200,0,0));
+			NoticeLabel.setOpaque(true);
+			NoticeLabel.setBorder(border);
 		}
 	}
 	
