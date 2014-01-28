@@ -27,8 +27,13 @@ public class Controller implements IController {
 	}
 		
 	
-	public void comprobarMovimientoValido(String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
-		modelo.poner(email, cT, fT, cC, fC);
+	public void comprobarMovimientoValido(int id_partida, String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
+		try {
+			modelo.poner(id_partida, email, cT, fT, cC, fC);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		juego.ponerFicha(email, cT, fT, cC, fC);
 	}
 	
@@ -37,11 +42,44 @@ public class Controller implements IController {
 	}
 	
 	public void enviarDatosRegistro(String email, String passwd) {
-		modelo.registrarJugador(email, passwd);
+		boolean error = true;
+		try {
+			modelo.registrarJugador(email, passwd);
+			error = false;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		registro.respuestaRegistro(error);
 	}
 	
-	public void retarJugador() {
+	public void retarJugador(String creador, String oponente) {
+		try {
+			modelo.solicitudDeJuego(creador, oponente);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setRegistro(IRegistro registro) {
+		this.registro = registro;
+	}
+
+	@Override
+	public void setLista(IListaJugadores lista) {
+		this.lista = lista;
 		
+	}
+
+	@Override
+	public void setJuego(IJuego juego) {
+		this.juego = juego;
+	}
+
+	@Override
+	public void setLogin(ILogin login) {
+		this.login = login;
 	}
 	
 }

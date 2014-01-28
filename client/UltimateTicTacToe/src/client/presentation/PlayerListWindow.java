@@ -19,9 +19,12 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import client.controller.Controller;
+
 import java.awt.Color;
 
-public class PlayerListWindow extends JFrame implements WindowListener {
+public class PlayerListWindow extends JFrame implements WindowListener, IListaJugadores {
 	
 	private static final long serialVersionUID = -5107198177153703399L;
 	
@@ -42,7 +45,14 @@ public class PlayerListWindow extends JFrame implements WindowListener {
 	
 	public PlayerListWindow() {
 		super();
-
+		try {
+			Controller cntrl;
+			cntrl = Controller.get();
+			cntrl.setLista(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.setupListGUI();
 	}
 	
@@ -251,6 +261,27 @@ public class PlayerListWindow extends JFrame implements WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
+		
+	}
+
+
+	@Override
+	public void recibirRespuestaReto() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void cerrarSesion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void actualizarLista() {
+		// TODO Auto-generated method stub
 		
 	}
 	

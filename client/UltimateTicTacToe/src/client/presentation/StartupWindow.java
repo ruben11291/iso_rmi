@@ -54,6 +54,14 @@ public class StartupWindow extends JFrame implements ILogin {
 
 	public StartupWindow() {
 		super();
+		try {
+			Controller cntrl;
+			cntrl = Controller.get();
+			cntrl.setLogin(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		this.initGUI();
 	}
 

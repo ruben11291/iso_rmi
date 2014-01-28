@@ -59,34 +59,30 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	
 	
 	@Override
-	public void poner(int idPartida, int cT, int fT, int cC, int fC)
-			throws RemoteException {
+	public void poner(int idPartida, int cT, int fT, int cC, int fC) throws RemoteException {
 		
 		
 		
 	}
 
 	@Override
-	public void respuestaAPeticionDeReto(String retador, String retado,
-			boolean respuesta) throws RemoteException {
+	public void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException {
 		
 		;//this.fachada.
 	}
 
 	@Override
-	public void OponenteHaAbandonadoPartida(int idPartida)
-			throws RemoteException {
+	public void OponenteHaAbandonadoPartida(int idPartida) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void recibirListaDeJugadores(Vector<String> jugadores)
-			throws RemoteException {
+	public void recibirListaDeJugadores(Vector<String> jugadores) throws RemoteException {
 		System.out.println(jugadores);
 		// TODO Auto-generated method stub
 		try {
-			this.fachada.updateJugadoresConectados(jugadores);
+			this.fachada.actualizarListaJugadores(jugadores);
 		} catch(NullPointerException e) {
 			System.out.println(e);
 		}

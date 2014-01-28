@@ -59,7 +59,16 @@ public class RegisterDialog extends JDialog implements IRegistro {
 
 	public RegisterDialog(JFrame f, String string, boolean b) {
 		super(f, string, b);
+		try {
+			Controller cntrl;
+			cntrl = Controller.get();
+			cntrl.setRegistro(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		this.initGUI();
+		
 	}
 
 	private void initGUI() {
@@ -177,7 +186,15 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		@Override
 		public void mouseClicked(MouseEvent evt) {
 			dlg.selection = selection;
-			dlg.setVisible(false);
+			try {
+				dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
+			} catch (Exception e) {
+				NoticeLabel.setText("El Usuario introducido ya existe");
+				NoticeLabel.setForeground(new Color(200, 0, 0));
+				NoticeLabel.setOpaque(true);
+				NoticeLabel.setBorder(border);
+				e.printStackTrace();
+			}			
 		}
 	}
 
@@ -192,34 +209,41 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		public void keyPressed(KeyEvent evt) {
 			if (evt.getKeyCode() == 10) {
 				dlg.selection = true;
-				try {
-					dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
-				} catch (Exception e) {
-					// TODO ANADIR LABEL DE ERROR EN REGISTRO
-					NoticeLabel.setText("El Usuario introducido ya existe");
-					NoticeLabel.setForeground(new Color(200, 0, 0));
-					NoticeLabel.setOpaque(true);
-					NoticeLabel.setBorder(border);
-					e.printStackTrace();
-				}				
-				dlg.setVisible(false);
-			} else if (evt.getKeyCode() == 27) {
-				dlg.selection = false;
-				dlg.setVisible(false);
+				dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
 			}
 		}
 	}
 	
-	public void enviarDatosRegistro(String email, String passwd, String passwdcheck) throws Exception {
+	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) {
+		boolean valido = false;
 		if (passwd.equals(passwdcheck)) {
-			Controller cntrl = Controller.get();
-			cntrl.enviarDatosRegistro(email, passwd);
+			Controller cntrl;
+			try {
+				cntrl = Controller.get();
+				cntrl.enviarDatosRegistro(email, passwd);
+				valido = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			//TODO label de repetir contraseña
 			NoticeLabel.setText("Las contraseñas no coinciden");
 			NoticeLabel.setForeground(new Color(200,0,0));
 			NoticeLabel.setOpaque(true);
 			NoticeLabel.setBorder(border);
+			NoticeLabel.setVisible(true);
+		}
+		return valido;
+	}
+	
+	public void respuestaRegistro(boolean error) {
+		if (error) {
+			NoticeLabel.setText("El Usuario introducido ya existe");
+			NoticeLabel.setForeground(new Color(200, 0, 0));
+			NoticeLabel.setOpaque(true);
+			NoticeLabel.setBorder(border);
+		} else {
+			this.setVisible(false);
 		}
 	}
 	
