@@ -19,6 +19,7 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 import client.controller.Controller;
 
@@ -133,7 +134,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			mPlayList = new JTable();
 			final JScrollPane playListPanel = new JScrollPane(mPlayList);
 			
-			mPlayerList = new JTable();
+			mPlayerList = new JTable(new DefaultTableModel(new Object[]{"Email"}, 0));			
 			mPlayerList.setBackground(Color.WHITE);
 			final JScrollPane playerListPanel = new JScrollPane(mPlayerList);
 
@@ -279,18 +280,16 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		
 	}
 
-
-	@Override
-	public void actualizarLista() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void recibirRespuestaLista(Vector<String> jugadores) {
-		mPlayerList.removeAll();
+		if (!this.isVisible()) this.setVisible(true);
+		DefaultTableModel model = (DefaultTableModel) this.mPlayerList.getModel();
+		int rowCount = model.getRowCount();
+		for (int i = 0;i<rowCount;i++) {
+		    model.removeRow(i);
+		}
 		for (String jugador : jugadores) {
-			// TODO anadir a la lista
+			model.addRow(new String[]{jugador});
 		}
 	}
 	
