@@ -38,7 +38,13 @@ public class Controller implements IController {
 	}
 	
 	public void enviarDatosLogin(String email, String passwd) {
-		modelo.autenticar(email, passwd);
+		try{
+			modelo.autenticar(email, passwd);
+		}
+		catch(JugadorNoExisteException e){
+			//crear ventana de error
+			System.out.println("JUGADOR "+e.toString()+" NO EXISTE EXCEPTION");
+		}
 	}
 	
 	public void enviarDatosRegistro(String email, String passwd) {

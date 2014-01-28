@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import client.communications.Cliente;
 import client.communications.Proxy;
+import client.controller.Controller;
 import client.exceptions.*;
 import client.persistence.DAOAutenticar;
 import client.exceptions.*;
@@ -23,14 +24,14 @@ public class FTERD {
 		this.jugadores = new Hashtable<String, Jugador>();
 		this.tableros  = new Hashtable<String, Tablero9x9>();
 		this.proxy = Proxy.get();
-		this.cliente = new Cliente();
+		this.cliente = new Cliente(this);
 	}
 
 	public void registrarJugador(String email, String passwd) throws RemoteException {
 		proxy.register(email, passwd);
 	}
 	
-	public void autenticar(String email, String passwd) {
+	public void autenticar(String email, String passwd) throws JugadorNoExisteException {
 		try {
 			proxy.add(email, passwd, cliente);
 		} catch (RemoteException e) {
@@ -60,6 +61,17 @@ public class FTERD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void updateJugadoresConectados(Vector <String> jugadores){
+		//pasarselo a ventana
+		System.out.println(jugadores);
+		try {
+			Controller c = Controller.get();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }
