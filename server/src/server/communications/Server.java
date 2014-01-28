@@ -139,7 +139,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void retar(String retador, String retado) throws RemoteException {
 		this.fachada.retar(retador, retado);
-		
+		ICliente IRetado = this.stubs.get(retado);
+		IRetado.notificarSolicitudReto(retador);
 	}
 
 	@Override
@@ -148,4 +149,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
 		
 	}
+	
+	
 }

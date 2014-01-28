@@ -14,7 +14,6 @@ public interface IServer extends Remote {
 	public void add(String email, String passwd, ICliente cliente) throws RemoteException, JugadorNoExisteException;
 	public void delete(String email) throws RemoteException;
 	public void register(String email, String passwd) throws RemoteException;
-	
 	public void retar(String retador, String retado) throws RemoteException;
 	public void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException;
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC)throws RemoteException;

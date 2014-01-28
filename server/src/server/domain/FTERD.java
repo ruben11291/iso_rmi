@@ -112,6 +112,7 @@ public class FTERD {
 	public void retar(String retador, String retado){
 		retosEnEspera.put(retador, retado);
 		//Enviar peticion de reto a jugador 'retado'
+		
 	}
 	
 	/*AÑADIR A LA INTERFAZ*/
