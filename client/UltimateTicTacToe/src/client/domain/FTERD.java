@@ -61,7 +61,7 @@ public class FTERD {
 		}
 	}
 	
-	public void autenticar(String email, String passwd) {
+	public void autenticar(String email, String passwd) throws JugadorNoExisteException {
 		try {
 			proxy.add(email, passwd, cliente);
 		} catch (RemoteException e) {

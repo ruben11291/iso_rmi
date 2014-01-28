@@ -10,6 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 
+import client.exceptions.JugadorNoExisteException;
 import client.exportable.communications.ICliente;
 import server.exportable.communications.IServer;
 
@@ -18,7 +19,7 @@ public class Proxy {
 	private IServer server;
 	  
 	private Proxy() throws MalformedURLException, RemoteException, NotBoundException {
-		this.server=(IServer) Naming.lookup("rmi://192.168.0.105:3001/servidor");//172.19.177.184
+		this.server=(IServer) Naming.lookup("rmi://172.19.150.60:3001/servidor");//172.19.177.184
 	}
 	
 	public static Proxy get() throws Exception {
@@ -35,7 +36,7 @@ public class Proxy {
 	}
 	
 	//darse de alta en el sistema
-	public void add(String email, String passwd, ICliente cliente) throws RemoteException{
+	public void add(String email, String passwd, ICliente cliente) throws RemoteException, JugadorNoExisteException{
 		server.add(email, passwd, cliente);
 	}
 	

@@ -22,6 +22,6 @@ public class main {
 		startupWindow.setLocationRelativeTo(null);
 		startupWindow.setVisible(true);		
 		System.out.println("Conectando");
-		Tablero9x9 prueba = new Tablero9x9();
+	//	Tablero9x9 prueba = new Tablero9x9();
 	}
 }
