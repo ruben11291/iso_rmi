@@ -1,5 +1,6 @@
 package client.controller;
 
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Hashtable;
@@ -65,8 +66,6 @@ public class Controller implements IController {
 
 	@Override
 	public void enviarListaJugadores(Vector<String> jugadores) {
-		System.out.println(jugadores);
-		if (lista == null) System.out.println("nulo soy");
 		lista.recibirRespuestaLista(jugadores);
 	}
 	

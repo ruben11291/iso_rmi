@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
 
+import client.controller.Controller;
+
 import java.awt.Font;
 
 public class GameWindow extends JFrame implements IJuego {
@@ -52,6 +54,14 @@ public class GameWindow extends JFrame implements IJuego {
 	
 	public GameWindow() {
 		super();
+		try {
+			Controller cntrl;
+			cntrl = Controller.get();
+			cntrl.setJuego(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		this.initGUI();
 	}
 

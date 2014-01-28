@@ -44,7 +44,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	private JButton updateListButton;
 	private JButton createGameButton;
 	
-	
 	public PlayerListWindow() {
 		super();
 		try {
@@ -59,7 +58,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	}
 	
 
-	private void setupListGUI() {
+	private void setupListGUI() {		
 		// TODO Auto-generated method stub
 		this.setResizable(false);
 		this.setTitle("Ultimate Tic-Tac-Toe");
