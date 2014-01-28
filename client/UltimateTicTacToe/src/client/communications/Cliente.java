@@ -91,5 +91,20 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	public String getEmail() {
 		return this.email;
 	}
+
+
+	@Override
+	public void notificarSolicitudReto(String retador) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void iniciarPartida(int idPartida, String retador, String retado)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

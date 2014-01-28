@@ -10,5 +10,7 @@ public interface ICliente extends Remote{
 	void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException;
 	void OponenteHaAbandonadoPartida(int idPartida) throws RemoteException;
 	void recibirListaDeJugadores(Vector <String> jugadores) throws RemoteException;
+	void notificarSolicitudReto(String retador) throws RemoteException;
+	void iniciarPartida(int idPartida, String retador, String retado) throws RemoteException;
 	
 }
