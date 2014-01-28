@@ -12,7 +12,7 @@ import client.presentation.*;
 
 public class Controller implements IController {
 	private static Controller self;
-	IJuego juego;
+	private Hashtable <Integer,IJuego> juegos;
 	IListaJugadores lista;
 	ILogin login;
 	IRegistro registro;
@@ -36,7 +36,7 @@ public class Controller implements IController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		juego.ponerFicha(email, cT, fT, cC, fC);
+		juegos.get(id_partida).ponerFicha(email, cT, fT, cC, fC);
 	}
 	
 	public void enviarDatosLogin(String email, String passwd) {
@@ -90,12 +90,23 @@ public class Controller implements IController {
 
 	@Override
 	public void setJuego(IJuego juego) {
-		this.juego = juego;
+		
 	}
 
 	@Override
 	public void setLogin(ILogin login) {
 		this.login = login;
+	}
+
+	public void cerrarSesion() {
+		this.modelo.cerrarSesion(null);
+		
+	}
+
+	//Cierra ventana de juego
+	public void cerrarPartida(int idPartida) {
+		this.juegos.get(idPartida).cerrar();
+		
 	}
 	
 }

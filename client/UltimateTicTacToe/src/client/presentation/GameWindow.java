@@ -992,5 +992,10 @@ public class GameWindow extends JFrame implements IJuego {
 		
 	}
 
+	@Override
+	public void cerrar() {
+		this.dispose();
+	}
+
 }
 

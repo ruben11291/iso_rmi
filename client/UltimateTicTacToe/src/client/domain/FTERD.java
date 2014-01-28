@@ -17,14 +17,14 @@ public class FTERD {
 	
 	private Hashtable<String, Jugador> jugadores;
 	private Jugador jugador;
-	private Hashtable<String, Tablero9x9> tableros;
+	private Hashtable<Integer, Tablero9x9> tableros;
 	private Vector<String> retosSolicitados;
 	private Proxy proxy;
 	private Cliente cliente;
 	
 	public FTERD() throws Exception{
 		this.jugadores = new Hashtable<String, Jugador>();
-		this.tableros  = new Hashtable<String, Tablero9x9>();
+		this.tableros  = new Hashtable<Integer, Tablero9x9>();
 		this.proxy = Proxy.get();
 		this.cliente = new Cliente(this);
 	}
@@ -35,6 +35,9 @@ public class FTERD {
 		else return "";
 	}
 	
+	public void autenticarTest(String email, String passwd){
+		this.jugador = new Jugador(email,passwd);
+	}
 	
 	public void registrarJugador(String email, String passwd) throws RemoteException {
 		proxy.register(email, passwd);
@@ -62,6 +65,7 @@ public class FTERD {
 	
 	
 	public void cerrarSesion(String email) {
+		
 		try {
 			proxy.delete(email);
 		} catch (RemoteException e) {
@@ -99,11 +103,19 @@ public class FTERD {
 		tablero.setJugadorA(j1);
 		tablero.setJugadorB(j2);
 		tablero.setJugadorConelTurno(j1);
-		this.tableros.put(retador, tablero);
+		this.tableros.put(idPartida, tablero);
 	}
 	
 	public void iniciarPartida(String retador, String retado, int idPartida){
 		creaPartida(retador, retado, idPartida);
+	}
+
+	//Esta operacion hace que el cliente limpie la partida que mantenia con el otro jugador
+	//Es recibida
+	public void oponenteHaAbandonado(int idPartida) {
+		Controller c = Controller.get();
+		c.cerrarPartida(idPartida);
+		this.tableros.remove(idPartida);
 	}
 	
 }
