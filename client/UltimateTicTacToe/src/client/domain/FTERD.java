@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import client.communications.Cliente;
 import client.communications.Proxy;
+import client.controller.Controller;
 import client.exceptions.*;
 import client.persistence.DAOAutenticar;
 import client.exceptions.*;
@@ -23,7 +24,7 @@ public class FTERD {
 		this.jugadores = new Hashtable<String, Jugador>();
 		this.tableros  = new Hashtable<String, Tablero9x9>();
 		this.proxy = Proxy.get();
-		this.cliente = new Cliente();
+		this.cliente = new Cliente(this);
 	}
 	
 	
@@ -130,6 +131,13 @@ public class FTERD {
 	public void updateJugadoresConectados(Vector <String> jugadores){
 		//pasarselo a ventana
 		System.out.println(jugadores);
+		try {
+			Controller c = Controller.get();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	
