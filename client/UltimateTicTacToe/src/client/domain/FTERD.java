@@ -113,9 +113,15 @@ public class FTERD {
 	//Esta operacion hace que el cliente limpie la partida que mantenia con el otro jugador
 	//Es recibida
 	public void oponenteHaAbandonado(int idPartida) {
-		Controller c = Controller.get();
-		c.cerrarPartida(idPartida);
-		this.tableros.remove(idPartida);
+		Controller c;
+		try {
+			c = Controller.get();
+			c.cerrarPartida(idPartida);
+			this.tableros.remove(idPartida);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
