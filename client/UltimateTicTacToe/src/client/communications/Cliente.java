@@ -70,7 +70,7 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 
 	@Override
 	public void OponenteHaAbandonadoPartida(int idPartida) throws RemoteException {
-		// TODO Auto-generated method stub
+		this.fachada.oponenteHaAbandonado(idPartida);
 		
 	}
 

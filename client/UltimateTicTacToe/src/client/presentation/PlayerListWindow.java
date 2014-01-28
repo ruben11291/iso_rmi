@@ -214,6 +214,8 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 					"Confirmación", JOptionPane.YES_NO_OPTION);
 				if (confirm == 0) {
 					win.dispose();
+					Controller c = Controller.get();
+					c.cerrarSesion();
 				}
 			} catch (final Exception e) {
 				
