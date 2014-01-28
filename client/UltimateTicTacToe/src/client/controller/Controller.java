@@ -3,6 +3,7 @@ package client.controller;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import client.domain.FTERD;
 import client.exceptions.*;
@@ -38,13 +39,16 @@ public class Controller implements IController {
 	}
 	
 	public void enviarDatosLogin(String email, String passwd) {
+		boolean error = true;
 		try{
 			modelo.autenticar(email, passwd);
+			error = false;
 		}
 		catch(JugadorNoExisteException e){
 			//crear ventana de error
 			System.out.println("JUGADOR "+e.toString()+" NO EXISTE EXCEPTION");
 		}
+		login.recibirRespuestaLogin(error);
 	}
 	
 	public void enviarDatosRegistro(String email, String passwd) {
@@ -57,6 +61,11 @@ public class Controller implements IController {
 			e.printStackTrace();
 		}
 		registro.respuestaRegistro(error);
+	}
+
+	@Override
+	public void enviarListaJugadores(Vector<String> jugadores) {
+		lista.recibirRespuestaLista(jugadores);		
 	}
 	
 	public void retarJugador(String creador, String oponente) {

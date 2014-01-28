@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import client.controller.Controller;
 
 import java.awt.Color;
+import java.util.Vector;
 
 public class PlayerListWindow extends JFrame implements WindowListener, IListaJugadores {
 	
@@ -283,6 +284,14 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	public void actualizarLista() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void recibirRespuestaLista(Vector<String> jugadores) {
+		mPlayerList.removeAll();
+		for (String jugador : jugadores) {
+			// TODO anadir a la lista
+		}
 	}
 	
 }

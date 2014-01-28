@@ -190,28 +190,35 @@ public class StartupWindow extends JFrame implements ILogin {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			try {
-				win.enviarDatosLogin(win.getEmailTextField().getText(), win.getPasswdField().getText());
-				final PlayerListWindow playerListWindow = new PlayerListWindow();
-				playerListWindow.setLocationRelativeTo(null);
-				playerListWindow.setVisible(true);
-			} catch (Exception e) {
-				// TODO ANADIR LABEL DE ERROR EN REGISTRO
-				e.printStackTrace();
-			}
+			win.enviarDatosLogin(win.getEmailTextField().getText(), win.getPasswdField().getText());
 		}
 
 	}
 
-	public void enviarDatosLogin(String email, String passwd) throws Exception {
-		Controller cntrl = Controller.get();
-		cntrl.enviarDatosLogin(email, passwd);
+	public void enviarDatosLogin(String email, String passwd) {
+		Controller cntrl;
+		try {
+			cntrl = Controller.get();
+			cntrl.enviarDatosLogin(email, passwd);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
 	
 	@Override
-	public void recibirRespuesta(boolean respuesta) {
-		// TODO Auto-generated method stub
-		
+	public void recibirRespuestaLogin(boolean error) {
+		if (error) {
+			NoticeLabel.setText("El Usuario introducido ya existe");
+			NoticeLabel.setForeground(new Color(200, 0, 0));
+			NoticeLabel.setOpaque(true);
+			NoticeLabel.setBorder(border);
+		} else {
+			this.setVisible(false);
+			final PlayerListWindow playerListWindow = new PlayerListWindow();
+			playerListWindow.setLocationRelativeTo(null);
+			playerListWindow.setVisible(true);
+		}		
 	}
 
 }

@@ -246,10 +246,4 @@ public class RegisterDialog extends JDialog implements IRegistro {
 			this.setVisible(false);
 		}
 	}
-	
-	@Override
-	public void recibirRespuesta() {
-		// TODO Auto-generated method stub
-		
-	}
 }
