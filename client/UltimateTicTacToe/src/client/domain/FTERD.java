@@ -161,8 +161,13 @@ public class FTERD {
 		this.proxy.envioRespuestaPeticionDeReto(retador, this.jugador.getEmail(), respuesta);
 	}
 
-	public void cerrarPartida() {
-		this.proxy.abandonoPartida(this.jugador.getEmail());
+	public void cerrarPartida()  {
+		try {
+			this.proxy.abandonoPartida(this.jugador.getEmail());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.tablero = null;
 	}
 	

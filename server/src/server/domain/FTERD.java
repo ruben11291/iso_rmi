@@ -180,7 +180,7 @@ public class FTERD {
 		return this.jugadores.get(email);
 	}
 
-	public Hashtable<String, Integer> eliminarPartidasDelJugador(String email) {
+	public Hashtable<String, Integer> eliminarPartidaDelJugador(String email) {
 		Hashtable<String, Integer> avisarA = new Hashtable<String, Integer>();
 		
 		Enumeration<Tablero9x9> tableros = this.tableros.elements();

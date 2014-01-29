@@ -63,13 +63,22 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.fachada.add(email, passwd);
 		this.stubs.put(email, cliente);
 		System.out.println("Jugador añadido "+email+" en servidor ");
+		this.actualizarListaDeJugadores();
 		
+
+	}
+	
+	private void actualizarListaDeJugadores(){
 		Vector <String> emailJugadores = getEmailJugadores(stubs);
 		
 		Enumeration<ICliente> lista=this.stubs.elements();
 		while (lista.hasMoreElements()) {
 			ICliente t=lista.nextElement();
-			t.recibirListaDeJugadores(emailJugadores);
+			try {
+				t.recibirListaDeJugadores(emailJugadores);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -83,19 +92,34 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return emailJugadores;
 	}
 
+	// Para cerrar sesion
 	public void delete(String email) throws RemoteException {
 		this.fachada.delete(email);
-		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidasDelJugador(email);
-		//avisar a todos los clientes que esten jugando que su oponente ha cerrado sesion
+		this.abandonoPartida(email);
+		this.actualizarListaDeJugadores();
+		
+		
+	}
+	
+	// El jugador con email 'email' ha abandonado la partida. Se busca a su oponente y 
+	// se comunica que 'email' ha abandonado la partida
+	@Override
+	public void abandonoPartida(String email) {
+		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidaDelJugador(email);
+		//avisar al jugador que su oponente ha cerrado sesion
 		Enumeration<String> emailes=avisarA.keys();
 		while (emailes.hasMoreElements()) {
 			String e = emailes.nextElement();
 			ICliente c = this.stubs.get(e);
-			c.OponenteHaAbandonadoPartida(avisarA.get(e));
-		}		
-	}
-	
-	
+			try {
+				c.OponenteHaAbandonadoPartida();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		}
+	}	
 	
 	///Registar jugador///
 	public void register(String email, String passwd) throws RemoteException {
@@ -170,7 +194,5 @@ public class Server extends UnicastRemoteObject implements IServer {
 		
 	}
 
-
-	
 	
 }

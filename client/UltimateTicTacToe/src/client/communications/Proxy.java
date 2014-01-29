@@ -61,7 +61,7 @@ public class Proxy {
 		server.respuestaAPeticionDeReto(retador, retado, respuesta);
 	}
 
-	public void oponenteHaAbandonadoPartida(int idPartida) {
-		server.oponenteHaAbandonadoPartida(idPartida);
+	public void abandonoPartida(String email) throws RemoteException {
+		server.abandonoPartida(email);
 	}
 }
