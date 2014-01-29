@@ -54,9 +54,9 @@ public class FTERD {
 		
 	}
 	
-	public void delete(Jugador jugador) {
+	public void delete(String email) {
 		if (jugadores != null) {
-			this.jugadores.remove(jugador.getEmail());
+			this.jugadores.remove(email);
 		}
 	}
 	
@@ -178,5 +178,23 @@ public class FTERD {
 
 	public Jugador getJugador(String email) {
 		return this.jugadores.get(email);
+	}
+
+	public Hashtable<String, Integer> eliminarPartidasDelJugador(String email) {
+		Hashtable<String, Integer> avisarA = new Hashtable<String, Integer>();
+		
+		Enumeration<Tablero9x9> tableros = this.tableros.elements();
+		while(tableros.hasMoreElements()){
+			Tablero9x9 tablero = tableros.nextElement();
+			if (tablero.getJugadorA().getEmail().equals(email)){
+				avisarA.put(tablero.getJugadorB().getEmail(), tablero.getId());			
+			}
+			if (tablero.getJugadorB().getEmail().equals(email)){
+				avisarA.put(tablero.getJugadorA().getEmail(), tablero.getId());
+			}
+				
+		}
+		
+		return avisarA;
 	}
 }

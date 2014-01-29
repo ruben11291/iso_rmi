@@ -84,10 +84,17 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	
-	///Delete player////
+	///Delete player////	
 	public void delete(String email) throws RemoteException {
-		Jugador jugador=this.fachada.getJugador(email);
-		this.fachada.delete(jugador);
+		this.fachada.delete(email);
+		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidasDelJugador(email);
+		//mandar a los jugadores que sea que el otro ha cerrado
+		Enumeration<String> emailes=stubs.keys();
+		while (emailes.hasMoreElements()) {
+			String e = emailes.nextElement();
+			ICliente c = this.stubs.get(e);
+			c.OponenteHaAbandonadoPartida(avisarA.get(e));
+		}		
 	}
 	
 	
