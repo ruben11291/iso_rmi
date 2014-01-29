@@ -64,10 +64,11 @@ public class FTERD {
 	
 	
 	
-	public void cerrarSesion(String email) {
+	public void cerrarSesion() {
 		
 		try {
-			proxy.delete(email);
+			proxy.delete(this.jugador.getEmail());
+			this.jugador = null;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -99,7 +99,7 @@ public class Controller implements IController {
 	}
 
 	public void cerrarSesion() {
-		this.modelo.cerrarSesion(null);
+		this.modelo.cerrarSesion();
 		
 	}
 
