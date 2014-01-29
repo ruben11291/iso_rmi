@@ -116,5 +116,15 @@ public class Controller implements IController {
 		// TODO Auto-generated method stub
 		this.lista.recibirRespuestaReto(retado, respuesta, id_partida);		
 	}
+
+	public boolean hasSidoRetado(String retador) {
+		try{
+		;	
+		}
+		catch(Exception e){
+			;
+		}
+		return false;
+	}
 	
 }
