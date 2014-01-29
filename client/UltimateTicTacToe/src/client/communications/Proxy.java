@@ -19,7 +19,7 @@ public class Proxy {
 	private IServer server;
 	  
 	private Proxy() throws MalformedURLException, RemoteException, NotBoundException {
-		this.server=(IServer) Naming.lookup("rmi://localhost:3001/servidor");//172.19.177.184
+		this.server=(IServer) Naming.lookup("rmi://:3001/servidor");//172.19.177.184
 
 	}
 	
@@ -57,6 +57,7 @@ public class Proxy {
 	}	
 	
 	public void envioRespuestaPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException{
+		System.out.println("Respuesta a server");
 		server.respuestaAPeticionDeReto(retador, retado, respuesta);
 	}
 }

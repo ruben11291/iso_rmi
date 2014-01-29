@@ -288,7 +288,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			gw.setLocationRelativeTo(null);
 			gw.setVisible(true);
 		} else {
-			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.");
+			JOptionPane.showMessageDialog(this.mGameListPanel, retado + " ha rechazado el reto.");
 		}
 		
 	}
@@ -296,6 +296,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	@Override
 	public void recibirReto(String retador) {
 		final int confirm = JOptionPane.showConfirmDialog(this.mGameListPanel, retador + " te ha retado, ¿aceptas?", "¡Te han retado!", JOptionPane.YES_NO_OPTION);
+		System.out.println("Respuesta: " + confirm);
 		try {
 			Controller cntl = Controller.get();
 			if (confirm == 0) cntl.enviarRespuestaReto(true, retador);

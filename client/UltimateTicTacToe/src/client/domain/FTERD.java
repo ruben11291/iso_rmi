@@ -59,8 +59,8 @@ public class FTERD {
 	}
 
 	public void retar(String oponente) throws RemoteException {
-		proxy.retar(this.jugador.getEmail(), oponente);
 		this.retosSolicitados.add(oponente);
+		proxy.retar(this.jugador.getEmail(), oponente);
 	}
 	
 	
@@ -90,18 +90,19 @@ public class FTERD {
 	//Metodo que se llama cuando un cliente recibe la respuesta a su solicitud de reto
 	public void respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta, int idPartida) {
-		
-		if(this.retosSolicitados.contains(retador)){
+		System.out.println("Procede de: proxy servidor. Retador: " + retador + " Retado: " + retado + " Respuesta:" + respuesta);
+		System.out.println(this.retosSolicitados.toString());
+		if(this.retosSolicitados.contains(retado)){
 			if(respuesta){
-				this.retosSolicitados.remove(retador);
+				this.retosSolicitados.remove(retado);
 				creaPartida(retador,retado, idPartida);
-				try {
-					Controller cntrl = Controller.get();
-					cntrl.respuestaReto(retado, respuesta, idPartida);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			}
+			try {
+				Controller cntrl = Controller.get();
+				cntrl.respuestaReto(retado, respuesta, idPartida);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
@@ -150,6 +151,7 @@ public class FTERD {
 
 	public void enviarRespuestaReto(boolean respuesta, String retador) throws RemoteException {
 		// TODO Auto-generated method stub
+		System.out.println("Respuesta enviada al proxy");
 		this.proxy.envioRespuestaPeticionDeReto(retador, this.jugador.getEmail(), respuesta);
 	}
 	

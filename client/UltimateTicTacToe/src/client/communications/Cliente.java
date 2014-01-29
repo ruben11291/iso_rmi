@@ -79,7 +79,6 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	public void recibirListaDeJugadores(Vector<String> jugadores)
 			throws RemoteException {
 		try {
-			System.out.println("asss");
 			this.fachada.updateJugadoresConectados(jugadores);
 		} catch(NullPointerException e) {
 			System.out.println(e);
@@ -109,7 +108,7 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	@Override
 	public void respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta, int idPartida) throws RemoteException {
-		
+		System.out.println("Respuesta que viene del servidor: " + respuesta);
 		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta, idPartida);
 		
 	}

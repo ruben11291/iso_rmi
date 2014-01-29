@@ -119,6 +119,7 @@ public class Controller implements IController {
 	@Override
 	public void enviarRespuestaReto(boolean respuesta, String retador) {
 		try {
+			System.out.println("Respuesta enviada a la fachada: " + respuesta + ", " + retador);
 			this.modelo.enviarRespuestaReto(respuesta, retador);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
