@@ -11,12 +11,12 @@ public interface IController {
 	public void enviarDatosLogin(String email, String passwd);
 	public void enviarDatosRegistro(String email, String passwd);
 	public void enviarListaJugadores(Vector<String> jugadores);
-	public void enviarRespuestaReto(boolean respuesta);
+	public void enviarRespuestaReto(boolean respuesta, String retador);
 	public void retarJugador(String oponente);
 	public void respuestaReto(String retado, boolean respuesta, int id_partida);
 	public void setRegistro(IRegistro registro);
 	public void setLista(IListaJugadores lista);
 	public void setLogin(ILogin login);
 	public void setJuego(int id_partida, IJuego juego);
-	public boolean hasSidoRetado(String retador);
+	public void hasSidoRetado(String retador);
 }

@@ -139,7 +139,18 @@ public class FTERD {
 
 	public void hasSidoRetado(String retador) {
 		// TODO Auto-generated method stub
-		
+		try {
+			Controller cntrl = Controller.get();
+			cntrl.hasSidoRetado(retador);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void enviarRespuestaReto(boolean respuesta, String retador) throws RemoteException {
+		// TODO Auto-generated method stub
+		this.proxy.envioRespuestaPeticionDeReto(retador, this.jugador.getEmail(), respuesta);
 	}
 	
 }

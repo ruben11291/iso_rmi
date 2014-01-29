@@ -117,19 +117,18 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void enviarRespuestaReto(boolean respuesta) {
-	
+	public void enviarRespuestaReto(boolean respuesta, String retador) {
+		try {
+			this.modelo.enviarRespuestaReto(respuesta, retador);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
-	public boolean hasSidoRetado(String retador) {
-		try{
-		;	
-		}
-		catch(Exception e){
-			;
-		}
-		return false;
+	public void hasSidoRetado(String retador) {
+		this.lista.recibirReto(retador);
 	}
 	
 }
