@@ -42,7 +42,20 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel C9_1_1, C9_1_2, C9_1_3, C9_2_1, C9_2_2, C9_2_3, C9_3_1, C9_3_2, C9_3_3; //TABLERO 9
 	
 	private JLabel F1, F2, F3, F4, F5, F6, F7, F8, F9; //TABLERO GLOBAL
-
+	
+	private JLabel [][] tableroJuego = {
+			{C1_1_1, C1_1_2, C1_1_3, C1_2_1, C1_2_2, C1_2_3, C1_3_1, C1_3_2, C1_3_3},
+			{C2_1_1, C2_1_2, C2_1_3, C2_2_1, C2_2_2, C2_2_3, C2_3_1, C2_3_2, C2_3_3},
+			{C3_1_1, C3_1_2, C3_1_3, C3_2_1, C3_2_2, C3_2_3, C3_3_1, C3_3_2, C3_3_3},
+			{C4_1_1, C4_1_2, C4_1_3, C4_2_1, C4_2_2, C4_2_3, C4_3_1, C4_3_2, C4_3_3},
+			{C5_1_1, C5_1_2, C5_1_3, C5_2_1, C5_2_2, C5_2_3, C5_3_1, C5_3_2, C5_3_3},
+			{C6_1_1, C6_1_2, C6_1_3, C6_2_1, C6_2_2, C6_2_3, C6_3_1, C6_3_2, C6_3_3},
+			{C7_1_1, C7_1_2, C7_1_3, C7_2_1, C7_2_2, C7_2_3, C7_3_1, C7_3_2, C7_3_3},
+			{C8_1_1, C8_1_2, C8_1_3, C8_2_1, C8_2_2, C8_2_3, C8_3_1, C8_3_2, C8_3_3},
+			{C9_1_1, C9_1_2, C9_1_3, C9_2_1, C9_2_2, C9_2_3, C9_3_1, C9_3_2, C9_3_3}};
+	
+	private JLabel [][] tableroGlobal = {{F1, F2, F3},{F4, F5, F6},{F7, F8, F9}};
+	
 	private JLabel minimapLabel;
 	private JLabel ply1;
 	private JLabel ply2;
