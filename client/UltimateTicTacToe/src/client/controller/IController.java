@@ -24,5 +24,5 @@ public interface IController {
 	public void cerrarPartida();
 	public void cerrarPartida(Window window);
 	public void oponenteHaAbandonado();
-	void avisoCerrarSesion();
+	public void avisoCerrarSesion();
 }

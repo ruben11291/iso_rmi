@@ -116,9 +116,7 @@ public class Controller implements IController {
 	//Cierra ventana de juego
 	@Override
 	public void cerrarPartida() {
-		if(juego != null){
-		this.juego.cerrar();
-		}
+		if(juego != null) this.juego.cerrar();
 		this.juego = null;
 		
 	}
@@ -127,7 +125,6 @@ public class Controller implements IController {
 	public void oponenteHaAbandonado(){
 		this.juego.cerrarPorAbandonoOponente();
 		this.juego = null;
-		this.lista.avisoCierreJuego();
 	}
 	
 	@Override
