@@ -109,7 +109,8 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	@Override
 	public void respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta, int idPartida) throws RemoteException {
-			this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta, idPartida);
+		
+		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta, idPartida);
 		
 	}
 	

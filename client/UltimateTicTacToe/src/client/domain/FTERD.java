@@ -85,6 +85,7 @@ public class FTERD {
 		}
 	}
 
+	//Metodo que se llama cuando un cliente recibe la respuesta a su solicitud de reto
 	public void respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta, int idPartida) {
 		
@@ -96,6 +97,7 @@ public class FTERD {
 		}
 	}
 	
+	//Metodo en el que se crea la partida y se inicializan los jugadores
 	private void creaPartida(String retador, String retado, int idPartida){
 		Tablero9x9 tablero = new Tablero9x9(idPartida);
 		Jugador j1 = new Jugador(retador,"");
@@ -106,12 +108,14 @@ public class FTERD {
 		this.tableros.put(idPartida, tablero);
 	}
 	
+	//Metodo que se llama cuando se recibe por parte del servidor un inicio de partida.
+	//Este cliente es el que recibe la petición de reto
 	public void iniciarPartida(String retador, String retado, int idPartida){
 		creaPartida(retador, retado, idPartida);
 	}
 
 	//Esta operacion hace que el cliente limpie la partida que mantenia con el otro jugador
-	//Es recibida
+	//Es recibida por el openente al jugador que abandona
 	public void oponenteHaAbandonado(int idPartida) {
 		Controller c;
 		try {
