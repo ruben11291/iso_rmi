@@ -136,7 +136,8 @@ public class FTERD {
 		Controller c;
 		try {
 			c = Controller.get();
-			c.cerrarPartida();
+			//c.cerrarPartida();
+			c.oponenteHaAbandonado();
 			this.tablero = null;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

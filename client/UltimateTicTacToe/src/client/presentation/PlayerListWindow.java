@@ -325,7 +325,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		final GameWindow gw = new GameWindow(id_partida);
 		gw.setLocationRelativeTo(null);
 		gw.setVisible(true);
-	}
+	}	
 	
 }
 
