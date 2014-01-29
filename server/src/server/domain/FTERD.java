@@ -115,8 +115,9 @@ public class FTERD {
 		
 	}
 	
-	/*AÑADIR A LA INTERFAZ*/
-	public void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) {
+	public int respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) {
+		
+		int idPartida = -1;
 		if (retosEnEspera.containsKey(retador) &&
 				(retosEnEspera.get(retador)).equals(retado) ){
 			
@@ -130,6 +131,7 @@ public class FTERD {
 				tableroNuevo.setJugadorA(jugadorA);
 				tableroNuevo.setJugadorB(jugadorB);
 				this.tableros.put(tableroNuevo.getId(), tableroNuevo);
+				idPartida = tableroNuevo.getId();
 				try {
 					DAOTablero.nuevaPartida(tableroNuevo);
 				} catch (ClassNotFoundException | SQLException e) {
@@ -137,19 +139,17 @@ public class FTERD {
 					e.printStackTrace();
 				}
 				
-				//IMPLEMENTAR:
-				//mandar a retador: reto aceptado con tableroNuevo.getId()
-				//mandar a retado:  tableroNuevo.getId()
-				//...
+	
+				
 				
 			}
 			if (!respuesta){
-				//IMPLEMENTAR
-				//mandar a retador: reto rechazado
-				
+
 			}
 		
 		}
+		
+		return idPartida;
 	}
 
 	public Hashtable<String, Jugador> getJugadores() {

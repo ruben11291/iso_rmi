@@ -151,7 +151,22 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta) throws RemoteException {
-		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
+		
+		int idPartida = this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
+		
+		//Mandar a respuesta a retador. Si la respuestas ha sido positiva le manda un idPartida valido
+		//Si ha sido negativa le mando un idPartida invalido (= -1)
+		ICliente IRetador = this.stubs.get(retador);
+		IRetador.respuestaAPeticionDeReto(retador, retado, respuesta, idPartida);
+		
+		//Solo si el jugador retado ha aceptado el reto, el servidor le manda el idPartida con el
+		//que van a jugar.
+		//Si el jugador retado NO ha aceptado el reto no espera ningun mensaje der servidor
+		if(respuesta){
+			ICliente IRetado = this.stubs.get(retado);
+			IRetado.iniciarPartida(idPartida, retador, retado);
+		}
+
 		
 	}
 	
