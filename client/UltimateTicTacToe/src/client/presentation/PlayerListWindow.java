@@ -3,6 +3,7 @@ package client.presentation;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -83,7 +84,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		mGameListToolBar.setVisible(true);
 		this.getGameListPanel().setVisible(true);
 	}
-
 
 	private JToolBar getGameListToolBar() {
 		// TODO Auto-generated method stub
@@ -233,7 +233,19 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-
+		int eleccion = JOptionPane.showConfirmDialog(null, "Desea salir?");
+		if ( eleccion == 0) {
+			//hilo
+			try {
+				Controller ctrl = Controller.get();
+				ctrl.cerrarPartida(e.getWindow());
+			} catch (Exception ex) {
+				System.out.println("EXCEPTION");
+				
+			}
+			///
+			e.getWindow().dispose();
+		}  
 		
 	}
 
