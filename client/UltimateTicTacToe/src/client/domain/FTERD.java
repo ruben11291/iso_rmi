@@ -57,8 +57,8 @@ public class FTERD {
 		proxy.poner(id_partida, email, cT, fT, cC, fC);
 	}
 
-	public void retar(String creador, String oponente) throws RemoteException {
-		proxy.retar(creador, oponente);
+	public void retar(String oponente) throws RemoteException {
+		proxy.retar(this.jugador.getEmail(), oponente);
 		this.retosSolicitados.add(oponente);
 	}
 	

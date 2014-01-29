@@ -69,9 +69,9 @@ public class Controller implements IController {
 		lista.recibirRespuestaLista(jugadores);
 	}
 	
-	public void retarJugador(String creador, String oponente) {
+	public void retarJugador(String oponente) {
 		try {
-			modelo.retar(creador, oponente);
+			modelo.retar(oponente);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,8 +89,9 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void setJuego(IJuego juego) {
-		
+	public void setJuego(int id_partida, IJuego juego) {
+		if (this.juegos == null) this.juegos = new Hashtable<Integer, IJuego>();
+		this.juegos.put(id_partida, juego);
 	}
 
 	@Override
@@ -112,7 +113,7 @@ public class Controller implements IController {
 	@Override
 	public void respuestaReto(String retado, boolean respuesta, int id_partida) {
 		// TODO Auto-generated method stub
-		
+		this.lista.recibirRespuestaReto(retado, respuesta, id_partida);		
 	}
 	
 }

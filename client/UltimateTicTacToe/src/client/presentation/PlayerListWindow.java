@@ -97,21 +97,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			updateListButton.addMouseListener(new UpdateListMouseAdapter());
 			mGameListToolBar.add(updateListButton);
 
-			createGameButton = new JButton("Crear partida");
-			createGameButton.setIcon(new ImageIcon(
-				this.getClass().getClassLoader().getResource(
-					"image/ttoe.png")));
-			createGameButton.addMouseListener(new CreateGameMouseAdapter());
-			mGameListToolBar.add(createGameButton);
-
-			joinGameButton = new JButton("Unirse a la partida");
-			joinGameButton.setIcon(new ImageIcon(
-				this.getClass().getClassLoader().getResource(
-					"image/joinp.png")));
-			joinGameButton.addMouseListener(new JoinGameMouseAdapter());
-//			joinGameButton.setEnabled(false);
-			mGameListToolBar.add(joinGameButton);
-
 			logoutButton = new JButton("Cerrar sesión");
 			logoutButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
@@ -178,21 +163,21 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		}
 	}
 	
-	private class JoinGameMouseAdapter extends MouseAdapter {
-		@Override
-		public void mouseClicked(MouseEvent evt) {
-			final int gameSelected = mPlayerList.getSelectedRow();
-			System.out.println("Seleccionado: " + gameSelected);
-			System.out.println(mPlayerList.getRowCount());
-		}
-	}
-	
 	private class CreateGameMouseAdapter extends MouseAdapter {
+		PlayerListWindow win;
+		public CreateGameMouseAdapter(PlayerListWindow win) {
+			this.win = win;
+		}		
+		
 		@Override
 		public void mouseClicked(MouseEvent evt) {
-			final GameWindow gw = new GameWindow();
-			gw.setLocationRelativeTo(null);
-			gw.setVisible(true);
+			try {
+				Controller cntrl = Controller.get();
+				cntrl.retarJugador("arreglar");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -267,14 +252,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		
 	}
 
-
-	@Override
-	public void recibirRespuestaReto() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	@Override
 	public void cerrarSesion() {
 		// TODO Auto-generated method stub
@@ -292,6 +269,19 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		for (String jugador : jugadores) {
 			model.addRow(new String[]{jugador});
 		}
+	}
+
+
+	@Override
+	public void recibirRespuestaReto(String retado, boolean respuesta, int id_partida) {
+		if (respuesta) {
+			final GameWindow gw = new GameWindow(id_partida);
+			gw.setLocationRelativeTo(null);
+			gw.setVisible(true);
+		} else {
+			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.");
+		}
+		
 	}
 	
 }
