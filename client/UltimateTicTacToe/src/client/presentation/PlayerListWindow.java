@@ -174,14 +174,15 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		PlayerListWindow win;
 		public CreateGameMouseAdapter(PlayerListWindow win) {
 			this.win = win;
-		}		
+		}
 		
 		@Override
 		public void mouseClicked(MouseEvent evt) {
-			if (this.win.mPlayerList.getSelectedRow() != -1) {
+			if (this.win.mPlayerList.getSelectedRow() != -1 || this.win.mPlayerList.getSelectedRow() >= this.win.mPlayerList.getRowCount()) {
+				String retado = this.win.mPlayerList.getModel().getValueAt(this.win.mPlayerList.getSelectedRow(), this.win.mPlayerList.getSelectedColumn()).toString();
 				try {
 					Controller cntrl = Controller.get();
-					cntrl.retarJugador(this.win.mPlayerList.getModel().getValueAt(this.win.mPlayerList.getSelectedRow(), this.win.mPlayerList.getSelectedColumn()).toString());
+					cntrl.retarJugador(retado);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -287,24 +288,20 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			iniciarPartida(id_partida);
 		} else {
 			System.out.println(retado + " ha rechazado el reto.");
-//			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.", "Respuesta reto", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.", "Respuesta reto", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
 	
 	@Override
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this.mGameListPanel, mensaje, "Respuesta reto", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	@Override
 	public void recibirReto(String retador) {
-		final int confirm = JOptionPane.showConfirmDialog(this.mGameListPanel, retador + " te ha retado, ¿aceptas?", "¡Te han retado!", JOptionPane.YES_NO_OPTION);
-		System.out.println("Respuesta: " + confirm);
-		try {
-			Controller cntl = Controller.get();
-			if (confirm == 0) cntl.enviarRespuestaReto(true, retador);
-			else cntl.enviarRespuestaReto(false, retador);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ConfirmDialogThread thread = new ConfirmDialogThread(retador);
+		thread.start();
 	}
 	
 	@Override
@@ -315,3 +312,26 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	}
 	
 }
+
+class ConfirmDialogThread extends Thread {
+	  private final String retador;
+
+	  ConfirmDialogThread(String retador) {
+	    this.retador = retador;
+	  }
+
+	  @Override
+	  public void run() {
+			final int confirm = JOptionPane.showConfirmDialog(null, retador + " te ha retado, ¿aceptas?", "¡Te han retado!", JOptionPane.YES_NO_OPTION);
+			System.out.println("Respuesta: " + confirm);
+			try {
+				Controller cntl = Controller.get();
+				if (confirm == 0) cntl.enviarRespuestaReto(true, retador);
+				else cntl.enviarRespuestaReto(false, retador);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	  }
+	} 
