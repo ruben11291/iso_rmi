@@ -23,4 +23,5 @@ public interface IController {
 	public void hasSidoRetado(String retador);
 	public void cerrarPartida();
 	public void cerrarPartida(Window window);
+	public void oponenteHaAbandonado();
 }

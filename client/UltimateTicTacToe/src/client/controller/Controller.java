@@ -106,6 +106,9 @@ public class Controller implements IController {
 	}
 
 	public void cerrarSesion() {
+		if (this.juego !=null) {
+			this.cerrarPartida();
+		}
 		this.modelo.cerrarSesion();
 		
 	}
@@ -116,6 +119,12 @@ public class Controller implements IController {
 		this.juego.cerrar();
 		this.juego = null;
 		
+	}
+	
+	@Override 
+	public void oponenteHaAbandonado(){
+		this.juego.cerrarPorAbandonoOponente();
+		this.juego = null;
 	}
 	
 	@Override

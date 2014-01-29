@@ -1017,16 +1017,21 @@ public class GameWindow extends JFrame implements IJuego {
 		
 	}
 
+//	@Override
+//	public void cerrar() {
+//		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida");
+//		
+//		this.dispose();
+//	}
+	
 	@Override
 	public void cerrar() {
-		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida");
-//		try {
-//			Controller ctrl = Controller.get();
-//			ctrl.cerrarPartida(this);
-//		} catch (Exception e) {
-//			System.out.println("EXCEPTION");
-//				
-//		}		
+		this.dispose();
+	}
+
+	@Override
+	public void cerrarPorAbandonoOponente() {	
+		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida");	
 		this.dispose();
 	}
 
