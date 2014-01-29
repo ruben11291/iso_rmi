@@ -50,12 +50,16 @@ public class Controller implements IController {
 		try{
 			modelo.autenticar(email, passwd);
 			error = false;
+			login.recibirRespuestaLogin(error);
 		}
 		catch(JugadorNoExisteException e){
 			//crear ventana de error
 			System.out.println("JUGADOR "+e.toString()+" NO EXISTE EXCEPTION");
 		}
-		login.recibirRespuestaLogin(error);
+		catch (JugadorYaExisteException e2) {
+			System.out.println("JUGADOR "+e2.toString()+" YA EXISTE EN EL SERVER");
+		}
+		
 	}
 	
 	public void enviarDatosRegistro(String email, String passwd) {

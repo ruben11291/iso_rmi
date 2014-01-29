@@ -14,6 +14,7 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import client.exceptions.JugadorNoExisteException;
+import client.exceptions.JugadorYaExisteException;
 import client.exportable.communications.ICliente;
 import server.domain.FTERD;
 import server.domain.Jugador;
@@ -58,7 +59,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/**** Métodos remotos ****/
 	
 	/////ADD Player///
-	public void add(String email, String passwd, ICliente cliente) throws RemoteException,JugadorNoExisteException {
+	public void add(String email, String passwd, ICliente cliente) throws RemoteException,JugadorNoExisteException , JugadorYaExisteException{
+		if(this.stubs.contains(email)) throw new JugadorYaExisteException(email);
 		Jugador jugador=new Jugador((ICliente)cliente, email);
 		this.fachada.add(email, passwd);
 		this.stubs.put(email, cliente);

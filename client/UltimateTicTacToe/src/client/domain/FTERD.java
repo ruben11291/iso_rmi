@@ -43,7 +43,7 @@ public class FTERD {
 		proxy.register(email, passwd);
 	}
 	
-	public void autenticar(String email, String passwd) throws JugadorNoExisteException {
+	public void autenticar(String email, String passwd) throws JugadorNoExisteException, JugadorYaExisteException {
 		try {
 			proxy.add(email, passwd, cliente);
 			this.jugador = new Jugador(email,passwd);

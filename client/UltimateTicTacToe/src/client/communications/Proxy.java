@@ -11,6 +11,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 
 import client.exceptions.JugadorNoExisteException;
+import client.exceptions.JugadorYaExisteException;
 import client.exportable.communications.ICliente;
 import server.exportable.communications.IServer;
 
@@ -37,7 +38,7 @@ public class Proxy {
 	}
 	
 	//darse de alta en el sistema
-	public void add(String email, String passwd, ICliente cliente) throws RemoteException, JugadorNoExisteException{
+	public void add(String email, String passwd, ICliente cliente) throws RemoteException, JugadorNoExisteException, JugadorYaExisteException{
 		server.add(email, passwd, cliente);
 	}
 	
