@@ -171,6 +171,12 @@ public class Controller implements IController {
 		this.lista.iniciarPartida(id_partida);
 	}
 
+	@Override
+	public void avisoCerrarSesion() {
+		// TODO Auto-generated method stub
+		this.login.avisoCerrarSesion();
+	}
+
 
 
 	

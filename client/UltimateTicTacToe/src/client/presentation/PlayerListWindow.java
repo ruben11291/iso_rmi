@@ -244,6 +244,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 				this.dispose();
 				Controller c = Controller.get();
 				c.cerrarSesion();
+				c.avisoCerrarSesion();
 			}
 		} catch (final Exception exc) {
 			

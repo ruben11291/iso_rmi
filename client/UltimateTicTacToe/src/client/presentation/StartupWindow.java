@@ -224,4 +224,10 @@ public class StartupWindow extends JFrame implements ILogin {
 		}		
 	}
 
+	@Override
+	public void avisoCerrarSesion() {
+		// TODO Auto-generated method stub
+		this.setVisible(true);
+	}
+
 }
