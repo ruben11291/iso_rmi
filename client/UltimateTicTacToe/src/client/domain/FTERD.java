@@ -136,5 +136,10 @@ public class FTERD {
 			e.printStackTrace();
 		}
 	}
+
+	public void hasSidoRetado(String retador) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
