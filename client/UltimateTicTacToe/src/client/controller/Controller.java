@@ -55,9 +55,11 @@ public class Controller implements IController {
 		catch(JugadorNoExisteException e){
 			//crear ventana de error
 			System.out.println("JUGADOR "+e.toString()+" NO EXISTE EXCEPTION");
+			this.login.jugadorNoExiste();
 		}
 		catch (JugadorYaExisteException e2) {
 			System.out.println("JUGADOR "+e2.toString()+" YA EXISTE EN EL SERVER");
+			this.login.jugadorYaExiste();
 		}
 		
 	}

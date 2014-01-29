@@ -231,4 +231,19 @@ public class StartupWindow extends JFrame implements ILogin {
 		this.setVisible(true);
 	}
 
+	@Override
+	public void jugadorNoExiste() {
+		// TODO Auto-generated method stub
+		//JOptionPane.showMessageDialog(this.mGameListPanel, mensaje, "Respuesta reto", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this,"Jugador no existe", "Error de login",JOptionPane.ERROR_MESSAGE);
+
+	}
+
+	@Override
+	public void jugadorYaExiste() {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(this,"Jugador ya esta en el sistema", "Error de login",JOptionPane.ERROR_MESSAGE);
+		
+	}
+
 }
