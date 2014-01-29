@@ -27,6 +27,7 @@ public class FTERD {
 		this.tableros  = new Hashtable<Integer, Tablero9x9>();
 		this.proxy = Proxy.get();
 		this.cliente = new Cliente(this);
+		this.retosSolicitados = new Vector<String>();
 	}
 
 	public String getEmailJugador(){

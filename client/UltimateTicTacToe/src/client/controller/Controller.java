@@ -71,6 +71,7 @@ public class Controller implements IController {
 	
 	public void retarJugador(String oponente) {
 		try {
+			System.out.println(oponente);
 			modelo.retar(oponente);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

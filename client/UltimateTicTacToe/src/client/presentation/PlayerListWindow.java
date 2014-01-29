@@ -97,6 +97,13 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			updateListButton.addMouseListener(new UpdateListMouseAdapter());
 			mGameListToolBar.add(updateListButton);
 
+			createGameButton = new JButton("Crear partida");
+			createGameButton.setIcon(new ImageIcon(
+				this.getClass().getClassLoader().getResource(
+					"image/ttoe.png")));
+			createGameButton.addMouseListener(new CreateGameMouseAdapter(this));
+			mGameListToolBar.add(createGameButton);
+
 			logoutButton = new JButton("Cerrar sesión");
 			logoutButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
@@ -171,12 +178,14 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		
 		@Override
 		public void mouseClicked(MouseEvent evt) {
-			try {
-				Controller cntrl = Controller.get();
-				cntrl.retarJugador("arreglar");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (this.win.mPlayerList.getSelectedRow() != -1) {
+				try {
+					Controller cntrl = Controller.get();
+					cntrl.retarJugador(this.win.mPlayerList.getModel().getValueAt(this.win.mPlayerList.getSelectedRow(), this.win.mPlayerList.getSelectedColumn()).toString());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
