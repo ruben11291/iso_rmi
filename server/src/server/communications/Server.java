@@ -97,6 +97,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	// Para cerrar sesion
 	public void delete(String email) throws RemoteException {
 		this.fachada.delete(email);
+		this.stubs.remove(email);
 		this.abandonoPartida(email);
 		this.actualizarListaDeJugadores();
 		
