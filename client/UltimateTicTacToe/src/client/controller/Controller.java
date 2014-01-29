@@ -135,18 +135,7 @@ public class Controller implements IController {
 	
 	@Override
 	public void cerrarPartida(Window window) {
-		// TODO Auto-generated method stub
-		System.out.println("Cerrar Partida window");
-//		boolean encontrado = false;
-//		while(it.hasNext()&& !encontrado){
-//			IJuego juego = it.next();
-//			if(juego == window){
-//				encontrado = true;
 		this.modelo.cerrarPartida();
-		System.out.println("CERRADA");
-			
-//		}
-
 	}
 
 	@Override

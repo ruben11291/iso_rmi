@@ -981,16 +981,10 @@ public class GameWindow extends JFrame implements IJuego {
 			public void windowClosing(WindowEvent we){
 				int eleccion = JOptionPane.showConfirmDialog(null, "Desea salir?");
 				if ( eleccion == 0) {
-					//hilo
-					try {
-						Controller ctrl = Controller.get();
-						ctrl.cerrarPartida(we.getWindow());
-					} catch (Exception e) {
-						System.out.println("EXCEPTION");
-						
-					}
-					///
 					we.getWindow().dispose();
+					//hilo
+					CerrarJuegoThread thread = new CerrarJuegoThread();
+					thread.start();
 				}  
 			}
 		});
@@ -1048,5 +1042,17 @@ public class GameWindow extends JFrame implements IJuego {
 		this.dispose();
 	}
 
+}
+
+class CerrarJuegoThread extends Thread {
+	@Override
+	public void run() {
+		try {
+			Controller ctrl = Controller.get();
+			ctrl.cerrarPartida(null);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }
 
