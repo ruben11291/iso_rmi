@@ -4,14 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Random;
+import java.util.ResourceBundle.Control;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import client.controller.Controller;
 
@@ -75,6 +80,7 @@ public class GameWindow extends JFrame implements IJuego {
 		StartupPanel.setBackground(UIManager.getColor("Button.select"));
 		this.getContentPane().add(StartupPanel, BorderLayout.CENTER);
 		StartupPanel.setLayout(null);
+	
 		
 		/*----------------------------- Casillas TABLERO 1 -----------------------------------------*/
 		C1_1_1 = new JLabel();
@@ -955,7 +961,26 @@ public class GameWindow extends JFrame implements IJuego {
 		turnoPly2.setBounds(868, 203, 70, 37);
 		StartupPanel.add(turnoPly2);
 		this.setLocationRelativeTo(null);
-
+		
+		setDefaultCloseOperation (WindowConstants.DO_NOTHING_ON_CLOSE);
+		
+		addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent we){
+				int eleccion = JOptionPane.showConfirmDialog(null, "Desea salir?");
+				if ( eleccion == 0) {
+					
+					try {
+						Controller ctrl = Controller.get();
+						ctrl.cerrarPartida(we.getWindow());
+					} catch (Exception e) {
+						System.out.println("EXCEPTION");
+						
+					}
+					
+					we.getWindow().dispose();
+				}  
+			}
+		});
 	}
 	//Evento para pintar las fichas, primero se mira si ya se ha pinchado sobre esa casilla
 	 private void FichaMouseClicked(java.awt.event.MouseEvent e, JLabel j) {

@@ -1,9 +1,14 @@
 package client.controller;
 
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Vector;
 
 import client.domain.FTERD;
@@ -105,9 +110,25 @@ public class Controller implements IController {
 	}
 
 	//Cierra ventana de juego
+	@Override
 	public void cerrarPartida(int idPartida) {
 		this.juegos.get(idPartida).cerrar();
 		
+	}
+	
+	@Override
+	public void cerrarPartida(Window window) {
+		// TODO Auto-generated method stub
+		System.out.println("Cerrar Partida window");
+		Collection<IJuego> juegos = this.juegos.values();
+		Iterator <IJuego> it = juegos.iterator();
+		boolean encontrado = false;
+		while(it.hasNext()&& !encontrado){
+			if(it.next() == window){
+				encontrado = true;
+				System.out.println("CERRADA");
+			}
+		}
 	}
 
 	@Override
@@ -135,5 +156,9 @@ public class Controller implements IController {
 	public void iniciarPartida(int id_partida) {
 		this.lista.iniciarPartida(id_partida);
 	}
+
+
+
+	
 	
 }
