@@ -18,4 +18,5 @@ public interface IController {
 	public void setLista(IListaJugadores lista);
 	public void setLogin(ILogin login);
 	public void setJuego(int id_partida, IJuego juego);
+	public boolean hasSidoRetado(String retador);
 }
