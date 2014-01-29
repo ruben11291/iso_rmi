@@ -287,7 +287,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			iniciarPartida(id_partida);
 		} else {
 			System.out.println(retado + " ha rechazado el reto.");
-			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.");
+//			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.", "Respuesta reto", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
