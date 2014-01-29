@@ -968,7 +968,7 @@ public class GameWindow extends JFrame implements IJuego {
 			public void windowClosing(WindowEvent we){
 				int eleccion = JOptionPane.showConfirmDialog(null, "Desea salir?");
 				if ( eleccion == 0) {
-					
+					//hilo
 					try {
 						Controller ctrl = Controller.get();
 						ctrl.cerrarPartida(we.getWindow());
@@ -976,7 +976,7 @@ public class GameWindow extends JFrame implements IJuego {
 						System.out.println("EXCEPTION");
 						
 					}
-					
+					///
 					we.getWindow().dispose();
 				}  
 			}
@@ -1019,14 +1019,14 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void cerrar() {
-		JOptionPane.showMessageDialog(null, "El oponente ha creado la partida");
-		try {
-			Controller ctrl = Controller.get();
-			ctrl.cerrarPartida(this);
-		} catch (Exception e) {
-			System.out.println("EXCEPTION");
-				
-		}		
+		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida");
+//		try {
+//			Controller ctrl = Controller.get();
+//			ctrl.cerrarPartida(this);
+//		} catch (Exception e) {
+//			System.out.println("EXCEPTION");
+//				
+//		}		
 		this.dispose();
 	}
 

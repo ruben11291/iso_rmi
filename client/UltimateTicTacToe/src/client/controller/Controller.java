@@ -128,7 +128,6 @@ public class Controller implements IController {
 //			if(juego == window){
 //				encontrado = true;
 		this.modelo.cerrarPartida();
-		cerrarPartida();
 		System.out.println("CERRADA");
 			
 //		}
