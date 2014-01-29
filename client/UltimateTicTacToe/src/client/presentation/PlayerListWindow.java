@@ -34,7 +34,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	private JToolBar mGameListToolBar = null;
 	private JPanel mGameListPanel = null;
 	private JTable mPlayerList = null;
-	private JTable mPlayList = null;
+	//private JTable mPlayList = null;
 	
 	private JToolBar mPlayToolBar = null;
 	private JPanel mGamePanel = null;
@@ -42,7 +42,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	
 	private JButton logoutButton; //Botón para quitar y salir del juego (cerrar sesión)
 	private JButton joinGameButton; //Botón para unirse a una partida
-	private JButton updateListButton;
+	//private JButton updateListButton;
 	private JButton createGameButton;
 	
 	public PlayerListWindow() {
@@ -90,14 +90,14 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		if (mGameListPanel == null) {
 			mGameListToolBar = new JToolBar();
 
-			updateListButton = new JButton("Actualizar lista");
-			updateListButton.setIcon(new ImageIcon(
-				this.getClass().getClassLoader().getResource(
-					"image/refresh.png")));
-			updateListButton.addMouseListener(new UpdateListMouseAdapter());
-			mGameListToolBar.add(updateListButton);
+		//	updateListButton = new JButton("Actualizar lista");
+			//updateListButton.setIcon(new ImageIcon(
+				//this.getClass().getClassLoader().getResource(
+					//"image/refresh.png")));
+//			updateListButton.addMouseListener(new UpdateListMouseAdapter());
+//			mGameListToolBar.add(updateListButton);
 
-			createGameButton = new JButton("Crear partida");
+			createGameButton = new JButton("Retar");
 			createGameButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
 					"image/ttoe.png")));
@@ -122,16 +122,22 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			mGameListPanel.setBackground(Color.WHITE);
 			mGameListPanel.setLayout(new BoxLayout(mGameListPanel,
 				BoxLayout.Y_AXIS));
-			mPlayList = new JTable();
-			final JScrollPane playListPanel = new JScrollPane(mPlayList);
+			//mPlayList = new JTable();
+			//final JScrollPane playListPanel = new JScrollPane(mPlayList);
 			
-			mPlayerList = new JTable(new DefaultTableModel(new Object[]{"Email"}, 0));			
+			mPlayerList = new JTable(new DefaultTableModel(new Object[]{"Email"}, 0){
+				 @Override
+				    public boolean isCellEditable (int fila, int columna) {
+				        return false;
+				 }
+			});		
+
+			
 			mPlayerList.setBackground(Color.WHITE);
 			final JScrollPane playerListPanel = new JScrollPane(mPlayerList);
 
-			mPlayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//			mPlayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			mPlayerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
 //			final GameListObserver listObserver = new GameListObserver(this);
 
 //			mPlayerList.getSelectionModel().addListSelectionListener(listObserver);
@@ -139,8 +145,8 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 
 			mGameListPanel.add(new JLabel("Jugadores disponibles"));
 			mGameListPanel.add(playerListPanel);
-			mGameListPanel.add(new JLabel("Partidas Abiertas"));
-			mGameListPanel.add(playListPanel);
+//			mGameListPanel.add(new JLabel("Partidas Abiertas"));
+//			mGameListPanel.add(playListPanel);
 		}
 		return mGameListPanel;
 	}
@@ -278,11 +284,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		
 	}
 
-	@Override
-	public void cerrarSesion() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void recibirRespuestaLista(Vector<String> jugadores) {
