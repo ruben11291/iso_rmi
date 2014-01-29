@@ -7,4 +7,5 @@ public interface IListaJugadores {
 	public void cerrarSesion();
 	public void recibirRespuestaLista(Vector<String> jugadores);
 	public void recibirReto(String retador);
+	public void iniciarPartida(int id_partida);
 }

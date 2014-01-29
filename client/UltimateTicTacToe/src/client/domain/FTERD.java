@@ -122,6 +122,13 @@ public class FTERD {
 	//Este cliente es el que recibe la petición de reto
 	public void iniciarPartida(String retador, String retado, int idPartida){
 		creaPartida(retador, retado, idPartida);
+		try {
+			Controller cntrl = Controller.get();
+			cntrl.iniciarPartida(idPartida);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//Esta operacion hace que el cliente limpie la partida que mantenia con el otro jugador

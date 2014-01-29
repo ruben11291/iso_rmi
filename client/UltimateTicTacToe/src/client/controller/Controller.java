@@ -132,4 +132,8 @@ public class Controller implements IController {
 		this.lista.recibirReto(retador);
 	}
 	
+	public void iniciarPartida(int id_partida) {
+		this.lista.iniciarPartida(id_partida);
+	}
+	
 }
