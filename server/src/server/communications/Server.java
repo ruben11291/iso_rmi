@@ -69,28 +69,30 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 	
 	private void actualizarListaDeJugadores(){
-		Vector <String> emailJugadores = getEmailJugadores(stubs);
+		Vector <String> jugadores = this.fachada.getEmailsJugadores();
+		
+		System.out.println(jugadores.toString());
 		
 		Enumeration<ICliente> lista=this.stubs.elements();
 		while (lista.hasMoreElements()) {
 			ICliente t=lista.nextElement();
 			try {
-				t.recibirListaDeJugadores(emailJugadores);
+				t.recibirListaDeJugadores(jugadores);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	private Vector<String> getEmailJugadores(Hashtable<String, ICliente> stubs2) {
-		Vector <String> emailJugadores = new Vector <String>();
-		Enumeration<String> lista=stubs2.keys();
-		while (lista.hasMoreElements()) {
-			String t=lista.nextElement();
-			emailJugadores.add(t);
-		}
-		return emailJugadores;
-	}
+//	private Vector<String> getEmailJugadores(Hashtable<String, ICliente> stubs2) {
+//		Vector <String> emailJugadores = new Vector <String>();
+//		Enumeration<String> lista=stubs2.keys();
+//		while (lista.hasMoreElements()) {
+//			String t=lista.nextElement();
+//			emailJugadores.add(t);
+//		}
+//		return emailJugadores;
+//	}
 
 	// Para cerrar sesion
 	public void delete(String email) throws RemoteException {

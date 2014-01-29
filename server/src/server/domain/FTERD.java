@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import client.exceptions.JugadorNoExisteException;
@@ -154,6 +156,16 @@ public class FTERD {
 
 	public Hashtable<String, Jugador> getJugadores() {
 		return jugadores;
+	}
+	
+	public Vector<String> getEmailsJugadores(){
+		Vector<String> emailJugadores = new Vector<String>();
+		
+		for (String email: this.jugadores.keySet()){
+			emailJugadores.add(email);
+			
+		}
+		return emailJugadores;
 	}
 
 	public Hashtable<Integer, Tablero9x9> getTableros() {
