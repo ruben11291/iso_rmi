@@ -1043,8 +1043,7 @@ public class GameWindow extends JFrame implements IJuego {
 	}
 
 	@Override
-	public void cerrarPorAbandonoOponente() {	
-		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida");	
+	public void cerrarPorAbandonoOponente() {		
 		this.dispose();
 	}
 

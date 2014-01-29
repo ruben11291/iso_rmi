@@ -326,6 +326,15 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		gw.setLocationRelativeTo(null);
 		gw.setVisible(true);
 	}
+
+
+	@Override
+	public void avisoCierreJuego() {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida.");
+	}
+	
+	
 	
 }
 

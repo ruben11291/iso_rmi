@@ -9,4 +9,5 @@ public interface IListaJugadores {
 	public void recibirReto(String retador);
 	public void iniciarPartida(int id_partida);
 	public void mostrarMensaje(String mensaje);
+	public void avisoCierreJuego();
 }
