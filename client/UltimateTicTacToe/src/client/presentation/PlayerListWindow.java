@@ -293,4 +293,16 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		
 	}
 	
+	public void recibirReto(String retador) {
+		final int confirm = JOptionPane.showConfirmDialog(this.mGameListPanel, retador + " te ha retado, ¿aceptas?", "¡Te han retado!", JOptionPane.YES_NO_OPTION);
+		try {
+			Controller cntl = Controller.get();
+			if (confirm == 0) cntl.enviarRespuestaReto(true);
+			else cntl.enviarRespuestaReto(false);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

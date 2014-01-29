@@ -71,7 +71,6 @@ public class Controller implements IController {
 	
 	public void retarJugador(String oponente) {
 		try {
-			System.out.println(oponente);
 			modelo.retar(oponente);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -115,6 +114,11 @@ public class Controller implements IController {
 	public void respuestaReto(String retado, boolean respuesta, int id_partida) {
 		// TODO Auto-generated method stub
 		this.lista.recibirRespuestaReto(retado, respuesta, id_partida);		
+	}
+
+	@Override
+	public void enviarRespuestaReto(boolean respuesta) {
+		// TODO Auto-generated method stub
 	}
 	
 }
