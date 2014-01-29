@@ -272,7 +272,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		if (!this.isVisible()) this.setVisible(true);
 		DefaultTableModel model = (DefaultTableModel) this.mPlayerList.getModel();
 		int rowCount = model.getRowCount();
-		for (int i = 0;i<rowCount;i++) {
+		for(int i = rowCount - 1; i >=0; i--){
 		    model.removeRow(i);
 		}
 		for (String jugador : jugadores) {
@@ -286,7 +286,8 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		if (respuesta) {
 			iniciarPartida(id_partida);
 		} else {
-			JOptionPane.showMessageDialog(this, retado + " ha rechazado el reto.");
+			System.out.println(retado + " ha rechazado el reto.");
+			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.");
 		}
 		
 	}
