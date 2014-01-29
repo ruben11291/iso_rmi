@@ -126,11 +126,13 @@ public class Controller implements IController {
 		this.juego = null;
 		
 	}
-	
+	////////////////////////////////////////////////
 	@Override 
 	public void oponenteHaAbandonado(){
-		this.juego.cerrarPorAbandonoOponente();
-		this.juego = null;
+		if(juego !=null){
+			this.juego.cerrarPorAbandonoOponente();
+			this.juego = null;
+		}
 	}
 	
 	@Override
