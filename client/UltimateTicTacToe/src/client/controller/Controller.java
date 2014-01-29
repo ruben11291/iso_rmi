@@ -116,9 +116,20 @@ public class Controller implements IController {
 		this.lista.recibirRespuestaReto(retado, respuesta, id_partida);		
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void enviarRespuestaReto(boolean respuesta) {
 		// TODO Auto-generated method stub
+=======
+	public boolean hasSidoRetado(String retador) {
+		try{
+		;	
+		}
+		catch(Exception e){
+			;
+		}
+		return false;
+>>>>>>> 1db423ff56357c33ccedfd33793790bf37348d7b
 	}
 	
 }

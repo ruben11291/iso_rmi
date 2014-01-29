@@ -90,10 +90,10 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 		return this.email;
 	}
 
-
+	//El cliente ha sido retado
 	@Override
 	public void notificarSolicitudReto(String retador) throws RemoteException {
-		// TODO Auto-generated method stub
+		this.fachada.hasSidoRetado(retador);
 		
 	}
 
