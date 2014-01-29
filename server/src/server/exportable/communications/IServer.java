@@ -17,6 +17,6 @@ public interface IServer extends Remote {
 	public void retar(String retador, String retado) throws RemoteException;
 	public void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException;
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC)throws RemoteException;
-	public void oponenteHaAbandonadoPartida(int idPartida);
+	public void abandonoPartida(String email) throws RemoteException;
 	public Vector<String> getClientesEnEspera() throws RemoteException;
 }

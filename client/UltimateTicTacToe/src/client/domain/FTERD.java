@@ -162,7 +162,7 @@ public class FTERD {
 	}
 
 	public void cerrarPartida() {
-		this.proxy.oponenteHaAbandonadoPartida(this.tablero.getId());
+		this.proxy.abandonoPartida(this.jugador.getEmail());
 		this.tablero = null;
 	}
 	
