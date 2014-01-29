@@ -92,6 +92,13 @@ public class FTERD {
 			if(respuesta){
 				this.retosSolicitados.remove(retador);
 				creaPartida(retador,retado, idPartida);
+				try {
+					Controller cntrl = Controller.get();
+					cntrl.respuestaReto(retado, respuesta, idPartida);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

@@ -12,6 +12,7 @@ public interface IController {
 	public void enviarDatosRegistro(String email, String passwd);
 	public void enviarListaJugadores(Vector<String> jugadores);
 	public void retarJugador(String creador, String oponente);
+	public void respuestaReto(String retado, boolean respuesta, int id_partida);
 	public void setRegistro(IRegistro registro);
 	public void setLista(IListaJugadores lista);
 	public void setJuego(IJuego juego);

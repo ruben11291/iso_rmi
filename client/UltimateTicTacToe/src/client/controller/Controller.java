@@ -108,5 +108,11 @@ public class Controller implements IController {
 		this.juegos.get(idPartida).cerrar();
 		
 	}
+
+	@Override
+	public void respuestaReto(String retado, boolean respuesta, int id_partida) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
