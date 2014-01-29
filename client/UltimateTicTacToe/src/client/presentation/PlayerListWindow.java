@@ -233,19 +233,21 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		int eleccion = JOptionPane.showConfirmDialog(null, "Desea salir?");
-		if ( eleccion == 0) {
-			//hilo
-			try {
-				Controller ctrl = Controller.get();
-				ctrl.cerrarPartida(e.getWindow());
-			} catch (Exception ex) {
-				System.out.println("EXCEPTION");
-				
+		System.out.println("Haciendo logout...");
+		//Aquí todo lo de guardar los datos, las partidas y demás
+		try {
+			final int confirm = JOptionPane.showConfirmDialog(
+				mGameListPanel,
+				"¿Está seguro de que desea salir?",
+				"Confirmación", JOptionPane.YES_NO_OPTION);
+			if (confirm == 0) {
+				this.dispose();
+				Controller c = Controller.get();
+				c.cerrarSesion();
 			}
-			///
-			e.getWindow().dispose();
-		}  
+		} catch (final Exception exc) {
+			
+		} 
 		
 	}
 
