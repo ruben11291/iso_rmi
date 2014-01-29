@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 import client.domain.FTERD;
@@ -17,7 +18,7 @@ import client.presentation.*;
 
 public class Controller implements IController {
 	private static Controller self;
-	private Hashtable <Integer,IJuego> juegos;
+	private IJuego juego;
 	IListaJugadores lista;
 	ILogin login;
 	IRegistro registro;
@@ -41,7 +42,7 @@ public class Controller implements IController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		juegos.get(id_partida).ponerFicha(email, cT, fT, cC, fC);
+		juego.ponerFicha(email, cT, fT, cC, fC);
 	}
 	
 	public void enviarDatosLogin(String email, String passwd) {
@@ -95,8 +96,8 @@ public class Controller implements IController {
 
 	@Override
 	public void setJuego(int id_partida, IJuego juego) {
-		if (this.juegos == null) this.juegos = new Hashtable<Integer, IJuego>();
-		this.juegos.put(id_partida, juego);
+		if (this.juego == null) this.juego =juego;
+//		this.juegos.put(id_partida, juego);
 	}
 
 	@Override
@@ -111,8 +112,9 @@ public class Controller implements IController {
 
 	//Cierra ventana de juego
 	@Override
-	public void cerrarPartida(int idPartida) {
-		this.juegos.get(idPartida).cerrar();
+	public void cerrarPartida() {
+		this.juego.cerrar();
+		this.juego = null;
 		
 	}
 	
@@ -120,15 +122,17 @@ public class Controller implements IController {
 	public void cerrarPartida(Window window) {
 		// TODO Auto-generated method stub
 		System.out.println("Cerrar Partida window");
-		Collection<IJuego> juegos = this.juegos.values();
-		Iterator <IJuego> it = juegos.iterator();
-		boolean encontrado = false;
-		while(it.hasNext()&& !encontrado){
-			if(it.next() == window){
-				encontrado = true;
-				System.out.println("CERRADA");
-			}
-		}
+//		boolean encontrado = false;
+//		while(it.hasNext()&& !encontrado){
+//			IJuego juego = it.next();
+//			if(juego == window){
+//				encontrado = true;
+		this.modelo.cerrarPartida();
+		cerrarPartida();
+		System.out.println("CERRADA");
+			
+//		}
+
 	}
 
 	@Override

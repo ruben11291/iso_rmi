@@ -60,4 +60,8 @@ public class Proxy {
 		System.out.println("Respuesta a server");
 		server.respuestaAPeticionDeReto(retador, retado, respuesta);
 	}
+
+	public void oponenteHaAbandonadoPartida(int idPartida) {
+		server.oponenteHaAbandonadoPartida(idPartida);
+	}
 }

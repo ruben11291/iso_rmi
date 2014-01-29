@@ -17,14 +17,13 @@ public class FTERD {
 	
 	private Hashtable<String, Jugador> jugadores;
 	private Jugador jugador;
-	private Hashtable<Integer, Tablero9x9> tableros;
+	private Tablero9x9 tablero;
 	private Vector<String> retosSolicitados;
 	private Proxy proxy;
 	private Cliente cliente;
 	
 	public FTERD() throws Exception{
 		this.jugadores = new Hashtable<String, Jugador>();
-		this.tableros  = new Hashtable<Integer, Tablero9x9>();
 		this.proxy = Proxy.get();
 		this.cliente = new Cliente(this);
 		this.retosSolicitados = new Vector<String>();
@@ -115,7 +114,7 @@ public class FTERD {
 		tablero.setJugadorA(j1);
 		tablero.setJugadorB(j2);
 		tablero.setJugadorConelTurno(j1);
-		this.tableros.put(idPartida, tablero);
+		this.tablero = tablero;
 	}
 	
 	//Metodo que se llama cuando se recibe por parte del servidor un inicio de partida.
@@ -133,12 +132,12 @@ public class FTERD {
 
 	//Esta operacion hace que el cliente limpie la partida que mantenia con el otro jugador
 	//Es recibida por el openente al jugador que abandona
-	public void oponenteHaAbandonado(int idPartida) {
+	public void oponenteHaAbandonado() {
 		Controller c;
 		try {
 			c = Controller.get();
-			c.cerrarPartida(idPartida);
-			this.tableros.remove(idPartida);
+			c.cerrarPartida();
+			this.tablero = null;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -160,6 +159,11 @@ public class FTERD {
 		// TODO Auto-generated method stub
 		System.out.println("Respuesta enviada al proxy");
 		this.proxy.envioRespuestaPeticionDeReto(retador, this.jugador.getEmail(), respuesta);
+	}
+
+	public void cerrarPartida() {
+		this.proxy.oponenteHaAbandonadoPartida(this.tablero.getId());
+		this.tablero = null;
 	}
 	
 }

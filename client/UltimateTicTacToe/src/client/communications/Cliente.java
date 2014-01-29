@@ -69,8 +69,8 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 
 
 	@Override
-	public void OponenteHaAbandonadoPartida(int idPartida) throws RemoteException {
-		this.fachada.oponenteHaAbandonado(idPartida);
+	public void OponenteHaAbandonadoPartida() throws RemoteException {
+		this.fachada.oponenteHaAbandonado();
 		
 	}
 

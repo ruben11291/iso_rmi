@@ -21,6 +21,6 @@ public interface IController {
 	public void setLogin(ILogin login);
 	public void setJuego(int id_partida, IJuego juego);
 	public void hasSidoRetado(String retador);
+	public void cerrarPartida();
 	public void cerrarPartida(Window window);
-	public void cerrarPartida(int idPartida);
 }

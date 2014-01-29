@@ -1019,6 +1019,14 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void cerrar() {
+		JOptionPane.showMessageDialog(null, "El oponente ha creado la partida");
+		try {
+			Controller ctrl = Controller.get();
+			ctrl.cerrarPartida(this);
+		} catch (Exception e) {
+			System.out.println("EXCEPTION");
+				
+		}		
 		this.dispose();
 	}
 
