@@ -18,6 +18,13 @@ import server.domain.Jugador;
 import server.domain.Tablero9x9;
 import server.persistence.DAOTablero;
 
+/**
+ * Test unitario
+ * Este clase comprueba que en el servidor se crea la partida cuando a una solicitud
+ * de reto se contesta afirmativamente
+ * 
+ * Notar que no intervienen clientes remotos. No se prueba la comunicaciOn*/
+
 public class TestDAOCrearPartida extends TestCase{
 	
 	FTERD fachada = FTERD.get();
@@ -34,14 +41,13 @@ public class TestDAOCrearPartida extends TestCase{
 		jB.insert();
 
 		try {
-			x = fachada.autenticar("jose.stalin@pcus.urrs","passwd1");
+			fachada.add("jose.stalin@pcus.urrs","passwd1");
 		} catch (JugadorNoExisteException e1) {
 			fail("NO se esperaba excepcion");
 		}
 		try {
-			x = fachada.autenticar("adol.hitler@nsdap.ger","passwd2");
+			fachada.add("adol.hitler@nsdap.ger","passwd2");
 		} catch (JugadorNoExisteException e1) {
-			// TODO Auto-generated catch block
 			fail("NO se esperaba excepcion");
 		}
 		

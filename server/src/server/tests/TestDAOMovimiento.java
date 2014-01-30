@@ -4,13 +4,20 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import client.exceptions.JugadorNoExisteException;
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.persistence.DAOTablero;
 
 public class TestDAOMovimiento {
+	
+	@Before
+	public void setUp(){
+		FuncionesAuxiliaresTests.borrarBD();
+	}
 
 	@Test
 	public void testCrearPartida() {
@@ -29,9 +36,14 @@ public class TestDAOMovimiento {
 			e.printStackTrace();
 		}
 		
+		try {
+			fachada.add(jugadorA.getEmail(), "jose");
+			fachada.add(jugadorB.getEmail(), "adol");
+		}
+		catch (JugadorNoExisteException jne){
+			fail("Esperaba autenticar");
+		}
 		
-		fachada.add(jugadorA);
-		fachada.add(jugadorB);
 		
 		fachada.retar(jugadorA.getEmail(), jugadorB.getEmail());
 		assertTrue(fachada.getRetosEnEspera().size() == 1); //¿Hay que volver a hacer estas aserciones (para eso esta el test TestReto)?
