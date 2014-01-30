@@ -66,20 +66,20 @@ public class FTERD {
 		j.insert();
 	}
 	
-	public Jugador autenticar(String email, String passwd) throws ClassNotFoundException, SQLException, JugadorNoExisteException{
-		Jugador j = null;
-		
-		if (DAOAutenticar.autenticar(email, passwd)){
-			j = new Jugador(email);
-				this.add(email, passwd);
-			
-		}
-		
-		return j;
-				
-	}
+//	public Jugador autenticar(String email, String passwd) throws ClassNotFoundException, SQLException, JugadorNoExisteException{
+//		Jugador j = null;
+//		
+//		if (DAOAutenticar.autenticar(email, passwd)){
+//			j = new Jugador(email);
+//				this.add(email, passwd);
+//			
+//		}
+//		
+//		return j;
+//				
+//	}
 	
-	/*AÑADIR A LA INTERFAZ*/
+
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) {
 		if(!this.tableros.containsKey(idPartida)){
 			System.out.println("NO CONTIENE PARTIDA");

@@ -9,6 +9,7 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
+import client.exceptions.JugadorNoExisteException;
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
@@ -34,13 +35,15 @@ public class TestDAOJugador {
 		FTERD fachada = FTERD.get();
 		try{
 			j.insert();
-			Jugador respuesta = fachada.autenticar(j.getEmail(),"javi");
-			assertTrue(j.getEmail().equals(respuesta.getEmail()));
+			fachada.add(j.getEmail(),"javi");
 			
 			Hashtable<String, Jugador> jugadores = fachada.getJugadores();
 			assertTrue(jugadores.containsKey("javierMarchan@uclm.es"));
 			
 			j.delete();
+		}
+		catch (JugadorNoExisteException jne){
+			fail("Esperaba autenticar");
 		}
 		catch(Exception e){
 			j.delete();
