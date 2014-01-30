@@ -225,5 +225,14 @@ public class Server extends UnicastRemoteObject implements IServer {
 ////		UnicastRemoteObject.unexportObject();
 //	}
 
+	@Override
+	public void enviarMovimientoAOponente(int idPartida, String oponente, int cT, int fT, int cC, int fC) throws RemoteException {
+		// TODO Auto-generated method stub
+		ICliente c = this.stubs.get(oponente);
+		c.poner(idPartida, cT, fT, cC, fC);
+		
+	}
+
+
 	
 }

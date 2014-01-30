@@ -1,11 +1,14 @@
 package server.domain;
 
+import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
 import client.exceptions.JugadorNoExisteException;
+import server.communications.Server;
 import server.persistence.DAOAutenticar;
 import server.persistence.DAOTablero;
 
@@ -74,6 +77,20 @@ public class FTERD {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}			
+
+			Jugador oponente = partida.getOpenenteDE(email);
+			Server s;
+			try {
+				s = Server.get();
+				s.enviarMovimientoAOponente(idPartida, oponente.getEmail(), cT, fT, cC, fC);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+
 		}
 	}
 	

@@ -35,14 +35,18 @@ public class Controller implements IController {
 	}
 		
 	
-	public void comprobarMovimientoValido(int idPartida,String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
+	public void comprobarMovimientoValido(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
 		try {
-			modelo.poner(idPartida,email, cT, fT, cC, fC);
+			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
+			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		juego.ponerFicha(email, cT, fT, cC, fC);
+	}
+	
+	public void ponerMovimientoEnemigo(int cT, int fT, int cC, int fC) {
+		juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 	}
 	
 	public void enviarDatosLogin(String email, String passwd) {
@@ -101,9 +105,8 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void setJuego(int idPartida,IJuego juego) {
+	public void setJuego(IJuego juego) {
 		if (this.juego == null) this.juego =juego;
-//		this.juegos.put(id_partida, juego);
 	}
 
 	@Override
@@ -144,9 +147,9 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void respuestaReto(String retado, boolean respuesta,int idPartida) {
+	public void respuestaReto(String retador, String retado, boolean respuesta) {
 		// TODO Auto-generated method stub
-		this.lista.recibirRespuestaReto(retado, respuesta, idPartida);		
+		this.lista.recibirRespuestaReto(retador, retado, respuesta);
 	}
 
 	@Override
@@ -165,8 +168,9 @@ public class Controller implements IController {
 		this.lista.recibirReto(retador);
 	}
 	
-	public void iniciarPartida(int idPartida) {
-		this.lista.iniciarPartida(idPartida);
+	@Override
+	public void iniciarPartida(String retador, String retado) {
+		this.lista.iniciarPartida(retador, retado);
 	}
 
 	@Override
@@ -174,6 +178,8 @@ public class Controller implements IController {
 		// TODO Auto-generated method stub
 		this.login.avisoCerrarSesion();
 	}
+
+
 
 
 

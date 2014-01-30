@@ -6,9 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Hashtable;
 import java.util.Random;
 import java.util.ResourceBundle.Control;
 
+import javax.print.attribute.HashAttributeSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,6 +21,8 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import client.controller.Controller;
+import client.exceptions.MovimientoNoValidoException;
+import client.exceptions.NoTienesElTurnoException;
 
 import java.awt.Font;
 
@@ -31,32 +35,27 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel mapLabel;
 	private java.util.ArrayList<JLabel> pulsaciones = new java.util.ArrayList<JLabel>();
 
-	private JLabel C1_1_1, C1_1_2, C1_1_3, C1_2_1, C1_2_2, C1_2_3, C1_3_1, C1_3_2, C1_3_3; //TABLERO 1
-	private JLabel C2_1_1, C2_1_2, C2_1_3, C2_2_1, C2_2_2, C2_2_3, C2_3_1, C2_3_2, C2_3_3; //TABLERO 2
-	private JLabel C3_1_1, C3_1_2, C3_1_3, C3_2_1, C3_2_2, C3_2_3, C3_3_1, C3_3_2, C3_3_3; //TABLERO 3
-	private JLabel C4_1_1, C4_1_2, C4_1_3, C4_2_1, C4_2_2, C4_2_3, C4_3_1, C4_3_2, C4_3_3; //TABLERO 4
-	private JLabel C5_1_1, C5_1_2, C5_1_3, C5_2_1, C5_2_2, C5_2_3, C5_3_1, C5_3_2, C5_3_3; //TABLERO 5
-	private JLabel C6_1_1, C6_1_2, C6_1_3, C6_2_1, C6_2_2, C6_2_3, C6_3_1, C6_3_2, C6_3_3; //TABLERO 6
-	private JLabel C7_1_1, C7_1_2, C7_1_3, C7_2_1, C7_2_2, C7_2_3, C7_3_1, C7_3_2, C7_3_3; //TABLERO 7
-	private JLabel C8_1_1, C8_1_2, C8_1_3, C8_2_1, C8_2_2, C8_2_3, C8_3_1, C8_3_2, C8_3_3; //TABLERO 8
-	private JLabel C9_1_1, C9_1_2, C9_1_3, C9_2_1, C9_2_2, C9_2_3, C9_3_1, C9_3_2, C9_3_3; //TABLERO 9
-	
 	private JLabel F1, F2, F3, F4, F5, F6, F7, F8, F9; //TABLERO GLOBAL
 	
-	 JLabel [][] matrizLabels = new JLabel [9][9];
-	
-	private JLabel [][] tableroJuego = {
-			{C1_1_1, C1_1_2, C1_1_3, C1_2_1, C1_2_2, C1_2_3, C1_3_1, C1_3_2, C1_3_3},
-			{C2_1_1, C2_1_2, C2_1_3, C2_2_1, C2_2_2, C2_2_3, C2_3_1, C2_3_2, C2_3_3},
-			{C3_1_1, C3_1_2, C3_1_3, C3_2_1, C3_2_2, C3_2_3, C3_3_1, C3_3_2, C3_3_3},
-			{C4_1_1, C4_1_2, C4_1_3, C4_2_1, C4_2_2, C4_2_3, C4_3_1, C4_3_2, C4_3_3},
-			{C5_1_1, C5_1_2, C5_1_3, C5_2_1, C5_2_2, C5_2_3, C5_3_1, C5_3_2, C5_3_3},
-			{C6_1_1, C6_1_2, C6_1_3, C6_2_1, C6_2_2, C6_2_3, C6_3_1, C6_3_2, C6_3_3},
-			{C7_1_1, C7_1_2, C7_1_3, C7_2_1, C7_2_2, C7_2_3, C7_3_1, C7_3_2, C7_3_3},
-			{C8_1_1, C8_1_2, C8_1_3, C8_2_1, C8_2_2, C8_2_3, C8_3_1, C8_3_2, C8_3_3},
-			{C9_1_1, C9_1_2, C9_1_3, C9_2_1, C9_2_2, C9_2_3, C9_3_1, C9_3_2, C9_3_3}};
 	
 	private JLabel [][] tableroGlobal = {{F1, F2, F3},{F4, F5, F6},{F7, F8, F9}};
+	
+	private class Coordenada{
+		private int x;
+		private int y;
+		public Coordenada(int i, int j) {
+			this.x = i;
+			this.y = j;
+		}
+		public int getx(){return this.x;}
+		public int gety(){return this.y;}
+	
+		@Override
+		public String toString(){return x+" "+y;}
+	}
+	
+	 private JLabel [][] tableroJuego = new JLabel[9][9];
+	 private Hashtable <JLabel, Coordenada> coordenadas = new Hashtable<JLabel, Coordenada> ();
 	
 	private JLabel minimapLabel;
 	private JLabel ply1;
@@ -72,21 +71,21 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel turnoPly2;
 
 	
-	public GameWindow(int id_partida) {
+	public GameWindow(String retador, String retado) {
 		super();
 		
 		try {
 			Controller cntrl;
 			cntrl = Controller.get();
-			cntrl.setJuego( id_partida,this);
+			cntrl.setJuego(this);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		this.initGUI();
+		this.initGUI(retador, retado);
 	}
 
-	private void initGUI() {
+	private void initGUI(String retador, String retado) {
 		
 		this.setResizable(false);
 		this.setTitle("Ultimate Tic-Tac-Toe - GAME");
@@ -99,757 +98,854 @@ public class GameWindow extends JFrame implements IJuego {
 	
 		
 		/*----------------------------- Casillas TABLERO 1 -----------------------------------------*/
-		C1_1_1 = new JLabel();
-		C1_1_1.setBackground(Color.WHITE);
-		C1_1_1.setBounds(49, 126, 48, 53);
-		C1_1_1.addMouseListener(new java.awt.event.MouseAdapter() {
+		tableroJuego[0][0] = new JLabel();
+		tableroJuego[0][0].setBackground(Color.WHITE);
+		tableroJuego[0][0].setBounds(49, 126, 48, 53);
+		tableroJuego[0][0].addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FichaMouseClicked(evt, C1_1_1);
+                FichaMouseClicked(evt, tableroJuego[0][0]);
             }
         });
-		StartupPanel.add(C1_1_1);
+		this.coordenadas.put(tableroJuego[0][0], new Coordenada(0,0));
+		StartupPanel.add(tableroJuego[0][0]);
 		
-		C1_1_2 = new JLabel();
-		C1_1_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[0][1] = new JLabel();
+		tableroJuego[0][1].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_1_2);
+				FichaMouseClicked(e, tableroJuego[0][1]);
 			}
 		});
-		C1_1_2.setBackground(UIManager.getColor("Button.WITHE"));
-		C1_1_2.setBounds(109, 126, 53, 53);
-		StartupPanel.add(C1_1_2);
+		tableroJuego[0][1].setBackground(UIManager.getColor("Button.WITHE"));
+		tableroJuego[0][1].setBounds(109, 126, 53, 53);
+		StartupPanel.add(tableroJuego[0][1]);
+		this.coordenadas.put(tableroJuego[0][1], new Coordenada(0,1));
 		
-		C1_1_3 = new JLabel();
-		C1_1_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[0][2] = new JLabel();
+		tableroJuego[0][2].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_1_3);
+				FichaMouseClicked(e, tableroJuego[0][2]);
 			}
 		});
-		C1_1_3.setBackground(UIManager.getColor("Button.WHITE"));
-		C1_1_3.setBounds(175, 126, 48, 53);
-		StartupPanel.add(C1_1_3);
+		tableroJuego[0][2].setBackground(UIManager.getColor("Button.WHITE"));
+		tableroJuego[0][2].setBounds(175, 126, 48, 53);
+		StartupPanel.add(tableroJuego[0][2]);
+		this.coordenadas.put(tableroJuego[0][2], new Coordenada(0,2));
 		
-		C1_2_1 = new JLabel();
-		C1_2_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[0][3] = new JLabel();
+		tableroJuego[0][3].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_2_1);
+				FichaMouseClicked(e, tableroJuego[0][3]);
 			}
 		});
-		C1_2_1.setBackground(UIManager.getColor("Button.WHITE"));
-		C1_2_1.setBounds(49, 191, 48, 53);
-		StartupPanel.add(C1_2_1);
+		this.coordenadas.put(tableroJuego[0][3], new Coordenada(0,3));
 		
-		C1_2_2 = new JLabel();
-		C1_2_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[0][3].setBackground(UIManager.getColor("Button.WHITE"));
+		tableroJuego[0][3].setBounds(49, 191, 48, 53);
+		StartupPanel.add(tableroJuego[0][3]);
+		
+		tableroJuego[0][4] = new JLabel();
+		tableroJuego[0][4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_2_2);
+				FichaMouseClicked(e, tableroJuego[0][4]);
 			}
 		});
-		C1_2_2.setBackground(UIManager.getColor("Button.WHITE"));
-		C1_2_2.setBounds(113, 195, 53, 49);
-		StartupPanel.add(C1_2_2);
 		
-		C1_2_3= new JLabel();
-		C1_2_3.addMouseListener(new MouseAdapter() {
+
+		tableroJuego[0][4].setBackground(UIManager.getColor("Button.WHITE"));
+		tableroJuego[0][4].setBounds(113, 195, 53, 49);
+		StartupPanel.add(tableroJuego[0][4]);
+		this.coordenadas.put(tableroJuego[0][4], new Coordenada(0,4));
+		
+		tableroJuego[0][5]= new JLabel();
+		tableroJuego[0][5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_2_3);
+				FichaMouseClicked(e, tableroJuego[0][5]);
 			}
 		});
-		C1_2_3.setBackground(UIManager.getColor("Button.WHITE"));
-		C1_2_3.setBounds(175, 191, 48, 53);
-		StartupPanel.add(C1_2_3);
+		tableroJuego[0][5].setBackground(UIManager.getColor("Button.WHITE"));
+		tableroJuego[0][5].setBounds(175, 191, 48, 53);
+		StartupPanel.add(tableroJuego[0][5]);
+		this.coordenadas.put(tableroJuego[0][5], new Coordenada(0,5));
 		
-		C1_3_1 = new JLabel();
-		C1_3_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[0][6] = new JLabel();
+		tableroJuego[0][6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_3_1);
+				FichaMouseClicked(e, tableroJuego[0][6]);
 			}
 		});
-		C1_3_1.setBounds(49, 253, 55, 53);
-		StartupPanel.add(C1_3_1);
+		tableroJuego[0][6].setBounds(49, 253, 55, 53);
+		StartupPanel.add(tableroJuego[0][6]);
+		this.coordenadas.put(tableroJuego[0][6], new Coordenada(0,6));
 		
-		C1_3_2 = new JLabel();
-		C1_3_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[0][7] = new JLabel();
+		tableroJuego[0][7].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_3_2);
+				FichaMouseClicked(e, tableroJuego[0][7]);
 			}
 		});
-		C1_3_2.setBounds(109, 312, 53, 54);
-		StartupPanel.add(C1_3_2);
+		tableroJuego[0][7].setBounds(109, 312, 53, 54);
+		StartupPanel.add(tableroJuego[0][7]);
+		this.coordenadas.put(tableroJuego[0][7], new Coordenada(0,7));
 		
-		C1_3_3 = new JLabel();
-		C1_3_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[0][8] = new JLabel();
+		tableroJuego[0][8].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C1_3_3);
+				FichaMouseClicked(e, tableroJuego[0][8]);
 			}
 		});
-		C1_3_3.setBounds(175, 256, 48, 50);
-		StartupPanel.add(C1_3_3);
+		tableroJuego[0][8].setBounds(175, 256, 48, 50);
+		StartupPanel.add(tableroJuego[0][8]);
+		this.coordenadas.put(tableroJuego[0][8], new Coordenada(0,8));
 		/*-------------------------------------------------------------------------------------*/
 		
 		/*-------------------------------Casillas TABLERO 2 -------------------------------------------*/
-		C2_1_1 = new JLabel();
-		C2_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][0] = new JLabel();
+		tableroJuego[1][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_1_1);
+				FichaMouseClicked(e, tableroJuego[1][0]);
 			}
 		});
-		C2_1_1.setBounds(235, 131, 53, 48);
-		StartupPanel.add(C2_1_1);
+		tableroJuego[1][0].setBounds(235, 131, 53, 48);
+		StartupPanel.add(tableroJuego[1][0]);
+		this.coordenadas.put(tableroJuego[1][0], new Coordenada(1,0));
 		
-		C2_1_2 = new JLabel();
-		C2_1_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][1] = new JLabel();
+		tableroJuego[1][1].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_1_2);
+				FichaMouseClicked(e, tableroJuego[1][1]);
 			}
 		});
-		C2_1_2.setBounds(295, 131, 53, 48);
-		StartupPanel.add(C2_1_2);
-		
-		C2_1_3 = new JLabel();
-		C2_1_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][1].setBounds(295, 131, 53, 48);
+		StartupPanel.add(tableroJuego[1][1]);
+		this.coordenadas.put(tableroJuego[1][1], new Coordenada(1,1));
+
+		tableroJuego[1][2] = new JLabel();
+		tableroJuego[1][2].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_1_3);
+				FichaMouseClicked(e, tableroJuego[1][2]);
 			}
 		});
-		C2_1_3.setBounds(362, 131, 48, 48);
-		StartupPanel.add(C2_1_3);
-		
-		C2_2_1 = new JLabel();
-		C2_2_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][2].setBounds(362, 131, 48, 48);
+		StartupPanel.add(tableroJuego[1][2]);
+		this.coordenadas.put(tableroJuego[1][2], new Coordenada(1,2));
+
+		tableroJuego[1][3] = new JLabel();
+		tableroJuego[1][3].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_2_1);
+				FichaMouseClicked(e, tableroJuego[1][3]);
 			}
 		});
-		C2_2_1.setBounds(235, 191, 53, 53);
-		StartupPanel.add(C2_2_1);
-		
-		C2_2_2 = new JLabel();
-		C2_2_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][3].setBounds(235, 191, 53, 53);
+		StartupPanel.add(tableroJuego[1][3]);
+		this.coordenadas.put(tableroJuego[1][3], new Coordenada(1,3));
+
+		tableroJuego[1][4] = new JLabel();
+		tableroJuego[1][4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_2_2);
+				FichaMouseClicked(e, tableroJuego[1][4]);
 			}
 		});
-		C2_2_2.setBounds(296, 191, 55, 53);
-		StartupPanel.add(C2_2_2);
-		
-		C2_2_3 = new JLabel();
-		C2_2_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][4].setBounds(296, 191, 55, 53);
+		StartupPanel.add(tableroJuego[1][4]);
+		this.coordenadas.put(tableroJuego[1][4], new Coordenada(1,4));
+
+		tableroJuego[1][5] = new JLabel();
+		tableroJuego[1][5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_2_3);
+				FichaMouseClicked(e, tableroJuego[1][5]);
 			}
 		});
-		C2_2_3.setBounds(362, 191, 48, 53);
-		StartupPanel.add(C2_2_3);
-		
-		C2_3_1 = new JLabel();
-		C2_3_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][5].setBounds(362, 191, 48, 53);
+		StartupPanel.add(tableroJuego[1][5]);
+		this.coordenadas.put(tableroJuego[1][5], new Coordenada(1,5));
+
+		tableroJuego[1][6] = new JLabel();
+		tableroJuego[1][6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_3_1);
+				FichaMouseClicked(e, tableroJuego[1][6]);
 			}
 		});
-		C2_3_1.setBounds(235, 256, 53, 49);
-		StartupPanel.add(C2_3_1);
-		
-		C2_3_2 = new JLabel();
-		C2_3_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][6].setBounds(235, 256, 53, 49);
+		StartupPanel.add(tableroJuego[1][6]);
+		this.coordenadas.put(tableroJuego[1][6], new Coordenada(1,6));
+
+		tableroJuego[1][7] = new JLabel();
+		tableroJuego[1][7].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_3_2);
+				FichaMouseClicked(e, tableroJuego[1][7]);
 			}
 		});
-		C2_3_2.setBounds(295, 252, 53, 53);
-		StartupPanel.add(C2_3_2);
-		
-		C2_3_3 = new JLabel();
-		C2_3_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[1][7].setBounds(295, 252, 53, 53);
+		StartupPanel.add(tableroJuego[1][7]);
+		this.coordenadas.put(tableroJuego[1][7], new Coordenada(1,7));
+
+		tableroJuego[1][8] = new JLabel();
+		tableroJuego[1][8].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C2_3_3);
+				FichaMouseClicked(e, tableroJuego[1][8]);
 			}
 		});
-		C2_3_3.setBounds(365, 256, 47, 49);
-		StartupPanel.add(C2_3_3);
+		tableroJuego[1][8].setBounds(365, 256, 47, 49);
+		StartupPanel.add(tableroJuego[1][8]);
+		this.coordenadas.put(tableroJuego[1][8], new Coordenada(1,8));
+
 		/*-------------------------------------------------------------------------------------*/
 		
 		/*--------------------------------Casillas TABLERO 3-----------------------------------*/
 		
-		C3_1_1 = new JLabel();
-		C3_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][0] = new JLabel();
+		tableroJuego[2][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_1_1);
+				FichaMouseClicked(e, tableroJuego[2][0]);
 			}
 		});
-		C3_1_1.setBounds(423, 131, 48, 48);
-		StartupPanel.add(C3_1_1);
-		
-		C3_1_2 = new JLabel();
-		C3_1_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][0].setBounds(423, 131, 48, 48);
+		StartupPanel.add(tableroJuego[2][0]);
+		this.coordenadas.put(tableroJuego[2][0], new Coordenada(2,0));
+
+		tableroJuego[2][1] = new JLabel();
+		tableroJuego[2][1].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_1_2);
+				FichaMouseClicked(e, tableroJuego[2][1]);
 			}
 		});
-		C3_1_2.setBounds(478, 133, 53, 46);
-		StartupPanel.add(C3_1_2);
-		
-		C3_1_3 = new JLabel();
-		C3_1_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][1].setBounds(478, 133, 53, 46);
+		StartupPanel.add(tableroJuego[2][1]);
+		this.coordenadas.put(tableroJuego[2][1], new Coordenada(2,1));
+
+		tableroJuego[2][2] = new JLabel();
+		tableroJuego[2][2].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_1_3);
+				FichaMouseClicked(e, tableroJuego[2][2]);
 			}
 		});
-		C3_1_3.setBounds(545, 131, 48, 48);
-		StartupPanel.add(C3_1_3);
-		
-		C3_2_1 = new JLabel();
-		C3_2_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][2].setBounds(545, 131, 48, 48);
+		StartupPanel.add(tableroJuego[2][2]);
+		this.coordenadas.put(tableroJuego[2][2], new Coordenada(2,2));
+
+		tableroJuego[2][3] = new JLabel();
+		tableroJuego[2][3].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_2_1);
+				FichaMouseClicked(e, tableroJuego[2][3]);
 			}
 		});
-		C3_2_1.setBounds(422, 191, 49, 49);
-		StartupPanel.add(C3_2_1);
+		tableroJuego[2][3].setBounds(422, 191, 49, 49);
+		StartupPanel.add(tableroJuego[2][3]);
+		this.coordenadas.put(tableroJuego[2][3], new Coordenada(2,3));
+
 		
-		C3_2_2 = new JLabel();
-		C3_2_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][4] = new JLabel();
+		tableroJuego[2][4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
-				FichaMouseClicked(e, C3_2_2);
+				FichaMouseClicked(e, tableroJuego[2][4]);
 			}
 		});
-		C3_2_2.setBounds(484, 194, 48, 50);
-		StartupPanel.add(C3_2_2);
-		
-		C3_2_3 = new JLabel();
-		C3_2_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][4].setBounds(484, 194, 48, 50);
+		StartupPanel.add(tableroJuego[2][4]);
+		this.coordenadas.put(tableroJuego[2][4], new Coordenada(2,4));
+
+		tableroJuego[2][5] = new JLabel();
+		tableroJuego[2][5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_2_3);
+				FichaMouseClicked(e, tableroJuego[2][5]);
 			}
 		});
-		C3_2_3.setBounds(545, 191, 48, 53);
-		StartupPanel.add(C3_2_3);
-		
-		C3_3_1 = new JLabel();
-		C3_3_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][5].setBounds(545, 191, 48, 53);
+		StartupPanel.add(tableroJuego[2][5]);
+		this.coordenadas.put(tableroJuego[2][5], new Coordenada(2,5));
+
+		tableroJuego[2][6] = new JLabel();
+		tableroJuego[2][6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_3_1);
+				FichaMouseClicked(e, tableroJuego[2][6]);
 			}
 		});
-		C3_3_1.setBounds(424, 253, 42, 53);
-		StartupPanel.add(C3_3_1);
-		
-		C3_3_2 = new JLabel();
-		C3_3_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][6].setBounds(424, 253, 42, 53);
+		StartupPanel.add(tableroJuego[2][6]);
+		this.coordenadas.put(tableroJuego[2][6], new Coordenada(2,6));
+
+		tableroJuego[2][7] = new JLabel();
+		tableroJuego[2][7].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_3_2);
+				FichaMouseClicked(e, tableroJuego[2][7]);
 			}
 		});
-		C3_3_2.setBounds(482, 259, 55, 47);
-		StartupPanel.add(C3_3_2);
-		
-		C3_3_3 = new JLabel();
-		C3_3_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[2][7].setBounds(482, 259, 55, 47);
+		StartupPanel.add(tableroJuego[2][7]);
+		this.coordenadas.put(tableroJuego[2][7], new Coordenada(2,7));
+
+		tableroJuego[2][8] = new JLabel();
+		tableroJuego[2][8].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C3_3_3);
+				FichaMouseClicked(e, tableroJuego[2][8]);
 			}
 		});
-		C3_3_3.setBounds(550, 256, 48, 50);
-		StartupPanel.add(C3_3_3);
+		tableroJuego[2][8].setBounds(550, 256, 48, 50);
+		StartupPanel.add(tableroJuego[2][8]);
+		this.coordenadas.put(tableroJuego[2][8], new Coordenada(2,8));
+
 		/*-------------------------------------------------------------------------------------*/
 		
 		/*--------------------------------Casillas TABLERO 4-----------------------------------*/
-		C4_1_1 = new JLabel();
-		C4_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][0] = new JLabel();
+		tableroJuego[3][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_1_1);
+				FichaMouseClicked(e, tableroJuego[3][0]);
 			}
 		});
-		C4_1_1.setBounds(49, 317, 44, 49);
-		StartupPanel.add(C4_1_1);
-		
-		C4_1_2 = new JLabel();
-		C4_1_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][0].setBounds(49, 317, 44, 49);
+		StartupPanel.add(tableroJuego[3][0]);
+		this.coordenadas.put(tableroJuego[3][0], new Coordenada(3,0));
+
+		tableroJuego[3][1] = new JLabel();
+		tableroJuego[3][1].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_1_2);
+				FichaMouseClicked(e, tableroJuego[3][1]);
 			}
 		});
-		C4_1_2.setBounds(109, 256, 55, 50);
-		StartupPanel.add(C4_1_2);
-		
-		C4_1_3 = new JLabel();
-		C4_1_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][1].setBounds(109, 256, 55, 50);
+		StartupPanel.add(tableroJuego[3][1]);
+		this.coordenadas.put(tableroJuego[3][1], new Coordenada(3,1));
+
+		tableroJuego[3][2] = new JLabel();
+		tableroJuego[3][2].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_1_3);
+				FichaMouseClicked(e, tableroJuego[3][2]);
 			}
 		});
-		C4_1_3.setBounds(175, 318, 48, 49);
-		StartupPanel.add(C4_1_3);
-		
-		C4_2_1 = new JLabel();
-		C4_2_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][2].setBounds(175, 318, 48, 49);
+		StartupPanel.add(tableroJuego[3][2]);
+		this.coordenadas.put(tableroJuego[3][2], new Coordenada(3,2));
+
+		tableroJuego[3][3] = new JLabel();
+		tableroJuego[3][3].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_2_1);
+				FichaMouseClicked(e, tableroJuego[3][3]);
 			}
 		});
-		C4_2_1.setBounds(49, 379, 48, 49);
-		StartupPanel.add(C4_2_1);
-		
-		C4_2_2 = new JLabel();
-		C4_2_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][3].setBounds(49, 379, 48, 49);
+		StartupPanel.add(tableroJuego[3][3]);
+		this.coordenadas.put(tableroJuego[3][2], new Coordenada(3,2));
+
+		tableroJuego[3][4] = new JLabel();
+		tableroJuego[3][4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_2_2);
+				FichaMouseClicked(e, tableroJuego[3][4]);
 			}
 		});
-		C4_2_2.setBounds(109, 379, 53, 49);
-		StartupPanel.add(C4_2_2);
-		
-		C4_2_3 = new JLabel();
-		C4_2_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][4].setBounds(109, 379, 53, 49);
+		StartupPanel.add(tableroJuego[3][4]);
+		this.coordenadas.put(tableroJuego[3][4], new Coordenada(3,4));
+
+		tableroJuego[3][5] = new JLabel();
+		tableroJuego[3][5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_2_3);
+				FichaMouseClicked(e, tableroJuego[3][5]);
 			}
 		});
-		C4_2_3.setBounds(175, 379, 48, 49);
-		StartupPanel.add(C4_2_3);
-		
-		C4_3_1 = new JLabel();
-		C4_3_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][5].setBounds(175, 379, 48, 49);
+		StartupPanel.add(tableroJuego[3][5]);
+		this.coordenadas.put(tableroJuego[3][5], new Coordenada(3,5));
+
+		tableroJuego[3][6] = new JLabel();
+		tableroJuego[3][6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_3_1);
+				FichaMouseClicked(e, tableroJuego[3][6]);
 			}
 		});
-		C4_3_1.setBounds(49, 439, 48, 50);
-		StartupPanel.add(C4_3_1);
-		
-		C4_3_2 = new JLabel();
-		C4_3_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][6].setBounds(49, 439, 48, 50);
+		StartupPanel.add(tableroJuego[3][6]);
+		this.coordenadas.put(tableroJuego[3][6], new Coordenada(3,6));
+
+		tableroJuego[3][7] = new JLabel();
+		tableroJuego[3][7].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_3_2);
+				FichaMouseClicked(e, tableroJuego[3][7]);
 			}
 		});
-		C4_3_2.setBounds(109, 440, 48, 49);
-		StartupPanel.add(C4_3_2);
-		
-		C4_3_3 = new JLabel();
-		C4_3_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[3][7].setBounds(109, 440, 48, 49);
+		StartupPanel.add(tableroJuego[3][7]);
+		this.coordenadas.put(tableroJuego[3][7], new Coordenada(3,7));
+
+		tableroJuego[3][8] = new JLabel();
+		tableroJuego[3][8].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C4_3_3);
+				FichaMouseClicked(e, tableroJuego[3][8]);
 			}
 		});
-		C4_3_3.setBounds(175, 440, 48, 49);
-		StartupPanel.add(C4_3_3);
+		tableroJuego[3][8].setBounds(175, 440, 48, 49);
+		StartupPanel.add(tableroJuego[3][8]);
+		this.coordenadas.put(tableroJuego[3][8], new Coordenada(3,8));
+
 		/*----------------------------------------------------------------------------------*/
 		
 		/*--------------------------------Casillas TABLERO 5-----------------------------------*/
-		C5_1_1 = new JLabel();
-		C5_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][0] = new JLabel();
+		tableroJuego[4][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_1_1);
+				FichaMouseClicked(e, tableroJuego[4][0]);
 			}
 		});
-		C5_1_1.setBounds(235, 317, 44, 49);
-		StartupPanel.add(C5_1_1);
-		
-		C5_1_2 = new JLabel();
-		C5_1_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][0].setBounds(235, 317, 44, 49);
+		StartupPanel.add(tableroJuego[4][0]);
+		this.coordenadas.put(tableroJuego[4][0], new Coordenada(4,0));
+
+		tableroJuego[4][1] = new JLabel();
+		tableroJuego[4][1].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_1_2);
+				FichaMouseClicked(e, tableroJuego[4][1]);
 			}
 		});
-		C5_1_2.setBounds(295, 317, 55, 50);
-		StartupPanel.add(C5_1_2);
-		
-		C5_1_3 = new JLabel();
-		C5_1_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][1].setBounds(295, 317, 55, 50);
+		StartupPanel.add(tableroJuego[4][1]);
+		this.coordenadas.put(tableroJuego[4][1], new Coordenada(4,1));
+
+		tableroJuego[4][2] = new JLabel();
+		tableroJuego[4][2].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_1_3);
+				FichaMouseClicked(e, tableroJuego[4][2]);
 			}
 		});
-		C5_1_3.setBounds(362, 318, 48, 49);
-		StartupPanel.add(C5_1_3);
-		
-		C5_2_1 = new JLabel();
-		C5_2_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][2].setBounds(362, 318, 48, 49);
+		StartupPanel.add(tableroJuego[4][2]);
+		this.coordenadas.put(tableroJuego[4][2], new Coordenada(4,2));
+
+		tableroJuego[4][3] = new JLabel();
+		tableroJuego[4][3].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_2_1);
+				FichaMouseClicked(e, tableroJuego[4][3]);
 			}
 		});
-		C5_2_1.setBounds(235, 379, 48, 49);
-		StartupPanel.add(C5_2_1);
-		
-		C5_2_2 = new JLabel();
-		C5_2_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][3].setBounds(235, 379, 48, 49);
+		StartupPanel.add(tableroJuego[4][3]);
+		this.coordenadas.put(tableroJuego[4][3], new Coordenada(4,3));
+
+		tableroJuego[4][4] = new JLabel();
+		tableroJuego[4][4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_2_2);
+				FichaMouseClicked(e, tableroJuego[4][4]);
 			}
 		});
-		C5_2_2.setBounds(295, 379, 53, 49);
-		StartupPanel.add(C5_2_2);
-		
-		C5_2_3 = new JLabel();
-		C5_2_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][4].setBounds(295, 379, 53, 49);
+		StartupPanel.add(tableroJuego[4][4]);
+		this.coordenadas.put(tableroJuego[4][4], new Coordenada(4,4));
+
+		tableroJuego[4][5] = new JLabel();
+		tableroJuego[4][5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_2_3);
+				FichaMouseClicked(e, tableroJuego[4][5]);
 			}
 		});
-		C5_2_3.setBounds(362, 379, 48, 49);
-		StartupPanel.add(C5_2_3);
-		
-		C5_3_1 = new JLabel();
-		C5_3_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][5].setBounds(362, 379, 48, 49);
+		StartupPanel.add(tableroJuego[4][5]);
+		this.coordenadas.put(tableroJuego[4][5], new Coordenada(4,5));
+
+		tableroJuego[4][6] = new JLabel();
+		tableroJuego[4][6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_3_1);
+				FichaMouseClicked(e, tableroJuego[4][6]);
 			}
 		});
-		C5_3_1.setBounds(235, 439, 48, 50);
-		StartupPanel.add(C5_3_1);
-		
-		C5_3_2 = new JLabel();
-		C5_3_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][6].setBounds(235, 439, 48, 50);
+		StartupPanel.add(tableroJuego[4][6]);
+		this.coordenadas.put(tableroJuego[4][6], new Coordenada(4,6));
+
+		tableroJuego[4][7] = new JLabel();
+		tableroJuego[4][7].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_3_2);
+				FichaMouseClicked(e, tableroJuego[4][7]);
 			}
 		});
-		C5_3_2.setBounds(300, 440, 48, 49);
-		StartupPanel.add(C5_3_2);
-		
-		C5_3_3 = new JLabel();
-		C5_3_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[4][7].setBounds(300, 440, 48, 49);
+		StartupPanel.add(tableroJuego[4][7]);
+		this.coordenadas.put(tableroJuego[4][7], new Coordenada(4,7));
+
+		tableroJuego[4][8] = new JLabel();
+		tableroJuego[4][8].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C5_3_3);
+				FichaMouseClicked(e, tableroJuego[4][8]);
 			}
 		});
-		C5_3_3.setBounds(362, 440, 48, 49);
-		StartupPanel.add(C5_3_3);
+		tableroJuego[4][8].setBounds(362, 440, 48, 49);
+		StartupPanel.add(tableroJuego[4][8]);
+		this.coordenadas.put(tableroJuego[4][8], new Coordenada(4,8));
+
 		/*-------------------------------------------------------------------------------------*/
 		
 		/*--------------------------------Casillas TABLERO 6-----------------------------------*/
-		C6_1_1 = new JLabel();
-		C6_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[5][0] = new JLabel();
+		tableroJuego[5][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_1_1);
+				FichaMouseClicked(e, tableroJuego[5][0]);
 			}
 		});
-		C6_1_1.setBounds(423, 317, 44, 49);
-		StartupPanel.add(C6_1_1);
+		tableroJuego[5][0].setBounds(423, 317, 44, 49);
+		StartupPanel.add(tableroJuego[5][0]);
+		this.coordenadas.put(tableroJuego[5][0], new Coordenada(5,0));
+
+		tableroJuego[5][1] = new JLabel();
+		tableroJuego[5][1].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][1]);
+			}
+		});
+		tableroJuego[5][1].setBounds(484, 318, 55, 50);
+		StartupPanel.add(tableroJuego[5][1]);
+		this.coordenadas.put(tableroJuego[5][1], new Coordenada(5,1));
+
+		tableroJuego[5][2] = new JLabel();
+		tableroJuego[5][2].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][2]);
+			}
+		});
+		tableroJuego[5][2].setBounds(545, 317, 48, 49);
+		StartupPanel.add(tableroJuego[5][2]);
+		this.coordenadas.put(tableroJuego[5][2], new Coordenada(5,2));
+
+		tableroJuego[5][3] = new JLabel();
+		tableroJuego[5][3].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][3]);
+			}
+		});
+		tableroJuego[5][3].setBounds(423, 379, 48, 49);
+		StartupPanel.add(tableroJuego[5][3]);
+		this.coordenadas.put(tableroJuego[5][3], new Coordenada(5,3));
+
+		tableroJuego[5][4] = new JLabel();
+		tableroJuego[5][4].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][4]);
+			}
+		});
+		tableroJuego[5][4].setBounds(484, 379, 53, 49);
+		StartupPanel.add(tableroJuego[5][4]);
+		this.coordenadas.put(tableroJuego[5][4], new Coordenada(5,4));
+
+		tableroJuego[5][5] = new JLabel();
+		tableroJuego[5][5].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][5]);
+			}
+		});
+		tableroJuego[5][5].setBounds(550, 379, 48, 49);
+		StartupPanel.add(tableroJuego[5][5]);
+		this.coordenadas.put(tableroJuego[5][5], new Coordenada(5,5));
+
+		tableroJuego[5][6] = new JLabel();
+		tableroJuego[5][6].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][6]);
+			}
+		});
+		tableroJuego[5][6].setBounds(423, 439, 48, 50);
+		StartupPanel.add(tableroJuego[5][6]);
+		this.coordenadas.put(tableroJuego[5][6], new Coordenada(5,6));
+
+		tableroJuego[5][7] = new JLabel();
+		tableroJuego[5][7].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][7]);
+			}
+		});
+		tableroJuego[5][7].setBounds(484, 439, 48, 49);
+		StartupPanel.add(tableroJuego[5][7]);
+		this.coordenadas.put(tableroJuego[5][7], new Coordenada(5,7));
+
+		tableroJuego[5][8] = new JLabel();
+		tableroJuego[5][8].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[5][8]);
+			}
+		});
+		tableroJuego[5][8].setBounds(550, 440, 48, 49);
+		StartupPanel.add(tableroJuego[5][8]);
 		
-		C6_1_2 = new JLabel();
-		C6_1_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_1_2);
-			}
-		});
-		C6_1_2.setBounds(484, 318, 55, 50);
-		StartupPanel.add(C6_1_2);
-		
-		C6_1_3 = new JLabel();
-		C6_1_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_1_3);
-			}
-		});
-		C6_1_3.setBounds(545, 317, 48, 49);
-		StartupPanel.add(C6_1_3);
-		
-		C6_2_1 = new JLabel();
-		C6_2_1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_2_1);
-			}
-		});
-		C6_2_1.setBounds(423, 379, 48, 49);
-		StartupPanel.add(C6_2_1);
-		
-		C6_2_2 = new JLabel();
-		C6_2_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_2_2);
-			}
-		});
-		C6_2_2.setBounds(484, 379, 53, 49);
-		StartupPanel.add(C6_2_2);
-		
-		C6_2_3 = new JLabel();
-		C6_2_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_2_3);
-			}
-		});
-		C6_2_3.setBounds(550, 379, 48, 49);
-		StartupPanel.add(C6_2_3);
-		
-		C6_3_1 = new JLabel();
-		C6_3_1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_3_1);
-			}
-		});
-		C6_3_1.setBounds(423, 439, 48, 50);
-		StartupPanel.add(C6_3_1);
-		
-		C6_3_2 = new JLabel();
-		C6_3_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_3_2);
-			}
-		});
-		C6_3_2.setBounds(484, 439, 48, 49);
-		StartupPanel.add(C6_3_2);
-		
-		C6_3_3 = new JLabel();
-		C6_3_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C6_3_3);
-			}
-		});
-		C6_3_3.setBounds(550, 440, 48, 49);
-		StartupPanel.add(C6_3_3);
-		/*--------------------------------------------------------------------------------------*/
+		this.coordenadas.put(tableroJuego[5][8], new Coordenada(5,8));
+/*---------------------------------------------------------*/
 		
 		/*--------------------------------Casillas TABLERO 7-----------------------------------*/
-		C7_1_1 = new JLabel();
-		C7_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][0] = new JLabel();
+		tableroJuego[6][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_1_1);
+				FichaMouseClicked(e, tableroJuego[6][0]);
 			}
 		});
-		C7_1_1.setBounds(49, 501, 44, 49);
-		StartupPanel.add(C7_1_1);
-		
-		C7_1_2 = new JLabel();
-		C7_1_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][0].setBounds(49, 501, 44, 49);
+		StartupPanel.add(tableroJuego[6][0]);
+		this.coordenadas.put(tableroJuego[6][0], new Coordenada(6,0));
+
+		tableroJuego[6][1] = new JLabel();
+		tableroJuego[6][1].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_1_2);
+				FichaMouseClicked(e, tableroJuego[6][1]);
 			}
 		});
-		C7_1_2.setBounds(105, 500, 55, 50);
-		StartupPanel.add(C7_1_2);
-		
-		C7_1_3 = new JLabel();
-		C7_1_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][1].setBounds(105, 500, 55, 50);
+		StartupPanel.add(tableroJuego[6][1]);
+		this.coordenadas.put(tableroJuego[6][1], new Coordenada(6,1));
+
+		tableroJuego[6][2] = new JLabel();
+		tableroJuego[6][2].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_1_3);
+				FichaMouseClicked(e, tableroJuego[6][2]);
 			}
 		});
-		C7_1_3.setBounds(172, 501, 48, 49);
-		StartupPanel.add(C7_1_3);
-		
-		C7_2_1 = new JLabel();
-		C7_2_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][2].setBounds(172, 501, 48, 49);
+		StartupPanel.add(tableroJuego[6][2]);
+		this.coordenadas.put(tableroJuego[6][2], new Coordenada(6,2));
+
+		tableroJuego[6][3] = new JLabel();
+		tableroJuego[6][3].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_2_1);
+				FichaMouseClicked(e, tableroJuego[6][3]);
 			}
 		});
-		C7_2_1.setBounds(49, 562, 48, 49);
-		StartupPanel.add(C7_2_1);
-		
-		C7_2_2 = new JLabel();
-		C7_2_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][3].setBounds(49, 562, 48, 49);
+		StartupPanel.add(tableroJuego[6][3]);
+		this.coordenadas.put(tableroJuego[6][3], new Coordenada(6,3));
+
+		tableroJuego[6][4] = new JLabel();
+		tableroJuego[6][4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_2_2);
+				FichaMouseClicked(e, tableroJuego[6][4]);
 			}
 		});
-		C7_2_2.setBounds(105, 562, 53, 49);
-		StartupPanel.add(C7_2_2);
-		
-		C7_2_3 = new JLabel();
-		C7_2_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][4].setBounds(105, 562, 53, 49);
+		StartupPanel.add(tableroJuego[6][4]);
+		this.coordenadas.put(tableroJuego[6][4], new Coordenada(6,4));
+
+		tableroJuego[6][5] = new JLabel();
+		tableroJuego[6][5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_2_3);
+				FichaMouseClicked(e, tableroJuego[6][5]);
 			}
 		});
-		C7_2_3.setBounds(172, 562, 48, 49);
-		StartupPanel.add(C7_2_3);
-		
-		C7_3_1 = new JLabel();
-		C7_3_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][5].setBounds(172, 562, 48, 49);
+		StartupPanel.add(tableroJuego[6][5]);
+		this.coordenadas.put(tableroJuego[6][5], new Coordenada(6,5));
+
+		tableroJuego[6][6] = new JLabel();
+		tableroJuego[6][6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_3_1);
+				FichaMouseClicked(e, tableroJuego[6][6]);
 			}
 		});
-		C7_3_1.setBounds(49, 623, 48, 50);
-		StartupPanel.add(C7_3_1);
-		
-		C7_3_2 = new JLabel();
-		C7_3_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][6].setBounds(49, 623, 48, 50);
+		StartupPanel.add(tableroJuego[6][6]);
+		this.coordenadas.put(tableroJuego[6][6], new Coordenada(6,6));
+
+		tableroJuego[6][7] = new JLabel();
+		tableroJuego[6][7].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_3_2);
+				FichaMouseClicked(e, tableroJuego[6][7]);
 			}
 		});
-		C7_3_2.setBounds(109, 624, 48, 49);
-		StartupPanel.add(C7_3_2);
-		
-		C7_3_3 = new JLabel();
-		C7_3_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[6][7].setBounds(109, 624, 48, 49);
+		StartupPanel.add(tableroJuego[6][7]);
+		this.coordenadas.put(tableroJuego[6][7], new Coordenada(6,7));
+
+		tableroJuego[6][8] = new JLabel();
+		tableroJuego[6][8].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C7_3_3);
+				FichaMouseClicked(e, tableroJuego[6][8]);
 			}
 		});
-		C7_3_3.setBounds(175, 624, 48, 49);
-		StartupPanel.add(C7_3_3);
+		tableroJuego[6][8].setBounds(175, 624, 48, 49);
+		StartupPanel.add(tableroJuego[6][8]);
+		this.coordenadas.put(tableroJuego[6][8], new Coordenada(6,8));
+
 		/*-------------------------------------------------------------------------------------*/
 		
 		/*--------------------------------Casillas TABLERO 8-----------------------------------*/
-		C8_1_1 = new JLabel();
-		C8_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][0] = new JLabel();
+		tableroJuego[7][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_1_1);
+				FichaMouseClicked(e, tableroJuego[7][0]);
 			}
 		});
-		C8_1_1.setBounds(235, 501, 44, 49);
-		StartupPanel.add(C8_1_1);
-		
-		C8_1_2 = new JLabel();
-		C8_1_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][0].setBounds(235, 501, 44, 49);
+		StartupPanel.add(tableroJuego[7][0]);
+		this.coordenadas.put(tableroJuego[7][0], new Coordenada(7,0));
+
+		tableroJuego[7][1] = new JLabel();
+		tableroJuego[7][1].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_1_2);
+				FichaMouseClicked(e, tableroJuego[7][1]);
 			}
 		});
-		C8_1_2.setBounds(293, 501, 55, 50);
-		StartupPanel.add(C8_1_2);
-		
-		C8_1_3 = new JLabel();
-		C8_1_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][1].setBounds(293, 501, 55, 50);
+		StartupPanel.add(tableroJuego[7][1]);
+		this.coordenadas.put(tableroJuego[7][1], new Coordenada(7,1));
+
+		tableroJuego[7][2] = new JLabel();
+		tableroJuego[7][2].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_1_3);
+				FichaMouseClicked(e, tableroJuego[7][2]);
 			}
 		});
-		C8_1_3.setBounds(362, 501, 48, 49);
-		StartupPanel.add(C8_1_3);
-		
-		C8_2_1 = new JLabel();
-		C8_2_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][2].setBounds(362, 501, 48, 49);
+		StartupPanel.add(tableroJuego[7][2]);
+		this.coordenadas.put(tableroJuego[7][2], new Coordenada(7,2));
+
+		tableroJuego[7][3] = new JLabel();
+		tableroJuego[7][3].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_2_1);
+				FichaMouseClicked(e, tableroJuego[7][3]);
 			}
 		});
-		C8_2_1.setBounds(240, 562, 48, 49);
-		StartupPanel.add(C8_2_1);
-		
-		C8_2_2 = new JLabel();
-		C8_2_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][3].setBounds(240, 562, 48, 49);
+		StartupPanel.add(tableroJuego[7][3]);
+		this.coordenadas.put(tableroJuego[7][3], new Coordenada(7,3));
+
+		tableroJuego[7][4] = new JLabel();
+		tableroJuego[7][4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_2_2);
+				FichaMouseClicked(e, tableroJuego[7][4]);
 			}
 		});
-		C8_2_2.setBounds(295, 562, 53, 49);
-		StartupPanel.add(C8_2_2);
-		
-		C8_2_3 = new JLabel();
-		C8_2_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][4].setBounds(295, 562, 53, 49);
+		StartupPanel.add(tableroJuego[7][4]);
+		this.coordenadas.put(tableroJuego[7][4], new Coordenada(7,4));
+
+		tableroJuego[7][5] = new JLabel();
+		tableroJuego[7][5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_2_3);
+				FichaMouseClicked(e, tableroJuego[7][5]);
 			}
 		});
-		C8_2_3.setBounds(362, 562, 48, 49);
-		StartupPanel.add(C8_2_3);
-		
-		C8_3_1 = new JLabel();
-		C8_3_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][5].setBounds(362, 562, 48, 49);
+		StartupPanel.add(tableroJuego[7][5]);
+		this.coordenadas.put(tableroJuego[7][5], new Coordenada(7,5));
+
+		tableroJuego[7][6] = new JLabel();
+		tableroJuego[7][6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_3_1);
+				FichaMouseClicked(e, tableroJuego[7][6]);
 			}
 		});
-		C8_3_1.setBounds(235, 623, 48, 50);
-		StartupPanel.add(C8_3_1);
-		
-		C8_3_2 = new JLabel();
-		C8_3_2.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][6].setBounds(235, 623, 48, 50);
+		StartupPanel.add(tableroJuego[7][6]);
+		this.coordenadas.put(tableroJuego[7][6], new Coordenada(7,6));
+
+		tableroJuego[7][7] = new JLabel();
+		tableroJuego[7][7].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_3_2);
+				FichaMouseClicked(e, tableroJuego[7][7]);
 			}
 		});
-		C8_3_2.setBounds(300, 623, 48, 49);
-		StartupPanel.add(C8_3_2);
-		
-		C8_3_3 = new JLabel();
-		C8_3_3.addMouseListener(new MouseAdapter() {
+		tableroJuego[7][7].setBounds(300, 623, 48, 49);
+		StartupPanel.add(tableroJuego[7][7]);
+		this.coordenadas.put(tableroJuego[7][7], new Coordenada(7,7));
+
+		tableroJuego[7][8] = new JLabel();
+		tableroJuego[7][8].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C8_3_3);
+				FichaMouseClicked(e, tableroJuego[7][8]);
 			}
 		});
-		C8_3_3.setBounds(362, 624, 48, 49);
-		StartupPanel.add(C8_3_3);
+		tableroJuego[7][8].setBounds(362, 624, 48, 49);
+		StartupPanel.add(tableroJuego[7][8]);
+		this.coordenadas.put(tableroJuego[7][8], new Coordenada(7,8));
+
 		/*-------------------------------------------------------------------------------------*/
 		
 		/*--------------------------------Casillas TABLERO 9-----------------------------------*/
-		C9_1_1 = new JLabel();
-		C9_1_1.addMouseListener(new MouseAdapter() {
+		tableroJuego[8][0] = new JLabel();
+		tableroJuego[8][0].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_1_1);
+				FichaMouseClicked(e, tableroJuego[8][0]);
 			}
 		});
-		C9_1_1.setBounds(423, 501, 44, 49);
-		StartupPanel.add(C9_1_1);
+		tableroJuego[8][0].setBounds(423, 501, 44, 49);
+		StartupPanel.add(tableroJuego[8][0]);
+		this.coordenadas.put(tableroJuego[8][0], new Coordenada(8,0));
+
+		tableroJuego[8][1] = new JLabel();
+		tableroJuego[8][1].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][1]);
+			}
+		});
+		tableroJuego[8][1].setBounds(482, 500, 55, 50);
+		StartupPanel.add(tableroJuego[8][1]);
+		this.coordenadas.put(tableroJuego[8][1], new Coordenada(8,1));
+
+		tableroJuego[8][2] = new JLabel();
+		tableroJuego[8][2].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][2]);
+			}
+		});
+		tableroJuego[8][2].setBounds(545, 501, 48, 49);
+		StartupPanel.add(tableroJuego[8][2]);
+		this.coordenadas.put(tableroJuego[8][2], new Coordenada(8,2));
+
+		tableroJuego[8][3] = new JLabel();
+		tableroJuego[8][3].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][3]);
+			}
+		});
+		tableroJuego[8][3].setBounds(423, 562, 48, 49);
+		StartupPanel.add(tableroJuego[8][3]);
+		this.coordenadas.put(tableroJuego[8][3], new Coordenada(8,3));
+
+		tableroJuego[8][4] = new JLabel();
+		tableroJuego[8][4].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][4]);
+			}
+		});
+		tableroJuego[8][4].setBounds(484, 562, 53, 49);
+		StartupPanel.add(tableroJuego[8][4]);
+		this.coordenadas.put(tableroJuego[8][4], new Coordenada(8,4));
+
+		tableroJuego[8][5] = new JLabel();
+		tableroJuego[8][5].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][5]);
+			}
+		});
+		tableroJuego[8][5].setBounds(550, 562, 48, 49);
+		StartupPanel.add(tableroJuego[8][5]);
+		this.coordenadas.put(tableroJuego[8][5], new Coordenada(8,5));
+
+		tableroJuego[8][6] = new JLabel();
+		tableroJuego[8][6].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][6]);
+			}
+		});
+		tableroJuego[8][6].setBounds(423, 624, 48, 50);
+		StartupPanel.add(tableroJuego[8][6]);
+		this.coordenadas.put(tableroJuego[8][6], new Coordenada(8,6));
+
+		tableroJuego[8][7] = new JLabel();
+		tableroJuego[8][7].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][7]);
+			}
+		});
+		tableroJuego[8][7].setBounds(484, 623, 48, 49);
+		StartupPanel.add(tableroJuego[8][7]);
+		this.coordenadas.put(tableroJuego[8][7], new Coordenada(8,7));
+
+		tableroJuego[8][8] = new JLabel();
+		tableroJuego[8][8].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FichaMouseClicked(e, tableroJuego[8][8]);
+			}
+		});
+		tableroJuego[8][8].setBounds(550, 624, 48, 49);
+		StartupPanel.add(tableroJuego[8][8]);
+		this.coordenadas.put(tableroJuego[8][8], new Coordenada(8,8));
+
 		
-		C9_1_2 = new JLabel();
-		C9_1_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_1_2);
-			}
-		});
-		C9_1_2.setBounds(482, 500, 55, 50);
-		StartupPanel.add(C9_1_2);
 		
-		C9_1_3 = new JLabel();
-		C9_1_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_1_3);
-			}
-		});
-		C9_1_3.setBounds(545, 501, 48, 49);
-		StartupPanel.add(C9_1_3);
 		
-		C9_2_1 = new JLabel();
-		C9_2_1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_2_1);
-			}
-		});
-		C9_2_1.setBounds(423, 562, 48, 49);
-		StartupPanel.add(C9_2_1);
 		
-		C9_2_2 = new JLabel();
-		C9_2_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_2_2);
-			}
-		});
-		C9_2_2.setBounds(484, 562, 53, 49);
-		StartupPanel.add(C9_2_2);
-		
-		C9_2_3 = new JLabel();
-		C9_2_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_2_3);
-			}
-		});
-		C9_2_3.setBounds(550, 562, 48, 49);
-		StartupPanel.add(C9_2_3);
-		
-		C9_3_1 = new JLabel();
-		C9_3_1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_3_1);
-			}
-		});
-		C9_3_1.setBounds(423, 624, 48, 50);
-		StartupPanel.add(C9_3_1);
-		
-		C9_3_2 = new JLabel();
-		C9_3_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_3_2);
-			}
-		});
-		C9_3_2.setBounds(484, 623, 48, 49);
-		StartupPanel.add(C9_3_2);
-		
-		C9_3_3 = new JLabel();
-		C9_3_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FichaMouseClicked(e, C9_3_3);
-			}
-		});
-		C9_3_3.setBounds(550, 624, 48, 49);
-		StartupPanel.add(C9_3_3);
 		/*-------------------------------------------------------------------------------------*/
 		
 		
@@ -909,14 +1005,14 @@ public class GameWindow extends JFrame implements IJuego {
 		notification.setText("<html>angel puso en T1 su ficha en la casilla 2,1 : toni tiene que poner en T4 su ficha</html>");
 		StartupPanel.add(notification);
 		
-		ply1name = new JLabel("Ángel");
+		ply1name = new JLabel(retador);
 		ply1name.setForeground(new Color(0, 100, 0));
 		ply1name.setFont(new Font("Dialog", Font.BOLD, 18));
 		ply1name.setHorizontalAlignment(SwingConstants.CENTER);
 		ply1name.setBounds(751, 138, 106, 31);
 		StartupPanel.add(ply1name);
 		
-		ply2name = new JLabel("Antonio");
+		ply2name = new JLabel(retado);
 		ply2name.setFont(new Font("Dialog", Font.BOLD, 18));
 		ply2name.setForeground(new Color(0, 100, 0));
 		ply2name.setHorizontalAlignment(SwingConstants.CENTER);
@@ -967,14 +1063,15 @@ public class GameWindow extends JFrame implements IJuego {
 		minimapLabel.setBounds(644, 395, 299, 296);
 		StartupPanel.add(minimapLabel);
 		
-		turnoPly1 = new JLabel("");
+		turnoPly1 = new JLabel();
 		turnoPly1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/arrow.png")));
 		turnoPly1.setBounds(869, 126, 70, 45);
 		StartupPanel.add(turnoPly1);
 		
-		turnoPly2 = new JLabel("");
+		turnoPly2 = new JLabel();
 		turnoPly2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/arrow.png")));
 		turnoPly2.setBounds(868, 203, 70, 37);
+		turnoPly2.setVisible(false);
 		StartupPanel.add(turnoPly2);
 		this.setLocationRelativeTo(null);
 		
@@ -994,25 +1091,26 @@ public class GameWindow extends JFrame implements IJuego {
 	}
 	//Evento para pintar las fichas, primero se mira si ya se ha pinchado sobre esa casilla
 	 private void FichaMouseClicked(java.awt.event.MouseEvent e, JLabel j) {
+		int cTableroG,fTableroG, cTableroP, fTableroP;
+		cTableroG = this.coordenadas.get(j).getx() % 3;
+		fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
+		cTableroP = this.coordenadas.get(j).gety() % 3 ;
+		fTableroP = (int)(this.coordenadas.get(j).gety() / 3);
 		 
-		 if(!pulsaciones.contains(j)){
-		 	if(a.nextInt(2)==0){
-		 		  j.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("image/x.png")));
-		 	}
-		 	else{
-		 		  j.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("image/o.png")));
-		 	}
-		 }
-		 pulsaciones.add(j);
-	 }
-	 
-	 private void GlobalFichaMouseClicked(java.awt.event.MouseEvent e, JLabel j){
-		 if(a.nextInt(2)==0){
-	 		  j.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("image/O.png")));
-	 	}
-	 	else{
-	 		  j.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("image/X.png")));
-	 	}
+		try {
+			Controller cntrl;
+			cntrl = Controller.get();
+			cntrl.comprobarMovimientoValido(cTableroG, fTableroG, cTableroP, fTableroP);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		System.out.println(this.coordenadas.get(j).toString());
+		System.out.println("cTG : "+cTableroG+" fTG : "+fTableroG+" cTp: "+cTableroP+ " fTp : "+fTableroP);
+		//this.tableroJuego[][]
+		 
+		// pulsaciones.add(j);
 	 }
 
 	@Override
@@ -1024,9 +1122,22 @@ public class GameWindow extends JFrame implements IJuego {
 	@Override
 	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {
 		// TODO Auto-generated method stub
-		
+		if (email.equals(this.ply1name.getText()))
+			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
+		else
+			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
 	}
 
+	public void cambiarTurno() {
+		if (this.turnoPly1.isVisible()) {
+			this.turnoPly1.setVisible(false);
+			this.turnoPly2.setVisible(true);
+		} else {
+			this.turnoPly1.setVisible(true);
+			this.turnoPly2.setVisible(false);			
+		}		
+	}
+	
 //	@Override
 //	public void cerrar() {
 //		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida");
