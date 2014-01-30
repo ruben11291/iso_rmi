@@ -53,8 +53,8 @@ public class Proxy {
 	}
 	
 	//realizar movimiento
-	public void poner(String email, int cT, int fT, int cC, int fC) throws RemoteException {
-		server.poner(email, cT, fT, cC, fC);
+	public void poner(String email, int cT, int fT, int cC, int fC, int idPartida) throws RemoteException {
+		server.poner(idPartida,email, cT, fT, cC, fC);
 	}	
 	
 	public void envioRespuestaPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException{

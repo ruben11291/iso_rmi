@@ -60,7 +60,7 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	
 	
 	@Override
-	public void poner( int cT, int fT, int cC, int fC) throws RemoteException {
+	public void poner( int idPartida,int cT, int fT, int cC, int fC) throws RemoteException {
 		
 		
 		
@@ -98,18 +98,18 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 
 
 	@Override
-	public void iniciarPartida(String retador, String retado)
+	public void iniciarPartida(int idPartida,String retador, String retado)
 			throws RemoteException {
-		this.fachada.iniciarPartida(retador, retado);
+		this.fachada.iniciarPartida(retador, retado,idPartida);
 		
 	}
 
 
 	@Override
 	public void respuestaAPeticionDeReto(String retador, String retado,
-			boolean respuesta) throws RemoteException {
+			boolean respuesta, int idPartida) throws RemoteException {
 		System.out.println("Respuesta que viene del servidor: " + respuesta);
-		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
+		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta,  idPartida);
 		
 	}
 	

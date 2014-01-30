@@ -70,12 +70,12 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel turnoPly2;
 
 	
-	public GameWindow() {
+	public GameWindow(int id_partida) {
 		super();
 		try {
 			Controller cntrl;
 			cntrl = Controller.get();
-			cntrl.setJuego( this);
+			cntrl.setJuego( id_partida,this);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

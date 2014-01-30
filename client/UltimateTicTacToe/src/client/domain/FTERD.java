@@ -53,8 +53,8 @@ public class FTERD {
 		}
 	}
 
-	public void poner( String email, int cT, int fT, int cC, int fC) throws RemoteException {
-		proxy.poner( email, cT, fT, cC, fC);
+	public void poner( int id_partida,String email, int cT, int fT, int cC, int fC) throws RemoteException {
+		proxy.poner(email, cT, fT, cC, fC,id_partida);
 	}
 
 	public void retar(String oponente) throws RemoteException {
@@ -88,17 +88,17 @@ public class FTERD {
 
 	//Metodo que se llama cuando un cliente recibe la respuesta a su solicitud de reto
 	public void respuestaAPeticionDeReto(String retador, String retado,
-			boolean respuesta) {
+			boolean respuesta, int idPartida) {
 		System.out.println("Procede de: proxy servidor. Retador: " + retador + " Retado: " + retado + " Respuesta:" + respuesta);
 		System.out.println(this.retosSolicitados.toString());
 		if(this.retosSolicitados.contains(retado)){
 			if(respuesta){
 				this.retosSolicitados.remove(retado);
-				creaPartida(retador,retado);
+				creaPartida(retador,retado,idPartida);
 			}
 			try {
 				Controller cntrl = Controller.get();
-				cntrl.respuestaReto(retado, respuesta);
+				cntrl.respuestaReto(retado, respuesta,idPartida);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -107,8 +107,8 @@ public class FTERD {
 	}
 	
 	//Metodo en el que se crea la partida y se inicializan los jugadores
-	private void creaPartida(String retador, String retado){
-		Tablero9x9 tablero = new Tablero9x9();
+	private void creaPartida(String retador, String retado,int idPartida){
+		Tablero9x9 tablero = new Tablero9x9(idPartida);
 		Jugador j1 = new Jugador(retador,"");
 		Jugador j2 = new Jugador(retado,"");
 		tablero.setJugadorA(j1);
@@ -119,11 +119,11 @@ public class FTERD {
 	
 	//Metodo que se llama cuando se recibe por parte del servidor un inicio de partida.
 	//Este cliente es el que recibe la petición de reto
-	public void iniciarPartida(String retador, String retado){
-		creaPartida(retador, retado);
+	public void iniciarPartida(String retador, String retado, int idPartida){
+		creaPartida(retador, retado, idPartida);
 		try {
 			Controller cntrl = Controller.get();
-			cntrl.iniciarPartida();
+			cntrl.iniciarPartida(idPartida);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
