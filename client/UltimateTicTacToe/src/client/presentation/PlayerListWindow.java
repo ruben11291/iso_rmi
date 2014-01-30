@@ -1,6 +1,7 @@
 package client.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -134,6 +135,9 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 
 			
 			mPlayerList.setBackground(Color.WHITE);
+			mPlayerList.setFont(new Font("Dialog", Font.BOLD, 12));
+			mPlayerList.setForeground(Color.BLUE);
+			
 			final JScrollPane playerListPanel = new JScrollPane(mPlayerList);
 
 //			mPlayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
