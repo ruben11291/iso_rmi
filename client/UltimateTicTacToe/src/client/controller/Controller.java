@@ -122,7 +122,10 @@ public class Controller implements IController {
 	//Cierra ventana de juego
 	@Override
 	public void cerrarPartida() {
-		if(juego != null) this.juego.cerrar();
+		if(juego != null) {
+			this.juego.cerrar();
+		//	this.modelo.cerrarPartida();
+		}
 		this.juego = null;
 		
 	}
