@@ -145,9 +145,6 @@ public class FTERD {
 				
 				
 			}
-			if (!respuesta){
-
-			}
 		
 		}
 		

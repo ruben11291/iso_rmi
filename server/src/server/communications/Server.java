@@ -154,6 +154,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
+		this.fachada = FTERD.get();
 		this.fachada.poner(idPartida, email, cT, fT, cC, fC);
 	}
 
@@ -173,6 +174,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	@Override
 	public void retar(String retador, String retado) throws RemoteException {
+		this.fachada= FTERD.get();
 		this.fachada.retar(retador, retado);
 		ICliente IRetado = this.stubs.get(retado);
 		IRetado.notificarSolicitudReto(retador);
@@ -181,7 +183,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta) throws RemoteException {
-		
+		this.fachada = FTERD.get();
 		int idPartida = this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
 		
 		//Mandar a respuesta a retador. Si la respuestas ha sido positiva le manda un idPartida valido

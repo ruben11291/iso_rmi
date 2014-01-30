@@ -53,7 +53,11 @@ public class FTERD {
 		}
 	}
 
-	public void poner( int id_partida,String email, int cT, int fT, int cC, int fC) throws RemoteException {
+	public void poner( int id_partida,String email, int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
+		if (email.equals(this.tablero.getJugadorA().getEmail())) 
+			this.tablero.getJugadorA().poner(cT, fT, cC, fC);
+		else 
+			this.tablero.getJugadorB().poner(cT, fT, cC, fC);
 		proxy.poner(email, cT, fT, cC, fC,id_partida);
 	}
 
