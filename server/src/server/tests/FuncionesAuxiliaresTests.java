@@ -48,6 +48,7 @@ public class FuncionesAuxiliaresTests {
 	
 	public static void borrarBD(){
 		Broker broker;
+		System.out.println("borrarBD");
 		try {
 			broker = Broker.get();
 			Connection bd=broker.getBD();

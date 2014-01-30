@@ -5,8 +5,10 @@ import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -28,6 +30,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private FTERD fachada;
 	private static Server servo;
 	private Hashtable <String, ICliente>stubs;
+	private Registry r;
 	
 	protected Server() throws RemoteException, UnknownHostException {
 		super();
@@ -46,12 +49,16 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	public void conectar() throws RemoteException, MalformedURLException {
-		LocateRegistry.createRegistry(this.puerto);
+		r = LocateRegistry.createRegistry(this.puerto);
+		//Registry r = LocateRegistry.getRegistry(this.puerto);
 		try {
 			Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
+//			r.bind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
 		}
 		catch (AlreadyBoundException eABE) {
-			Naming.rebind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
+			;
+			//Naming.rebind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
+//			r.rebind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
 		}
 		System.out.println("Servidor escuchando" + this.puerto);
 	}
@@ -166,9 +173,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public Vector<String> getClientesEnEspera() throws RemoteException {
 		Vector<String> result=new Vector<String>();
-		for (Tablero9x9 tablero : this.fachada.getTablerosLibres()) {
-			result.add(tablero.getJugadorA().getEmail());
-		}
+//		for (Tablero9x9 tablero : this.fachada.getTablerosLibres()) {
+//			result.add(tablero.getJugadorA().getEmail());
+//		}
 		return result;
 	}
 
@@ -201,6 +208,22 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 		
 	}
+
+	/* Este metodo se ha creado para las pruebas de la comunicacion*/
+	public FTERD getFachada() {
+		return this.fachada;
+		
+	}
+
+//	/* Este metodo se ha creado para las pruebas de la comunicacion*/
+//	public void desconectar() throws RemoteException, MalformedURLException, NotBoundException {
+////		Naming.unbind();
+////		UnicastRemoteObject.unexportObject(r, true);
+//		Registry r = LocateRegistry.getRegistry(this.ip, this.puerto);
+////		r.unbind("rmi://" + this.ip + ":" + this.puerto + "/servidor");
+//		Naming.unbind("rmi://" + this.ip + ":" + this.puerto + "/servidor");
+////		UnicastRemoteObject.unexportObject();
+//	}
 
 	
 }

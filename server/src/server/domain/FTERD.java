@@ -1,13 +1,8 @@
 package server.domain;
 
-import java.rmi.RemoteException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import client.exceptions.JugadorNoExisteException;
@@ -44,10 +39,8 @@ public class FTERD {
 			}
 			else throw new JugadorNoExisteException(email);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			throw new JugadorNoExisteException(email);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new JugadorNoExisteException(email);
 		}
 	}
@@ -65,20 +58,6 @@ public class FTERD {
 	public void register(Jugador j) throws ClassNotFoundException, SQLException {
 		j.insert();
 	}
-	
-//	public Jugador autenticar(String email, String passwd) throws ClassNotFoundException, SQLException, JugadorNoExisteException{
-//		Jugador j = null;
-//		
-//		if (DAOAutenticar.autenticar(email, passwd)){
-//			j = new Jugador(email);
-//				this.add(email, passwd);
-//			
-//		}
-//		
-//		return j;
-//				
-//	}
-	
 
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) {
 		if(!this.tableros.containsKey(idPartida)){
@@ -91,30 +70,15 @@ public class FTERD {
 			try {
 				partida.colocar(email, cT, fT, cC, fC);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-
-
-			
-//			mandar movimiento a oponente
-			
-//			Jugador oponente = partida.getOpenenteDE(email);
-//			oponente.poner(idPartida,..,..,);
-			
+			}			
 		}
 	}
 	
-	
-	
-	/*AÑADIR A LA INTERFAZ*/
 	public void retar(String retador, String retado){
-		retosEnEspera.put(retador, retado);
-		//Enviar peticion de reto a jugador 'retado'
-		
+		retosEnEspera.put(retador, retado);		
 	}
 	
 	public int respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) {
@@ -137,13 +101,8 @@ public class FTERD {
 				try {
 					DAOTablero.nuevaPartida(tableroNuevo);
 				} catch (ClassNotFoundException | SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				
-	
-				
-				
+				}				
 			}
 		
 		}
@@ -173,17 +132,17 @@ public class FTERD {
 		return retosEnEspera;
 	}
 	
-	public Vector<Tablero9x9> getTablerosLibres() {
-		Vector<Tablero9x9> result=new Vector<Tablero9x9>();
-		Enumeration<Tablero9x9> lista=this.tableros.elements();
-		while (lista.hasMoreElements()) {
-			Tablero9x9 t=lista.nextElement();
-			if (t.getJugadorB()==null)
-				result.add(t);
-		}
-		return result;
-		
-	}
+//	public Vector<Tablero9x9> getTablerosLibres() {
+//		Vector<Tablero9x9> result=new Vector<Tablero9x9>();
+//		Enumeration<Tablero9x9> lista=this.tableros.elements();
+//		while (lista.hasMoreElements()) {
+//			Tablero9x9 t=lista.nextElement();
+//			if (t.getJugadorB()==null)
+//				result.add(t);
+//		}
+//		return result;
+//		
+//	}
 
 	public Jugador getJugador(String email) {
 		return this.jugadores.get(email);
