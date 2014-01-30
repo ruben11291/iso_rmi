@@ -43,6 +43,8 @@ public class GameWindow extends JFrame implements IJuego {
 	
 	private JLabel F1, F2, F3, F4, F5, F6, F7, F8, F9; //TABLERO GLOBAL
 	
+	 JLabel [][] matrizLabels = new JLabel [9][9];
+	
 	private JLabel [][] tableroJuego = {
 			{C1_1_1, C1_1_2, C1_1_3, C1_2_1, C1_2_2, C1_2_3, C1_3_1, C1_3_2, C1_3_3},
 			{C2_1_1, C2_1_2, C2_1_3, C2_2_1, C2_2_2, C2_2_3, C2_3_1, C2_3_2, C2_3_3},
@@ -72,10 +74,11 @@ public class GameWindow extends JFrame implements IJuego {
 	
 	public GameWindow(int id_partida) {
 		super();
+		
 		try {
 			Controller cntrl;
 			cntrl = Controller.get();
-			cntrl.setJuego(id_partida, this);
+			cntrl.setJuego( id_partida,this);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

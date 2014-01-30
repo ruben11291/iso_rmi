@@ -35,9 +35,9 @@ public class Controller implements IController {
 	}
 		
 	
-	public void comprobarMovimientoValido(int id_partida, String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
+	public void comprobarMovimientoValido(int idPartida,String email, int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
 		try {
-			modelo.poner(id_partida, email, cT, fT, cC, fC);
+			modelo.poner(idPartida,email, cT, fT, cC, fC);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,7 +101,7 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void setJuego(int id_partida, IJuego juego) {
+	public void setJuego(int idPartida,IJuego juego) {
 		if (this.juego == null) this.juego =juego;
 //		this.juegos.put(id_partida, juego);
 	}
@@ -122,7 +122,10 @@ public class Controller implements IController {
 	//Cierra ventana de juego
 	@Override
 	public void cerrarPartida() {
-		if(juego != null) this.juego.cerrar();
+		if(juego != null) {
+			this.juego.cerrar();
+			this.modelo.cerrarPartida();
+		}
 		this.juego = null;
 		
 	}
@@ -141,9 +144,9 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void respuestaReto(String retado, boolean respuesta, int id_partida) {
+	public void respuestaReto(String retado, boolean respuesta,int idPartida) {
 		// TODO Auto-generated method stub
-		this.lista.recibirRespuestaReto(retado, respuesta, id_partida);		
+		this.lista.recibirRespuestaReto(retado, respuesta, idPartida);		
 	}
 
 	@Override
@@ -162,8 +165,8 @@ public class Controller implements IController {
 		this.lista.recibirReto(retador);
 	}
 	
-	public void iniciarPartida(int id_partida) {
-		this.lista.iniciarPartida(id_partida);
+	public void iniciarPartida(int idPartida) {
+		this.lista.iniciarPartida(idPartida);
 	}
 
 	@Override

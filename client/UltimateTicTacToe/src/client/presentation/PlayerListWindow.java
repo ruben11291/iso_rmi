@@ -1,6 +1,8 @@
 package client.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -20,6 +22,7 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import client.controller.Controller;
@@ -63,7 +66,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		// TODO Auto-generated method stub
 		this.setResizable(false);
 		this.setTitle("Ultimate Tic-Tac-Toe");
-		this.setSize(900, 650);
+		this.setSize(250, 400);
 		this.addWindowListener(this);
 		
 		if (mPlayToolBar != null) {
@@ -89,25 +92,25 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		// TODO Auto-generated method stub
 		if (mGameListPanel == null) {
 			mGameListToolBar = new JToolBar();
-
-		//	updateListButton = new JButton("Actualizar lista");
-			//updateListButton.setIcon(new ImageIcon(
-				//this.getClass().getClassLoader().getResource(
-					//"image/refresh.png")));
-//			updateListButton.addMouseListener(new UpdateListMouseAdapter());
-//			mGameListToolBar.add(updateListButton);
-
+			
 			createGameButton = new JButton("Retar");
 			createGameButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
 					"image/ttoe.png")));
+//			createGameButton.setBackground(new Color(143,188,143));
+			createGameButton.setForeground(Color.BLACK);
 			createGameButton.addMouseListener(new CreateGameMouseAdapter(this));
+			
 			mGameListToolBar.add(createGameButton);
-
+			
+			mGameListToolBar.addSeparator();
+			
 			logoutButton = new JButton("Cerrar sesión");
 			logoutButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
 					"image/logout.png")));
+//			logoutButton.setBackground(new Color(143,188,143));
+			logoutButton.setForeground(Color.BLACK);
 			logoutButton.addMouseListener(new LogoutMouseAdapter(this));
 			mGameListToolBar.add(logoutButton);
 
@@ -122,60 +125,41 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			mGameListPanel.setBackground(Color.WHITE);
 			mGameListPanel.setLayout(new BoxLayout(mGameListPanel,
 				BoxLayout.Y_AXIS));
-			//mPlayList = new JTable();
-			//final JScrollPane playListPanel = new JScrollPane(mPlayList);
 			
-			mPlayerList = new JTable(new DefaultTableModel(new Object[]{"Email"}, 0){
+			mPlayerList = new JTable(new DefaultTableModel(new Object[]{"Jugadores disponibles"}, 0){
 				 @Override
 				    public boolean isCellEditable (int fila, int columna) {
 				        return false;
 				 }
 			});		
-
+			
+			DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+	            @Override
+	            public Component getTableCellRendererComponent(JTable table, Object
+	                value, boolean isSelected, boolean hasFocus, int row, int column) {
+	                super.getTableCellRendererComponent(
+	                    table, value, isSelected, hasFocus, row, column);
+	                setForeground(Color.blue);
+	                setHorizontalAlignment(JLabel.CENTER);
+	                return this;
+	            }
+	        };
 			
 			mPlayerList.setBackground(Color.WHITE);
+			mPlayerList.setFont(new Font("Dialog", Font.BOLD, 16));
+			mPlayerList.setForeground(Color.BLUE);
+			mPlayerList.getColumnModel().getColumn(0).setCellRenderer(r);
+			mPlayerList.getTableHeader().setFont(new Font( "FreeSans" , Font.BOLD, 17 ));
+			
+			mPlayerList.setRowHeight(25);
 			final JScrollPane playerListPanel = new JScrollPane(mPlayerList);
 
-//			mPlayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			mPlayerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//			final GameListObserver listObserver = new GameListObserver(this);
-
-//			mPlayerList.getSelectionModel().addListSelectionListener(listObserver);
-//			mPlayList.getSelectionModel().addListSelectionListener(listObserver);
-
-			mGameListPanel.add(new JLabel("Jugadores disponibles"));
 			mGameListPanel.add(playerListPanel);
-//			mGameListPanel.add(new JLabel("Partidas Abiertas"));
-//			mGameListPanel.add(playListPanel);
 		}
 		return mGameListPanel;
 	}
-	
-	//Miniclase que captura los cambios en las listas de partidas
-//		private class GameListObserver implements ListSelectionListener {
-//			private final PlayerListWindow win;
-//
-//			public GameListObserver(PlayerListWindow win) {
-//				this.win = win;
-//			}
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent arg0) {
-//				win.joinGameButton.setEnabled(mPlayerList.getSelectedRow() != -1);
-//			}
-//			
-//		}
-
-	
-
-	
-	private class UpdateListMouseAdapter extends MouseAdapter {
-		@Override
-		public void mouseClicked(MouseEvent evt) {
-
-		}
-	}
-	
+			
 	private class CreateGameMouseAdapter extends MouseAdapter {
 		PlayerListWindow win;
 		public CreateGameMouseAdapter(PlayerListWindow win) {
