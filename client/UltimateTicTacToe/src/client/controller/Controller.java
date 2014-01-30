@@ -39,7 +39,18 @@ public class Controller implements IController {
 		try {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
-		} catch (RemoteException e) {
+		}catch (MovimientoNoValidoException e1){
+			;
+		}catch (NoTienesElTurnoException e2) {
+			// TODO: handle exception
+			;
+		}catch (TableroLlenoException e3){
+			//finalizamos la partida hacia el otro clietne: implementar operacion en icliente, la partida se ha acabado
+			;
+		}catch (PartidaFinalizadaException  e4) {
+			//avisamos al otro cliente que hemoss ganado la partida
+			;
+		}catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -106,7 +117,7 @@ public class Controller implements IController {
 
 	@Override
 	public void setJuego(IJuego juego) {
-		if (this.juego == null) this.juego =juego;
+		this.juego =juego;
 	}
 
 	@Override

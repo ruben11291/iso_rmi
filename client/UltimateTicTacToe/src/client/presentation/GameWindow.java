@@ -88,7 +88,7 @@ public class GameWindow extends JFrame implements IJuego {
 	private void initGUI(String retador, String retado) {
 		
 		this.setResizable(false);
-		this.setTitle("Ultimate Tic-Tac-Toe - GAME");
+		this.setTitle("Ultimate Tic-Tac-Toe - GAME  Player "+retado);
 		this.setSize(980, 730);
 
 		StartupPanel = new JPanel();

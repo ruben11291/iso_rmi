@@ -34,10 +34,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	protected Server() throws RemoteException, UnknownHostException {
 		super();
-		//this.ip="localhost";
+//		this.ip="localhost";
 		this.ip = InetAddress.getLocalHost().getHostAddress();
 		//System.out.println(ip);
-		this.puerto=3001;
+		this.puerto=3002;
 		this.fachada=FTERD.get();
 		this.stubs = new Hashtable <String, ICliente>();
 	}

@@ -54,6 +54,8 @@ public class FTERD {
 	}
 
 	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
+		System.out.println((tablero.getJugadorA()== null));
+		System.out.println((tablero.getJugadorB()== null));
 		if (email.equals(this.tablero.getJugadorA().getEmail())) 
 			this.tablero.getJugadorA().poner(cT, fT, cC, fC);
 		else 
@@ -127,8 +129,13 @@ public class FTERD {
 		Jugador j2 = new Jugador(retado,"");
 		tablero.setJugadorA(j1);
 		tablero.setJugadorB(j2);
+		j1.setTablero(tablero);
+		j2.setTablero(tablero);
 		tablero.setJugadorConelTurno(j1);
 		this.tablero = tablero;
+		j1.setTablero(tablero);
+		j2.setTablero(tablero);
+
 	}
 	
 	//Metodo que se llama cuando se recibe por parte del servidor un inicio de partida.
