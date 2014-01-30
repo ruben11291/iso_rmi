@@ -98,6 +98,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	// Para cerrar sesion
 	public void delete(String email) throws RemoteException {
+		System.out.println("Abandona "+ email);
 		this.fachada.delete(email);
 		this.stubs.remove(email);
 		this.abandonoPartida(email);
