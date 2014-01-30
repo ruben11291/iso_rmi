@@ -5,4 +5,5 @@ public interface IJuego {
 	public void hayGanador(int jugador);
 	public void cerrar();
 	public void cerrarPorAbandonoOponente();
+	public void cambiarTurno();
 }
