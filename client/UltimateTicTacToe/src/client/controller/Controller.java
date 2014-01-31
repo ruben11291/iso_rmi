@@ -44,13 +44,15 @@ public class Controller implements IController {
 			;
 		}catch (NoTienesElTurnoException e2) {
 			// TODO: handle exception
-			;
+			System.out.println("NO TIENEES EL TULNO");
 		}catch (TableroLlenoException e3){
 			//finalizamos la partida hacia el otro clietne: implementar operacion en icliente, la partida se ha acabado
-			;
+			System.out.println("TABLELO LLENOL");
+
 		}catch (PartidaFinalizadaException  e4) {
 			//avisamos al otro cliente que hemoss ganado la partida
-			;
+			System.out.println("END OF GAME");
+
 		}catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

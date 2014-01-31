@@ -1095,7 +1095,8 @@ public class GameWindow extends JFrame implements IJuego {
 	}
 	//Evento para pintar las fichas, primero se mira si ya se ha pinchado sobre esa casilla
 	 private void FichaMouseClicked(java.awt.event.MouseEvent e, JLabel j) {
-		int cTableroG,fTableroG, cTableroP, fTableroP;
+		System.out.println("COMPROBAR MOVIMIENTO VALIDO");
+		 int cTableroG,fTableroG, cTableroP, fTableroP;
 		cTableroG = this.coordenadas.get(j).getx() % 3;
 		fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
 		cTableroP = this.coordenadas.get(j).gety() % 3 ;
@@ -1131,6 +1132,7 @@ public class GameWindow extends JFrame implements IJuego {
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		else
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+		this.cambiarTurno();
 	}
 
 	public void cambiarTurno() {

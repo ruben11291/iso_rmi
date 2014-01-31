@@ -26,7 +26,7 @@ public class Jugador {
 	}
 
 	public void poner(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
-		
+		System.out.println("Jugador ha puesto "+this.email);
 		if(this.tablero == null)
 			throw new NoEstaJugandoException(email);
 		

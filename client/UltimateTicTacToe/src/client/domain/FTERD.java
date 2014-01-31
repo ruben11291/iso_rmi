@@ -55,6 +55,7 @@ public class FTERD {
 
 	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
 		System.out.println("Poner de la fachada");
+		System.out.println(email);
 		if (email.equals(this.tablero.getJugadorA().getEmail())) 
 			this.tablero.getJugadorA().poner(cT, fT, cC, fC);
 		else 
@@ -95,6 +96,7 @@ public class FTERD {
 		try {
 			Controller cntrl = Controller.get();
 			cntrl.ponerMovimientoEnemigo(realizaMov, cT, fT, cC, fC);
+			this.tablero.cambiarTurno();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

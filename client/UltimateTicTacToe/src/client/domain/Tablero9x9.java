@@ -113,6 +113,7 @@ public class Tablero9x9 {
 	
 	
 	public void colocar(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
+		System.out.println("Tablero colocar");
 		if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
 			throw new CoordenadasNoValidasException(cT, fT, cC, fC);
 		if (this.last_cC != cT && this.last_fC != fT && this.last_cT != -1)
@@ -123,6 +124,7 @@ public class Tablero9x9 {
 		if (this.vencedor != null)
 			throw new PartidaFinalizadaException(this.vencedor);
 		
+		System.out.println("ANTES DE MOVIMIENTO");
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
 		tablerillo.colocar(cC, fC, this.ultimoValor*-1);
 		tablerillo.comprobarVencedor(this.jugadorA, this.jugadorB);
@@ -130,15 +132,21 @@ public class Tablero9x9 {
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
 		this.ultimoValor =- this.ultimoValor;
 		
-		if (this.jugadorConElTurno.equals(this.jugadorA))
-			this.jugadorConElTurno = this.jugadorB;
-		else
-			this.jugadorConElTurno = this.jugadorA;
+		System.out.println("ANTES DE JUGADOR CON EL TURNO");
+
+		this.cambiarTurno();
 	}
 
 	public void setJugadorConelTurno(Jugador jugador) {
 		this.jugadorConElTurno = jugador;
 		
+	}
+	
+	public void cambiarTurno(){
+		if (this.jugadorConElTurno.equals(this.jugadorA))
+			this.jugadorConElTurno = this.jugadorB;
+		else
+			this.jugadorConElTurno = this.jugadorA;
 	}
 
 	public void setJugadorA(Jugador a) {
