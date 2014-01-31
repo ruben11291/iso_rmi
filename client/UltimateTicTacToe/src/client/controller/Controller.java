@@ -1,17 +1,8 @@
 package client.controller;
 
 import java.awt.Window;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Vector;
-
 import client.domain.FTERD;
 import client.exceptions.*;
 import client.presentation.*;
@@ -35,7 +26,7 @@ public class Controller implements IController {
 	}
 		
 	
-	public void comprobarMovimientoValido(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
+	public void ponerMovimiento(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
 		System.out.println("Comprobar movimiento válido");
 		try {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
@@ -55,18 +46,20 @@ public class Controller implements IController {
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (PartidaFinalizadaException  e5) {
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
-
+			this.juego.hayGanador(this.modelo.getEmailJugador());
 		}catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	// TODO: Capturar las excepciones de partida finalizada  y tablero lleno
+	@Override
 	public void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC, int fC) {
-		System.out.println("Esto está mal: " + this.modelo.getEmailJugador());
 		juego.ponerFicha(realizaMov, cT, fT, cC, fC);
 	}
 	
+	@Override
 	public void enviarDatosLogin(String email, String passwd) {
 		boolean error = true;
 		try{
@@ -85,7 +78,7 @@ public class Controller implements IController {
 		}
 		
 	}
-	
+	@Override
 	public void enviarDatosRegistro(String email, String passwd) {
 		boolean error = true;
 		try {
@@ -102,7 +95,7 @@ public class Controller implements IController {
 	public void enviarListaJugadores(Vector<String> jugadores) {
 		lista.recibirRespuestaLista(jugadores);
 	}
-	
+	@Override
 	public void retarJugador(String oponente) {
 		try {
 			modelo.retar(oponente);
@@ -111,7 +104,7 @@ public class Controller implements IController {
 			e.printStackTrace();
 		}
 	}
-	
+	@Override
 	public void setRegistro(IRegistro registro) {
 		this.registro = registro;
 	}
@@ -195,6 +188,19 @@ public class Controller implements IController {
 	public void avisoCerrarSesion() {
 		// TODO Auto-generated method stub
 		this.login.avisoCerrarSesion();
+	}
+
+
+	@Override
+	public void tableroGanadoPorOponente(String email, int getcT, int getfT) {
+		this.juego.tableroGanado(email, getcT, getfT);
+	}
+	
+	@Override
+	public void partidaGanadaPorOponente(String email) {
+		// TODO Auto-generated method stub
+		this.juego.hayGanador(email);
+
 	}
 
 

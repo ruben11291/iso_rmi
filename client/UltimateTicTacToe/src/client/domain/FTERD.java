@@ -56,13 +56,45 @@ public class FTERD {
 	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException, TableroGanadoException {
 		System.out.println("Poner de la fachada");
 		System.out.println(email);
-		if (email.equals(this.tablero.getJugadorA().getEmail())) 
-			this.tablero.getJugadorA().poner(cT, fT, cC, fC);
-		else 
-			this.tablero.getJugadorB().poner(cT, fT, cC, fC);
-		proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+		try{
+			if (email.equals(this.tablero.getJugadorA().getEmail())) 
+				this.tablero.getJugadorA().poner(cT, fT, cC, fC);
+			else 
+				this.tablero.getJugadorB().poner(cT, fT, cC, fC);	
+			//Si no se produce exception se trata normal
+			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+			
+		//Si al realizar el movimiento se produce una de las siguientes excepciones se le envia al oponente
+			//el movimiento  y se vuelve a lanzar la excepcion
+		}catch(PartidaFinalizadaException  | TableroGanadoException e){
+			System.out.println(e.toString());
+			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+			throw e;
+		}
 	}
 
+	public void recibirMovimientoOponente(String realizaMov, int cT, int fT, int cC, int fC) {
+			Controller cntrl=null;
+			try{
+				cntrl = Controller.get();
+				cntrl.ponerMovimientoEnemigo(realizaMov, cT, fT, cC, fC);
+				this.tablero.colocar(cT, fT, cC, fC);
+			}catch ( TableroGanadoException e1) {
+				try {
+					cntrl = Controller.get();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				cntrl.tableroGanadoPorOponente(e1.getEmail(),e1.getcT(),e1.getfT());
+				
+			}catch(PartidaFinalizadaException e2){
+				cntrl.partidaGanadaPorOponente(realizaMov);
+			}catch (Exception e) {
+				System.out.print("Excepcion no identificada");
+			}
+	}
+	
 	public void retar(String oponente) throws RemoteException {
 		this.retosSolicitados.add(oponente);
 		proxy.retar(this.jugador.getEmail(), oponente);
@@ -92,16 +124,7 @@ public class FTERD {
 		}
 	}
 
-	public void recibirMovimientoOponente(String realizaMov, int cT, int fT, int cC, int fC) {
-		try {
-			Controller cntrl = Controller.get();
-			cntrl.ponerMovimientoEnemigo(realizaMov, cT, fT, cC, fC);
-			this.tablero.colocar(cT, fT, cC, fC);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	
 	//Metodo que se llama cuando un cliente recibe la respuesta a su solicitud de reto
 	public void respuestaAPeticionDeReto(String retador, String retado,

@@ -9,7 +9,7 @@ import client.exceptions.*;
 import client.presentation.*;
 
 public interface IController {
-	public void comprobarMovimientoValido(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException;
+	public void ponerMovimiento(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException;
 	public void enviarDatosLogin(String email, String passwd);
 	public void enviarDatosRegistro(String email, String passwd);
 	public void enviarListaJugadores(Vector<String> jugadores);
@@ -26,4 +26,8 @@ public interface IController {
 	public void avisoCerrarSesion();
 	public void respuestaReto(String retador, String retado, boolean respuesta);
 	public void iniciarPartida(String retador, String retado);
+	void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC,
+			int fC);
+	void tableroGanadoPorOponente(String email, int getcT, int getfT);
+	void partidaGanadaPorOponente(String email);
 }

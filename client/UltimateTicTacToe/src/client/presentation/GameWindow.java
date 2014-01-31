@@ -7,10 +7,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Hashtable;
-import java.util.Random;
-import java.util.ResourceBundle.Control;
-
-import javax.print.attribute.HashAttributeSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,9 +27,7 @@ public class GameWindow extends JFrame implements IJuego {
 	private static final long serialVersionUID = -5128501222928885944L;
 
 	private JPanel StartupPanel;
-	private Random a= new Random();
 	private JLabel mapLabel;
-	private java.util.ArrayList<JLabel> pulsaciones = new java.util.ArrayList<JLabel>();
 
 	private JLabel F1, F2, F3, F4, F5, F6, F7, F8, F9; //TABLERO GLOBAL
 	
@@ -79,7 +73,6 @@ public class GameWindow extends JFrame implements IJuego {
 			cntrl = Controller.get();
 			cntrl.setJuego(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		this.initGUI(self, retador, retado);
@@ -1113,7 +1106,7 @@ public class GameWindow extends JFrame implements IJuego {
 		try {
 			Controller cntrl;
 			cntrl = Controller.get();
-			cntrl.comprobarMovimientoValido(cTableroG, fTableroG, cTableroP, fTableroP);
+			cntrl.ponerMovimiento(cTableroG, fTableroG, cTableroP, fTableroP);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -1121,15 +1114,13 @@ public class GameWindow extends JFrame implements IJuego {
 		
 		System.out.println(this.coordenadas.get(j).toString());
 		System.out.println("cTG : "+cTableroG+" fTG : "+fTableroG+" cTp: "+cTableroP+ " fTp : "+fTableroP);
-		//this.tableroJuego[][]
 		 
-		// pulsaciones.add(j);
 	 }
 
 	@Override
-	public void hayGanador(int jugador) {
+	public void hayGanador(String email) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("GANADOR : "+email);
 	}
 
 	@Override
@@ -1153,13 +1144,7 @@ public class GameWindow extends JFrame implements IJuego {
 		}		
 	}
 	
-//	@Override
-//	public void cerrar() {
-//		JOptionPane.showMessageDialog(null, "El oponente ha abandonado la partida");
-//		
-//		this.dispose();
-//	}
-	
+
 	@Override
 	public void cerrar() {
 		this.dispose();
