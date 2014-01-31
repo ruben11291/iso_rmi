@@ -41,13 +41,13 @@ public class Controller implements IController {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (MovimientoNoValidoException e1){
-			;
+			System.out.println("MOVIMIENTO NO VÁLIDO");
 		}catch (NoTienesElTurnoException e2) {
 			// TODO: handle exception
 			System.out.println("NO TIENEES EL TULNO");
-		}catch (TableroLlenoException e3){
+		}catch (CasillaOcupadaException e3){
 			//finalizamos la partida hacia el otro clietne: implementar operacion en icliente, la partida se ha acabado
-			System.out.println("TABLELO LLENOL");
+			System.out.println("CASILLA OCUPADA ILLO");
 
 		}catch (PartidaFinalizadaException  e4) {
 			//avisamos al otro cliente que hemoss ganado la partida
