@@ -1177,7 +1177,6 @@ public class GameWindow extends JFrame implements IJuego {
 			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		else
 			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
-		this.cambiarTurno();
 	}
 
 }
