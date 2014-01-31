@@ -7,7 +7,7 @@ public class Tablero3x3 {
 	}
 
 	private Casilla[][] casillas;
-	private Jugador vencedor;	
+	private String vencedor;	
 	
 	
 	public Tablero3x3(){
@@ -17,7 +17,7 @@ public class Tablero3x3 {
 				this.casillas[col][fila] = new Casilla();
 			}
 		}
-		this.vencedor = null;		
+		this.vencedor = "";	
 	}
 
 	public void colocar(int cC, int fC, int valor){
@@ -39,13 +39,13 @@ public class Tablero3x3 {
 
 	public boolean hayVencedor() {
 		boolean hay = false;
-		if (this.vencedor != null)
+		if (!this.vencedor.equals(""))
 			hay = true;
 		return hay;
 	}
 	
-	public void comprobarVencedor(Jugador a, Jugador b) {
-		Jugador vencedor = null;
+	public void comprobarVencedor(String a, String b) {
+		String vencedor = "";
 		if (!hayVencedor()) {
 			for (int i = 0; i < 3; i++) {
 				// Comprueba si hay alguna combinación ganadora vertical
@@ -69,7 +69,7 @@ public class Tablero3x3 {
 				}
 			}
 			// Comprueba si hay alguna combinación ganadora diagonal
-			if (vencedor == null) {
+			if (vencedor.equals("")) {
 				if (this.casillas[0][0].getValor() == this.casillas[1][1].getValor()
 					&& this.casillas[1][1].getValor() == this.casillas[2][2].getValor()
 					&& this.casillas[2][2].getValor() != 0) {
@@ -90,11 +90,11 @@ public class Tablero3x3 {
 		setVencedor(vencedor);
 	}
 	
-	public Jugador getVencedor() {
+	public String getVencedor() {
 		return this.vencedor;
 	}
 	
-	private void setVencedor(Jugador w) {
+	private void setVencedor(String w) {
 		this.vencedor = w;
 	}
 	
