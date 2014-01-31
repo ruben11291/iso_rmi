@@ -1172,8 +1172,12 @@ public class GameWindow extends JFrame implements IJuego {
 	}
 
 	@Override
-	public void tableroGanado(String email, int getcT, int getfT) {
-		// TODO 
+	public void tableroGanado(String email, int col, int fila) {
+		if (email.equals(this.ply1name.getText()))
+			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
+		else
+			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+		this.cambiarTurno();
 	}
 
 }
