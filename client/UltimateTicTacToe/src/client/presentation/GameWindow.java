@@ -183,7 +183,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[0][7]);
 			}
 		});
-		tableroJuego[0][7].setBounds(109, 312, 53, 54);
+		tableroJuego[0][7].setBounds(109, 256, 55, 50);
 		StartupPanel.add(tableroJuego[0][7]);
 		this.coordenadas.put(tableroJuego[0][7], new Coordenada(0,7));
 		
@@ -403,7 +403,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][1]);
 			}
 		});
-		tableroJuego[3][1].setBounds(109, 256, 55, 50);
+		tableroJuego[3][1].setBounds(109, 312, 53, 54);
 		StartupPanel.add(tableroJuego[3][1]);
 		this.coordenadas.put(tableroJuego[3][1], new Coordenada(3,1));
 
@@ -1095,7 +1095,8 @@ public class GameWindow extends JFrame implements IJuego {
 	}
 	//Evento para pintar las fichas, primero se mira si ya se ha pinchado sobre esa casilla
 	 private void FichaMouseClicked(java.awt.event.MouseEvent e, JLabel j) {
-		System.out.println("COMPROBAR MOVIMIENTO VALIDO");
+		 System.out.println(this.coordenadas.get(j).toString());
+		 System.out.println("COMPROBAR MOVIMIENTO VALIDO");
 		 int cTableroG,fTableroG, cTableroP, fTableroP;
 		cTableroG = this.coordenadas.get(j).getx() % 3;
 		fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
