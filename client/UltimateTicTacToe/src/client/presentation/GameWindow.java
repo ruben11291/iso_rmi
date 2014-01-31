@@ -1164,6 +1164,11 @@ public class GameWindow extends JFrame implements IJuego {
 		this.dispose();
 	}
 
+	@Override
+	public void tableroGanado(String email, int getcT, int getfT) {
+		// TODO 
+	}
+
 }
 
 class CerrarJuegoThread extends Thread {

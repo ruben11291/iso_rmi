@@ -6,4 +6,5 @@ public interface IJuego {
 	public void cerrar();
 	public void cerrarPorAbandonoOponente();
 	public void cambiarTurno();
+	public void tableroGanado(String email, int getcT, int getfT);
 }

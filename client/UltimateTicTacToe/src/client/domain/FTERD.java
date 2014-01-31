@@ -53,7 +53,7 @@ public class FTERD {
 		}
 	}
 
-	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException {
+	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException, TableroGanadoException {
 		System.out.println("Poner de la fachada");
 		System.out.println(email);
 		if (email.equals(this.tablero.getJugadorA().getEmail())) 
