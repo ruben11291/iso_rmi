@@ -118,7 +118,7 @@ public class Tablero9x9 {
 			throw new CoordenadasNoValidasException(cT, fT, cC, fC);
 		System.out.println("Columna tablero peq. anterior: " + last_cC + ". Fila tablero peq. anterior: " + last_fC + ". Columna tablero grande actual: " + cT + ". Fila tabler ogrande actual: " + fT);
 		if (this.last_fC != -1)
-			if ((this.last_cC != cT && this.last_fC != fT))
+			if ((this.last_cC != cT || this.last_fC != fT))
 				if (!this.tablerillos[this.last_cC][this.last_fC].isFull())
 					throw new MovimientoNoValidoException(cT, fT, cC, fC);
 		if (this.tablerillos[cT][fT].isFull())
