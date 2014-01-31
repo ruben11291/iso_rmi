@@ -38,7 +38,7 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel F1, F2, F3, F4, F5, F6, F7, F8, F9; //TABLERO GLOBAL
 	
 	
-	private JLabel [][] tableroGlobal = {{F1, F2, F3},{F4, F5, F6},{F7, F8, F9}};
+	private JLabel [][] tableroGlobal =  new JLabel[3][3];
 	
 	private class Coordenada{
 		private int x;
@@ -1027,40 +1027,47 @@ public class GameWindow extends JFrame implements IJuego {
 		F1 = new JLabel();
 		F1.setBounds(667, 413, 78, 76);
 		StartupPanel.add(F1);
-		
+		this.tableroGlobal[0][0] = F1;
 		F2 = new JLabel();
 		F2.setBounds(759, 413, 78, 76);
 		StartupPanel.add(F2);
-		
+		this.tableroGlobal[0][1] = F2;
+
 		F3 = new JLabel();
 		F3.setBounds(846, 413, 78, 76);
 		StartupPanel.add(F3);
-		
+		this.tableroGlobal[0][2] = F3;
+
 		F4 = new JLabel();
 		F4.setBounds(667, 501, 78, 79);
 		StartupPanel.add(F4);
-		
+		this.tableroGlobal[1][0] = F4;
+
 		F5 = new JLabel();
 		F5.setBounds(759, 501, 78, 79);
 		StartupPanel.add(F5);
-		
+		this.tableroGlobal[1][1] = F5;
+
 		F6 = new JLabel();
 		F6.setBounds(846, 506, 78, 74);
 		StartupPanel.add(F6);
-		
+		this.tableroGlobal[1][2] = F6;
+
 		F7 = new JLabel();
 		F7.setBounds(667, 592, 78, 81);
 		StartupPanel.add(F7);
-		
+		this.tableroGlobal[2][0] = F7;
+
 		F8 = new JLabel();
 		F8.setBounds(759, 592, 78, 81);
 		StartupPanel.add(F8);
-		
+		this.tableroGlobal[2][1] = F8;
+
 		F9 = new JLabel();
 		F9.setBounds(846, 592, 78, 81);
 		StartupPanel.add(F9);
-		
-		
+		this.tableroGlobal[2][2] = F9;
+
 		
 		minimapLabel = new JLabel();
 		minimapLabel.setIcon(new ImageIcon(GameWindow.class.getResource("/image/miniboard.png")));
