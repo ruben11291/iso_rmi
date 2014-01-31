@@ -60,8 +60,8 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	
 	
 	@Override
-	public void poner(int idPartida,int cT, int fT, int cC, int fC) throws RemoteException {
-		this.fachada.recibirMovimientoOponente(cT, fT, cC, fC);
+	public void poner(int idPartida, String realizaMov, int cT, int fT, int cC, int fC) throws RemoteException {
+		this.fachada.recibirMovimientoOponente(realizaMov, cT, fT, cC, fC);
 	}
 
 

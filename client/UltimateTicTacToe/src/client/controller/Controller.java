@@ -57,8 +57,9 @@ public class Controller implements IController {
 		}
 	}
 	
-	public void ponerMovimientoEnemigo(int cT, int fT, int cC, int fC) {
-		juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
+	public void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC, int fC) {
+		System.out.println("Esto está mal: " + this.modelo.getEmailJugador());
+		juego.ponerFicha(realizaMov, cT, fT, cC, fC);
 	}
 	
 	public void enviarDatosLogin(String email, String passwd) {

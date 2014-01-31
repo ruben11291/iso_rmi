@@ -90,7 +90,7 @@ public class ClienteParaTest extends UnicastRemoteObject implements ICliente {
 	}
 
 	@Override
-	public void poner(int arg0, int arg1, int arg2, int arg3, int arg4)
+	public void poner(int arg0, String arg1, int arg2, int arg3, int arg4, int arg5)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		

@@ -91,10 +91,10 @@ public class FTERD {
 		}
 	}
 
-	public void recibirMovimientoOponente(int cT, int fT, int cC, int fC) {
+	public void recibirMovimientoOponente(String realizaMov, int cT, int fT, int cC, int fC) {
 		try {
 			Controller cntrl = Controller.get();
-			cntrl.ponerMovimientoEnemigo(cT, fT, cC, fC);
+			cntrl.ponerMovimientoEnemigo(realizaMov, cT, fT, cC, fC);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
