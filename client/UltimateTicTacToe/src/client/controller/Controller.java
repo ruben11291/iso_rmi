@@ -48,8 +48,9 @@ public class Controller implements IController {
 		}catch (CasillaOcupadaException e3){
 			//finalizamos la partida hacia el otro clietne: implementar operacion en icliente, la partida se ha acabado
 			System.out.println("CASILLA OCUPADA ILLO");
-
-		}catch (PartidaFinalizadaException  e4) {
+		}catch (TableroGanadoException e4) {
+			this.juego.tableroGanado(e4.getEmail(), e4.getcT(), e4.getfT());
+		}catch (PartidaFinalizadaException  e5) {
 			//avisamos al otro cliente que hemoss ganado la partida
 			System.out.println("END OF GAME");
 

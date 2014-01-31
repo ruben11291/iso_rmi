@@ -4,6 +4,7 @@ import client.exceptions.CasillaOcupadaException;
 import client.exceptions.CoordenadasNoValidasException;
 import client.exceptions.MovimientoNoValidoException;
 import client.exceptions.PartidaFinalizadaException;
+import client.exceptions.TableroGanadoException;
 import client.exceptions.TableroLlenoException;
 
 public class Tablero9x9 {
@@ -113,7 +114,7 @@ public class Tablero9x9 {
 		this.vencedor = w;
 	}
 	
-	public void comprobarMovimiento(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException {
+	public void comprobarMovimiento(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, MovimientoNoValidoException, CasillaOcupadaException {
 		System.out.println("Tablero colocar");
 		if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
 			throw new CoordenadasNoValidasException(cT, fT, cC, fC);
@@ -125,22 +126,24 @@ public class Tablero9x9 {
 				if (!this.tablerillos[this.last_cC][this.last_fC].isFull())
 					throw new MovimientoNoValidoException(cT, fT, cC, fC);
 		// TODO: COMPROBAR SI SE HAN LLENADO TODOS LOS TABLEROS
-		if (this.vencedor != null)
-			throw new PartidaFinalizadaException(this.vencedor);
 		
 	}
 	
-	public void colocar(int cT, int fT, int cC, int fC) {
-		System.out.println("ANTES DE MOVIMIENTO");
+	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException {
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
 		tablerillo.colocar(cC, fC, this.ultimoValor*-1);
 		tablerillo.comprobarVencedor(this.jugadorA, this.jugadorB);
 		
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
 		this.ultimoValor =- this.ultimoValor;
-		
-		System.out.println("ANTES DE JUGADOR CON EL TURNO");
 
+		if (tablerillo.getVencedor() != null) {
+			this.comprobarVencedor(this.jugadorA, this.jugadorB);
+			if (this.vencedor != null)
+				throw new PartidaFinalizadaException(this.vencedor.getEmail());
+			throw new TableroGanadoException(tablerillo.getVencedor().getEmail(), cT, fT);
+		}
+			
 		this.cambiarTurno();
 	}
 
