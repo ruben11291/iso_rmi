@@ -39,6 +39,7 @@ public class Controller implements IController {
 		System.out.println("Comprobar movimiento válido");
 		try {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
+			// TODO: EL OPONENTE NO RECIBE EL MOVIMIENTO
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (MovimientoNoValidoException e1){
 			System.out.println("MOVIMIENTO NO VÁLIDO");
@@ -49,10 +50,11 @@ public class Controller implements IController {
 			//finalizamos la partida hacia el otro clietne: implementar operacion en icliente, la partida se ha acabado
 			System.out.println("CASILLA OCUPADA ILLO");
 		}catch (TableroGanadoException e4) {
+			System.out.println("Excepción: " + e4.getEmail() + " " + e4.getcT() + " " + e4.getfT());
 			this.juego.tableroGanado(e4.getEmail(), e4.getcT(), e4.getfT());
+			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (PartidaFinalizadaException  e5) {
-			//avisamos al otro cliente que hemoss ganado la partida
-			System.out.println("END OF GAME");
+			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 
 		}catch (RemoteException e) {
 			// TODO Auto-generated catch block
