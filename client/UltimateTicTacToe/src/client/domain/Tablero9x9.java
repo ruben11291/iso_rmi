@@ -24,6 +24,7 @@ public class Tablero9x9 {
 		}
 		this.jugadorA= null;
 		this.jugadorB = null;
+		this.last_cT = this.last_fT = this.last_cC = this.last_fC = -1;
 	}
 
 	public Tablero9x9(int idPartida) {
@@ -37,7 +38,7 @@ public class Tablero9x9 {
 		}
 		this.jugadorA= null;
 		this.jugadorB = null;
-		
+		this.last_cT = this.last_fT = this.last_cC = this.last_fC = -1;
 	}
 
 	public void setId(int id){
@@ -111,19 +112,23 @@ public class Tablero9x9 {
 		this.vencedor = w;
 	}
 	
-	
-	public void colocar(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
+	public void comprobarMovimiento(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException {
 		System.out.println("Tablero colocar");
 		if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
 			throw new CoordenadasNoValidasException(cT, fT, cC, fC);
-		if (this.last_cC != cT && this.last_fC != fT && this.last_cT != -1)
-			if (!this.tablerillos[this.last_cC][this.last_fC].isFull())
-				throw new MovimientoNoValidoException(cT, fT, cC, fC);
+		System.out.println("Columna tablero peq. anterior: " + last_cC + ". Fila tablero peq. anterior: " + last_fC + ". Columna tablero grande actual: " + cT + ". Fila tabler ogrande actual: " + fT);
+		if (this.last_fC != -1)
+			if ((this.last_cC != cT && this.last_fC != fT))
+				if (!this.tablerillos[this.last_cC][this.last_fC].isFull())
+					throw new MovimientoNoValidoException(cT, fT, cC, fC);
 		if (this.tablerillos[cT][fT].isFull())
 			throw new TableroLlenoException(cT, fT, cC, fC);
 		if (this.vencedor != null)
 			throw new PartidaFinalizadaException(this.vencedor);
 		
+	}
+	
+	public void colocar(int cT, int fT, int cC, int fC) {
 		System.out.println("ANTES DE MOVIMIENTO");
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
 		tablerillo.colocar(cC, fC, this.ultimoValor*-1);

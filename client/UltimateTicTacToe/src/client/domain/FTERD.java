@@ -96,7 +96,7 @@ public class FTERD {
 		try {
 			Controller cntrl = Controller.get();
 			cntrl.ponerMovimientoEnemigo(realizaMov, cT, fT, cC, fC);
-			this.tablero.cambiarTurno();
+			this.tablero.colocar(cT, fT, cC, fC);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

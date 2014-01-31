@@ -33,6 +33,7 @@ public class Jugador {
 		if(this.tablero.getJugadorConElTurno() != this)
 			throw new NoTienesElTurnoException();
 		
+		this.tablero.comprobarMovimiento(cT, fT, cC, fC);
 		this.tablero.colocar(cT, fT, cC, fC);
 		
 	}
