@@ -2,7 +2,6 @@ package client.domain;
 
 import java.sql.SQLException;
 
-import client.persistence.DAOJugador;
 import client.exceptions.*;
 
 public class Jugador {

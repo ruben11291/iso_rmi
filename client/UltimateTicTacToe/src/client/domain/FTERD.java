@@ -1,16 +1,12 @@
 package client.domain;
 
 import java.rmi.RemoteException;
-import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
 import client.communications.Cliente;
 import client.communications.Proxy;
 import client.controller.Controller;
-import client.exceptions.*;
-import client.persistence.DAOAutenticar;
 import client.exceptions.*;
 
 public class FTERD {
