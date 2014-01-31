@@ -71,7 +71,7 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel turnoPly2;
 
 	
-	public GameWindow(String retador, String retado) {
+	public GameWindow(String self, String retador, String retado) {
 		super();
 		
 		try {
@@ -82,13 +82,13 @@ public class GameWindow extends JFrame implements IJuego {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		this.initGUI(retador, retado);
+		this.initGUI(self, retador, retado);
 	}
 
-	private void initGUI(String retador, String retado) {
+	private void initGUI(String self, String retador, String retado) {
 		
 		this.setResizable(false);
-		this.setTitle("Ultimate Tic-Tac-Toe - GAME  Player "+retado);
+		this.setTitle("Ultimate Tic-Tac-Toe - GAME  Player " + self + ". " + retador + " vs " + retado);
 		this.setSize(980, 730);
 
 		StartupPanel = new JPanel();
@@ -970,12 +970,16 @@ public class GameWindow extends JFrame implements IJuego {
 		StartupPanel.add(tictactoe);
 		
 		player1 = new JLabel();
-		player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
-		player1.setBounds(697, 119, 65, 60);
-		StartupPanel.add(player1);
-		
 		player2 = new JLabel();
-		player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+		if (self.equals(retador)) {
+			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
+			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+		} else {
+			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
+		}
+		player1.setBounds(697, 119, 65, 60);
+		StartupPanel.add(player1);		
 		player2.setBounds(697, 191, 55, 53);
 		StartupPanel.add(player2);
 		

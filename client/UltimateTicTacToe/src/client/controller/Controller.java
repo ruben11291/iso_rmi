@@ -160,7 +160,7 @@ public class Controller implements IController {
 	@Override
 	public void respuestaReto(String retador, String retado, boolean respuesta) {
 		// TODO Auto-generated method stub
-		this.lista.recibirRespuestaReto(retador, retado, respuesta);
+		this.lista.recibirRespuestaReto(this.modelo.getEmailJugador(), retador, retado, respuesta);
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public class Controller implements IController {
 	
 	@Override
 	public void iniciarPartida(String retador, String retado) {
-		this.lista.iniciarPartida(retador, retado);
+		this.lista.iniciarPartida(this.modelo.getEmailJugador(), retador, retado);
 	}
 
 	@Override

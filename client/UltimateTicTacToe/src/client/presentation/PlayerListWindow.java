@@ -285,9 +285,9 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 
 
 	@Override
-	public void recibirRespuestaReto(String retador, String retado, boolean respuesta) {
+	public void recibirRespuestaReto(String self, String retador, String retado, boolean respuesta) {
 		if (respuesta) {
-			iniciarPartida(retador, retado);
+			iniciarPartida(self, retador, retado);
 		} else {
 			System.out.println(retado + " ha rechazado el reto.");
 			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.", "Respuesta reto", JOptionPane.ERROR_MESSAGE);
@@ -307,8 +307,8 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	}
 	
 	@Override
-	public void iniciarPartida(String retador, String retado) {
-		final GameWindow gw = new GameWindow(retador, retado); // TODO
+	public void iniciarPartida(String self, String retador, String retado) {
+		final GameWindow gw = new GameWindow(self, retador, retado); // TODO
 		gw.setLocationRelativeTo(null);
 		gw.setVisible(true);
 	}	
