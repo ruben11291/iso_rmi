@@ -2,6 +2,10 @@ package client.domain;
 
 public class Tablero3x3 {
 	
+	public Casilla[][] getCasillas() {
+		return casillas;
+	}
+
 	private Casilla[][] casillas;
 	private Jugador vencedor;	
 	
