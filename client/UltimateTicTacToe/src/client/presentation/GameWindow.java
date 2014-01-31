@@ -1126,6 +1126,7 @@ public class GameWindow extends JFrame implements IJuego {
 	@Override
 	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {
 		// TODO Auto-generated method stub
+		System.out.println("En poner ficha: " + cT + " " + fT + " " + cC + " " + fC);
 		if (email.equals(this.ply1name.getText()))
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		else

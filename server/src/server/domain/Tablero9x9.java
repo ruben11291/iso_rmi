@@ -89,9 +89,9 @@ public class Tablero9x9 {
 	
 	public Jugador getOpenenteDE(String email){
 		Jugador oponente = null;
-		if (this.jugadorA.equals(email))
+		if (this.jugadorA.getEmail().equals(email))
 			oponente = this.jugadorA;
-		if (this.jugadorB.equals(email))
+		if (this.jugadorB.getEmail().equals(email))
 			oponente = this.jugadorB;
 		return oponente;
 	}

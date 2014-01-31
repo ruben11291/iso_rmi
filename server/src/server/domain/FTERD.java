@@ -80,6 +80,7 @@ public class FTERD {
 
 			Jugador oponente = partida.getOpenenteDE(email);
 			Server s;
+			System.out.println(email);
 			try {
 				s = Server.get();
 				s.enviarMovimientoAOponente(idPartida, oponente.getEmail(), cT, fT, cC, fC);

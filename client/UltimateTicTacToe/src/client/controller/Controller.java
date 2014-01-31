@@ -36,6 +36,7 @@ public class Controller implements IController {
 		
 	
 	public void comprobarMovimientoValido(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
+		System.out.println("Comprobar movimiento válido");
 		try {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);

@@ -159,8 +159,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return this.fachada.getTableros();
 	}
 
-	
+	@Override
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
+		System.out.println("Llega movimiento");
 		this.fachada = FTERD.get();
 		this.fachada.poner(idPartida, email, cT, fT, cC, fC);
 	}
