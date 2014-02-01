@@ -1118,10 +1118,14 @@ public class GameWindow extends JFrame implements IJuego {
 	 }
 
 	@Override
-	public void hayGanador(String email) {
+	public void partidaFinalizada(String email) {
 		System.out.println("GANADOR : "+email);
+		PartidaFinalizadaThread thread = new PartidaFinalizadaThread(email, this);
 		thread.start();
 	}
+
+		 
+
 
 	@Override
 	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {

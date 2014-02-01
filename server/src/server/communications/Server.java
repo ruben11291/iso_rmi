@@ -119,18 +119,22 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void abandonoPartida(String email) {
 		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidaDelJugador(email);
-		//avisar al jugador que su oponente ha cerrado sesion
-		Enumeration<String> emailes=avisarA.keys();
-		while (emailes.hasMoreElements()) {
-			String e = emailes.nextElement();
-			ICliente c = this.stubs.get(e);
-			try {
-				c.OponenteHaAbandonadoPartida();
-			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si también abandona cliente2 entonces
+		//al llegar aquí avisarA será vacio
+		if(avisarA.isEmpty()){
+			//avisar al jugador que su oponente ha cerrado sesion
+			Enumeration<String> emailes=avisarA.keys();
+			while (emailes.hasMoreElements()) {
+				String e = emailes.nextElement();
+				ICliente c = this.stubs.get(e);
+				try {
+					c.OponenteHaAbandonadoPartida();
+				} catch (RemoteException e1) {
+					System.out.println("Error en comunicacion con cliente :" +e);
+					this.stubs.remove(e);//eliminamos de stubs
+				}
+	
 			}
-
 		}
 	}	
 	

@@ -1,7 +1,6 @@
 package client.domain;
 
 import java.rmi.RemoteException;
-import java.util.Hashtable;
 import java.util.Vector;
 
 import client.communications.Cliente;
@@ -10,8 +9,6 @@ import client.controller.Controller;
 import client.exceptions.*;
 
 public class FTERD {
-	
-	private Hashtable<String, Jugador> jugadores;
 	private Jugador jugador;
 	private Tablero9x9 tablero;
 	private Vector<String> retosSolicitados;
@@ -19,7 +16,7 @@ public class FTERD {
 	private Cliente cliente;
 	
 	public FTERD() throws Exception{
-		this.jugadores = new Hashtable<String, Jugador>();
+
 		this.proxy = Proxy.get();
 		this.cliente = new Cliente(this);
 		this.retosSolicitados = new Vector<String>();

@@ -1,8 +1,4 @@
 package client.controller;
-
-import java.awt.Window;
-import java.awt.event.WindowAdapter;
-import java.rmi.RemoteException;
 import java.util.Vector;
 
 import client.exceptions.*;

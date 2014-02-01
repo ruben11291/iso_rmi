@@ -1,6 +1,4 @@
 package client.controller;
-
-import java.awt.Window;
 import java.rmi.RemoteException;
 import java.util.Vector;
 import client.domain.FTERD;

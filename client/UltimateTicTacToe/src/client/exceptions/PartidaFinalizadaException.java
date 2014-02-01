@@ -1,6 +1,5 @@
 package client.exceptions;
 
-import client.domain.Jugador;
 
 public class PartidaFinalizadaException extends Exception {
 	public String getEmail() {

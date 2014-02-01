@@ -5,7 +5,6 @@ import client.exceptions.CoordenadasNoValidasException;
 import client.exceptions.MovimientoNoValidoException;
 import client.exceptions.PartidaFinalizadaException;
 import client.exceptions.TableroGanadoException;
-import client.exceptions.TableroLlenoException;
 
 public class Tablero9x9 {
 

@@ -1,7 +1,5 @@
 package client.domain;
 
-import java.sql.SQLException;
-
 import client.exceptions.*;
 
 public class Jugador {

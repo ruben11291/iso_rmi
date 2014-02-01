@@ -173,13 +173,14 @@ public class FTERD {
 		while(tableros.hasMoreElements()){
 			Tablero9x9 tablero = tableros.nextElement();
 			if (tablero.getJugadorA().getEmail().equals(email)){
-				avisarA.put(tablero.getJugadorB().getEmail(), tablero.getId());			
+				avisarA.put(tablero.getJugadorB().getEmail(), tablero.getId());	
 			}
 			if (tablero.getJugadorB().getEmail().equals(email)){
 				avisarA.put(tablero.getJugadorA().getEmail(), tablero.getId());
 			}
-				
-		}
+			//Como avisarA solo contendra a un jugador entonces solamente se elimina una partida
+			this.tableros.remove(tablero.getId());
+		}	
 		
 		return avisarA;
 	}
