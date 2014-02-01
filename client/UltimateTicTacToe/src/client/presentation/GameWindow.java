@@ -1107,6 +1107,7 @@ public class GameWindow extends JFrame implements IJuego {
 			Controller cntrl;
 			cntrl = Controller.get();
 			cntrl.ponerMovimiento(cTableroG, fTableroG, cTableroP, fTableroP);
+			//this.setMsgNotificacion("Has movido ");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -1117,10 +1118,15 @@ public class GameWindow extends JFrame implements IJuego {
 		 
 	 }
 
+	private void setMsgNotificacion(String string) {
+		this.notification.setText(string);
+	}
+
 	@Override
 	public void hayGanador(String email) {
 		// TODO Auto-generated method stub
 		System.out.println("GANADOR : "+email);
+		this.setMsgNotificacion("Partida ganada por "+email);
 	}
 
 	@Override

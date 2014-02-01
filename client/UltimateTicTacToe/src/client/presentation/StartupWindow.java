@@ -226,8 +226,6 @@ public class StartupWindow extends JFrame implements ILogin {
 
 	@Override
 	public void avisoCerrarSesion() {
-		System.out.println("AVISADO");
-		// TODO Auto-generated method stub
 		this.PasswdField.setText("");
 		this.setVisible(true);
 	}
