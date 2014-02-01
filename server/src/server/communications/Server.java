@@ -121,7 +121,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidaDelJugador(email);
 		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si también abandona cliente2 entonces
 		//al llegar aquí avisarA será vacio
-		if(avisarA.isEmpty()){
+		if(!avisarA.isEmpty()){
 			//avisar al jugador que su oponente ha cerrado sesion
 			Enumeration<String> emailes=avisarA.keys();
 			while (emailes.hasMoreElements()) {
