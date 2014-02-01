@@ -1022,17 +1022,17 @@ public class GameWindow extends JFrame implements IJuego {
 		StartupPanel.add(F1);
 		this.tableroGlobal[0][0] = F1;
 		F2 = new JLabel();
-		F2.setBounds(759, 413, 78, 76);
+		F2.setBounds(667, 501, 78, 79);
 		StartupPanel.add(F2);
 		this.tableroGlobal[0][1] = F2;
 
 		F3 = new JLabel();
-		F3.setBounds(846, 413, 78, 76);
+		F3.setBounds(667, 592, 78, 81);
 		StartupPanel.add(F3);
 		this.tableroGlobal[0][2] = F3;
 
 		F4 = new JLabel();
-		F4.setBounds(667, 501, 78, 79);
+		F4.setBounds(759, 413, 78, 76);
 		StartupPanel.add(F4);
 		this.tableroGlobal[1][0] = F4;
 
@@ -1042,17 +1042,17 @@ public class GameWindow extends JFrame implements IJuego {
 		this.tableroGlobal[1][1] = F5;
 
 		F6 = new JLabel();
-		F6.setBounds(846, 506, 78, 74);
+		F6.setBounds(759, 592, 78, 81);
 		StartupPanel.add(F6);
 		this.tableroGlobal[1][2] = F6;
 
 		F7 = new JLabel();
-		F7.setBounds(667, 592, 78, 81);
+		F7.setBounds(846, 413, 78, 76);
 		StartupPanel.add(F7);
 		this.tableroGlobal[2][0] = F7;
 
 		F8 = new JLabel();
-		F8.setBounds(759, 592, 78, 81);
+		F8.setBounds(846, 506, 78, 74);
 		StartupPanel.add(F8);
 		this.tableroGlobal[2][1] = F8;
 
@@ -1158,7 +1158,7 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void tableroGanado(String email, int col, int fila) {
-		System.out.println("Tablero ganado interfaz: " + this.ply1name.getText() + " " + email);
+		System.out.println("Tablero ganado col[" + col + "] fila[" + fila + "] interfaz: " + this.ply1name.getText() + " " + email);
 		if (email.equals(this.ply1name.getText()))
 			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		else
