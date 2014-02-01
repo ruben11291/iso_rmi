@@ -14,6 +14,7 @@ import server.communications.Server;
 import server.tests.FuncionesAuxiliaresTests;
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
 import client.exportable.communications.ICliente;
 
 public class TestCerrarSesion{
@@ -44,6 +45,8 @@ public class TestCerrarSesion{
 			s.add("camilo", "camilo", cliente1);
 		} catch (RemoteException e) {
 			e.printStackTrace();
+		}catch(JugadorYaRegistradoException e){
+			fail("No se esperaba esta excepcion");
 		} catch (JugadorNoExisteException | JugadorYaExisteException e) {
 			fail("No esperaba esta excepcion");
 			e.printStackTrace();

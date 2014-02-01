@@ -12,6 +12,7 @@ import java.rmi.server.ExportException;
 
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
 import client.exportable.communications.ICliente;
 import server.exportable.communications.IServer;
 
@@ -32,7 +33,7 @@ public class Proxy {
 	
 	//////////// COMUNICACION CON EL SERVIDOR//////////////////
 	//registrar en el sistema
-	public void register(String email, String passwd) throws RemoteException {
+	public void register(String email, String passwd) throws RemoteException,JugadorYaRegistradoException {
 		// TODO Auto-generated method stub
 		server.register(email, passwd);
 	}

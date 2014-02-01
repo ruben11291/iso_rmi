@@ -32,7 +32,7 @@ public class FTERD {
 		this.jugador = new Jugador(email,passwd);
 	}
 	
-	public void registrarJugador(String email, String passwd) throws RemoteException {
+	public void registrarJugador(String email, String passwd) throws RemoteException, JugadorYaRegistradoException {
 		proxy.register(email, passwd);
 	}
 	

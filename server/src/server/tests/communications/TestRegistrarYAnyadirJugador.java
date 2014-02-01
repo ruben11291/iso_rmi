@@ -7,7 +7,6 @@ import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.Vector;
 
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,6 +14,7 @@ import server.communications.Server;
 import server.tests.FuncionesAuxiliaresTests;
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
 import client.exportable.communications.ICliente;
 
 public class TestRegistrarYAnyadirJugador {
@@ -39,7 +39,7 @@ public class TestRegistrarYAnyadirJugador {
 	public void testRegistrarYAnyadirJugador() {
 		try {
 			s.register("camilo", "camilo");
-		} catch (RemoteException e) {
+		} catch (RemoteException | JugadorYaRegistradoException e) {
 			fail("No esperaba RemoteException al registrar jugador");
 			e.printStackTrace();
 		}

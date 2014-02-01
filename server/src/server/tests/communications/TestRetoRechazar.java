@@ -15,6 +15,7 @@ import server.communications.Server;
 import server.tests.FuncionesAuxiliaresTests;
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
 
 public class TestRetoRechazar {
 	
@@ -42,7 +43,7 @@ public class TestRetoRechazar {
 			s.add("keynes", "keynes", retador);
 			s.add("hayek", "hayek", retado);
 
-		} catch (RemoteException | JugadorNoExisteException | JugadorYaExisteException e) {
+		} catch (RemoteException | JugadorNoExisteException | JugadorYaExisteException |JugadorYaRegistradoException e) {
 			fail("No esperaba fallar aquI");
 			e.printStackTrace();
 		}

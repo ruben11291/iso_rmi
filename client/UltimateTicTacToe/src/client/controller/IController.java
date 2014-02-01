@@ -1,4 +1,5 @@
 package client.controller;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 import client.exceptions.*;
@@ -7,7 +8,7 @@ import client.presentation.*;
 public interface IController {
 	public void ponerMovimiento(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException;
 	public void enviarDatosLogin(String email, String passwd);
-	public void enviarDatosRegistro(String email, String passwd);
+	public void enviarDatosRegistro(String email, String passwd) throws JugadorYaRegistradoException, RemoteException;
 	public void enviarListaJugadores(Vector<String> jugadores);
 	public void enviarRespuestaReto(boolean respuesta, String retador);
 	public void retarJugador(String oponente);

@@ -11,12 +11,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
 import client.exportable.communications.ICliente;
 import server.domain.FTERD;
 import server.domain.Jugador;
@@ -139,15 +141,17 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}	
 	
 	///Registar jugador///
-	public void register(String email, String passwd) throws RemoteException {
+	public void register(String email, String passwd) throws RemoteException, JugadorYaRegistradoException {
 		Jugador jugador = new Jugador(email, passwd);
 		try {
 			this.fachada.register(jugador);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLIntegrityConstraintViolationException e) {
+			throw new JugadorYaRegistradoException(email);
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

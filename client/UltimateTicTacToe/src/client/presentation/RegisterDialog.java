@@ -21,6 +21,8 @@ import javax.swing.border.Border;
 import javax.swing.SwingConstants;
 
 import client.controller.Controller;
+import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
 
 public class RegisterDialog extends JDialog implements IRegistro {
 
@@ -133,7 +135,7 @@ public class RegisterDialog extends JDialog implements IRegistro {
 			this.getClass().getClassLoader().getResource(
 			"image/cancel.png")));
 		CancelButton.setBounds(271, 232, 150, 35);
-		CancelButton.addMouseListener(new AcceptDialogMouseAdapter(this, false));
+		CancelButton.addMouseListener(new CancelDialogMouseAdapter(this, false));
 
 		mapLabel = new JLabel();
 		mapLabel.setIcon(new ImageIcon(
@@ -188,16 +190,32 @@ public class RegisterDialog extends JDialog implements IRegistro {
 			dlg.selection = selection;
 			try {
 				dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
-			} catch (Exception e) {
+			} catch (JugadorYaRegistradoException e) {
 				NoticeLabel.setText("El Usuario introducido ya existe");
 				NoticeLabel.setForeground(new Color(200, 0, 0));
 				NoticeLabel.setOpaque(true);
 				NoticeLabel.setBorder(border);
+				
+			}		
+			catch (Exception e) {
 				e.printStackTrace();
-			}			
+			}
 		}
 	}
 
+	private class CancelDialogMouseAdapter extends MouseAdapter {
+
+		private final RegisterDialog dlg;
+
+		public CancelDialogMouseAdapter(RegisterDialog dlg, boolean selection) {
+			this.dlg = dlg;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent evt) {
+			dlg.dispose();
+		}
+	}
 	private class AcceptDialogKeyAdapter extends KeyAdapter {
 		private final RegisterDialog dlg;
 
@@ -209,23 +227,27 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		public void keyPressed(KeyEvent evt) {
 			if (evt.getKeyCode() == 10) {
 				dlg.selection = true;
-				dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
+				try {
+					dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
+				} catch (JugadorYaExisteException e) {
+					
+					e.printStackTrace();
+				}
+				catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 		}
 	}
 	
-	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) {
+	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) throws Exception {
 		boolean valido = false;
 		if (passwd.equals(passwdcheck)) {
 			Controller cntrl;
-			try {
-				cntrl = Controller.get();
-				cntrl.enviarDatosRegistro(email, passwd);
-				valido = true;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			cntrl = Controller.get();
+			cntrl.enviarDatosRegistro(email, passwd);
+			valido = true;
+			
 		} else {
 			NoticeLabel.setText("Las contraseñas no coinciden");
 			NoticeLabel.setForeground(new Color(200,0,0));

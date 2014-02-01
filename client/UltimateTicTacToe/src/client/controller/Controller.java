@@ -1,6 +1,7 @@
 package client.controller;
 import java.rmi.RemoteException;
 import java.util.Vector;
+
 import client.domain.FTERD;
 import client.exceptions.*;
 import client.presentation.*;
@@ -77,16 +78,12 @@ public class Controller implements IController {
 		
 	}
 	@Override
-	public void enviarDatosRegistro(String email, String passwd) {
+	public void enviarDatosRegistro(String email, String passwd) throws JugadorYaRegistradoException, RemoteException {
 		boolean error = true;
-		try {
+		
 			modelo.registrarJugador(email, passwd);
 			error = false;
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		registro.respuestaRegistro(error);
+			registro.respuestaRegistro(error);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
 import server.communications.Server;
 import server.tests.FuncionesAuxiliaresTests;
 
@@ -45,7 +46,7 @@ public class TestRetoAceptar {
 			s.add("keynes", "keynes", retador);
 			s.add("hayek", "hayek", retado);
 
-		} catch (RemoteException | JugadorNoExisteException | JugadorYaExisteException e) {
+		} catch (RemoteException | JugadorNoExisteException | JugadorYaExisteException | JugadorYaRegistradoException e) {
 			fail("No esperaba fallar aquI");
 			e.printStackTrace();
 		}
