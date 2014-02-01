@@ -136,10 +136,10 @@ public class Controller implements IController {
 	//Cierra ventana de juego
 	@Override
 	public void cerrarPartida() {
-		if(juego != null) {
+		if(juego != null) 
 			this.juego.cerrar();
-			this.modelo.cerrarPartida();
-		}
+		
+		this.modelo.cerrarPartida();
 		this.juego = null;
 		
 	}
@@ -152,10 +152,11 @@ public class Controller implements IController {
 		}
 	}
 	
-	@Override
-	public void cerrarPartida(Window window) {
-		this.modelo.cerrarPartida();
-	}
+//	@Override
+//	public void cerrarPartida(Window window) {
+//		this.modelo.cerrarPartida();
+//		this.juego = null;
+//	}
 
 	@Override
 	public void respuestaReto(String retador, String retado, boolean respuesta) {

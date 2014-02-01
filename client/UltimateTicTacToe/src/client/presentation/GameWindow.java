@@ -1165,6 +1165,7 @@ public class GameWindow extends JFrame implements IJuego {
 			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
 	}
 
+
 }
 
 class CerrarJuegoThread extends Thread {
@@ -1172,7 +1173,7 @@ class CerrarJuegoThread extends Thread {
 	public void run() {
 		try {
 			Controller ctrl = Controller.get();
-			ctrl.cerrarPartida(null);
+			ctrl.cerrarPartida();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

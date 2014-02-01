@@ -21,7 +21,6 @@ public interface IController {
 	public void setJuego(IJuego juego);
 	public void hasSidoRetado(String retador);
 	public void cerrarPartida();
-	public void cerrarPartida(Window window);
 	public void oponenteHaAbandonado();
 	public void avisoCerrarSesion();
 	public void respuestaReto(String retador, String retado, boolean respuesta);
