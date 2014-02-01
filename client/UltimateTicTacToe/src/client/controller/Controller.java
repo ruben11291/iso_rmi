@@ -30,25 +30,25 @@ public class Controller implements IController {
 		System.out.println("Comprobar movimiento válido");
 		try {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
-			// TODO: EL OPONENTE NO RECIBE EL MOVIMIENTO
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (MovimientoNoValidoException e1){
+			// TODO: INFORMAR A LA INTERFAZ
 			System.out.println("MOVIMIENTO NO VÁLIDO");
 		}catch (NoTienesElTurnoException e2) {
-			// TODO: handle exception
-			System.out.println("NO TIENEES EL TULNO");
+			// TODO: INFORMAR A LA INTERFAZ
+			System.out.println("NO TIENES EL TURNO");
 		}catch (CasillaOcupadaException e3){
-			//finalizamos la partida hacia el otro clietne: implementar operacion en icliente, la partida se ha acabado
-			System.out.println("CASILLA OCUPADA ILLO");
+			System.out.println("CASILLA OCUPADA");
 		}catch (TableroGanadoException e4) {
 			System.out.println("Excepción: " + e4.getEmail() + " " + e4.getcT() + " " + e4.getfT());
 			this.juego.tableroGanado(e4.getEmail(), e4.getcT(), e4.getfT());
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (PartidaFinalizadaException  e5) {
-			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
-			this.juego.hayGanador(this.modelo.getEmailJugador());
+			this.juego.ponerFicha(this.modelo.getEmailJugador(), cT, fT, cC, fC);
+			this.juego.tableroGanado(e5.getEmail(), e5.getCol(), e5.getFila());
+			this.juego.partidaFinalizada(e5.getEmail());
+			
 		}catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -56,7 +56,7 @@ public class Controller implements IController {
 	// TODO: Capturar las excepciones de partida finalizada  y tablero lleno
 	@Override
 	public void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC, int fC) {
-		juego.ponerFicha(realizaMov, cT, fT, cC, fC);
+		this.juego.ponerFicha(realizaMov, cT, fT, cC, fC);
 	}
 	
 	@Override
@@ -136,7 +136,7 @@ public class Controller implements IController {
 	//Cierra ventana de juego
 	@Override
 	public void cerrarPartida() {
-		if(juego != null) 
+		if(this.juego != null) 
 			this.juego.cerrar();
 		
 		this.modelo.cerrarPartida();
@@ -146,7 +146,7 @@ public class Controller implements IController {
 	////////////////////////////////////////////////
 	@Override 
 	public void oponenteHaAbandonado(){
-		if(juego !=null){
+		if(this.juego != null){
 			this.juego.cerrarPorAbandonoOponente();
 			this.juego = null;
 		}
@@ -200,8 +200,17 @@ public class Controller implements IController {
 	@Override
 	public void partidaGanadaPorOponente(String email) {
 		// TODO Auto-generated method stub
-		this.juego.hayGanador(email);
+		this.juego.partidaFinalizada(email);
 
+	}
+
+	@Override
+	public void partidaFinalizada(String email) {	
+		this.modelo.partidaFinalizada();
+		if(this.juego != null) {
+			this.juego = null;
+			this.juego.partidaFinalizada(email);
+		}
 	}
 
 

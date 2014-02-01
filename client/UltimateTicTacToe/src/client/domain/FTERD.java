@@ -85,6 +85,7 @@ public class FTERD {
 				cntrl.tableroGanadoPorOponente(e1.getEmail(),e1.getcT(),e1.getfT());
 				
 			}catch(PartidaFinalizadaException e2){
+				cntrl.tableroGanadoPorOponente(e2.getEmail(),e2.getCol(),e2.getFila());
 				cntrl.partidaGanadaPorOponente(realizaMov);
 			}catch (Exception e) {
 				System.out.print("Excepcion no identificada");
@@ -210,6 +211,10 @@ public class FTERD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.tablero = null;
+	}
+
+	public void partidaFinalizada() {
 		this.tablero = null;
 	}
 	

@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Hashtable;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -1095,9 +1096,9 @@ public class GameWindow extends JFrame implements IJuego {
 	}
 	//Evento para pintar las fichas, primero se mira si ya se ha pinchado sobre esa casilla
 	 private void FichaMouseClicked(java.awt.event.MouseEvent e, JLabel j) {
-		 System.out.println(this.coordenadas.get(j).toString());
-		 System.out.println("COMPROBAR MOVIMIENTO VALIDO");
-		 int cTableroG,fTableroG, cTableroP, fTableroP;
+		System.out.println(this.coordenadas.get(j).toString());
+		System.out.println("COMPROBAR MOVIMIENTO VALIDO");
+		int cTableroG,fTableroG, cTableroP, fTableroP;
 		cTableroG = this.coordenadas.get(j).getx() % 3;
 		fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
 		cTableroP = this.coordenadas.get(j).gety() % 3 ;
@@ -1118,9 +1119,9 @@ public class GameWindow extends JFrame implements IJuego {
 	 }
 
 	@Override
-	public void hayGanador(String email) {
-		// TODO Auto-generated method stub
-		System.out.println("GANADOR : "+email);
+	public void partidaFinalizada(String email) {
+		PartidaFinalizadaThread thread = new PartidaFinalizadaThread(email, this);
+		thread.start();
 	}
 
 	@Override
@@ -1180,3 +1181,24 @@ class CerrarJuegoThread extends Thread {
 	}
 }
 
+class PartidaFinalizadaThread extends Thread {
+	String email;
+	GameWindow gw;
+	
+	PartidaFinalizadaThread(String email, GameWindow gw) {
+		this.email = email;
+		this.gw = gw;
+	}
+	
+	
+	@Override
+	public void run() {
+		try {
+			JOptionPane.showMessageDialog(null, this.email + " ha ganado la partida.");
+			this.gw.dispose();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+}

@@ -146,7 +146,7 @@ public class Tablero9x9 {
 		if (!tablerillo.getVencedor().equals("")) {
 			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 			if (!this.vencedor.equals(""))
-				throw new PartidaFinalizadaException(this.vencedor);
+				throw new PartidaFinalizadaException(this.vencedor, cT, fT);
 			throw new TableroGanadoException(tablerillo.getVencedor(), cT, fT);
 		}
 	}

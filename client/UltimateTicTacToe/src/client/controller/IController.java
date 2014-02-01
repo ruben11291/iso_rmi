@@ -25,8 +25,9 @@ public interface IController {
 	public void avisoCerrarSesion();
 	public void respuestaReto(String retador, String retado, boolean respuesta);
 	public void iniciarPartida(String retador, String retado);
-	void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC,
+	public void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC,
 			int fC);
-	void tableroGanadoPorOponente(String email, int getcT, int getfT);
-	void partidaGanadaPorOponente(String email);
+	public void tableroGanadoPorOponente(String email, int getcT, int getfT);
+	public void partidaGanadaPorOponente(String email);
+	public void partidaFinalizada(String email);
 }
