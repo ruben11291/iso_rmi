@@ -18,7 +18,7 @@ public class Tablero9x9 {
 	private int last_cT, last_fT, last_cC, last_fC;
 	
 	public Tablero9x9(){
-		this.ultimoValor =+ 1;
+		this.ultimoValor = 1;
 		this.tablerillos = new Tablero3x3[3][3];
 		for(int fila=0; fila<3; fila++){
 			for(int col=0; col<3; col++){
@@ -33,7 +33,7 @@ public class Tablero9x9 {
 
 	public Tablero9x9(int idPartida) {
 		this.id = idPartida;
-		this.ultimoValor =+ 1;
+		this.ultimoValor = 1;
 		this.tablerillos = new Tablero3x3[3][3];
 		for(int fila=0; fila<3; fila++){
 			for(int col=0; col<3; col++){
@@ -136,20 +136,19 @@ public class Tablero9x9 {
 	
 	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException {
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
-		tablerillo.colocar(cC, fC, this.ultimoValor*-1);
+		tablerillo.colocar(cC, fC, this.ultimoValor);
+		this.ultimoValor *= -1;
 		tablerillo.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 		
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
-		this.ultimoValor =- this.ultimoValor;
-
+		this.cambiarTurno();
+		
 		if (!tablerillo.getVencedor().equals("")) {
 			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor);
 			throw new TableroGanadoException(tablerillo.getVencedor(), cT, fT);
 		}
-			
-		this.cambiarTurno();
 	}
 
 	public void setJugadorConelTurno(Jugador jugador) {

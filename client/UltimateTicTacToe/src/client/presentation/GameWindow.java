@@ -1158,6 +1158,7 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void tableroGanado(String email, int col, int fila) {
+		System.out.println("Tablero ganado interfaz: " + this.ply1name.getText() + " " + email);
 		if (email.equals(this.ply1name.getText()))
 			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		else
