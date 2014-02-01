@@ -46,7 +46,7 @@ public class FTERD {
 		}
 	}
 
-	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException, TableroGanadoException {
+	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException, TableroGanadoException, TableroEmpateException {
 		System.out.println("Poner de la fachada");
 		System.out.println(email);
 		try{
@@ -59,7 +59,7 @@ public class FTERD {
 			
 		//Si al realizar el movimiento se produce una de las siguientes excepciones se le envia al oponente
 			//el movimiento  y se vuelve a lanzar la excepcion
-		} catch(TableroGanadoException e1){
+		} catch(TableroGanadoException | TableroEmpateException e1){
 			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
 			throw e1;
 		} catch(PartidaFinalizadaException e2) {
@@ -76,17 +76,17 @@ public class FTERD {
 				cntrl.ponerMovimientoEnemigo(realizaMov, cT, fT, cC, fC);
 				this.tablero.colocar(cT, fT, cC, fC);
 			}catch ( TableroGanadoException e1) {
-				try {
-					cntrl = Controller.get();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				cntrl.tableroGanadoPorOponente(e1.getEmail(),e1.getcT(),e1.getfT());
-				
 			}catch(PartidaFinalizadaException e2){
-				cntrl.tableroGanadoPorOponente(e2.getEmail(),e2.getCol(),e2.getFila());
-				cntrl.partidaGanadaPorOponente(realizaMov);
+				if(!e2.getEmpate()){
+					cntrl.tableroGanadoPorOponente(e2.getEmail(),e2.getCol(),e2.getFila());
+					cntrl.partidaGanadaPorOponente(realizaMov);
+				}
+				else
+					cntrl.tableroEmpatado(e2.getCol(),e2.getFila());
+			}catch (TableroEmpateException e3) {
+					cntrl.tableroEmpatado(e3.getcT(), e3.getfT());
+
 			}catch (Exception e) {
 				System.out.print("Excepcion no identificada");
 			}

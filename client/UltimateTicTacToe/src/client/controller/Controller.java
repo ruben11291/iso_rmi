@@ -44,9 +44,13 @@ public class Controller implements IController {
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (PartidaFinalizadaException  e5) {
 			this.juego.ponerFicha(this.modelo.getEmailJugador(), cT, fT, cC, fC);
-			this.juego.tableroGanado(e5.getEmail(), e5.getCol(), e5.getFila());
 			this.juego.partidaFinalizada(e5.getEmail());
-			
+			if(!e5.getEmpate())
+				this.juego.tableroGanado(e5.getEmail(), e5.getCol(), e5.getFila());
+			else
+				this.juego.tableroEmpatado(e5.getCol(),e5.getFila());
+		}catch (TableroEmpateException  e6) {
+				this.juego.tableroEmpatado(e6.getcT(),e6.getfT());
 		}catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -206,6 +210,11 @@ public class Controller implements IController {
 			this.juego = null;
 			this.juego.partidaFinalizada(email);
 		}
+	}
+	@Override
+	public void tableroEmpatado(int col, int fila) {
+		this.juego.tableroEmpatado(col,fila);
+		
 	}
 
 

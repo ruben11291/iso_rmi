@@ -4,6 +4,7 @@ import client.exceptions.CasillaOcupadaException;
 import client.exceptions.CoordenadasNoValidasException;
 import client.exceptions.MovimientoNoValidoException;
 import client.exceptions.PartidaFinalizadaException;
+import client.exceptions.TableroEmpateException;
 import client.exceptions.TableroGanadoException;
 
 public class Tablero9x9 {
@@ -133,12 +134,13 @@ public class Tablero9x9 {
 		
 	}
 	
-	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException {
+	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException {
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
 		tablerillo.colocar(cC, fC, this.ultimoValor);
 		this.ultimoValor *= -1;
 		tablerillo.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 		
+			
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
 		this.cambiarTurno();
 		
@@ -147,6 +149,13 @@ public class Tablero9x9 {
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor, cT, fT);
 			throw new TableroGanadoException(tablerillo.getVencedor(), cT, fT);
+		}
+		if(tablerillo.getVencedor().equals("") && tablerillo.isFull()){
+			tablerillo.setEmpate(true);
+			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
+			if (!this.vencedor.equals(""))
+				throw new PartidaFinalizadaException(this.vencedor, cT, fT, true);
+			throw new TableroEmpateException(cT,fT);
 		}
 	}
 

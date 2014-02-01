@@ -27,4 +27,5 @@ public interface IController {
 	public void tableroGanadoPorOponente(String email, int getcT, int getfT);
 	public void partidaGanadaPorOponente(String email);
 	public void partidaFinalizada(String email);
+	public void tableroEmpatado(int col, int fila);
 }

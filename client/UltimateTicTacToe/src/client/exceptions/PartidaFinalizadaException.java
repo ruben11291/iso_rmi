@@ -14,14 +14,27 @@ public class PartidaFinalizadaException extends Exception {
 		return fila;
 	}
 
+	public boolean getEmpate(){
+		return this.empate;
+	}
 	private String email;
 	private int col;
 	private int fila;
+	private boolean empate;
 	
 	public PartidaFinalizadaException(String email, int cT, int fT){
 		 super("La partida ya ha finalizado, el ganador es: " + email);
 		 this.email = email;
 		 this.col = cT;
 		 this.fila = fT;
+		 this.empate = false;
+	}
+
+	public PartidaFinalizadaException(String email, int cT, int fT, boolean b) {
+		super("La partida ya ha finalizado, el ganador es: " + email);
+		 this.email = email;
+		 this.col = cT;
+		 this.fila = fT;
+		 this.empate = b;
 	}
 }

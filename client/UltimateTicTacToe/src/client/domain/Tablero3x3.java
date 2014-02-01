@@ -8,7 +8,7 @@ public class Tablero3x3 {
 
 	private Casilla[][] casillas;
 	private String vencedor;	
-	
+	private boolean empate;
 	
 	public Tablero3x3(){
 		this.casillas = new Casilla[3][3];
@@ -18,6 +18,7 @@ public class Tablero3x3 {
 			}
 		}
 		this.vencedor = "";	
+		this.empate = false;
 	}
 
 	public void colocar(int cC, int fC, int valor){
@@ -109,4 +110,12 @@ public class Tablero3x3 {
 		return r;
 	}
 
+	public void setEmpate(boolean b) {
+		this.empate = b;
+		
+	}
+	public boolean getEmpate() {
+		return this.empate;
+		
+	}
 }

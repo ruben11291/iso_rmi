@@ -12,17 +12,14 @@ public class Jugador {
 		this.email = email;
 		this.passwd = passwd;
 	}
-	
-	public void empezarPartida(){
-		//comunicacion con ventana ifaz. y con rmi.
-	}
+
 
 	public String getEmail() {
 		// TODO Auto-generated method stub
 		return this.email;
 	}
 
-	public void poner(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException, TableroGanadoException {
+	public void poner(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException, TableroGanadoException, TableroEmpateException {
 		System.out.println("Jugador ha puesto "+this.email);
 		if(this.tablero == null)
 			throw new NoEstaJugandoException(email);
@@ -38,19 +35,6 @@ public class Jugador {
 	public void setTablero(Tablero9x9 tablero) {
 		this.tablero = tablero;
 	}
-
-	public boolean retar(Jugador creador) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
-	public void acabarPartida() {
-		//comunicacion con ventana ifaz. y delete de rmi.
-		
-	}
-
 
 	
 }

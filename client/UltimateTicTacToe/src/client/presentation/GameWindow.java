@@ -1169,6 +1169,12 @@ public class GameWindow extends JFrame implements IJuego {
 			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
 	}
 
+	@Override
+	public void tableroEmpatado(int col, int fila) {
+		System.out.println("Tablero empatado col[" + col + "] fila[" + fila + "]");
+		this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/OSym.png")));	
+	}
+
 
 }
 
