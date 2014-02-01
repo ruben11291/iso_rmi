@@ -59,10 +59,13 @@ public class FTERD {
 			
 		//Si al realizar el movimiento se produce una de las siguientes excepciones se le envia al oponente
 			//el movimiento  y se vuelve a lanzar la excepcion
-		}catch(PartidaFinalizadaException  | TableroGanadoException e){
-			System.out.println(e.toString());
+		} catch(TableroGanadoException e1){
 			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
-			throw e;
+			throw e1;
+		} catch(PartidaFinalizadaException e2) {
+			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+			proxy.partidaFinalizada(this.tablero.getId());
+			throw e2;
 		}
 	}
 

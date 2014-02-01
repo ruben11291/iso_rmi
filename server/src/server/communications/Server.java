@@ -243,6 +243,11 @@ public class Server extends UnicastRemoteObject implements IServer {
 		
 	}
 
+	@Override
+	public void partidaFinalizada(int idPartida) throws RemoteException {
+		this.fachada.eliminarPartidaFinalizada(idPartida);
+	}
+
 
 	
 }

@@ -21,7 +21,7 @@ public class Proxy {
 	private IServer server;
 	  
 	private Proxy() throws MalformedURLException, RemoteException, NotBoundException {
-		this.server=(IServer) Naming.lookup("rmi://localhost:3002/servidor");//172.19.177.184
+		this.server=(IServer) Naming.lookup("rmi://192.168.1.8:3002/servidor");//172.19.177.184
 
 	}
 	
@@ -65,5 +65,10 @@ public class Proxy {
 
 	public void abandonoPartida(String email) throws RemoteException {
 		server.abandonoPartida(email);
+	}
+
+	public void partidaFinalizada(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.partidaFinalizada(id);
 	}
 }
