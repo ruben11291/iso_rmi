@@ -95,8 +95,8 @@ public class Tablero3x3 {
 		return this.vencedor;
 	}
 	
-	private void setVencedor(String w) {
-		this.vencedor = w;
+	private void setVencedor(String vencedor) {
+		this.vencedor = vencedor;
 	}
 	
 	@Override
@@ -110,8 +110,8 @@ public class Tablero3x3 {
 		return r;
 	}
 
-	public void setEmpate(boolean b) {
-		this.empate = b;
+	public void setEmpate(boolean empate) {
+		this.empate = empate;
 		
 	}
 	public boolean getEmpate() {

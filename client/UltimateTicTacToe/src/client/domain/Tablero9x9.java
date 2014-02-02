@@ -64,48 +64,87 @@ public class Tablero9x9 {
 		return hay;
 	}
 
-	public void comprobarVencedor(String a, String b) {
+	public void comprobarVencedor(String a, String b, String last) {
 		String vencedor = "";
 		
 		if (!hayVencedor()) {
 			for (int i = 0; i < 3; i++) {
 				// Comprueba si hay alguna combinación ganadora vertical
-				if (this.tablerillos[i][0].getVencedor().equals(this.tablerillos[i][1].getVencedor())
-					&& this.tablerillos[i][1].getVencedor().equals(this.tablerillos[i][2].getVencedor())
-					&& !this.tablerillos[i][2].getVencedor().equals("")) {
-					if (this.tablerillos[i][0].getVencedor().equals(this.jugadorA.getEmail()))
-						vencedor = a;
+				if ((this.tablerillos[i][0].getVencedor().equals(a) || tablerillos[i][0].getEmpate()) && 
+						(this.tablerillos[i][1].getVencedor().equals(a) || tablerillos[i][1].getEmpate()) &&
+						(this.tablerillos[i][2].getVencedor().equals(a) || tablerillos[i][2].getEmpate())) {
+					if (this.tablerillos[i][0].getEmpate() && this.tablerillos[i][1].getEmpate() && this.tablerillos[i][2].getEmpate())
+						vencedor = last;
 					else
-						vencedor = b;
-					i = 4;
+						vencedor = a;
+				} else if ((this.tablerillos[i][0].getVencedor().equals(b) || tablerillos[i][0].getEmpate()) && 
+						(this.tablerillos[i][1].getVencedor().equals(b) || tablerillos[i][1].getEmpate()) &&
+						(this.tablerillos[i][2].getVencedor().equals(b) || tablerillos[i][2].getEmpate())) {
+					vencedor = b;
 				// Comprueba si hay alguna combinación ganadora horizontal
-				} else if (this.tablerillos[0][i].getVencedor().equals(this.tablerillos[1][i].getVencedor())
-					&& this.tablerillos[1][i].getVencedor().equals(this.tablerillos[2][i].getVencedor())
-					&& !this.tablerillos[2][i].getVencedor().equals("")) {
-					if (this.tablerillos[0][i].getVencedor().equals(this.jugadorA.getEmail()))
-						vencedor = a;
-					else
-						vencedor = b;
-					i = 4;
+				} else if ((this.tablerillos[0][i].getVencedor().equals(a) || tablerillos[0][i].getEmpate()) && 
+						(this.tablerillos[1][i].getVencedor().equals(a) || tablerillos[1][i].getEmpate()) &&
+						(this.tablerillos[2][i].getVencedor().equals(a) || tablerillos[2][i].getEmpate())) {
+					vencedor = a;
+				} else if ((this.tablerillos[0][i].getVencedor().equals(b) || tablerillos[0][i].getEmpate()) && 
+						(this.tablerillos[1][i].getVencedor().equals(b) || tablerillos[1][i].getEmpate()) &&
+						(this.tablerillos[2][i].getVencedor().equals(b) || tablerillos[2][i].getEmpate())) {
+					vencedor = b;
+				}
+				i = 4;
+//				// Comprueba si hay alguna combinación ganadora vertical
+//				if (this.tablerillos[i][0].getVencedor().equals(this.tablerillos[i][1].getVencedor())
+//					&& this.tablerillos[i][1].getVencedor().equals(this.tablerillos[i][2].getVencedor())
+//					&& !this.tablerillos[i][2].getVencedor().equals("")) {
+//					if (this.tablerillos[i][0].getVencedor().equals(this.jugadorA.getEmail()))
+//						vencedor = a;
+//					else
+//						vencedor = b;
+//					i = 4;
+//				// Comprueba si hay alguna combinación ganadora horizontal
+//				} else if (this.tablerillos[0][i].getVencedor().equals(this.tablerillos[1][i].getVencedor())
+//					&& this.tablerillos[1][i].getVencedor().equals(this.tablerillos[2][i].getVencedor())
+//					&& !this.tablerillos[2][i].getVencedor().equals("")) {
+//					if (this.tablerillos[0][i].getVencedor().equals(this.jugadorA.getEmail()))
+//						vencedor = a;
+//					else
+//						vencedor = b;
+//					i = 4;
 				}
 			}
 			// Comprueba si hay alguna combinación ganadora diagonal
 			if (vencedor.equals("")) {
-				if (this.tablerillos[0][0].getVencedor().equals(this.tablerillos[1][1].getVencedor())
-					&& this.tablerillos[1][1].getVencedor().equals(this.tablerillos[2][2].getVencedor())
-					&& !this.tablerillos[2][2].getVencedor().equals("")) {
-					if (this.tablerillos[2][2].getVencedor().equals(this.jugadorA.getEmail()))
-						vencedor = a;
-					else
-						vencedor = b;
-				} else if (this.tablerillos[2][0].getVencedor().equals(this.tablerillos[1][1].getVencedor())
-					&& this.tablerillos[1][1].getVencedor().equals(this.tablerillos[0][2].getVencedor())
-					&& !this.tablerillos[0][2].getVencedor().equals("")) {
-					if (this.tablerillos[0][2].getVencedor().equals(this.jugadorA.getEmail()))
-						vencedor = a;
-					else
-						vencedor = b;
-				}
+				if ((this.tablerillos[0][0].getVencedor().equals(a) || tablerillos[0][0].getEmpate()) && 
+						(this.tablerillos[1][1].getVencedor().equals(a) || tablerillos[1][1].getEmpate()) &&
+						(this.tablerillos[2][2].getVencedor().equals(a) || tablerillos[2][2].getEmpate())) {
+					vencedor = a;
+				} else if ((this.tablerillos[0][0].getVencedor().equals(b) || tablerillos[0][0].getEmpate()) && 
+						(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
+						(this.tablerillos[2][2].getVencedor().equals(b) || tablerillos[2][2].getEmpate())) {
+					vencedor = b;
+				} if ((this.tablerillos[2][0].getVencedor().equals(a) || tablerillos[2][0].getEmpate()) && 
+						(this.tablerillos[1][1].getVencedor().equals(a) || tablerillos[1][1].getEmpate()) &&
+						(this.tablerillos[0][2].getVencedor().equals(a) || tablerillos[0][2].getEmpate())) {
+					vencedor = a;
+				} else if ((this.tablerillos[2][0].getVencedor().equals(b) || tablerillos[2][0].getEmpate()) && 
+						(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
+						(this.tablerillos[0][2].getVencedor().equals(b) || tablerillos[0][2].getEmpate())) {
+					vencedor = b;
+//				if (this.tablerillos[0][0].getVencedor().equals(this.tablerillos[1][1].getVencedor())
+//					&& this.tablerillos[1][1].getVencedor().equals(this.tablerillos[2][2].getVencedor())
+//					&& !this.tablerillos[2][2].getVencedor().equals("")) {
+//					if (this.tablerillos[2][2].getVencedor().equals(this.jugadorA.getEmail()))
+//						vencedor = a;
+//					else
+//						vencedor = b;
+//				} else if (this.tablerillos[2][0].getVencedor().equals(this.tablerillos[1][1].getVencedor())
+//					&& this.tablerillos[1][1].getVencedor().equals(this.tablerillos[0][2].getVencedor())
+//					&& !this.tablerillos[0][2].getVencedor().equals("")) {
+//					if (this.tablerillos[0][2].getVencedor().equals(this.jugadorA.getEmail()))
+//						vencedor = a;
+//					else
+//						vencedor = b;
+//				}
 			}
 		}
 		setVencedor(vencedor);
@@ -115,8 +154,8 @@ public class Tablero9x9 {
 		return this.vencedor;
 	}
 	
-	private void setVencedor(String w) {
-		this.vencedor = w;
+	private void setVencedor(String vencedor) {
+		this.vencedor = vencedor;
 	}
 	
 	public void comprobarMovimiento(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, MovimientoNoValidoException, CasillaOcupadaException {
@@ -130,29 +169,29 @@ public class Tablero9x9 {
 			if (this.last_cC != cT || this.last_fC != fT)
 				if (!this.tablerillos[this.last_cC][this.last_fC].isFull())
 					throw new MovimientoNoValidoException(cT, fT, cC, fC);
-		// TODO: COMPROBAR SI SE HAN LLENADO TODOS LOS TABLEROS
-		
 	}
 	
 	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException {
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
 		tablerillo.colocar(cC, fC, this.ultimoValor);
-		this.ultimoValor *= -1;
+		String last;
+		if (this.ultimoValor == 1) last = this.jugadorA.getEmail();
+		else last = this.jugadorB.getEmail();
 		tablerillo.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
-		
+		this.ultimoValor *= -1;
 			
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
 		this.cambiarTurno();
 		
 		if (!tablerillo.getVencedor().equals("")) {
-			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
+			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail(), last);
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor, cT, fT);
 			throw new TableroGanadoException(tablerillo.getVencedor(), cT, fT);
 		}
 		if(tablerillo.getVencedor().equals("") && tablerillo.isFull()){
 			tablerillo.setEmpate(true);
-			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
+			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail(), last);
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor, cT, fT, true);
 			throw new TableroEmpateException(cT,fT);
@@ -161,7 +200,6 @@ public class Tablero9x9 {
 
 	public void setJugadorConelTurno(Jugador jugador) {
 		this.jugadorConElTurno = jugador;
-		
 	}
 	
 	public void cambiarTurno(){
@@ -190,13 +228,12 @@ public class Tablero9x9 {
 	}
 
 	public String toString(){
-		String r ="";
-		for (int fila=0; fila<3; fila++){
-			for(int col=0; col<3; col++){
-				r+=this.tablerillos[col][fila].toString();
+		String r = "";
+		for (int fila = 0; fila < 3; fila++){
+			for(int col = 0; col < 3; col++){
+				r += this.tablerillos[col][fila].toString();
 			}
 		}
-		
 		return r;
 	}
 }
