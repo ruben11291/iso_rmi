@@ -6,4 +6,5 @@ public interface ILogin {
 	public void jugadorNoExiste();
 	public void jugadorYaExiste();
 	public void excepcionRemota();
+	public void mostrar();
 }

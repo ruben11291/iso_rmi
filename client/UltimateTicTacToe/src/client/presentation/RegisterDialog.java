@@ -175,24 +175,14 @@ public class RegisterDialog extends JDialog implements IRegistro {
 	private class AcceptDialogMouseAdapter extends MouseAdapter {
 
 		private final RegisterDialog dlg;
-		private final boolean selection;
 
 		public AcceptDialogMouseAdapter(RegisterDialog dlg, boolean selection) {
 			this.dlg = dlg;
-			this.selection = selection;
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent evt) {
-			dlg.selection = selection;
-			try {
-				dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
-			} catch (JugadorYaRegistradoException e) {
-				dlg.respuestaRegistro(false);
-			}catch (RemoteException e) {
-				dlg.excepcionRemota();
-			}
-			
+			dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
 		}
 	}
 
@@ -211,28 +201,22 @@ public class RegisterDialog extends JDialog implements IRegistro {
 	}
 	private class AcceptDialogKeyAdapter extends KeyAdapter {
 		private final RegisterDialog dlg;
-
+		
 		public AcceptDialogKeyAdapter(RegisterDialog dlg) {
 			this.dlg = dlg;
 		}
 
 		@Override
 		public void keyPressed(KeyEvent evt) {
+			
 			if (evt.getKeyCode() == 10) {
-				dlg.selection = true;
-				try {
-					dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
-				} catch (JugadorYaRegistradoException e) {
-					dlg.respuestaRegistro(false);
-				}
-				catch (RemoteException e) {
-					dlg.excepcionRemota();
-				}
+				
+				dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
 			}
 		}
 	}
 	
-	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) throws RemoteException, JugadorYaRegistradoException {
+	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) {
 		boolean valido = false;
 		if (passwd.equals(passwdcheck)) {
 			Controller cntrl;
@@ -262,8 +246,10 @@ public class RegisterDialog extends JDialog implements IRegistro {
 			NoticeLabel.setForeground(new Color(200, 0, 0));
 			NoticeLabel.setOpaque(true);
 			NoticeLabel.setBorder(border);
+			this.selection = false;
 		} else {
 			this.setVisible(false);
+			this.selection = true;
 		}
 	}
 }

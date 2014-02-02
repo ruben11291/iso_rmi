@@ -95,12 +95,13 @@ public class Controller implements IController {
 		
 	}
 	@Override
-	public void enviarDatosRegistro(String email, String passwd) throws JugadorYaRegistradoException, RemoteException {
-		boolean error = true;
-
+	public void enviarDatosRegistro(String email, String passwd) {
+		try{
 			modelo.registrarJugador(email, passwd);
-			error = false;
-			registro.respuestaRegistro(error);
+			registro.respuestaRegistro(false);
+		}catch(JugadorYaRegistradoException e){
+			registro.respuestaRegistro(true);
+		}
 	}
 
 	@Override
@@ -221,10 +222,14 @@ public class Controller implements IController {
 	}
 	@Override
 	public void excepcionRemota() {
-		if(this.juego != null)
+		if(this.juego != null){
 			juego.excepcionRemota();
-		else if(this.lista != null)
+			login.mostrar();
+	}
+		else if(this.lista != null){
 			lista.excepcionRemota();
+			login.mostrar();
+		}
 		else if (this.login != null)
 			login.excepcionRemota();
 		

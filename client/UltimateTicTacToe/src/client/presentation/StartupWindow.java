@@ -238,4 +238,9 @@ public class StartupWindow extends JFrame implements ILogin {
 		
 	}
 
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+	}
+
 }
