@@ -50,14 +50,9 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	
 	public PlayerListWindow() {
 		super();
-		try {
-			Controller cntrl;
-			cntrl = Controller.get();
-			cntrl.setLista(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Controller cntrl;
+		cntrl = Controller.get();
+		cntrl.setLista(this);
 		this.setupListGUI();
 	}
 	
@@ -170,13 +165,9 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		public void mouseClicked(MouseEvent evt) {
 			if (this.win.mPlayerList.getSelectedRow() != -1 || this.win.mPlayerList.getSelectedRow() >= this.win.mPlayerList.getRowCount()) {
 				String retado = this.win.mPlayerList.getModel().getValueAt(this.win.mPlayerList.getSelectedRow(), this.win.mPlayerList.getSelectedColumn()).toString();
-				try {
-					Controller cntrl = Controller.get();
-					cntrl.retarJugador(retado);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Controller cntrl = Controller.get();
+				cntrl.retarJugador(retado);
+				
 			}
 		}
 	}
@@ -192,19 +183,16 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		public void mouseClicked(MouseEvent evt) {
 			System.out.println("Haciendo logout...");
 			//Aquí todo lo de guardar los datos, las partidas y demás
-			try {
-				final int confirm = JOptionPane.showConfirmDialog(
-					mGameListPanel,
-					"¿Está seguro de que desea salir?",
-					"Confirmación", JOptionPane.YES_NO_OPTION);
-				if (confirm == 0) {
-					win.dispose();
-					Controller c = Controller.get();
-					c.avisoCerrarSesion();
-					c.cerrarSesion();
-				}
-			} catch (final Exception e) {
-				
+			
+			final int confirm = JOptionPane.showConfirmDialog(
+				mGameListPanel,
+				"¿Está seguro de que desea salir?",
+				"Confirmación", JOptionPane.YES_NO_OPTION);
+			if (confirm == 0) {
+				win.dispose();
+				Controller c = Controller.get();
+				c.avisoCerrarSesion();
+				c.cerrarSesion();
 			}
 		}
 	}
@@ -226,21 +214,17 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	public void windowClosing(WindowEvent e) {
 		System.out.println("Haciendo logout...");
 		//Aquí todo lo de guardar los datos, las partidas y demás
-		try {
-			final int confirm = JOptionPane.showConfirmDialog(
-				mGameListPanel,
-				"¿Está seguro de que desea salir?",
-				"Confirmación", JOptionPane.YES_NO_OPTION);
-			if (confirm == 0) {
-				this.dispose();
-				Controller c = Controller.get();
-				c.avisoCerrarSesion();
-				c.cerrarSesion();
-			}
-		} catch (final Exception exc) {
-			
-		} 
 		
+		final int confirm = JOptionPane.showConfirmDialog(
+			mGameListPanel,
+			"¿Está seguro de que desea salir?",
+			"Confirmación", JOptionPane.YES_NO_OPTION);
+		if (confirm == 0) {
+			this.dispose();
+			Controller c = Controller.get();
+			c.avisoCerrarSesion();
+			c.cerrarSesion();
+		}
 	}
 
 
@@ -311,6 +295,13 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		final GameWindow gw = new GameWindow(self, retador, retado); // TODO
 		gw.setLocationRelativeTo(null);
 		gw.setVisible(true);
+	}
+
+
+	@Override
+	public void excepcionRemota() {
+		// TODO Auto-generated method stub
+		
 	}	
 	
 }
@@ -326,14 +317,8 @@ class ConfirmDialogThread extends Thread {
 	  public void run() {
 			final int confirm = JOptionPane.showConfirmDialog(null, retador + " te ha retado, ¿aceptas?", "¡Te han retado!", JOptionPane.YES_NO_OPTION);
 			System.out.println("Respuesta: " + confirm);
-			try {
-				Controller cntl = Controller.get();
-				if (confirm == 0) cntl.enviarRespuestaReto(true, retador);
-				else cntl.enviarRespuestaReto(false, retador);
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Controller cntl = Controller.get();
+			if (confirm == 0) cntl.enviarRespuestaReto(true, retador);
+			else cntl.enviarRespuestaReto(false, retador);
 	  }
 	} 

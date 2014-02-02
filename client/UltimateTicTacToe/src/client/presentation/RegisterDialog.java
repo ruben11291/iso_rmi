@@ -61,14 +61,9 @@ public class RegisterDialog extends JDialog implements IRegistro {
 
 	public RegisterDialog(JFrame f, String string, boolean b) {
 		super(f, string, b);
-		try {
-			Controller cntrl;
-			cntrl = Controller.get();
-			cntrl.setRegistro(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		Controller cntrl;
+		cntrl = Controller.get();
+		cntrl.setRegistro(this);	
 		this.initGUI();
 		
 	}
@@ -194,12 +189,9 @@ public class RegisterDialog extends JDialog implements IRegistro {
 				NoticeLabel.setText("El Usuario introducido ya existe");
 				NoticeLabel.setForeground(new Color(200, 0, 0));
 				NoticeLabel.setOpaque(true);
-				NoticeLabel.setBorder(border);
-				
-			}		
-			catch (Exception e) {
-				e.printStackTrace();
+				NoticeLabel.setBorder(border);	
 			}
+			
 		}
 	}
 
@@ -240,7 +232,7 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		}
 	}
 	
-	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) throws Exception {
+	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) {
 		boolean valido = false;
 		if (passwd.equals(passwdcheck)) {
 			Controller cntrl;

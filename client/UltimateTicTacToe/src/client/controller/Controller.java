@@ -1,4 +1,5 @@
 package client.controller;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Vector;
 
@@ -14,22 +15,33 @@ public class Controller implements IController {
 	IRegistro registro;
 	FTERD modelo;
 	
-	private Controller() throws Exception {
-		this.modelo = new FTERD();
+	private Controller(){
+		try{
+			this.modelo = new FTERD();
+		}
+		catch (RemoteException | NotBoundException e) {
+			this.excepcionRemota();
+		}
 	}
 	
-	public static Controller get() throws Exception {
+	public static Controller get() {
 		if (self == null)
 			self = new Controller();
 		return self;
 	}
 		
 	
-	public void ponerMovimiento(int cT, int fT, int cC, int fC) throws NoTienesElTurnoException, NoEstaJugandoException, JugadorNoExisteException, TableroLlenoException, MovimientoNoValidoException, PartidaFinalizadaException, CoordenadasNoValidasException {
+	public void ponerMovimiento(int cT, int fT, int cC, int fC) {
 		System.out.println("Comprobar movimiento válido");
 		try {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
+		}catch (NoEstaJugandoException e) {
+			System.out.println("NO ESTA JUGANDO EXCEPTION");
+			e.printStackTrace();
+		} catch (CoordenadasNoValidasException e) {
+			System.out.println("Coordenadas no válidas exception");
+			e.printStackTrace();
 		}catch (MovimientoNoValidoException e1){
 			// TODO: INFORMAR A LA INTERFAZ
 			System.out.println("MOVIMIENTO NO VÁLIDO");
@@ -54,7 +66,7 @@ public class Controller implements IController {
 				this.juego.tableroEmpatado(e6.getcT(),e6.getfT());
 		}catch (RemoteException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	// TODO: Capturar las excepciones de partida finalizada  y tablero lleno
@@ -85,7 +97,7 @@ public class Controller implements IController {
 	@Override
 	public void enviarDatosRegistro(String email, String passwd) throws JugadorYaRegistradoException, RemoteException {
 		boolean error = true;
-		
+
 			modelo.registrarJugador(email, passwd);
 			error = false;
 			registro.respuestaRegistro(error);
@@ -215,6 +227,16 @@ public class Controller implements IController {
 	@Override
 	public void tableroEmpatado(int col, int fila) {
 		this.juego.tableroEmpatado(col,fila);
+		
+	}
+	@Override
+	public void excepcionRemota() {
+		if(this.juego != null)
+			juego.excepcionRemota();
+		else if(this.lista != null)
+			lista.excepcionRemota();
+		else if (this.login != null)
+			login.excepcionRemota();
 		
 	}
 

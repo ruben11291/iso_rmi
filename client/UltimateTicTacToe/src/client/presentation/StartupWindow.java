@@ -54,14 +54,9 @@ public class StartupWindow extends JFrame implements ILogin {
 
 	public StartupWindow() {
 		super();
-		try {
-			Controller cntrl;
-			cntrl = Controller.get();
-			cntrl.setLogin(this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		Controller cntrl;
+		cntrl = Controller.get();
+		cntrl.setLogin(this);	
 		this.initGUI();
 	}
 
@@ -197,16 +192,10 @@ public class StartupWindow extends JFrame implements ILogin {
 
 	public void enviarDatosLogin(String email, String passwd) {
 		Controller cntrl;
-		try {
-			cntrl = Controller.get();
-			final PlayerListWindow playerListWindow = new PlayerListWindow();
-			playerListWindow.setLocationRelativeTo(null);
-			//playerListWindow.setVisible(true);
-			cntrl.enviarDatosLogin(email, passwd);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cntrl = Controller.get();
+		final PlayerListWindow playerListWindow = new PlayerListWindow();
+		playerListWindow.setLocationRelativeTo(null);
+		cntrl.enviarDatosLogin(email, passwd);
 	}	
 	
 	@Override
@@ -232,16 +221,20 @@ public class StartupWindow extends JFrame implements ILogin {
 
 	@Override
 	public void jugadorNoExiste() {
-		// TODO Auto-generated method stub
-		//JOptionPane.showMessageDialog(this.mGameListPanel, mensaje, "Respuesta reto", JOptionPane.ERROR_MESSAGE);
 		JOptionPane.showMessageDialog(this,"Jugador no existe", "Error de login",JOptionPane.ERROR_MESSAGE);
 
 	}
 
 	@Override
 	public void jugadorYaExiste() {
-		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(this,"Jugador ya esta en el sistema", "Error de login",JOptionPane.ERROR_MESSAGE);
+		
+	}
+
+	@Override
+	public void excepcionRemota() {
+		JOptionPane.showMessageDialog(this,"No se obtiene respuesta del servidor", "Error de red",JOptionPane.ERROR_MESSAGE);
+		this.setVisible(true);
 		
 	}
 

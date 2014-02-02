@@ -1,5 +1,6 @@
 package client.domain;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Vector;
 
@@ -15,7 +16,7 @@ public class FTERD {
 	private Proxy proxy;
 	private Cliente cliente;
 	
-	public FTERD() throws Exception{
+	public FTERD() throws RemoteException, NotBoundException {
 
 		this.proxy = Proxy.get();
 		this.cliente = new Cliente(this);
@@ -32,47 +33,70 @@ public class FTERD {
 		this.jugador = new Jugador(email,passwd);
 	}
 	
-	public void registrarJugador(String email, String passwd) throws RemoteException, JugadorYaRegistradoException {
-		proxy.register(email, passwd);
+	public void registrarJugador(String email, String passwd) throws  JugadorYaRegistradoException {
+		Controller cntrl;
+		try{
+			proxy.register(email, passwd);
+		}catch(RemoteException e){
+			cntrl = Controller.get();
+			cntrl.excepcionRemota();
+		}
 	}
 	
 	public void autenticar(String email, String passwd) throws JugadorNoExisteException, JugadorYaExisteException {
+		Controller cntrl;
 		try {
 			proxy.add(email, passwd, cliente);
-			this.jugador = new Jugador(email,passwd);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			cntrl = Controller.get();
+			cntrl.excepcionRemota();
 		}
+		this.jugador = new Jugador(email,passwd);
+		
 	}
 
 	public void poner(String email,int cT, int fT, int cC, int fC) throws RemoteException, NoTienesElTurnoException, NoEstaJugandoException, CoordenadasNoValidasException, MovimientoNoValidoException, PartidaFinalizadaException, CasillaOcupadaException, TableroGanadoException, TableroEmpateException {
-		System.out.println("Poner de la fachada");
-		System.out.println(email);
+//		System.out.println("Poner de la fachada");
+//		System.out.println(email);
+		Controller cntrl=null;
 		try{
 			if (email.equals(this.tablero.getJugadorA().getEmail())) 
 				this.tablero.getJugadorA().poner(cT, fT, cC, fC);
 			else 
 				this.tablero.getJugadorB().poner(cT, fT, cC, fC);	
 			//Si no se produce exception se trata normal
-			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
-			
+			try {
+				proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+			} catch (RemoteException e) {
+				cntrl = Controller.get();
+				cntrl.excepcionRemota();
+			}
 		//Si al realizar el movimiento se produce una de las siguientes excepciones se le envia al oponente
 			//el movimiento  y se vuelve a lanzar la excepcion
 		} catch(TableroGanadoException | TableroEmpateException e1){
-			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+			try {
+				proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+			} catch (RemoteException e) {
+				cntrl = Controller.get();
+				cntrl.excepcionRemota();
+			}
 			throw e1;
 		} catch(PartidaFinalizadaException e2) {
-			proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
-			proxy.partidaFinalizada(this.tablero.getId());
+			try {
+				proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
+				proxy.partidaFinalizada(this.tablero.getId());
+			} catch (RemoteException e) {
+				cntrl = Controller.get();
+				cntrl.excepcionRemota();
+			}
 			throw e2;
 		}
 	}
 
 	public void recibirMovimientoOponente(String realizaMov, int cT, int fT, int cC, int fC) {
 			Controller cntrl=null;
+			cntrl = Controller.get();
 			try{
-				cntrl = Controller.get();
 				cntrl.ponerMovimientoEnemigo(realizaMov, cT, fT, cC, fC);
 				this.tablero.colocar(cT, fT, cC, fC);
 			}catch ( TableroGanadoException e1) {
@@ -86,39 +110,40 @@ public class FTERD {
 					cntrl.tableroEmpatado(e2.getCol(),e2.getFila());
 			}catch (TableroEmpateException e3) {
 					cntrl.tableroEmpatado(e3.getcT(), e3.getfT());
-
-			}catch (Exception e) {
-				System.out.print("Excepcion no identificada");
 			}
 	}
 	
 	public void retar(String oponente) throws RemoteException {
+		Controller cntrl = null;
+		
 		this.retosSolicitados.add(oponente);
-		proxy.retar(this.jugador.getEmail(), oponente);
+		
+		try{
+			proxy.retar(this.jugador.getEmail(), oponente);
+		}catch(RemoteException e){
+			this.retosSolicitados.remove(oponente);
+			cntrl = Controller.get();
+			cntrl.excepcionRemota();
+		
+		}
 	}
 	
 	
 	
 	public void cerrarSesion() {
-		
+		Controller cntrl = null;
 		try {
 			proxy.delete(this.jugador.getEmail());
 			this.jugador = null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			cntrl = Controller.get();
+			cntrl.excepcionRemota();
 		}
 	}
 	public void updateJugadoresConectados(Vector <String> jugadores){
-		//pasarselo a ventana
-		System.out.println(jugadores);
-		try {
-			Controller c = Controller.get();
-			c.enviarListaJugadores(jugadores);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		System.out.println(jugadores);
+		Controller c = Controller.get();
+		c.enviarListaJugadores(jugadores);
 	}
 
 	
@@ -133,13 +158,8 @@ public class FTERD {
 				this.retosSolicitados.remove(retado);
 				creaPartida(retador,retado,idPartida);
 			}
-			try {
-				Controller cntrl = Controller.get();
-				cntrl.respuestaReto(retador, retado, respuesta);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Controller cntrl = Controller.get();
+			cntrl.respuestaReto(retador, retado, respuesta);
 		}
 	}
 	
@@ -163,45 +183,33 @@ public class FTERD {
 	//Este cliente es el que recibe la petición de reto
 	public void iniciarPartida(String retador, String retado, int idPartida){
 		creaPartida(retador, retado, idPartida);
-		try {
-			Controller cntrl = Controller.get();
-			cntrl.iniciarPartida(retador, retado);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Controller cntrl = Controller.get();
+		cntrl.iniciarPartida(retador, retado);
 	}
 
 	//Esta operacion hace que el cliente limpie la partida que mantenia con el otro jugador
 	//Es recibida por el openente al jugador que abandona
 	public void oponenteHaAbandonado() {
 		Controller c;
-		try {
-			c = Controller.get();
-			//c.cerrarPartida();
-			c.oponenteHaAbandonado();
-			this.tablero = null;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		c = Controller.get();
+		c.oponenteHaAbandonado();
+		this.tablero = null;
 	}
 
 	public void hasSidoRetado(String retador) {
-		// TODO Auto-generated method stub
-		try {
-			Controller cntrl = Controller.get();
-			cntrl.hasSidoRetado(retador);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Controller cntrl = Controller.get();
+		cntrl.hasSidoRetado(retador);
 	}
 
 	public void enviarRespuestaReto(boolean respuesta, String retador) throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("Respuesta enviada al proxy");
-		this.proxy.envioRespuestaPeticionDeReto(retador, this.jugador.getEmail(), respuesta);
+//		System.out.println("Respuesta enviada al proxy");
+		Controller cntrl = null;
+		try{
+			this.proxy.envioRespuestaPeticionDeReto(retador, this.jugador.getEmail(), respuesta);
+		}catch(RemoteException e){
+			cntrl=Controller.get();
+			cntrl.excepcionRemota();
+		}
 	}
 
 	public void cerrarPartida()  {

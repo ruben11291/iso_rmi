@@ -20,12 +20,16 @@ public class Proxy {
 	private static Proxy yo;
 	private IServer server;
 	  
-	private Proxy() throws MalformedURLException, RemoteException, NotBoundException {
-		this.server=(IServer) Naming.lookup("rmi://localhost:3002/servidor");//172.19.177.184
+	private Proxy() throws RemoteException, NotBoundException {
+		try{
+			this.server=(IServer) Naming.lookup("rmi://localhost:3002/servidor");//172.19.177.184
+		}catch(MalformedURLException e){
+			e.printStackTrace();//No se va a producir
+		}
 
 	}
 	
-	public static Proxy get() throws Exception {
+	public static Proxy get() throws RemoteException , NotBoundException {
 		if (yo==null)
 			yo=new Proxy();
 		return yo;

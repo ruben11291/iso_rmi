@@ -8,4 +8,5 @@ public interface IJuego {
 	public void cambiarTurno();
 	public void tableroGanado(String email, int col, int fila);
 	public void tableroEmpatado(int col, int fila);
+	public void excepcionRemota();
 }

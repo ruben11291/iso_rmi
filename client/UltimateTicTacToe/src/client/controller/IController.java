@@ -28,4 +28,5 @@ public interface IController {
 	public void partidaGanadaPorOponente(String email);
 	public void partidaFinalizada(String email);
 	public void tableroEmpatado(int col, int fila);
+	public void excepcionRemota();
 }

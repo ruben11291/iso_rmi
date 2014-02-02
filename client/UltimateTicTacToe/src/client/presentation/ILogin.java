@@ -5,4 +5,5 @@ public interface ILogin {
 	public void avisoCerrarSesion();
 	public void jugadorNoExiste();
 	public void jugadorYaExiste();
+	public void excepcionRemota();
 }

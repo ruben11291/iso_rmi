@@ -25,15 +25,18 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	private String ip;
 	private int puerto;
 	private String email;
-	private IServer servidor;
 	private FTERD fachada;
 
 	//private Tablero9x9 juego;
 	
-	public Cliente(FTERD f) throws RemoteException, UnknownHostException{
+	public Cliente(FTERD f) throws RemoteException {
 		super();
 		//ip = "localhost";
-		this.ip = InetAddress.getLocalHost().getHostAddress();
+		try {
+			this.ip = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e1) {
+			e1.printStackTrace();
+		}
 		puerto = 4000;              // Puerto por defecto para rmi
 		this.fachada = f;
 		boolean conectado= false;
@@ -47,10 +50,12 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 			catch (AlreadyBoundException eABE) {
 				this.puerto+=1;
 			}
-			catch (MalformedURLException e) {}
+			catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
 			catch (ExportException e){ 
-				this.puerto+=1;}
-			catch (RemoteException e) {
+				this.puerto+=1;
+			}catch (RemoteException e) {
 				System.err.println(e.toString());
 				this.puerto+=1;
 			}
@@ -106,7 +111,6 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	@Override
 	public void respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta, int idPartida) throws RemoteException {
-		System.out.println("Respuesta que viene del servidor: " + respuesta);
 		this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta,  idPartida);
 		
 	}

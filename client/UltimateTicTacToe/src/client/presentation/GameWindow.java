@@ -1102,19 +1102,10 @@ public class GameWindow extends JFrame implements IJuego {
 		fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
 		cTableroP = this.coordenadas.get(j).gety() % 3 ;
 		fTableroP = (int)(this.coordenadas.get(j).gety() / 3);
-		 
-		try {
-			Controller cntrl;
-			cntrl = Controller.get();
-			cntrl.ponerMovimiento(cTableroG, fTableroG, cTableroP, fTableroP);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		Controller cntrl;
+		cntrl = Controller.get();
+		cntrl.ponerMovimiento(cTableroG, fTableroG, cTableroP, fTableroP);
 		
-//		System.out.println(this.coordenadas.get(j).toString());
-//		System.out.println("cTG : "+cTableroG+" fTG : "+fTableroG+" cTp: "+cTableroP+ " fTp : "+fTableroP);
-		 
 	 }
 
 	@Override
@@ -1129,7 +1120,6 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {
-		// TODO Auto-generated method stub
 		System.out.println("En poner ficha: " + cT + " " + fT + " " + cC + " " + fC);
 		if (email.equals(this.ply1name.getText()))
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
@@ -1173,6 +1163,12 @@ public class GameWindow extends JFrame implements IJuego {
 	public void tableroEmpatado(int col, int fila) {
 		System.out.println("Tablero empatado col[" + col + "] fila[" + fila + "]");
 		this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/OSym.png")));	
+	}
+
+	@Override
+	public void excepcionRemota() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
