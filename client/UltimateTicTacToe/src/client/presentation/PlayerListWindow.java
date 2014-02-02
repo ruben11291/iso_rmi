@@ -300,7 +300,8 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 
 	@Override
 	public void excepcionRemota() {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(this,"No se obtiene respuesta del servidor", "Error de red",JOptionPane.ERROR_MESSAGE);
+		this.dispose();
 		
 	}	
 	

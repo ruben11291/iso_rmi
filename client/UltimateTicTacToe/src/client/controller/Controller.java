@@ -112,8 +112,7 @@ public class Controller implements IController {
 		try {
 			modelo.retar(oponente);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.excepcionRemota();
 		}
 	}
 	@Override
@@ -155,7 +154,7 @@ public class Controller implements IController {
 		this.juego = null;
 		
 	}
-	////////////////////////////////////////////////
+
 	@Override 
 	public void oponenteHaAbandonado(){
 		if(this.juego != null){
@@ -164,15 +163,9 @@ public class Controller implements IController {
 		}
 	}
 	
-//	@Override
-//	public void cerrarPartida(Window window) {
-//		this.modelo.cerrarPartida();
-//		this.juego = null;
-//	}
 
 	@Override
 	public void respuestaReto(String retador, String retado, boolean respuesta) {
-		// TODO Auto-generated method stub
 		this.lista.recibirRespuestaReto(this.modelo.getEmailJugador(), retador, retado, respuesta);
 	}
 
@@ -182,8 +175,7 @@ public class Controller implements IController {
 			System.out.println("Respuesta enviada a la fachada: " + respuesta + ", " + retador);
 			this.modelo.enviarRespuestaReto(respuesta, retador);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.excepcionRemota();
 		}
 	}
 	
@@ -199,7 +191,6 @@ public class Controller implements IController {
 
 	@Override
 	public void avisoCerrarSesion() {
-		// TODO Auto-generated method stub
 		this.login.avisoCerrarSesion();
 	}
 
@@ -211,7 +202,6 @@ public class Controller implements IController {
 	
 	@Override
 	public void partidaGanadaPorOponente(String email) {
-		// TODO Auto-generated method stub
 		this.juego.partidaFinalizada(email);
 
 	}

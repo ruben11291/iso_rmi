@@ -234,7 +234,7 @@ public class StartupWindow extends JFrame implements ILogin {
 	@Override
 	public void excepcionRemota() {
 		JOptionPane.showMessageDialog(this,"No se obtiene respuesta del servidor", "Error de red",JOptionPane.ERROR_MESSAGE);
-		this.setVisible(true);
+		System.exit(1);
 		
 	}
 

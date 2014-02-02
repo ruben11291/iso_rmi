@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -186,10 +188,9 @@ public class RegisterDialog extends JDialog implements IRegistro {
 			try {
 				dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
 			} catch (JugadorYaRegistradoException e) {
-				NoticeLabel.setText("El Usuario introducido ya existe");
-				NoticeLabel.setForeground(new Color(200, 0, 0));
-				NoticeLabel.setOpaque(true);
-				NoticeLabel.setBorder(border);	
+				dlg.respuestaRegistro(false);
+			}catch (RemoteException e) {
+				dlg.excepcionRemota();
 			}
 			
 		}
@@ -221,18 +222,17 @@ public class RegisterDialog extends JDialog implements IRegistro {
 				dlg.selection = true;
 				try {
 					dlg.enviarDatosRegistro(dlg.getEmailTextField().getText(), dlg.getPasswdField().getText(), dlg.getRepPasswdField().getText());
-				} catch (JugadorYaExisteException e) {
-					
-					e.printStackTrace();
+				} catch (JugadorYaRegistradoException e) {
+					dlg.respuestaRegistro(false);
 				}
-				catch (Exception e) {
-					// TODO: handle exception
+				catch (RemoteException e) {
+					dlg.excepcionRemota();
 				}
 			}
 		}
 	}
 	
-	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) {
+	public boolean enviarDatosRegistro(String email, String passwd, String passwdcheck) throws RemoteException, JugadorYaRegistradoException {
 		boolean valido = false;
 		if (passwd.equals(passwdcheck)) {
 			Controller cntrl;
@@ -250,6 +250,12 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		return valido;
 	}
 	
+	public void excepcionRemota() {
+		JOptionPane.showMessageDialog(this,"No se obtiene respuesta del servidor", "Error de red",JOptionPane.ERROR_MESSAGE);
+		this.setVisible(false);
+		
+	}
+
 	public void respuestaRegistro(boolean error) {
 		if (error) {
 			NoticeLabel.setText("El Usuario introducido ya existe");
