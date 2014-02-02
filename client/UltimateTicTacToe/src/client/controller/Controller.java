@@ -50,6 +50,7 @@ public class Controller implements IController {
 			else
 				this.juego.tableroEmpatado(e5.getCol(),e5.getFila());
 		}catch (TableroEmpateException  e6) {
+				this.juego.ponerFicha(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 				this.juego.tableroEmpatado(e6.getcT(),e6.getfT());
 		}catch (RemoteException e) {
 			e.printStackTrace();
