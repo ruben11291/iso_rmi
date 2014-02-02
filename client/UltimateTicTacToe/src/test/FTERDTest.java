@@ -9,6 +9,9 @@ import client.domain.FTERD;
 import client.domain.Jugador;
 import client.domain.Tablero9x9;
 
+
+///TODO: todos los test
+
 public class FTERDTest {
 
 	public FTERD fachada1;

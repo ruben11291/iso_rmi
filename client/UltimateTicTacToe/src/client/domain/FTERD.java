@@ -208,7 +208,7 @@ public class FTERD {
 		try {
 			this.proxy.abandonoPartida(this.jugador.getEmail());
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			//No se hace nada
 			e.printStackTrace();
 		}
 		this.tablero = null;
