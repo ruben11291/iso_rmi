@@ -64,7 +64,7 @@ public class Tablero9x9 {
 		return hay;
 	}
 
-	public void comprobarVencedor(String a, String b, String last) {
+	public void comprobarVencedor(String a, String b) {
 		String vencedor = "";
 		
 		if (!hayVencedor()) {
@@ -73,15 +73,14 @@ public class Tablero9x9 {
 				if ((this.tablerillos[i][0].getVencedor().equals(a) || tablerillos[i][0].getEmpate()) && 
 						(this.tablerillos[i][1].getVencedor().equals(a) || tablerillos[i][1].getEmpate()) &&
 						(this.tablerillos[i][2].getVencedor().equals(a) || tablerillos[i][2].getEmpate())) {
-					if (this.tablerillos[i][0].getEmpate() && this.tablerillos[i][1].getEmpate() && this.tablerillos[i][2].getEmpate())
-						vencedor = last;
-					else
 						vencedor = a;
 				} else if ((this.tablerillos[i][0].getVencedor().equals(b) || tablerillos[i][0].getEmpate()) && 
 						(this.tablerillos[i][1].getVencedor().equals(b) || tablerillos[i][1].getEmpate()) &&
 						(this.tablerillos[i][2].getVencedor().equals(b) || tablerillos[i][2].getEmpate())) {
 					vencedor = b;
 				// Comprueba si hay alguna combinación ganadora horizontal
+				} else if (this.tablerillos[i][0].getEmpate() && this.tablerillos[i][1].getEmpate() && this.tablerillos[i][2].getEmpate()) {
+					vencedor = this.getJugadorConElTurno().getEmail();
 				} else if ((this.tablerillos[0][i].getVencedor().equals(a) || tablerillos[0][i].getEmpate()) && 
 						(this.tablerillos[1][i].getVencedor().equals(a) || tablerillos[1][i].getEmpate()) &&
 						(this.tablerillos[2][i].getVencedor().equals(a) || tablerillos[2][i].getEmpate())) {
@@ -90,7 +89,9 @@ public class Tablero9x9 {
 						(this.tablerillos[1][i].getVencedor().equals(b) || tablerillos[1][i].getEmpate()) &&
 						(this.tablerillos[2][i].getVencedor().equals(b) || tablerillos[2][i].getEmpate())) {
 					vencedor = b;
-				}
+				} else if (this.tablerillos[0][i].getEmpate() && this.tablerillos[1][i].getEmpate() && this.tablerillos[2][i].getEmpate()) {
+					vencedor = this.getJugadorConElTurno().getEmail();
+				} 
 				i = 4;
 //				// Comprueba si hay alguna combinación ganadora vertical
 //				if (this.tablerillos[i][0].getVencedor().equals(this.tablerillos[i][1].getVencedor())
@@ -122,7 +123,9 @@ public class Tablero9x9 {
 						(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
 						(this.tablerillos[2][2].getVencedor().equals(b) || tablerillos[2][2].getEmpate())) {
 					vencedor = b;
-				} if ((this.tablerillos[2][0].getVencedor().equals(a) || tablerillos[2][0].getEmpate()) && 
+				} else if (this.tablerillos[0][0].getEmpate() && this.tablerillos[1][1].getEmpate() && this.tablerillos[2][2].getEmpate()) {
+					vencedor = this.getJugadorConElTurno().getEmail();
+				} else if ((this.tablerillos[2][0].getVencedor().equals(a) || tablerillos[2][0].getEmpate()) && 
 						(this.tablerillos[1][1].getVencedor().equals(a) || tablerillos[1][1].getEmpate()) &&
 						(this.tablerillos[0][2].getVencedor().equals(a) || tablerillos[0][2].getEmpate())) {
 					vencedor = a;
@@ -130,6 +133,8 @@ public class Tablero9x9 {
 						(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
 						(this.tablerillos[0][2].getVencedor().equals(b) || tablerillos[0][2].getEmpate())) {
 					vencedor = b;
+				} else if (this.tablerillos[2][0].getEmpate() && this.tablerillos[1][1].getEmpate() && this.tablerillos[0][2].getEmpate()) {
+					vencedor = this.getJugadorConElTurno().getEmail();
 //				if (this.tablerillos[0][0].getVencedor().equals(this.tablerillos[1][1].getVencedor())
 //					&& this.tablerillos[1][1].getVencedor().equals(this.tablerillos[2][2].getVencedor())
 //					&& !this.tablerillos[2][2].getVencedor().equals("")) {
@@ -174,9 +179,6 @@ public class Tablero9x9 {
 	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException {
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
 		tablerillo.colocar(cC, fC, this.ultimoValor);
-		String last;
-		if (this.ultimoValor == 1) last = this.jugadorA.getEmail();
-		else last = this.jugadorB.getEmail();
 		tablerillo.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 		this.ultimoValor *= -1;
 			
@@ -184,14 +186,14 @@ public class Tablero9x9 {
 		this.cambiarTurno();
 		
 		if (!tablerillo.getVencedor().equals("")) {
-			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail(), last);
+			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor, cT, fT);
 			throw new TableroGanadoException(tablerillo.getVencedor(), cT, fT);
 		}
 		if(tablerillo.getVencedor().equals("") && tablerillo.isFull()){
 			tablerillo.setEmpate(true);
-			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail(), last);
+			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor, cT, fT, true);
 			throw new TableroEmpateException(cT,fT);
