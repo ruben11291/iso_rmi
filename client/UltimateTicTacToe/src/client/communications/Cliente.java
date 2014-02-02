@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import client.domain.FTERD;
@@ -78,8 +79,7 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 	}
 
 	@Override
-
-	public void recibirListaDeJugadores(Vector<String> jugadores)
+	public void recibirListaDeJugadores(Hashtable<String, Integer> jugadores)
 			throws RemoteException {
 		try {
 			this.fachada.updateJugadoresConectados(jugadores);

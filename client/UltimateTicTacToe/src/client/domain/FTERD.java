@@ -2,6 +2,7 @@ package client.domain;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import client.communications.Cliente;
@@ -140,7 +141,7 @@ public class FTERD {
 			cntrl.excepcionRemota();
 		}
 	}
-	public void updateJugadoresConectados(Vector <String> jugadores){
+	public void updateJugadoresConectados(Hashtable <String, Integer> jugadores){
 //		System.out.println(jugadores);
 		Controller c = Controller.get();
 		c.enviarListaJugadores(jugadores);

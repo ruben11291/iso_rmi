@@ -158,6 +158,7 @@ public class StartupWindow extends JFrame implements ILogin {
 				if (dlg.getSelection() == true) {
 					System.out.println("Iniciando registro");
 						stw.NoticeLabel.setText("Usuario registrado con éxito.");
+						stw.NoticeLabel.setVisible(true);
 						NoticeLabel.setForeground(new Color(0, 200, 0));
 						NoticeLabel.setOpaque(true);
 						NoticeLabel.setBorder(border);
@@ -167,6 +168,7 @@ public class StartupWindow extends JFrame implements ILogin {
 					System.out.println("Fin registro");
 				} else {
 					stw.NoticeLabel.setText("");
+					stw.NoticeLabel.setVisible(false);
 					invalidArgument = false;
 				}
 				f.dispose();
@@ -193,7 +195,7 @@ public class StartupWindow extends JFrame implements ILogin {
 	public void enviarDatosLogin(String email, String passwd) {
 		Controller cntrl;
 		cntrl = Controller.get();
-		final PlayerListWindow playerListWindow = new PlayerListWindow();
+		final PlayerListWindow playerListWindow = new PlayerListWindow(email);
 		playerListWindow.setLocationRelativeTo(null);
 		cntrl.enviarDatosLogin(email, passwd);
 	}	

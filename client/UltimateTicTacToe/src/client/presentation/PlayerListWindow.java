@@ -20,14 +20,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 import client.controller.Controller;
 
 import java.awt.Color;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Vector;
 
 public class PlayerListWindow extends JFrame implements WindowListener, IListaJugadores {
@@ -36,20 +40,20 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	
 	private JToolBar mGameListToolBar = null;
 	private JPanel mGameListPanel = null;
+	private JLabel selfLabel = null;
 	private JTable mPlayerList = null;
-	//private JTable mPlayList = null;
+	private JTable mPlayingList = null;
 	
 	private JToolBar mPlayToolBar = null;
 	private JPanel mGamePanel = null;
 	private JPanel mGameInfoPanel = null;
 	
-	private JButton logoutButton; //Botón para quitar y salir del juego (cerrar sesión)
-	private JButton joinGameButton; //Botón para unirse a una partida
-	//private JButton updateListButton;
+	private JButton logoutButton;
 	private JButton createGameButton;
 	
-	public PlayerListWindow() {
+	public PlayerListWindow(String self) {
 		super();
+		this.selfLabel = new JLabel(self);
 		Controller cntrl;
 		cntrl = Controller.get();
 		cntrl.setLista(this);
@@ -58,11 +62,11 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	
 
 	private void setupListGUI() {		
-		// TODO Auto-generated method stub
 		this.setResizable(false);
 		this.setTitle("Ultimate Tic-Tac-Toe");
 		this.setSize(250, 400);
 		this.addWindowListener(this);
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		
 		if (mPlayToolBar != null) {
 			mPlayToolBar.setVisible(false);
@@ -123,10 +127,17 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			
 			mPlayerList = new JTable(new DefaultTableModel(new Object[]{"Jugadores disponibles"}, 0){
 				 @Override
-				    public boolean isCellEditable (int fila, int columna) {
+				 public boolean isCellEditable (int fila, int columna) {
 				        return false;
 				 }
 			});		
+			
+			mPlayingList = new JTable(new DefaultTableModel(new Object[]{"Jugando"}, 0){
+				 @Override
+				 public boolean isCellEditable (int fila, int columna) {
+				        return false;
+				 }
+			});	
 			
 			DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
 	            @Override
@@ -140,9 +151,11 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	            }
 	        };
 			
+	        mGameListPanel.add(this.selfLabel);
+	        
 			mPlayerList.setBackground(Color.WHITE);
 			mPlayerList.setFont(new Font("Dialog", Font.BOLD, 16));
-			mPlayerList.setForeground(Color.BLUE);
+			mPlayerList.setForeground(Color.GREEN);
 			mPlayerList.getColumnModel().getColumn(0).setCellRenderer(r);
 			mPlayerList.getTableHeader().setFont(new Font( "FreeSans" , Font.BOLD, 17 ));
 			
@@ -151,6 +164,19 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 
 			mPlayerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			mGameListPanel.add(playerListPanel);
+			
+			mPlayingList.setBackground(Color.WHITE);
+			mPlayingList.setFont(new Font("Dialog", Font.BOLD, 16));
+			mPlayingList.setForeground(Color.BLUE);
+			mPlayingList.getColumnModel().getColumn(0).setCellRenderer(r);
+			mPlayingList.getTableHeader().setFont(new Font( "FreeSans" , Font.BOLD, 17 ));
+			
+			mPlayingList.setRowHeight(25);
+			final JScrollPane playingListPanel = new JScrollPane(mPlayingList);
+
+			mPlayingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			mGameListPanel.add(playingListPanel);
+			
 		}
 		return mGameListPanel;
 	}
@@ -255,15 +281,22 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	
 
 	@Override
-	public void recibirRespuestaLista(Vector<String> jugadores) {
+	public void recibirRespuestaLista(Hashtable <String, Integer> jugadores) {
 		if (!this.isVisible()) this.setVisible(true);
-		DefaultTableModel model = (DefaultTableModel) this.mPlayerList.getModel();
-		int rowCount = model.getRowCount();
+		DefaultTableModel modelDisponibles = (DefaultTableModel) this.mPlayerList.getModel();
+		DefaultTableModel modelJugando = (DefaultTableModel) this.mPlayingList.getModel();
+		int rowCount = modelDisponibles.getRowCount();
 		for(int i = rowCount - 1; i >=0; i--){
-		    model.removeRow(i);
+		    modelDisponibles.removeRow(i);
 		}
-		for (String jugador : jugadores) {
-			model.addRow(new String[]{jugador});
+		Enumeration<String> emails = jugadores.keys();
+		while (emails.hasMoreElements()) {
+			String email = emails.nextElement();
+			if (!email.equals(this.selfLabel.getText()))
+				if (jugadores.get(email) == 0)
+					modelDisponibles.addRow(new String[]{email});
+				else
+					modelJugando.addRow(new String[]{email});
 		}
 	}
 

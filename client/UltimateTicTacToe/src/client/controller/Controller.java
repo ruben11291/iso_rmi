@@ -1,6 +1,7 @@
 package client.controller;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import client.domain.FTERD;
@@ -105,7 +106,7 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void enviarListaJugadores(Vector<String> jugadores) {
+	public void enviarListaJugadores(Hashtable <String, Integer> jugadores) {
 		lista.recibirRespuestaLista(jugadores);
 	}
 	@Override

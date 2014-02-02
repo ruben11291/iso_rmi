@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import org.junit.Before;
@@ -97,7 +98,7 @@ public class ClienteParaTest extends UnicastRemoteObject implements ICliente {
 	}
 
 	@Override
-	public void recibirListaDeJugadores(Vector<String> arg0)
+	public void recibirListaDeJugadores(Hashtable <String, Integer> arg0)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		
