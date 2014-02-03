@@ -190,7 +190,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
 		System.out.println("Llega movimiento");
 		this.fachada = FTERD.get();
-		this.fachada.poner(idPartida, email, cT, fT, cC, fC);
+		Jugador oponente =  this.fachada.poner(idPartida, email, cT, fT, cC, fC);
+		this.enviarMovimientoAOponente(idPartida, oponente.getEmail(), cT, fT, cC, fC);
 	}
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException, UnknownHostException {

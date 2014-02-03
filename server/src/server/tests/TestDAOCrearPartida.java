@@ -32,7 +32,11 @@ public class TestDAOCrearPartida extends TestCase{
 	Jugador jB = new Jugador("adol.hitler@nsdap.ger","passwd2");
 	
 	Jugador x;
-	
+
+	@Before
+	public void setUp(){
+		FuncionesAuxiliaresTests.borrarBD();
+	}
 
 	@Test
 	public void test1CrearPartida() throws ClassNotFoundException, SQLException {

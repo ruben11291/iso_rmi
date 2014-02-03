@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import client.exceptions.JugadorNoExisteException;
@@ -15,11 +16,15 @@ import server.domain.Jugador;
 import server.domain.Tablero9x9;
 
 public class TestDAOJugador {
-
-	Jugador j = new Jugador ("jose.stalin@uclm.es","jose");
+	
+	@Before
+	public void setUp(){
+		FuncionesAuxiliaresTests.borrarBD();
+	}
+	
 	@Test
 	public void test1InsertarYEliminar() {
-//		Jugador j = new Jugador ("jose.stalin@uclm.es");
+		Jugador j = new Jugador ("jose.stalin@uclm.es","jose");
 		try{
 			j.insert();
 			j.delete();

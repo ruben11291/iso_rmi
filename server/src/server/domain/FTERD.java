@@ -62,37 +62,40 @@ public class FTERD {
 		j.insert();
 	}
 
-	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) {
-		if(!this.tableros.containsKey(idPartida)){
-			System.out.println("NO CONTIENE PARTIDA");
-			return;
-		}
-		Tablero9x9 partida = this.tableros.get(idPartida);
+	public Jugador poner(int idPartida, String email, int cT, int fT, int cC, int fC) {
+		Jugador oponente = null;
+		if(this.tableros.containsKey(idPartida)){
+			
 		
-		if (partida!=null){
-			try {
-				partida.colocar(email, cT, fT, cC, fC);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}			
+			Tablero9x9 partida = this.tableros.get(idPartida);
+			
+			if (partida!=null){
+				try {
+					partida.colocar(email, cT, fT, cC, fC);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}			
+	
+				oponente = partida.getOpenenteDE(email);
+				
+	//			Server s;
+	//			System.out.println(email);
+	//			try {
+	//				s = Server.get();
+	//				s.enviarMovimientoAOponente(idPartida, oponente.getEmail(), cT, fT, cC, fC);
+	//			} catch (RemoteException e) {
+	//				// TODO Auto-generated catch block
+	//				e.printStackTrace();
+	//			} catch (UnknownHostException e) {
+	//				// TODO Auto-generated catch block
+	//				e.printStackTrace();
+	//			}		
 
-			Jugador oponente = partida.getOpenenteDE(email);
-			Server s;
-			System.out.println(email);
-			try {
-				s = Server.get();
-				s.enviarMovimientoAOponente(idPartida, oponente.getEmail(), cT, fT, cC, fC);
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-
+			}
 		}
+		return oponente;
 	}
 	
 	public void retar(String retador, String retado){
