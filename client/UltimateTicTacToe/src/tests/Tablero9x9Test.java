@@ -241,31 +241,29 @@ public class Tablero9x9Test {
 //	}
 	
 	@Test
-	public void PartidaGanadaTest() throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException{
-		for (int f=0, c=0; f<3; f++, c++){
-			try {
-				tablero.colocar(f, c, 0, 0); // j1
-				tablero.colocar(f, c, 1, 0); // j2
-				tablero.colocar(f, c, 0, 1); // j1
-				tablero.colocar(f, c, 1, 1); // j2
-				tablero.colocar(f, c, 0, 2); // j1 Gana tablero y recibe TableroGanadoException
-				fail("Esperaba TableroGanadoException");
-			} catch (TableroGanadoException e) {
-				tablero.colocar(f, c, 1, 2); // j2
-				assertSame(e.getEmail(), j1.getEmail());			
-			} catch (PartidaFinalizadaException e) {
-				assertTrue(f==2);
-				assertSame(e.getEmail(), j1.getEmail());
-				assertSame(tablero.getVencedor(), e.getEmail());
-			} catch (TableroEmpateException e) {
-				fail("No esperaba empate");
-			}
+	public void PartidaGanadaTest(){
+		try {
+			this.GanarTablero(0, 0, j1);
+			this.GanarTablero(0, 1, j1);
+			this.GanarTablero(0, 2, j1);
+			fail("Esperaba PartidaFinalizadaException");
+		} catch (PartidaFinalizadaException e) {
+			assertSame(e.getEmail(), j1.getEmail());
+			assertSame(tablero.getVencedor(), e.getEmail());
+		} catch (TableroGanadoException e) {
+			assertSame(e.getEmail(), j1.getEmail());
+		} catch (TableroEmpateException e) {
+			fail("No esperaba empate");
 		}
 	}
 	
 	@Test
 	public void PartidaEmpatadaTest(){
 
+		/*  X  0  X
+		 *  0  X  0
+		 *  0  X  0
+		 * */
 		try {
 			this.GanarTablero(0,0,j1);
 			this.GanarTablero(0,1,j2);
@@ -281,17 +279,18 @@ public class Tablero9x9Test {
 			
 		} catch (PartidaFinalizadaException e) {
 			assertTrue(e.getEmpate());
-		} catch (TableroGanadoException e) {
 		} catch (TableroEmpateException e) {
 			fail("No esperaba empatar ningun tablerillo");
-		}
+		} catch (TableroGanadoException e) {
+		} 
 	}
 	
 	private void GanarTablero(int fTablero, int cTablero, Jugador j) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException{
 		if (tablero.getJugadorConElTurno() != j) tablero.setJugadorConelTurno(j);
 		for (int f=0, c=0; f<3; c++){
-			tablero.colocar(fTablero, cTablero, 0, c); //
-			tablero.colocar(fTablero, cTablero, 1, c); // La ultima no coloca porque salta TableroGanado
+			tablero.colocar(fTablero, cTablero, 0, c); // pone j
+			tablero.colocar(fTablero, cTablero, 1, c); // pone oponene a j. 
+													   // La ultima no coloca porque salta TableroGanado
 		}
 	}
 
