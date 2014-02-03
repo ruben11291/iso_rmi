@@ -1,4 +1,4 @@
-package test;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -98,7 +98,7 @@ public class Tablero9x9Test {
 			assertTrue(tablero.getVencedor().equals(""));
 
 		}
-			catch (NoTienesElTurnoException | NoEstaJugandoException
+		catch (NoTienesElTurnoException | NoEstaJugandoException
 				| MovimientoNoValidoException
 				| PartidaFinalizadaException | CasillaOcupadaException
 				| TableroGanadoException | TableroEmpateException e) {
@@ -120,7 +120,7 @@ public class Tablero9x9Test {
 			assertTrue(tablero.hayVencedor()==false);
 			assertTrue(tablero.getVencedor().equals(""));
 		}
-			catch (NoTienesElTurnoException | NoEstaJugandoException
+		catch (NoTienesElTurnoException | NoEstaJugandoException
 				| CoordenadasNoValidasException
 				| PartidaFinalizadaException |MovimientoNoValidoException
 				| TableroGanadoException | TableroEmpateException e) {
@@ -138,7 +138,7 @@ public class Tablero9x9Test {
 			assertTrue(tablero.hayVencedor()==false);
 			assertTrue(tablero.getVencedor().equals(""));
 		}
-			catch (NoTienesElTurnoException | NoEstaJugandoException
+		catch (NoTienesElTurnoException | NoEstaJugandoException
 				| CoordenadasNoValidasException
 				| PartidaFinalizadaException |MovimientoNoValidoException
 				| TableroGanadoException | TableroEmpateException e) {
@@ -215,35 +215,84 @@ public class Tablero9x9Test {
 	
 
 	
+//	@Test
+//	public void PartidaGanadaTest(){
+//		try{
+//			
+//			j1.poner(0, 0, 0, 0);
+//			
+//			
+//			
+//			fail("No debería llegar aquí");
+//			
+//		}
+//		catch(TableroGanadoException | TableroEmpateException e ){
+//			assertTrue(tablero.hayVencedor() == false);
+//		}
+//		catch (PartidaFinalizadaException e) {
+//			assertTrue(e.getEmpate()==false);
+//			assertTrue(tablero.getVencedor().equals("alguno"));//TODO:
+//		
+//		}catch (NoEstaJugandoException | CoordenadasNoValidasException
+//					| MovimientoNoValidoException | NoTienesElTurnoException
+//					| CasillaOcupadaException  e) {
+//				fail("No debería saltar excepcion");
+//		}
+//	}
+	
 	@Test
-	public void PartidaGanadaTest(){
-		try{
-			
-			j1.poner(0, 0, 0, 0);
-			
-			
-			
-			fail("No debería llegar aquí");
-			
-		}
-		catch(TableroGanadoException | TableroEmpateException e ){
-			assertTrue(tablero.hayVencedor() == false);
-		}
-		catch (PartidaFinalizadaException e) {
-			assertTrue(e.getEmpate()==false);
-			assertTrue(tablero.getVencedor().equals("alguno"));//TODO:
-		
-		}catch (NoEstaJugandoException | CoordenadasNoValidasException
-					| MovimientoNoValidoException | NoTienesElTurnoException
-					| CasillaOcupadaException  e) {
-				fail("No debería saltar excepcion");
+	public void PartidaGanadaTest() throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException{
+		for (int f=0, c=0; f<3; f++, c++){
+			try {
+				tablero.colocar(f, c, 0, 0); // j1
+				tablero.colocar(f, c, 1, 0); // j2
+				tablero.colocar(f, c, 0, 1); // j1
+				tablero.colocar(f, c, 1, 1); // j2
+				tablero.colocar(f, c, 0, 2); // j1 Gana tablero y recibe TableroGanadoException
+				fail("Esperaba TableroGanadoException");
+			} catch (TableroGanadoException e) {
+				tablero.colocar(f, c, 1, 2); // j2
+				assertSame(e.getEmail(), j1.getEmail());			
+			} catch (PartidaFinalizadaException e) {
+				assertTrue(f==2);
+				assertSame(e.getEmail(), j1.getEmail());
+				assertSame(tablero.getVencedor(), e.getEmail());
+			} catch (TableroEmpateException e) {
+				fail("No esperaba empate");
+			}
 		}
 	}
 	
 	@Test
 	public void PartidaEmpatadaTest(){
-		
+
+		try {
+			this.GanarTablero(0,0,j1);
+			this.GanarTablero(0,1,j2);
+			this.GanarTablero(0,2,j1);
+			
+			this.GanarTablero(1,0,j2);
+			this.GanarTablero(1,1,j1);
+			this.GanarTablero(1,2,j2);
+			
+			this.GanarTablero(2,0,j2);
+			this.GanarTablero(2,1,j1);
+			this.GanarTablero(2,2,j2);
+			
+		} catch (PartidaFinalizadaException e) {
+			assertTrue(e.getEmpate());
+		} catch (TableroGanadoException e) {
+		} catch (TableroEmpateException e) {
+			fail("No esperaba empatar ningun tablerillo");
+		}
 	}
-//		
+	
+	private void GanarTablero(int fTablero, int cTablero, Jugador j) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException{
+		if (tablero.getJugadorConElTurno() != j) tablero.setJugadorConelTurno(j);
+		for (int f=0, c=0; f<3; c++){
+			tablero.colocar(fTablero, cTablero, 0, c); //
+			tablero.colocar(fTablero, cTablero, 1, c); // La ultima no coloca porque salta TableroGanado
+		}
+	}
 
 }

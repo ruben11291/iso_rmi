@@ -22,7 +22,7 @@ public class Proxy {
 	  
 	private Proxy() throws RemoteException, NotBoundException {
 		try{
-			this.server=(IServer) Naming.lookup("rmi://localhost:3002/servidor");//172.19.177.184
+			this.server=(IServer) Naming.lookup("rmi://172.19.213.48:3002/servidor");//172.19.177.184
 		}catch(MalformedURLException e){
 			e.printStackTrace();//No se va a producir
 		}
