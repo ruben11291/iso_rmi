@@ -38,19 +38,19 @@ public class Controller implements IController {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
 		}catch (NoEstaJugandoException e) {
-			System.out.println("NO ESTA JUGANDO EXCEPTION");
+			System.out.println("El oponente no está jugando.");
 			e.printStackTrace();
 		} catch (CoordenadasNoValidasException e) {
-			System.out.println("Coordenadas no válidas exception");
+			System.out.println("Coordenadas no válidas.");
 			e.printStackTrace();
 		}catch (MovimientoNoValidoException e1){
-			// TODO: INFORMAR A LA INTERFAZ
-			System.out.println("MOVIMIENTO NO VÁLIDO");
+			this.juego.movimientoInvalido(cT, fT, cC, fC);
+			System.out.println("Movimiento no válido");
 		}catch (NoTienesElTurnoException e2) {
 			// TODO: INFORMAR A LA INTERFAZ
-			System.out.println("NO TIENES EL TURNO");
+			System.out.println("No tienes el turno.");
 		}catch (CasillaOcupadaException e3){
-			System.out.println("CASILLA OCUPADA");
+			System.out.println("Casilla ocupada.");
 		}catch (TableroGanadoException e4) {
 			System.out.println("Excepción: " + e4.getEmail() + " " + e4.getcT() + " " + e4.getfT());
 			this.juego.tableroGanado(e4.getEmail(), e4.getcT(), e4.getfT());

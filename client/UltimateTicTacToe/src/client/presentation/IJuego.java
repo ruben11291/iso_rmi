@@ -9,4 +9,5 @@ public interface IJuego {
 	public void tableroGanado(String email, int col, int fila);
 	public void tableroEmpatado(int col, int fila);
 	public void excepcionRemota();
+	public void movimientoInvalido(int cT, int fT, int cC, int fC);
 }

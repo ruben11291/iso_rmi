@@ -2,6 +2,8 @@ package client.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -14,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -50,8 +53,12 @@ public class GameWindow extends JFrame implements IJuego {
 		public String toString(){return x+" "+y;}
 	}
 	
-	 private JLabel [][] tableroJuego = new JLabel[9][9];
-	 private Hashtable <JLabel, Coordenada> coordenadas = new Hashtable<JLabel, Coordenada> ();
+	private JLabel [][] tableroJuego = new JLabel[9][9];
+	public JLabel[][] getTableroJuego() {
+		return tableroJuego;
+	}
+
+	private Hashtable <JLabel, Coordenada> coordenadas = new Hashtable<JLabel, Coordenada> ();
 	
 	private JLabel minimapLabel;
 	private JLabel ply1;
@@ -66,6 +73,7 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel turnoPly1;
 	private JLabel turnoPly2;
 	private JLabel lastMove;
+	private JLabel wrongMove;
 
 	
 	public GameWindow(String self, String retador, String retado) {
@@ -1086,7 +1094,7 @@ public class GameWindow extends JFrame implements IJuego {
 		
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent we){
-				int eleccion = JOptionPane.showConfirmDialog(null, "Desea salir?");
+				int eleccion = JOptionPane.showConfirmDialog(null, "¿Deseas abandonar la partida?");
 				if ( eleccion == 0) {
 					we.getWindow().dispose();
 					//hilo
@@ -1101,14 +1109,13 @@ public class GameWindow extends JFrame implements IJuego {
 
 		 System.out.println("COMPROBAR MOVIMIENTO VALIDO");
 		 int cTableroG,fTableroG, cTableroP, fTableroP;
-		cTableroG = this.coordenadas.get(j).getx() % 3;
-		fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
-		cTableroP = this.coordenadas.get(j).gety() % 3 ;
-		fTableroP = (int)(this.coordenadas.get(j).gety() / 3);
-		Controller cntrl;
-		cntrl = Controller.get();
-		cntrl.ponerMovimiento(cTableroG, fTableroG, cTableroP, fTableroP);
-		
+		 cTableroG = this.coordenadas.get(j).getx() % 3;
+		 fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
+		 cTableroP = this.coordenadas.get(j).gety() % 3 ;
+		 fTableroP = (int)(this.coordenadas.get(j).gety() / 3);
+		 Controller cntrl;
+		 cntrl = Controller.get();
+		 cntrl.ponerMovimiento(cTableroG, fTableroG, cTableroP, fTableroP);
 	 }
 
 	@Override
@@ -1178,7 +1185,36 @@ public class GameWindow extends JFrame implements IJuego {
 		this.dispose();
 	}
 
+	@Override
+	public void movimientoInvalido(int cT, int fT, int cC, int fC) {
+		System.out.println("Pintando label");
+		this.wrongMove = this.tableroJuego[cT + fT * 3][cC + fC * 3];
+//		this.tableroJuego[cT + fT * 3][cC + fC * 3].setBackground(Color.red);
+//		this.tableroJuego[cT + fT * 3][cC + fC * 3].setOpaque(true);
+        final Timer timer = new Timer(10, null);
 
+        ActionListener listener = new ActionListener() {
+        	int gb = 254;
+        	int hop = 50;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				wrongMove.setBackground(new Color(255, gb, gb));
+				wrongMove.setOpaque(true);
+				gb -= hop;
+				if (gb >= 255) {
+					wrongMove.setOpaque(false);
+					timer.stop();
+				}
+				if (gb <= 0) {
+					hop = -50;
+					gb -= hop;
+				}				
+			}
+        };
+        timer.addActionListener(listener);
+        timer.start();		
+		this.tableroJuego[cT + fT * 3][cC + fC * 3].setOpaque(false);
+	}
 }
 
 class CerrarJuegoThread extends Thread {
