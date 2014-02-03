@@ -84,6 +84,7 @@ public class FTERD {
 			throw e1;
 		} catch(PartidaFinalizadaException e2) {
 			try {
+				System.out.println("PARTIDA FINALIZADA");
 				proxy.poner(email, cT, fT, cC, fC,this.tablero.getId());
 				proxy.partidaFinalizada(this.tablero.getId());
 			} catch (RemoteException e) {
