@@ -42,6 +42,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	private JToolBar mGameListToolBar = null;
 	private JPanel mGameListPanel = null;
 	private JLabel selfLabel = null;
+	private String self;
 	private JTable mPlayerList = null;
 	private JTable mPlayingList = null;
 	
@@ -54,7 +55,8 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	
 	public PlayerListWindow(String self) {
 		super();
-		this.selfLabel = new JLabel("Sesión iniciada de: "+self);
+		this.self = self;
+		this.selfLabel = new JLabel("Sesión iniciada de: " + self);
 		Controller cntrl;
 		cntrl = Controller.get();
 		cntrl.setLista(this);
@@ -303,7 +305,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		Enumeration<String> emails = jugadores.keys();
 		while (emails.hasMoreElements()) {
 			String email = emails.nextElement();
-			if (!email.equals(this.selfLabel.getText()))
+			if (!email.equals(this.self))
 				if (jugadores.get(email) == 0)
 					modelDisponibles.addRow(new String[]{email});
 				else
