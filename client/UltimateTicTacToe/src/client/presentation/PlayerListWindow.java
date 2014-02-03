@@ -33,6 +33,7 @@ import java.awt.Color;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
+import javax.swing.SwingConstants;
 
 public class PlayerListWindow extends JFrame implements WindowListener, IListaJugadores {
 	
@@ -53,7 +54,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	
 	public PlayerListWindow(String self) {
 		super();
-		this.selfLabel = new JLabel(self);
+		this.selfLabel = new JLabel("Sesión iniciada de: "+self);
 		Controller cntrl;
 		cntrl = Controller.get();
 		cntrl.setLista(this);
@@ -121,7 +122,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	private JPanel getGameListPanel() {
 		if (mGameListPanel == null) {
 			mGameListPanel = new JPanel();
-			mGameListPanel.setBackground(Color.WHITE);
+			mGameListPanel.setBackground(new Color(0,139,139));
 			mGameListPanel.setLayout(new BoxLayout(mGameListPanel,
 				BoxLayout.Y_AXIS));
 			
@@ -150,7 +151,13 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	                return this;
 	            }
 	        };
-			
+	        
+			selfLabel.setBackground(new Color(0,139,139));
+			selfLabel.setFont(new Font("Dialog", Font.BOLD, 14));
+			selfLabel.setForeground(Color.WHITE);
+			selfLabel.setOpaque(true);
+			selfLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			selfLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	        mGameListPanel.add(this.selfLabel);
 	        
 			mPlayerList.setBackground(Color.WHITE);
