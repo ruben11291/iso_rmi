@@ -1168,15 +1168,15 @@ public class GameWindow extends JFrame implements IJuego {
 	public void tableroGanado(String email, int col, int fila) {
 		System.out.println("Tablero ganado col[" + col + "] fila[" + fila + "] interfaz: " + this.ply1name.getText() + " " + email);
 		if (email.equals(this.ply1name.getText()))
-			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
+			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/OSym.png")));
 		else
-			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/X2.png")));
 	}
 
 	@Override
 	public void tableroEmpatado(int col, int fila) {
 		System.out.println("Tablero empatado col[" + col + "] fila[" + fila + "]");
-		this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/OSym.png")));	
+		this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/empate.png")));	
 	}
 
 	@Override
