@@ -289,6 +289,9 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		for(int i = rowCount - 1; i >=0; i--){
 		    modelDisponibles.removeRow(i);
 		}
+		for(int i = rowCount - 1; i >=0; i--){
+		    modelJugando.removeRow(i);
+		}
 		Enumeration<String> emails = jugadores.keys();
 		while (emails.hasMoreElements()) {
 			String email = emails.nextElement();
