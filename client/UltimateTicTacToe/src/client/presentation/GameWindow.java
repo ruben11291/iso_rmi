@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Hashtable;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -63,6 +65,7 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel ultimate, tictactoe;
 	private JLabel turnoPly1;
 	private JLabel turnoPly2;
+	private JLabel lastMove;
 
 	
 	public GameWindow(String self, String retador, String retado) {
@@ -1125,6 +1128,10 @@ public class GameWindow extends JFrame implements IJuego {
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		else
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+		if (this.lastMove != null)
+			this.lastMove.setBorder(null);
+		this.lastMove = this.tableroJuego[cT + fT * 3][cC + fC * 3];
+		this.lastMove.setBorder(BorderFactory.createLineBorder(Color.green, 5));
 		this.cambiarTurno();
 	}
 

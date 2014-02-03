@@ -289,6 +289,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		for(int i = rowCount - 1; i >=0; i--){
 		    modelDisponibles.removeRow(i);
 		}
+		rowCount = modelJugando.getRowCount();
 		for(int i = rowCount - 1; i >=0; i--){
 		    modelJugando.removeRow(i);
 		}
