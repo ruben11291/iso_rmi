@@ -131,8 +131,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.stubs.remove(email);
 		this.abandonoPartida(email);
 		this.actualizarListaDeJugadores();
-		
-		
 	}
 	
 	// El jugador con email 'email' ha abandonado la partida. Se busca a su oponente y 
@@ -157,6 +155,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 			}
 		}
+		this.actualizarListaDeJugadores();
 	}	
 	
 	///Registar jugador///
@@ -234,8 +233,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			ICliente IRetado = this.stubs.get(retado);
 			IRetado.iniciarPartida(idPartida, retador, retado);
 		}
-
-		
+		this.actualizarListaDeJugadores();
 	}
 
 	/* Este metodo se ha creado para las pruebas de la comunicacion*/
