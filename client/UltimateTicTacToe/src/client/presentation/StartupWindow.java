@@ -134,7 +134,6 @@ public class StartupWindow extends JFrame implements ILogin {
 
 	}
 
-
 	private class StartupRegisterMouseAdapter extends MouseAdapter {
 
 		private final StartupWindow stw;
@@ -159,9 +158,9 @@ public class StartupWindow extends JFrame implements ILogin {
 					System.out.println("Iniciando registro");
 						stw.NoticeLabel.setText("Usuario registrado con éxito.");
 						stw.NoticeLabel.setVisible(true);
-						NoticeLabel.setForeground(new Color(0, 200, 0));
-						NoticeLabel.setOpaque(true);
-						NoticeLabel.setBorder(border);
+						stw.NoticeLabel.setForeground(new Color(0, 200, 0));
+						stw.NoticeLabel.setOpaque(true);
+						stw.NoticeLabel.setBorder(border);
 						stw.EmailTextField.setText(dlg.getEmail());
 						stw.PasswdField.requestFocusInWindow();
 						invalidArgument = false;
@@ -208,10 +207,9 @@ public class StartupWindow extends JFrame implements ILogin {
 			NoticeLabel.setOpaque(true);
 			NoticeLabel.setBorder(border);
 		} else {
+			NoticeLabel.setText("");
+			NoticeLabel.setVisible(false);
 			this.setVisible(false);
-			//final PlayerListWindow playerListWindow = new PlayerListWindow();
-			//playerListWindow.setLocationRelativeTo(null);
-			//playerListWindow.setVisible(true);
 		}		
 	}
 
@@ -223,19 +221,19 @@ public class StartupWindow extends JFrame implements ILogin {
 
 	@Override
 	public void jugadorNoExiste() {
-		JOptionPane.showMessageDialog(this,"Jugador no existe", "Error de login",JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, "Jugador no existe", "Error de login", JOptionPane.ERROR_MESSAGE);
 
 	}
 
 	@Override
 	public void jugadorYaExiste() {
-		JOptionPane.showMessageDialog(this,"Jugador ya esta en el sistema", "Error de login",JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, "Jugador ya esta en el sistema", "Error de login", JOptionPane.ERROR_MESSAGE);
 		
 	}
 
 	@Override
 	public void excepcionRemota() {
-		JOptionPane.showMessageDialog(this,"No se obtiene respuesta del servidor", "Error de red",JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, "No se obtiene respuesta del servidor", "Error de red", JOptionPane.ERROR_MESSAGE);
 		System.exit(1);
 		
 	}
