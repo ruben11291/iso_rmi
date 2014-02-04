@@ -104,7 +104,7 @@ public class GameWindow extends JFrame implements IJuego {
 		/*----------------------------- Casillas TABLERO 1 -----------------------------------------*/
 		tableroJuego[0][0] = new JLabel();
 		tableroJuego[0][0].setBackground(Color.WHITE);
-		tableroJuego[0][0].setBounds(49, 126, 48, 53);
+		tableroJuego[0][0].setBounds(44, 126, 53, 60);
 		tableroJuego[0][0].addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 FichaMouseClicked(evt, tableroJuego[0][0]);
@@ -120,7 +120,7 @@ public class GameWindow extends JFrame implements IJuego {
 			}
 		});
 		tableroJuego[0][1].setBackground(UIManager.getColor("Button.WITHE"));
-		tableroJuego[0][1].setBounds(109, 126, 53, 53);
+		tableroJuego[0][1].setBounds(105, 126, 53, 60);
 		StartupPanel.add(tableroJuego[0][1]);
 		this.coordenadas.put(tableroJuego[0][1], new Coordenada(0,1));
 		
@@ -131,7 +131,7 @@ public class GameWindow extends JFrame implements IJuego {
 			}
 		});
 		tableroJuego[0][2].setBackground(UIManager.getColor("Button.WHITE"));
-		tableroJuego[0][2].setBounds(175, 126, 48, 53);
+		tableroJuego[0][2].setBounds(170, 126, 53, 60);
 		StartupPanel.add(tableroJuego[0][2]);
 		this.coordenadas.put(tableroJuego[0][2], new Coordenada(0,2));
 		
@@ -144,7 +144,7 @@ public class GameWindow extends JFrame implements IJuego {
 		this.coordenadas.put(tableroJuego[0][3], new Coordenada(0,3));
 		
 		tableroJuego[0][3].setBackground(UIManager.getColor("Button.WHITE"));
-		tableroJuego[0][3].setBounds(49, 191, 48, 53);
+		tableroJuego[0][3].setBounds(49, 191, 53, 60);
 		StartupPanel.add(tableroJuego[0][3]);
 		
 		tableroJuego[0][4] = new JLabel();
@@ -156,7 +156,7 @@ public class GameWindow extends JFrame implements IJuego {
 		
 
 		tableroJuego[0][4].setBackground(UIManager.getColor("Button.WHITE"));
-		tableroJuego[0][4].setBounds(113, 195, 53, 49);
+		tableroJuego[0][4].setBounds(105, 191, 53, 60);
 		StartupPanel.add(tableroJuego[0][4]);
 		this.coordenadas.put(tableroJuego[0][4], new Coordenada(0,4));
 		
@@ -167,7 +167,7 @@ public class GameWindow extends JFrame implements IJuego {
 			}
 		});
 		tableroJuego[0][5].setBackground(UIManager.getColor("Button.WHITE"));
-		tableroJuego[0][5].setBounds(175, 191, 48, 53);
+		tableroJuego[0][5].setBounds(170, 191, 53, 60);
 		StartupPanel.add(tableroJuego[0][5]);
 		this.coordenadas.put(tableroJuego[0][5], new Coordenada(0,5));
 		
@@ -177,7 +177,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[0][6]);
 			}
 		});
-		tableroJuego[0][6].setBounds(49, 253, 55, 53);
+		tableroJuego[0][6].setBounds(44, 253, 53, 60);
 		StartupPanel.add(tableroJuego[0][6]);
 		this.coordenadas.put(tableroJuego[0][6], new Coordenada(0,6));
 		
@@ -187,7 +187,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[0][7]);
 			}
 		});
-		tableroJuego[0][7].setBounds(109, 256, 55, 50);
+		tableroJuego[0][7].setBounds(105, 253, 53, 60);
 		StartupPanel.add(tableroJuego[0][7]);
 		this.coordenadas.put(tableroJuego[0][7], new Coordenada(0,7));
 		
@@ -197,7 +197,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[0][8]);
 			}
 		});
-		tableroJuego[0][8].setBounds(175, 256, 48, 50);
+		tableroJuego[0][8].setBounds(173, 253, 53, 60);
 		StartupPanel.add(tableroJuego[0][8]);
 		this.coordenadas.put(tableroJuego[0][8], new Coordenada(0,8));
 		/*-------------------------------------------------------------------------------------*/
@@ -209,7 +209,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][0]);
 			}
 		});
-		tableroJuego[1][0].setBounds(235, 131, 53, 48);
+		tableroJuego[1][0].setBounds(230, 126, 53, 60);
 		StartupPanel.add(tableroJuego[1][0]);
 		this.coordenadas.put(tableroJuego[1][0], new Coordenada(1,0));
 		
@@ -219,7 +219,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][1]);
 			}
 		});
-		tableroJuego[1][1].setBounds(295, 131, 53, 48);
+		tableroJuego[1][1].setBounds(293, 126, 53, 60);
 		StartupPanel.add(tableroJuego[1][1]);
 		this.coordenadas.put(tableroJuego[1][1], new Coordenada(1,1));
 
@@ -229,7 +229,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][2]);
 			}
 		});
-		tableroJuego[1][2].setBounds(362, 131, 48, 48);
+		tableroJuego[1][2].setBounds(358, 126, 53, 60);
 		StartupPanel.add(tableroJuego[1][2]);
 		this.coordenadas.put(tableroJuego[1][2], new Coordenada(1,2));
 
@@ -239,7 +239,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][3]);
 			}
 		});
-		tableroJuego[1][3].setBounds(235, 191, 53, 53);
+		tableroJuego[1][3].setBounds(235, 191, 53, 60);
 		StartupPanel.add(tableroJuego[1][3]);
 		this.coordenadas.put(tableroJuego[1][3], new Coordenada(1,3));
 
@@ -249,7 +249,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][4]);
 			}
 		});
-		tableroJuego[1][4].setBounds(296, 191, 55, 53);
+		tableroJuego[1][4].setBounds(293, 191, 53, 60);
 		StartupPanel.add(tableroJuego[1][4]);
 		this.coordenadas.put(tableroJuego[1][4], new Coordenada(1,4));
 
@@ -259,7 +259,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][5]);
 			}
 		});
-		tableroJuego[1][5].setBounds(362, 191, 48, 53);
+		tableroJuego[1][5].setBounds(358, 191, 53, 60);
 		StartupPanel.add(tableroJuego[1][5]);
 		this.coordenadas.put(tableroJuego[1][5], new Coordenada(1,5));
 
@@ -269,7 +269,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][6]);
 			}
 		});
-		tableroJuego[1][6].setBounds(235, 256, 53, 49);
+		tableroJuego[1][6].setBounds(230, 252, 53, 60);
 		StartupPanel.add(tableroJuego[1][6]);
 		this.coordenadas.put(tableroJuego[1][6], new Coordenada(1,6));
 
@@ -279,7 +279,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][7]);
 			}
 		});
-		tableroJuego[1][7].setBounds(295, 252, 53, 53);
+		tableroJuego[1][7].setBounds(298, 252, 53, 60);
 		StartupPanel.add(tableroJuego[1][7]);
 		this.coordenadas.put(tableroJuego[1][7], new Coordenada(1,7));
 
@@ -289,7 +289,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[1][8]);
 			}
 		});
-		tableroJuego[1][8].setBounds(365, 256, 47, 49);
+		tableroJuego[1][8].setBounds(360, 253, 53, 60);
 		StartupPanel.add(tableroJuego[1][8]);
 		this.coordenadas.put(tableroJuego[1][8], new Coordenada(1,8));
 
@@ -303,7 +303,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][0]);
 			}
 		});
-		tableroJuego[2][0].setBounds(423, 131, 48, 48);
+		tableroJuego[2][0].setBounds(422, 126, 53, 60);
 		StartupPanel.add(tableroJuego[2][0]);
 		this.coordenadas.put(tableroJuego[2][0], new Coordenada(2,0));
 
@@ -313,7 +313,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][1]);
 			}
 		});
-		tableroJuego[2][1].setBounds(478, 133, 53, 46);
+		tableroJuego[2][1].setBounds(480, 126, 53, 60);
 		StartupPanel.add(tableroJuego[2][1]);
 		this.coordenadas.put(tableroJuego[2][1], new Coordenada(2,1));
 
@@ -323,7 +323,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][2]);
 			}
 		});
-		tableroJuego[2][2].setBounds(545, 131, 48, 48);
+		tableroJuego[2][2].setBounds(545, 126, 53, 60);
 		StartupPanel.add(tableroJuego[2][2]);
 		this.coordenadas.put(tableroJuego[2][2], new Coordenada(2,2));
 
@@ -333,7 +333,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][3]);
 			}
 		});
-		tableroJuego[2][3].setBounds(422, 191, 49, 49);
+		tableroJuego[2][3].setBounds(422, 191, 53, 60);
 		StartupPanel.add(tableroJuego[2][3]);
 		this.coordenadas.put(tableroJuego[2][3], new Coordenada(2,3));
 
@@ -344,7 +344,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][4]);
 			}
 		});
-		tableroJuego[2][4].setBounds(484, 194, 48, 50);
+		tableroJuego[2][4].setBounds(480, 191, 53, 60);
 		StartupPanel.add(tableroJuego[2][4]);
 		this.coordenadas.put(tableroJuego[2][4], new Coordenada(2,4));
 
@@ -354,7 +354,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][5]);
 			}
 		});
-		tableroJuego[2][5].setBounds(545, 191, 48, 53);
+		tableroJuego[2][5].setBounds(545, 191, 53, 60);
 		StartupPanel.add(tableroJuego[2][5]);
 		this.coordenadas.put(tableroJuego[2][5], new Coordenada(2,5));
 
@@ -364,7 +364,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][6]);
 			}
 		});
-		tableroJuego[2][6].setBounds(424, 253, 42, 53);
+		tableroJuego[2][6].setBounds(422, 253, 53, 60);
 		StartupPanel.add(tableroJuego[2][6]);
 		this.coordenadas.put(tableroJuego[2][6], new Coordenada(2,6));
 
@@ -374,7 +374,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][7]);
 			}
 		});
-		tableroJuego[2][7].setBounds(482, 259, 55, 47);
+		tableroJuego[2][7].setBounds(480, 253, 53, 60);
 		StartupPanel.add(tableroJuego[2][7]);
 		this.coordenadas.put(tableroJuego[2][7], new Coordenada(2,7));
 
@@ -384,7 +384,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[2][8]);
 			}
 		});
-		tableroJuego[2][8].setBounds(550, 256, 48, 50);
+		tableroJuego[2][8].setBounds(550, 253, 53, 60);
 		StartupPanel.add(tableroJuego[2][8]);
 		this.coordenadas.put(tableroJuego[2][8], new Coordenada(2,8));
 
@@ -397,7 +397,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][0]);
 			}
 		});
-		tableroJuego[3][0].setBounds(49, 317, 44, 49);
+		tableroJuego[3][0].setBounds(44, 316, 53, 60);
 		StartupPanel.add(tableroJuego[3][0]);
 		this.coordenadas.put(tableroJuego[3][0], new Coordenada(3,0));
 
@@ -407,7 +407,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][1]);
 			}
 		});
-		tableroJuego[3][1].setBounds(109, 312, 53, 54);
+		tableroJuego[3][1].setBounds(105, 316, 53, 60);
 		StartupPanel.add(tableroJuego[3][1]);
 		this.coordenadas.put(tableroJuego[3][1], new Coordenada(3,1));
 
@@ -417,7 +417,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][2]);
 			}
 		});
-		tableroJuego[3][2].setBounds(175, 318, 48, 49);
+		tableroJuego[3][2].setBounds(170, 316, 53, 60);
 		StartupPanel.add(tableroJuego[3][2]);
 		this.coordenadas.put(tableroJuego[3][2], new Coordenada(3,2));
 
@@ -427,7 +427,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][3]);
 			}
 		});
-		tableroJuego[3][3].setBounds(49, 379, 48, 49);
+		tableroJuego[3][3].setBounds(44, 379, 53, 60);
 		StartupPanel.add(tableroJuego[3][3]);
 		this.coordenadas.put(tableroJuego[3][3], new Coordenada(3,3));
 
@@ -437,7 +437,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][4]);
 			}
 		});
-		tableroJuego[3][4].setBounds(109, 379, 53, 49);
+		tableroJuego[3][4].setBounds(105, 379, 53, 60);
 		StartupPanel.add(tableroJuego[3][4]);
 		this.coordenadas.put(tableroJuego[3][4], new Coordenada(3,4));
 
@@ -447,7 +447,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][5]);
 			}
 		});
-		tableroJuego[3][5].setBounds(175, 379, 48, 49);
+		tableroJuego[3][5].setBounds(170, 379, 53, 60);
 		StartupPanel.add(tableroJuego[3][5]);
 		this.coordenadas.put(tableroJuego[3][5], new Coordenada(3,5));
 
@@ -457,7 +457,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][6]);
 			}
 		});
-		tableroJuego[3][6].setBounds(49, 439, 48, 50);
+		tableroJuego[3][6].setBounds(44, 440, 53, 60);
 		StartupPanel.add(tableroJuego[3][6]);
 		this.coordenadas.put(tableroJuego[3][6], new Coordenada(3,6));
 
@@ -467,7 +467,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][7]);
 			}
 		});
-		tableroJuego[3][7].setBounds(109, 440, 48, 49);
+		tableroJuego[3][7].setBounds(105, 440, 53, 60);
 		StartupPanel.add(tableroJuego[3][7]);
 		this.coordenadas.put(tableroJuego[3][7], new Coordenada(3,7));
 
@@ -477,7 +477,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[3][8]);
 			}
 		});
-		tableroJuego[3][8].setBounds(175, 440, 48, 49);
+		tableroJuego[3][8].setBounds(175, 440, 53, 60);
 		StartupPanel.add(tableroJuego[3][8]);
 		this.coordenadas.put(tableroJuego[3][8], new Coordenada(3,8));
 
@@ -490,7 +490,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][0]);
 			}
 		});
-		tableroJuego[4][0].setBounds(235, 317, 44, 49);
+		tableroJuego[4][0].setBounds(230, 316, 53, 60);
 		StartupPanel.add(tableroJuego[4][0]);
 		this.coordenadas.put(tableroJuego[4][0], new Coordenada(4,0));
 
@@ -500,7 +500,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][1]);
 			}
 		});
-		tableroJuego[4][1].setBounds(295, 317, 55, 50);
+		tableroJuego[4][1].setBounds(293, 316, 53, 60);
 		StartupPanel.add(tableroJuego[4][1]);
 		this.coordenadas.put(tableroJuego[4][1], new Coordenada(4,1));
 
@@ -510,7 +510,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][2]);
 			}
 		});
-		tableroJuego[4][2].setBounds(362, 318, 48, 49);
+		tableroJuego[4][2].setBounds(358, 316, 53, 60);
 		StartupPanel.add(tableroJuego[4][2]);
 		this.coordenadas.put(tableroJuego[4][2], new Coordenada(4,2));
 
@@ -520,7 +520,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][3]);
 			}
 		});
-		tableroJuego[4][3].setBounds(235, 379, 48, 49);
+		tableroJuego[4][3].setBounds(230, 379, 53, 60);
 		StartupPanel.add(tableroJuego[4][3]);
 		this.coordenadas.put(tableroJuego[4][3], new Coordenada(4,3));
 
@@ -530,7 +530,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][4]);
 			}
 		});
-		tableroJuego[4][4].setBounds(295, 379, 53, 49);
+		tableroJuego[4][4].setBounds(295, 379, 53, 60);
 		StartupPanel.add(tableroJuego[4][4]);
 		this.coordenadas.put(tableroJuego[4][4], new Coordenada(4,4));
 
@@ -540,7 +540,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][5]);
 			}
 		});
-		tableroJuego[4][5].setBounds(362, 379, 48, 49);
+		tableroJuego[4][5].setBounds(358, 379, 53, 60);
 		StartupPanel.add(tableroJuego[4][5]);
 		this.coordenadas.put(tableroJuego[4][5], new Coordenada(4,5));
 
@@ -550,7 +550,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][6]);
 			}
 		});
-		tableroJuego[4][6].setBounds(235, 439, 48, 50);
+		tableroJuego[4][6].setBounds(230, 440, 53, 60);
 		StartupPanel.add(tableroJuego[4][6]);
 		this.coordenadas.put(tableroJuego[4][6], new Coordenada(4,6));
 
@@ -560,7 +560,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][7]);
 			}
 		});
-		tableroJuego[4][7].setBounds(300, 440, 48, 49);
+		tableroJuego[4][7].setBounds(293, 440, 53, 60);
 		StartupPanel.add(tableroJuego[4][7]);
 		this.coordenadas.put(tableroJuego[4][7], new Coordenada(4,7));
 
@@ -570,7 +570,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[4][8]);
 			}
 		});
-		tableroJuego[4][8].setBounds(362, 440, 48, 49);
+		tableroJuego[4][8].setBounds(362, 440, 53, 60);
 		StartupPanel.add(tableroJuego[4][8]);
 		this.coordenadas.put(tableroJuego[4][8], new Coordenada(4,8));
 
@@ -583,7 +583,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][0]);
 			}
 		});
-		tableroJuego[5][0].setBounds(423, 317, 44, 49);
+		tableroJuego[5][0].setBounds(419, 316, 53, 60);
 		StartupPanel.add(tableroJuego[5][0]);
 		this.coordenadas.put(tableroJuego[5][0], new Coordenada(5,0));
 
@@ -593,7 +593,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][1]);
 			}
 		});
-		tableroJuego[5][1].setBounds(484, 318, 55, 50);
+		tableroJuego[5][1].setBounds(480, 316, 53, 60);
 		StartupPanel.add(tableroJuego[5][1]);
 		this.coordenadas.put(tableroJuego[5][1], new Coordenada(5,1));
 
@@ -603,7 +603,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][2]);
 			}
 		});
-		tableroJuego[5][2].setBounds(545, 317, 48, 49);
+		tableroJuego[5][2].setBounds(545, 317, 53, 60);
 		StartupPanel.add(tableroJuego[5][2]);
 		this.coordenadas.put(tableroJuego[5][2], new Coordenada(5,2));
 
@@ -613,7 +613,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][3]);
 			}
 		});
-		tableroJuego[5][3].setBounds(423, 379, 48, 49);
+		tableroJuego[5][3].setBounds(419, 379, 53, 60);
 		StartupPanel.add(tableroJuego[5][3]);
 		this.coordenadas.put(tableroJuego[5][3], new Coordenada(5,3));
 
@@ -623,7 +623,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][4]);
 			}
 		});
-		tableroJuego[5][4].setBounds(484, 379, 53, 49);
+		tableroJuego[5][4].setBounds(484, 379, 53, 60);
 		StartupPanel.add(tableroJuego[5][4]);
 		this.coordenadas.put(tableroJuego[5][4], new Coordenada(5,4));
 
@@ -633,7 +633,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][5]);
 			}
 		});
-		tableroJuego[5][5].setBounds(550, 379, 48, 49);
+		tableroJuego[5][5].setBounds(545, 379, 53, 60);
 		StartupPanel.add(tableroJuego[5][5]);
 		this.coordenadas.put(tableroJuego[5][5], new Coordenada(5,5));
 
@@ -643,7 +643,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][6]);
 			}
 		});
-		tableroJuego[5][6].setBounds(423, 439, 48, 50);
+		tableroJuego[5][6].setBounds(419, 440, 53, 60);
 		StartupPanel.add(tableroJuego[5][6]);
 		this.coordenadas.put(tableroJuego[5][6], new Coordenada(5,6));
 
@@ -653,7 +653,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][7]);
 			}
 		});
-		tableroJuego[5][7].setBounds(484, 439, 48, 49);
+		tableroJuego[5][7].setBounds(480, 440, 53, 60);
 		StartupPanel.add(tableroJuego[5][7]);
 		this.coordenadas.put(tableroJuego[5][7], new Coordenada(5,7));
 
@@ -663,7 +663,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[5][8]);
 			}
 		});
-		tableroJuego[5][8].setBounds(550, 440, 48, 49);
+		tableroJuego[5][8].setBounds(550, 440, 53, 60);
 		StartupPanel.add(tableroJuego[5][8]);
 		
 		this.coordenadas.put(tableroJuego[5][8], new Coordenada(5,8));
@@ -676,7 +676,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][0]);
 			}
 		});
-		tableroJuego[6][0].setBounds(49, 501, 44, 49);
+		tableroJuego[6][0].setBounds(44, 500, 53, 60);
 		StartupPanel.add(tableroJuego[6][0]);
 		this.coordenadas.put(tableroJuego[6][0], new Coordenada(6,0));
 
@@ -686,7 +686,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][1]);
 			}
 		});
-		tableroJuego[6][1].setBounds(105, 500, 55, 50);
+		tableroJuego[6][1].setBounds(105, 500, 53, 60);
 		StartupPanel.add(tableroJuego[6][1]);
 		this.coordenadas.put(tableroJuego[6][1], new Coordenada(6,1));
 
@@ -696,7 +696,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][2]);
 			}
 		});
-		tableroJuego[6][2].setBounds(172, 501, 48, 49);
+		tableroJuego[6][2].setBounds(170, 500, 53, 60);
 		StartupPanel.add(tableroJuego[6][2]);
 		this.coordenadas.put(tableroJuego[6][2], new Coordenada(6,2));
 
@@ -706,7 +706,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][3]);
 			}
 		});
-		tableroJuego[6][3].setBounds(49, 562, 48, 49);
+		tableroJuego[6][3].setBounds(44, 562, 53, 60);
 		StartupPanel.add(tableroJuego[6][3]);
 		this.coordenadas.put(tableroJuego[6][3], new Coordenada(6,3));
 
@@ -716,7 +716,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][4]);
 			}
 		});
-		tableroJuego[6][4].setBounds(105, 562, 53, 49);
+		tableroJuego[6][4].setBounds(105, 562, 53, 60);
 		StartupPanel.add(tableroJuego[6][4]);
 		this.coordenadas.put(tableroJuego[6][4], new Coordenada(6,4));
 
@@ -726,7 +726,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][5]);
 			}
 		});
-		tableroJuego[6][5].setBounds(172, 562, 48, 49);
+		tableroJuego[6][5].setBounds(172, 562, 53, 60);
 		StartupPanel.add(tableroJuego[6][5]);
 		this.coordenadas.put(tableroJuego[6][5], new Coordenada(6,5));
 
@@ -736,7 +736,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][6]);
 			}
 		});
-		tableroJuego[6][6].setBounds(49, 623, 48, 50);
+		tableroJuego[6][6].setBounds(44, 623, 53, 60);
 		StartupPanel.add(tableroJuego[6][6]);
 		this.coordenadas.put(tableroJuego[6][6], new Coordenada(6,6));
 
@@ -746,7 +746,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][7]);
 			}
 		});
-		tableroJuego[6][7].setBounds(109, 624, 48, 49);
+		tableroJuego[6][7].setBounds(105, 623, 53, 60);
 		StartupPanel.add(tableroJuego[6][7]);
 		this.coordenadas.put(tableroJuego[6][7], new Coordenada(6,7));
 
@@ -756,7 +756,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[6][8]);
 			}
 		});
-		tableroJuego[6][8].setBounds(175, 624, 48, 49);
+		tableroJuego[6][8].setBounds(175, 624, 53, 60);
 		StartupPanel.add(tableroJuego[6][8]);
 		this.coordenadas.put(tableroJuego[6][8], new Coordenada(6,8));
 
@@ -769,7 +769,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][0]);
 			}
 		});
-		tableroJuego[7][0].setBounds(235, 501, 44, 49);
+		tableroJuego[7][0].setBounds(230, 500, 53, 60);
 		StartupPanel.add(tableroJuego[7][0]);
 		this.coordenadas.put(tableroJuego[7][0], new Coordenada(7,0));
 
@@ -779,7 +779,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][1]);
 			}
 		});
-		tableroJuego[7][1].setBounds(293, 501, 55, 50);
+		tableroJuego[7][1].setBounds(293, 501, 53, 60);
 		StartupPanel.add(tableroJuego[7][1]);
 		this.coordenadas.put(tableroJuego[7][1], new Coordenada(7,1));
 
@@ -789,7 +789,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][2]);
 			}
 		});
-		tableroJuego[7][2].setBounds(362, 501, 48, 49);
+		tableroJuego[7][2].setBounds(358, 500, 53, 60);
 		StartupPanel.add(tableroJuego[7][2]);
 		this.coordenadas.put(tableroJuego[7][2], new Coordenada(7,2));
 
@@ -799,7 +799,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][3]);
 			}
 		});
-		tableroJuego[7][3].setBounds(240, 562, 48, 49);
+		tableroJuego[7][3].setBounds(230, 562, 53, 60);
 		StartupPanel.add(tableroJuego[7][3]);
 		this.coordenadas.put(tableroJuego[7][3], new Coordenada(7,3));
 
@@ -809,7 +809,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][4]);
 			}
 		});
-		tableroJuego[7][4].setBounds(295, 562, 53, 49);
+		tableroJuego[7][4].setBounds(295, 562, 53, 60);
 		StartupPanel.add(tableroJuego[7][4]);
 		this.coordenadas.put(tableroJuego[7][4], new Coordenada(7,4));
 
@@ -819,7 +819,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][5]);
 			}
 		});
-		tableroJuego[7][5].setBounds(362, 562, 48, 49);
+		tableroJuego[7][5].setBounds(358, 562, 53, 60);
 		StartupPanel.add(tableroJuego[7][5]);
 		this.coordenadas.put(tableroJuego[7][5], new Coordenada(7,5));
 
@@ -829,7 +829,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][6]);
 			}
 		});
-		tableroJuego[7][6].setBounds(235, 623, 48, 50);
+		tableroJuego[7][6].setBounds(230, 623, 53, 60);
 		StartupPanel.add(tableroJuego[7][6]);
 		this.coordenadas.put(tableroJuego[7][6], new Coordenada(7,6));
 
@@ -839,7 +839,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][7]);
 			}
 		});
-		tableroJuego[7][7].setBounds(300, 623, 48, 49);
+		tableroJuego[7][7].setBounds(293, 623, 53, 60);
 		StartupPanel.add(tableroJuego[7][7]);
 		this.coordenadas.put(tableroJuego[7][7], new Coordenada(7,7));
 
@@ -849,7 +849,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[7][8]);
 			}
 		});
-		tableroJuego[7][8].setBounds(362, 624, 48, 49);
+		tableroJuego[7][8].setBounds(362, 624, 53, 60);
 		StartupPanel.add(tableroJuego[7][8]);
 		this.coordenadas.put(tableroJuego[7][8], new Coordenada(7,8));
 
@@ -862,7 +862,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][0]);
 			}
 		});
-		tableroJuego[8][0].setBounds(423, 501, 44, 49);
+		tableroJuego[8][0].setBounds(419, 500, 53, 60);
 		StartupPanel.add(tableroJuego[8][0]);
 		this.coordenadas.put(tableroJuego[8][0], new Coordenada(8,0));
 
@@ -872,7 +872,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][1]);
 			}
 		});
-		tableroJuego[8][1].setBounds(482, 500, 55, 50);
+		tableroJuego[8][1].setBounds(480, 500, 53, 60);
 		StartupPanel.add(tableroJuego[8][1]);
 		this.coordenadas.put(tableroJuego[8][1], new Coordenada(8,1));
 
@@ -882,7 +882,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][2]);
 			}
 		});
-		tableroJuego[8][2].setBounds(545, 501, 48, 49);
+		tableroJuego[8][2].setBounds(545, 501, 53, 60);
 		StartupPanel.add(tableroJuego[8][2]);
 		this.coordenadas.put(tableroJuego[8][2], new Coordenada(8,2));
 
@@ -892,7 +892,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][3]);
 			}
 		});
-		tableroJuego[8][3].setBounds(423, 562, 48, 49);
+		tableroJuego[8][3].setBounds(419, 562, 53, 60);
 		StartupPanel.add(tableroJuego[8][3]);
 		this.coordenadas.put(tableroJuego[8][3], new Coordenada(8,3));
 
@@ -902,7 +902,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][4]);
 			}
 		});
-		tableroJuego[8][4].setBounds(484, 562, 53, 49);
+		tableroJuego[8][4].setBounds(484, 562, 53, 60);
 		StartupPanel.add(tableroJuego[8][4]);
 		this.coordenadas.put(tableroJuego[8][4], new Coordenada(8,4));
 
@@ -912,7 +912,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][5]);
 			}
 		});
-		tableroJuego[8][5].setBounds(550, 562, 48, 49);
+		tableroJuego[8][5].setBounds(545, 562, 53, 60);
 		StartupPanel.add(tableroJuego[8][5]);
 		this.coordenadas.put(tableroJuego[8][5], new Coordenada(8,5));
 
@@ -922,7 +922,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][6]);
 			}
 		});
-		tableroJuego[8][6].setBounds(423, 624, 48, 50);
+		tableroJuego[8][6].setBounds(419, 623, 53, 60);
 		StartupPanel.add(tableroJuego[8][6]);
 		this.coordenadas.put(tableroJuego[8][6], new Coordenada(8,6));
 
@@ -932,7 +932,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][7]);
 			}
 		});
-		tableroJuego[8][7].setBounds(484, 623, 48, 49);
+		tableroJuego[8][7].setBounds(480, 623, 53, 60);
 		StartupPanel.add(tableroJuego[8][7]);
 		this.coordenadas.put(tableroJuego[8][7], new Coordenada(8,7));
 
@@ -942,7 +942,7 @@ public class GameWindow extends JFrame implements IJuego {
 				FichaMouseClicked(e, tableroJuego[8][8]);
 			}
 		});
-		tableroJuego[8][8].setBounds(550, 624, 48, 49);
+		tableroJuego[8][8].setBounds(550, 624, 53, 60);
 		StartupPanel.add(tableroJuego[8][8]);
 		this.coordenadas.put(tableroJuego[8][8], new Coordenada(8,8));
 
