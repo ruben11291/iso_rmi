@@ -60,17 +60,17 @@ public class GameWindow extends JFrame implements MouseListener, MouseMotionList
 			square.setOpaque(false);
 		}
 	//	Add a few pieces to the board
-		JLabel piece = new JLabel( new ImageIcon("/home/toni/o.png") );
+		JLabel piece = new JLabel( new ImageIcon("src/image/o.png") );
 		piece.setBorder(BorderFactory.createLineBorder(Color.green, 3));
 		JPanel panel = (JPanel)gameBoard.getComponent(0);
 		panel.add(piece);
-		piece = new JLabel(new ImageIcon("/home/toni/o.png"));
+		piece = new JLabel(new ImageIcon("src/image/o.png"));
 		panel = (JPanel)gameBoard.getComponent(15);
 		panel.add(piece);
-		piece = new JLabel(new ImageIcon("/home/toni/o.png"));
+		piece = new JLabel(new ImageIcon("src/image/o.png"));
 		panel = (JPanel)gameBoard.getComponent(16);
 		panel.add(piece);
-		piece = new JLabel(new ImageIcon("/home/toni/o.png"));
+		piece = new JLabel(new ImageIcon("src/image/o.png"));
 		panel = (JPanel)gameBoard.getComponent(20);
 		panel.add(piece);
 	 
