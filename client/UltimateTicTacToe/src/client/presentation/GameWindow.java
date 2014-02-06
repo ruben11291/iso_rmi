@@ -1006,13 +1006,6 @@ public class GameWindow extends JFrame implements IJuego {
 		ply2.setBounds(618, 209, 81, 19);
 		StartupPanel.add(ply2);
 		
-		notification = new JLabel();
-		notification.setHorizontalAlignment(SwingConstants.CENTER);
-		notification.setFont(new Font("Dialog", Font.BOLD, 16));
-		notification.setBounds(618, 253, 344, 99);
-		notification.setText("<html>angel puso en T1 su ficha en la casilla 2,1 : toni tiene que poner en T4 su ficha</html>");
-		StartupPanel.add(notification);
-		
 		ply1name = new JLabel(retador);
 		ply1name.setForeground(new Color(0, 100, 0));
 		ply1name.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -1138,7 +1131,7 @@ public class GameWindow extends JFrame implements IJuego {
 		if (this.lastMove != null)
 			this.lastMove.setBorder(null);
 		this.lastMove = this.tableroJuego[cT + fT * 3][cC + fC * 3];
-		this.lastMove.setBorder(BorderFactory.createLineBorder(Color.green, 5));
+		this.lastMove.setBorder(BorderFactory.createLineBorder(Color.green, 3));
 		this.cambiarTurno();
 	}
 
