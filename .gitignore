@@ -1,3 +1,10 @@
+doc/*.lof
+doc/*.log
+doc/*.out
+doc/*.aux
+doc/*.toc
+doc/*.backup
 bin/
 *~
+
 
