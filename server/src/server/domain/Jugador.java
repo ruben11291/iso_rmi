@@ -1,24 +1,15 @@
 package server.domain;
 
-import java.rmi.RemoteException;
 import java.sql.SQLException;
-
-import client.exportable.communications.ICliente;
 import server.persistence.DAOJugador;
 
 public class Jugador {
 	private String email;
 	private String passwd;
 	private Tablero9x9 tablero;
-	private ICliente cliente;
 	
-	public Jugador(ICliente cliente, String email) {
-		this.cliente=cliente;
-		this.email=email;
-	}
 	
 	public Jugador(String email, String passwd) {
-		this.cliente=null;
 		this.email=email;
 		this.passwd=passwd;
 	}
