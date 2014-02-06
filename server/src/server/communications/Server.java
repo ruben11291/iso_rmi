@@ -70,7 +70,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	/////ADD Player///
 	public void add(String email, String passwd, ICliente cliente) throws RemoteException,JugadorNoExisteException , JugadorYaExisteException{
 		if(this.stubs.containsKey(email)) throw new JugadorYaExisteException(email);
-		Jugador jugador=new Jugador((ICliente)cliente, email);
+		Jugador jugador=new Jugador(email);
 		this.fachada.add(email, passwd);
 		this.stubs.put(email, cliente);
 		System.out.println("Jugador añadido "+email+" en servidor ");
