@@ -1,0 +1,197 @@
+% \section{Requisitos de interfaces externas}
+
+% \section{Requisitos funcionales}
+
+\subsection{Registrarse}
+
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Registrarse \\
+
+\textbf{Precondición} & Ninguna \\	
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario pulsa el botón de registrarse en la ventana de inicio.
+\item Se muestra la ventana de registro.
+\item El usuario introduce su email y su contraseña en la ventana de registro.
+\item El usuario pulsa el botón de confirmación.
+\item Se espera confirmación por parte del servidor.
+\item La ventana de inicio informa al usuario del éxito de la operación.
+\end{enumerate} \\
+
+\textbf{Poscondición} & Un nuevo usuario existe en el sistema.
+
+\end{tabularx}
+}
+
+\subsection{Iniciar sesión}
+
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Iniciar sesión \\
+
+\textbf{Precondición} & Usuario registrado \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario introduce su email y contraseña en la ventana de inicio.
+\item El usuario pulsa el botón de ``Iniciar sesión''.
+\item Se espera validación por parte del servidor.
+\item Se cierra la ventana de login y se abre la lista de jugadores.
+\end{enumerate} \\
+
+\textbf{Poscondición} & Se ejecuta el caso de uso ``Ver lista de jugadores''
+\\ \\
+
+\textbf{Escenario alternativo} & Puede ocurrir que los datos de acceso no sean
+correctos, en cuyo caso se aborta la operación y se vuelve al estado inicial.
+
+\end{tabularx}
+}
+
+\subsection{Cerrar sesión}
+
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Cerrar sesión \\
+
+\textbf{Precondición} & Sesión iniciada \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario pulsa el botón de cerrar el programa.
+\item Se manda una petición de cierre de sesión al servidor.
+\item El servidor cierra la sesión del usuario.
+\item Se cierra el programa.
+\end{enumerate} \\
+
+\textbf{Poscondición} & El usuario deja de estar activo en el servidor y deja de aparecer
+en la lista de jugadores.
+
+\textbf{Precondición} & Sesión iniciada y jugador en partida \\
+
+\textbf{Escenario alternativo} & \begin{enumerate}
+\item El usuario pulsa el botón de cerrar el programa.
+\item Se manda una petición de cierre de sesión al servidor.
+\item El servidor elimina la partida y cierra la sesión del usuario.
+\item Se cierra el programa.
+\end{enumerate} \\
+
+\textbf{Poscondición} & El usuario deja de estar activo en el servidor y deja de aparecer
+en la lista de jugadores.
+
+\end{tabularx}
+}
+
+\subsection{Salir de la partida}
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Salir de la partida \\
+
+\textbf{Precondición} & Estar conectado a una partida.\\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario pulsa el botón cerrar partida en la ventana de juego.
+\item Se comunica al servidor que elimmine la partida.
+\item Se cierra la ventana de juego.
+
+\end{enumerate} \\
+
+\textbf{Poscondición} & Se sale de la partida y aparece la ventana principal.
+
+\end{tabularx}
+}
+
+\subsection{Retar jugador}
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Retar jugador \\
+
+\textbf{Precondición} & Sesión iniciada \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario selecciona un jugador de la lista y pulsa ``Retar''.
+\item Se manda la petición al servidor que a su vez se lo comunica al oponente.
+
+\end{enumerate} \\
+
+\textbf{Poscondición} & Usuario espera confirmación del oponente.
+
+\end{tabularx}
+}
+
+\subsection{Aceptar reto}
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Aceptar reto \\
+
+\textbf{Precondición} & Sesión iniciada \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item Se abre ventana emergente de invitación a partida.
+\item El usuario pulsa el botón de aceptar.
+
+\end{enumerate} \\
+
+\textbf{Poscondición} & Se crea una partida.
+
+\end{tabularx}
+}
+
+\subsection{Realizar movimiento}
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Realizar movimiento \\
+
+\textbf{Precondición} & En una partida \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario coloca una pieza en el tablero de juego.
+\item Se comprueba la validez del movimiento.
+\item Se manda información del movimiento al servidor.
+
+\end{enumerate} \\
+
+\textbf{Poscondición} & Tablero modificado.
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario coloca una pieza en el tablero de juego.
+\item Se comprueba la validez del movimiento.
+\item Se informa al usuario de que el movimiento no es válido.
+
+\end{enumerate} \\
+
+\textbf{Poscondición} & Tablero no modificado.
+
+\end{tabularx}
+}
+
+\subsection{Ver la lista de jugadores}
+
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Ver la lista de jugadores \\
+
+\textbf{Precondición} & Iniciar sesión \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item Se abre la ventana de la lista de jugadores y recibe la lista de 
+usuarios conectados del servidor.
+
+\end{enumerate} \\
+
+\textbf{Poscondición} & La lista de jugadores está disponible para el usuario.
+
+\end{tabularx}
+}
+
+\end{enumerate}
+
+
+}
