@@ -1,4 +1,4 @@
-package PruebaComunicacion;
+package client.presentation;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,7 +10,7 @@ import javax.swing.border.Border;
 
 import client.controller.Controller;
 
-public class GameWindow extends JFrame implements MouseListener, MouseMotionListener {
+public class GameWindow extends JFrame implements MouseListener, IJuego {
 	
 	private static final long serialVersionUID = -5128501222928885944L;
 
@@ -57,11 +57,34 @@ public class GameWindow extends JFrame implements MouseListener, MouseMotionList
 	private JLabel turnoPly2;
 	private JLabel lastMove;
 	private JLabel wrongMove;
+	private JLabel ply1Piece, ply2Piece;
 	
 	int xAdjustment = 24;
 	int yAdjustment = 124;
 	
-	public GameWindow(String self, String retador, String retado){
+	public GameWindow(String self, String retador, String retado) {
+		super();
+		
+		try {
+			Controller cntrl;
+			cntrl = Controller.get();
+			cntrl.setJuego(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
+		this.pack();
+		this.setResizable(false);
+		this.setTitle("Ultimate Tic-Tac-Toe - GAME  Player " + self + ". " + retador + " vs " + retado);
+		this.setSize(980, 730);
+		this.setLocationRelativeTo( null );
+		this.setVisible(true);
+
+		ply1Piece = new JLabel();
+		ply1Piece.setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+		ply2Piece = new JLabel();
+		ply2Piece.setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		
 		Dimension boardSize = new Dimension(600, 600);
 		mainPanel = new JPanel();
@@ -70,7 +93,6 @@ public class GameWindow extends JFrame implements MouseListener, MouseMotionList
 		mainPanel.setLayout(null);
 		mainPanel.setPreferredSize( new Dimension(1024, 750) );
 		mainPanel.addMouseListener(this);
-		mainPanel.addMouseMotionListener(this);
 		
 		gameBoard = new ImagePanel( "src/image/board600x600.png");
 		mainPanel.add(gameBoard);
@@ -79,8 +101,8 @@ public class GameWindow extends JFrame implements MouseListener, MouseMotionList
 		gameBoard.setBounds(xAdjustment, yAdjustment, boardSize.width, boardSize.height);
 	
 		for (int i = 0; i < 81; i++) {
-			JPanel square = new JPanel( new BorderLayout() );
-			//square.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+			JPanel square = new JPanel( new GridBagLayout() );
+//			square.setBorder(BorderFactory.createLineBorder(Color.black, 3));
 			gameBoard.add( square );
 			square.setOpaque(false);
 		}
@@ -233,7 +255,7 @@ public class GameWindow extends JFrame implements MouseListener, MouseMotionList
 		System.out.println(cT + " " + fT + " " + cC + " " + fC);
 		Controller cntrl;
 		cntrl = Controller.get();
-//		cntrl.ponerMovimiento(cT, fT, cC, fC);		
+		cntrl.ponerMovimiento(cT, fT, cC, fC);		
 
 	}
 
@@ -245,19 +267,7 @@ public class GameWindow extends JFrame implements MouseListener, MouseMotionList
 	}
 	public void mouseExited(MouseEvent e) {
 	}
-	public static void main(String[] args) {
-		JFrame frame = new GameWindow("a", "a", "a");
-		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
-		frame.pack();
-		frame.setResizable(true);
-		frame.setLocationRelativeTo( null );
-		frame.setVisible(true);
-	}
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -272,14 +282,17 @@ public class GameWindow extends JFrame implements MouseListener, MouseMotionList
 
 	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {
 		System.out.println("En poner ficha: " + cT + " " + fT + " " + cC + " " + fC);
+		JPanel tile;
+		System.out.println("Casilla: " + (cT * 3 + cC + fT * 27 + fC * 9));
+		tile = (JPanel)gameBoard.getComponent(cT * 3 + cC + fT * 27 + fC * 9);
 		if (email.equals(this.ply1name.getText()))
-			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
+			tile.add(ply1Piece);
 		else
-			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+			tile.add(ply2Piece);
 		if (this.lastMove != null)
 			this.lastMove.setBorder(null);
-		this.lastMove = this.tableroJuego[cT + fT * 3][cC + fC * 3];
-		this.lastMove.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+//		this.lastMove = this.tableroJuego[cT + fT * 3][cC + fC * 3];
+//		this.lastMove.setBorder(BorderFactory.createLineBorder(Color.green, 3));
 		this.cambiarTurno();
 	}
 
