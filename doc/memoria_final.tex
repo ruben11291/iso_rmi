@@ -29,7 +29,7 @@ urlcolor=black
 
 %%%% Title Page %%%%%
 
-\pagenumbering{alph}
+%\pagenumbering{alph}
 
 \begin{titlepage}
 \begin{center}
@@ -77,16 +77,16 @@ urlcolor=black
 \clearpage
 \section{Introducción}
 
-Este documento describe el análisis, desarrollo e implementación llevados a cabo para obtener 
-un juego \textbf{Tres en raya definitivo} \footnote{Este documento no explica las reglas del juego}.
+Este documento describe el análisis, desarrollo e implementación llevados a cabo para obtener
+el juego \textbf{Tres en raya definitivo} \footnote{Este documento no explica las reglas del juego}.
 
 Se trata de una aplicación cliente-servidor para escritorio que se comunica a través de RMI.
 El lenguaje utilizado para la implementación ha sido Java.
 
-Este documento pretende que el lector obtenga una idea clara de la composición del sistema, para ello 
-se ha dividido en X secciones. En primer lugar los requisitos funcionales ayudan a entender el objetivo
-buscado. La arquitectura del sistema junto con los casos de uso son las secciones más importantes, ya 
-que ayudarán al lector a hacerse una imagen mental, a alto nivel, del sistema desarrollado. 
+Este documento pretende que el lector obtenga una idea clara de la composición del sistema, para ello
+se ha dividido en distintas secciones. En primer lugar los requisitos funcionales ayudan a entender el objetivo
+buscado. La arquitectura del sistema junto con los casos de uso son las secciones más importantes, ya
+que ayudarán al lector a hacerse una imagen mental, a alto nivel, del sistema desarrollado.
 
 EL resto de secciones profundizan en el conocimiento del sistema.
 
@@ -100,74 +100,164 @@ EL resto de secciones profundizan en el conocimiento del sistema.
 
 \section{Arquitectura del sistema}
 
-A continuación se muestra una visión de la arquitectura del sistema. Se trata de 
+A continuación se muestra una visión de la arquitectura del sistema. Se trata de
 una arquitectura cliente-servidor a través de RMI. El cliente usa un
-proxy para comunicarse con el servidor y éste conoce un proxy de cada cliente con el 
+proxy para comunicarse con el servidor y éste conoce un proxy de cada cliente con el
 que se comunica.
-\\ \\
+\\
 \includegraphics[width=0.9\textwidth]{img/arquitectura/arquitectura.png}\\[1cm]
 
+\subsection{Arquitectura del cliente}
+
+A continuación se muestra la arquitectura del cliente. Esta es una arquitectura multicapa en el que existen varias capas:
+\begin{itemize}
+\item \emph{Interfaz:} Este paquete contiene las clases de las ventanas que se muestran al usuario, y las interfaces que estas implementan.
+\item \emph{Controlador:} Este paquete contiene el controlador y su interfaz. Realiza las comunicaciones y el control de la interfaz gráfica con el dominio.
+\item \emph{Dominio:} Contiene toda la lógica del juego. La clase Tablero9x9 contiene todas las reglas del juego y el modelo de la partida actual. La clase Fachada realiza las funciones de paso de mensajes entre las capas de control y comunicación, además de realizar las acciones consideradas en el modelo del juego.
+\item \emph{Comunicación:} Contiene las clases que realizan la función de \emph{listener} como es el caso de la clase cliente, y el proxy con el servidor.Estas clases solamente se encargan del envío de los respectivos mensajes al servidor o a la fachada del paquete de dominio.
+\end{itemize}
+\includegraphics[width=0.9\textwidth]{img/arq_Cliente.png}\\[1cm]
+
+\subsection{Arquitectura del servidor}
+
+A continuación se muestra la arquitectura del servidor. Esta es una arquitectura multicapa en la que constan los siguientes paquetes:
+\begin{itemize}
+\item \emph{Comunicación:} Contiene las clases encargadas de la comunicación, en este caso la clase servidor y su interfaz RMI. La clase servidor actúa como \emph{listener} para escuchar solicitudes de los clientes. También responde a esos clientes ya que internamente guarda una hash con los clientes que se han dado de alta en el sistema.
+\item \emph{Persistencia:} Contiene las clases encargadas de almacenar las partidas y sus respectivos tableros, jugadores y movimientos. Entre esas clases está la clase \emph{Broker} que actúa como agente entre el subsistema de base de datos y el sistema del servidor. Además se pueden observar las clases DAO, encargadas del almacenamiento de cada una de las entidades pertenecientes al dominio del juego.
+\item \emph{Dominio:} Contiene las clases de dominio como las encargadas de representar a cualquier juego, además de la clase Fachada. Esta clase contiene una referencia a cada uno de los modelos que se están jugando en el sistema, es decir, contiene todos los tableros activos.
+
+\end{itemize}
+\includegraphics[width=0.9\textwidth]{img/arq_Servidor.png}\\[1cm]
 \section{Casos de uso}
 
-Diagrama de casos de uso del cliente
-\\ \\
+\subsection{Diagrama de casos de uso del cliente}
+
 \includegraphics[width=0.9\textwidth]{img/cdu_Cliente.png}\\[1cm]
 
-Diagrama de casos de uso del servidor
-\\ \\
+\subsection{Diagrama de casos de uso del servidor}
+
 \includegraphics[width=0.9\textwidth]{img/cdu_Servidor.png}\\[1cm]
 
 \section{Diagramas de secuencia}
-Diagramas de secuencia del cliente:
+\subsection{Diagramas de secuencia del cliente}
 
-Autenticar
-\\ \\
+\subsubsection{Autenticar}
+
 \includegraphics[width=0.9\textwidth]{img/ds_autenticar.png}\\[1cm]
 
-Cerrar sesión oponente
-\\ \\
+\subsubsection{Cerrar sesión oponente}
+
 \includegraphics[width=0.9\textwidth]{img/ds_CerrarSesionOponenteCliente.png}\\[1cm]
 
-Enviar respuesta de reto
-\\ \\
+\subsubsection{Enviar respuesta de reto}
+
 \includegraphics[width=0.9\textwidth]{img/ds_EnviarRespuestaRetoCliente.png}\\[1cm]
 
-Enviar reto
-\\ \\
+\subsubsection{Enviar reto}
+
 \includegraphics[width=0.9\textwidth]{img/ds_EnviarRetoCliente.png}\\[1cm]
 
-Realizar movimiento
-\\ \\
+\subsubsection{Realizar movimiento}
+
 \includegraphics[width=0.9\textwidth]{img/ds_RealizarMovimientoCliente.png}\\[1cm]
 
-Recibir movimiento
-\\ \\
+\subsubsection{Recibir movimiento}
+
 \includegraphics[width=0.9\textwidth]{img/ds_RecibirMovimientoCliente.png}\\[1cm]
 
 
-Diagramas de secuencia del servidor:
+\subsection{Diagramas de secuencia del servidor}
 
-Cerrar sesión
-\\ \\
+\subsubsection{Cerrar sesión}
+
 \includegraphics[width=0.9\textwidth]{img/ds_CerrarSesionServidor.png}\\[1cm]
 
-Enviar respuesta de reto
-\\ \\
+\subsubsection{Enviar respuesta de reto}
+
 \includegraphics[width=0.9\textwidth]{img/ds_EnviarRespuestaRetoServidor.png}\\[1cm]
 
-Realizar movimiento
-\\ \\
+\subsubsection{Realizar movimiento}
+
 \includegraphics[width=0.9\textwidth]{img/ds_RealizarMovimientoServidor.png}\\[1cm]
 
 
 
 \section{Máquinas de estado}
 
+\subsection{Máquinas de estado del cliente}
+
+\subsubsection{Aceptar reto}
+
+\includegraphics[width=0.9\textwidth]{img/ms_aceptarRetoCliente.png}\\[1cm]
+
+\subsubsection{Iniciar sesión}
+
+\includegraphics[width=0.9\textwidth]{img/ms_IniciarSesionCliente.png}\\[1cm]
+
+
+\subsubsection{Cerrar sesión}
+
+\includegraphics[width=0.9\textwidth]{img/ms_CerrarSesionCliente.png}\\[1cm]
+
+
+\subsubsection{Realizar movimiento}
+
+\includegraphics[width=0.9\textwidth]{img/ms_RealizarMovimientoCliente.png}\\[1cm]
+
+
+\subsubsection{Retar jugador}
+
+\includegraphics[width=0.9\textwidth]{img/ms_RetarJugadorCliente.png}\\[1cm]
+
+\subsubsection{Salir de partida}
+
+\includegraphics[width=0.9\textwidth]{img/ms_SalirPartidaCliente.png}\\[1cm]
+
+
+\subsection{Máquinas de estado del Servidor}
+
+\subsubsection{Autenticar}
+
+\includegraphics[width=0.9\textwidth]{img/ms_AutenticarServidor.png}\\[1cm]
+
+\subsubsection{Borrar partida}
+
+\includegraphics[width=0.9\textwidth]{img/ms_BorrarPartidaServidor.png}\\[1cm]
+
+\subsubsection{Cerrar sesión}
+
+\includegraphics[width=0.9\textwidth]{img/ms_CerrarSesionServidor.png}\\[1cm]
+
+\subsubsection{Poner ficha}
+
+\includegraphics[width=0.9\textwidth]{img/ms_PonerFichaServidor.png}\\[1cm]
+
+\subsubsection{Registar usuario}
+
+\includegraphics[width=0.9\textwidth]{img/ms_RegistrarUsuarioServidor.png}\\[1cm]
+
+\subsubsection{Respuesta de reto}
+
+\includegraphics[width=0.9\textwidth]{img/ms_RespuestaRetoServidor.png}\\[1cm]
+
+\subsubsection{Retar jugador}
+
+\includegraphics[width=0.9\textwidth]{img/ms_RetarJugadorServidor.png}\\[1cm]
+
 \section{Diagrama de clases}
+
+En esta sección se realizará un análisis más en profundidad del diseño tanto del cliente como del servidor en cuanto a sus clases se refiere.
+
+\subsection{Diagrama de clases del cliente}
+
+\includegraphics[width=0.9\textwidth]{img/ddc_Cliente.png}\\[1cm]
+
+Como
+\subsection{Diagrama de clases del servidor}
+
+\includegraphics[width=0.9\textwidth]{img/ddc_Servidor.png}\\[1cm]
 
 \section{Pruebas de los casos de uso}
 
 
 \end{document}
-
-

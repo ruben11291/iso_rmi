@@ -40,7 +40,7 @@
 \end{enumerate} \\
 
 \textbf{Poscondición} & Se ejecuta el caso de uso ``Ver lista de partidas''
-\\ \\
+ y usuario autenticado\\ \\
 
 \textbf{Escenario alternativo} & Puede ocurrir que los datos de acceso no sean
 correctos, en cuyo caso se aborta la operación y se le comunica al usuario que los datos introducidos son erróneos.
@@ -136,7 +136,7 @@ la partida.\\
 
 \end{enumerate} \\
 
-\textbf{Poscondición} 
+\textbf{Poscondición}
 
 \end{tabularx}
 }
@@ -229,64 +229,50 @@ partida''.\\
 \end{tabularx}
 }
 
-\subsection{Responder a acción enemiga}
+\subsection{Responder a solicitud de reto}
 
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Responder a acción enemiga \\
+\textbf{Caso de uso} & Responder a solicitud de reto \\
 
-\textbf{Precondición} & Iniciar sesión, Unirse a una partida y Conectarse a una
-partida \\
+\textbf{Precondición} & Iniciar sesión\\
 
 \textbf{Escenario general} & \begin{enumerate}
-\item El servidor envía al gestor de partidas la información del ataque del
-oponente.
-\item El gestor de partidas pasa la información a la ventana de juego.
-\item La ventana de juego pregunta al jugador que acción realizar (aceptar
-ataque, dar soldados o dar gallifantes).
-\item El usuario elige la acción en la ventana de juego.
-\item La ventana de juego envía la información al gestor de partidas.
-\item El gestor de partidas envía la respuesta al servidor por medio del proxy.
-
+\item El servidor envía al usuario la solicitud de reto del otro usuario.
+\item El cliente recibe la solicitud y la envía al controlador.
+\item El controlador la envía a la ventana de jugadores para que muestre que el jugador ha sido retado
+\item El usuario elige la acción en la ventana (si acepta o si no).
+\item La ventana de juego envía la información al controlador.
+\item La fachada envía la respuesta al servidor por medio del proxy.
 \end{enumerate} \\
 
-\textbf{Poscondición} & 
+\textbf{Poscondición} & Respuesta a reto enviada.
 
 \end{tabularx}
 }
 
-\subsection{Comprar refuerzos}
+\subsection{Realizar movimiento}
 
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Comprar refuerzos \\
+\textbf{Caso de uso} & Realizar Movimiento \\
 
 \textbf{Precondición} & El usuario debe haberse unido a una partida y estar
 conectado a ella. \\
 
 \textbf{Escenario general} & \begin{enumerate}
-\item El usuario pulsa sobre el botón comprar.
-\item Se muestra al usuario una ventana con diferentes opciones.
-\item El usuario introduce los datos necesarios y confirma la operación.
-\item El gestor del juego recibe los datos y env\'ia la información al proxy.
-\item El proxy notifica al gestor de juego que la compra se ha realizado con
-\'exito.
-\item El gestor de juego actualiza los datos del juego.
+\item El usuario pulsa sobre la casilla del tablero a colocar.
+\item La interfaz avisa al controlador del movimiento.
+\item El controlador envía el movimiento a la fachada.
+\item La fachada envía el movimiento a Tablero9x9.
+\item Tablero9x9 comprueba la legalidad del movimiento.
+\item Si el movimiento es válido se lo envía al proxy y avisa al controlador para realizar el camino inverso hacia la interfaz y colocar la ficha.
+\item Si el movimiento es inválido se lanza una excepción que se recoge en el controlador.
+\item El controlador envía la excepción a la interfaz de usuario para comunicarle el error que ha cometido.
 \end{enumerate} \\
-\textbf{Postcondición} & Se ejecuta el caso de uso  ``Enviar actualización de
-la partida''. \\
-\textbf{Escenario alternativo} & \begin{enumerate}
-\item El usuario pulsa sobre el botón comprar.
-\item Se muestra al usuario una ventana con diferentes opciones.
-\item El usuario introduce los datos necesarios y confirma la operación.
-\item El gestor del juego recibe los datos, comprueba que se cumple la condición
-de que el jugador tenga dinero suficiente, el jugador no tiene dinero
-suficiente.
-\item El gestor de juego pide a la ventana que muestre un mensaje con
-información sobre el error producido al realizar la acción de compra.
-\end{enumerate}\\
+\textbf{Postcondición} & Movimiento realizado. \\
 \end{tabularx}
 }
 
