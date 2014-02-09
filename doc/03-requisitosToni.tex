@@ -67,7 +67,7 @@ correctos, en cuyo caso se aborta la operación y se vuelve al estado inicial.
 \end{enumerate} \\
 
 \textbf{Poscondición} & El usuario deja de estar activo en el servidor y deja de aparecer
-en la lista de jugadores.
+en la lista de jugadores.\\
 
 \textbf{Precondición} & Sesión iniciada y jugador en partida \\
 
@@ -157,7 +157,7 @@ en la lista de jugadores.
 
 \end{enumerate} \\
 
-\textbf{Poscondición} & Tablero modificado.
+\textbf{Poscondición} & Tablero modificado.\\
 
 \textbf{Escenario general} & \begin{enumerate}
 \item El usuario coloca una pieza en el tablero de juego.
@@ -190,6 +190,198 @@ usuarios conectados del servidor.
 
 \end{tabularx}
 }
+
+
+\subsection{Enviar Petición de Reto}
+
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Enviar petición de Reto\\
+
+\textbf{Precondición} & Usuarios logeados en el sistea y petición de reto realizada. \\
+
+\textbf{Escenario general} & \begin{enumerate}
+
+\item Al servidor le llega una petición de reto por parte de un usuario.
+\item El servidor envía al otro jugador la petición de reto.
+
+\end{enumerate} \\
+
+\textbf{Poscondición} &  \\ \\
+
+\end{tabularx}
+}
+
+\subsection{Registrar un movimiento}
+
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Registrar un movimiento \\
+
+\textbf{Precondición} & Iniciar sesión, Unirse a una partida y Conectarse a una
+partida \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item Al servidor le llega el movimiento realizado por un usuario.
+\item El servidor almacena el movimiento en la base de datos.
+\item El servidor notifica al otro usuario que ya puede realizar su movimiento.
+\end{enumerate} \\
+
+\textbf{Poscondición} & Se realiza el caso de uso: ''Enviar actualización de la
+partida''.\\
+
+\end{tabularx}
+}
+
+\subsection{Responder a solicitud de reto}
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Responder a solicitud de reto \\
+
+\textbf{Precondición} & Iniciar sesión\\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El servidor envía al usuario la solicitud de reto del otro usuario.
+\item El cliente recibe la solicitud y la envía al controlador.
+\item El controlador la envía a la ventana de jugadores para que muestre que el jugador ha sido retado
+\item El usuario elige la acción en la ventana (si acepta o si no).
+\item La ventana de juego envía la información al controlador.
+\item La fachada envía la respuesta al servidor por medio del proxy.
+\end{enumerate} \\
+
+\textbf{Poscondición} & Respuesta a reto enviada.
+
+\end{tabularx}
+}
+
+\subsection{Realizar movimiento}
+
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de uso} & Realizar Movimiento \\
+
+\textbf{Precondición} & El usuario debe haberse unido a una partida y estar
+conectado a ella. \\
+
+\textbf{Escenario general} & \begin{enumerate}
+\item El usuario pulsa sobre la casilla del tablero a colocar.
+\item La interfaz avisa al controlador del movimiento.
+\item El controlador envía el movimiento a la fachada.
+\item La fachada envía el movimiento a Tablero9x9.
+\item Tablero9x9 comprueba la legalidad del movimiento.
+\item Si el movimiento es válido se lo envía al proxy y avisa al controlador para realizar el camino inverso hacia la interfaz y colocar la ficha.
+\item Si el movimiento es inválido se lanza una excepción que se recoge en el controlador.
+\item El controlador envía la excepción a la interfaz de usuario para comunicarle el error que ha cometido.
+\end{enumerate} \\
+\textbf{Postcondición} & Movimiento realizado. \\
+\end{tabularx}
+}
+
+
+
+\section{Otros requisitos}
+\subsection{Requisitos de la interfaz de usuario}
+\subsubsection{Ventana de inicio}
+{\footnotesize
+
+ \textbf{Descripción:} Da la bienvenida al usuario.\\ Debe permitir al usuario
+ejecutar el
+caso de uso ``Iniciar sesión'' e introducir los siguientes datos: \\
+
+\begin{tabularx}{0.9\textwidth}{llX}
+\hline
+\textbf{Dato} & \textbf{Tipo} & \textbf{Descripción} \\
+\hline
+NombreUsuario & Texto & Nombre del usuario \\
+Contraseña & Texto & Contraseña en el sistema \\
+\hline
+\end{tabularx}
+}
+
+\subsubsection{Ventana de registro}
+{\footnotesize
+
+
+
+ \textbf{Descripción:} Permite registrarse al usuario.\\
+Es necesario que
+permita al usuario introducir los siguientes datos: \\
+
+\begin{tabularx}{0.9\textwidth}{llX}
+\hline
+\textbf{Dato} & \textbf{Tipo} & \textbf{Descripción} \\
+\hline
+Nombre & Texto & Nombre del usuario \\
+eMail & Texto & Dirección de correo electrónico \\
+Contraseña & Texto & Contraseña en el sistema \\
+Conf. Contraseña & Texto & Confirmación de contraseña \\
+\hline
+\end{tabularx}
+
+}
+
+\subsubsection{Ventana principal}
+{\footnotesize
+
+ \textbf{Descripción:}  Mostrará al usuario las partidas disponibles y las
+partidas en
+juego.\\
+Es necesario que
+permita al usuario ejecutar los siguientes casos de uso: \\
+\begin{enumerate}
+\item Crear una partida.
+\item Unirse a una partida.
+\item Conectarse a una partida.
+\item Ver lista de partidas.
+
+\end{enumerate}
+}
+
+\subsubsection{Ventana Crear partida}
+{\footnotesize
+
+ \textbf{Descripción:}  Permite al usuario crear una nueva partida.\\
+Es necesario que
+permita al usuario introducir los siguientes datos: \\
+
+\begin{tabularx}{0.9\textwidth}{llX}
+\hline
+\textbf{Dato} & \textbf{Tipo} & \textbf{Descripción} \\
+\hline
+Nombre & Texto & Nombre de la partida \\
+Días de juego & Fecha & Días en los que se jugará la partida\\
+Hora de Inicio de Juego & Hora & Hora en la que empieza o continua la partida
+los días indicados\\
+Hora de Fin de Juego & Hora & Hora en la que termina la partida los días
+indicados\\
+\hline
+\end{tabularx}
+}
+
+\subsubsection{Ventana de juego}
+{\footnotesize
+
+
+
+ \textbf{Descripción:}  Muestra al usuario todos los detalles de una partida y
+permite
+jugar en ella. Deberá mostrar el tablero de juego con la asignación de
+territorios.\\
+
+Es necesario que
+permita al usuario ejecutar los siguientes casos de uso: \\
+\begin{enumerate}
+\item Desconectarse de una partida.
+\item Realizar un movimiento.
+\item Responder acción enemiga.
+\item Comprar refuerzos.
+\item Enviar petición de alianza.
+\item Responder a petición de alianza.
+\item Romper alianza.
 
 \end{enumerate}
 

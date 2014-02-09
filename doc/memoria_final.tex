@@ -95,9 +95,9 @@ EL resto de secciones profundizan en el conocimiento del sistema.
 \pagestyle{fancy}
 
 \section{Requisitos funcionales}
-% \input{03-requisitosToni.tex}
-\input{03-requisitos_apl.tex}
-
+ \input{03-requisitosToni.tex}
+%\input{03-requisitos_apl.tex}
+\clearpage
 \section{Arquitectura del sistema}
 
 A continuación se muestra una visión de la arquitectura del sistema. Se trata de
@@ -128,6 +128,8 @@ A continuación se muestra la arquitectura del servidor. Esta es una arquitectur
 
 \end{itemize}
 \includegraphics[width=0.9\textwidth]{img/arq_Servidor.png}\\[1cm]
+
+\clearpage
 \section{Casos de uso}
 
 \subsection{Diagrama de casos de uso del cliente}
@@ -211,7 +213,7 @@ A continuación se muestra la arquitectura del servidor. Esta es una arquitectur
 
 \subsubsection{Salir de partida}
 
-\includegraphics[width=0.9\textwidth]{img/ms_SalirPartidaCliente.png}\\[1cm]
+\includegraphics[width=0.3\textwidth]{img/ms_SalirPartidaCliente.png}\\[1cm]
 
 
 \subsection{Máquinas de estado del Servidor}
@@ -230,7 +232,7 @@ A continuación se muestra la arquitectura del servidor. Esta es una arquitectur
 
 \subsubsection{Poner ficha}
 
-\includegraphics[width=0.9\textwidth]{img/ms_PonerFichaServidor.png}\\[1cm]
+\includegraphics[width=0.3\textwidth]{img/ms_PonerFichaServidor.png}\\[1cm]
 
 \subsubsection{Registar usuario}
 
@@ -250,13 +252,14 @@ En esta sección se realizará un análisis más en profundidad del diseño tant
 
 \subsection{Diagrama de clases del cliente}
 
-\includegraphics[width=0.9\textwidth]{img/ddc_Cliente.png}\\[1cm]
+\includegraphics[width=1\textwidth]{img/ddc_Cliente.png}\\[1cm]
 
-Como
+En el diagrama de clases se puede apreciar la arquitectura multicapa apareciéndo un paquete más , como es el paquete Excepciones.
 \subsection{Diagrama de clases del servidor}
 
-\includegraphics[width=0.9\textwidth]{img/ddc_Servidor.png}\\[1cm]
+\includegraphics[width=1 \textwidth]{img/ddc_Servidor.png}\\[1cm]
 
+\clearpage
 \section{Pruebas de los casos de uso}
 
 
