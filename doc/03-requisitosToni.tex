@@ -29,9 +29,9 @@
 \item El usuario introduce su email y contraseña en la ventana de registro.
 \item El usuario pulsa el botón de confirmación.
 \item Se espera confirmación por parte del servidor.
-\item La ventana de inicio informa al usuario que ya se encuenta registrado.\\
-\end{itemize}
-\textbf{Poscondición}& No se registra el usuario de nuevo.
+\item La ventana de inicio informa al usuario que ya se encuenta registrado.
+\end{enumerate}\\
+\textbf{Poscondición}& No se registra el usuario de nuevo.\\
 
 \end{tabularx}
 }
@@ -53,7 +53,7 @@
 \end{enumerate} \\
 
 \textbf{Poscondición} & Se ejecuta el caso de uso ``Ver lista de jugadores''
-\\ \\
+\\
 
 \textbf{Precondición} & Datos de acceso incorrectos\\
 \textbf{Escenario alternativo} & \begin{enumerate}
@@ -61,7 +61,7 @@
 \item El usuario pulsa el botón de ``Iniciar sesión''.
 \item Se espera validación por parte del servidor.
 \item Se informa al usuario que los datos de acceso son incorrectos.
-\end{itemize}\\
+\end{enumerate}\\
 \textbf{Poscondición} &Usuario no logeado.\\
 
 \textbf{Precondición} & Usuario ya logeado.\\
@@ -70,8 +70,8 @@
 \item El usuario pulsa el botón de ``Iniciar sesión''.
 \item Se espera validación por parte del servidor.
 \item Se informa al usuario que ya está logeado.
-\end{itemize}\\
-\textb{Poscondición}& Usuario no logeado de nuevo.\\
+\end{enumerate}\\
+\textbf{Poscondición}& Usuario no logeado de nuevo.\\
 \end{tabularx}
 }
 
@@ -169,9 +169,11 @@ en la lista de jugadores.
 \item Se abre ventana emergente de invitación a partida.
 \item El usuario pulsa el botón de cancelar.
 \item Se notifica al servidor de la cancelación.
-\end{tabularx}\\
+\end{enumerate}\\
 
-\textbf{Poscondición}& No se crea partida y se vuelve a la GUI de la lista de jugadores.\\
+\textbf{Poscondición}& No se crea partida y se vuelve a la GUI de la lista de jugadores.
+
+\end{tabularx}
 }
 
 \subsection{Realizar movimiento}
@@ -224,7 +226,7 @@ usuarios conectados del servidor.
 \textbf{Precondición} & Jugador ya iniciado sesión y otro jugador se conecta.\\
 \textbf{Escenario alternativo} & \begin{enumerate}
 \item El servidor envía al usuario la lista de jugadores actualizada.
-\end{itemize}\\
+\end{enumerate}\\
 \textbf{Poscondición}& Ambos jugadores con la lista de jugadores actualizada.\\
 \end{tabularx}
 }
