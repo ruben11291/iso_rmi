@@ -44,8 +44,8 @@ public class TestRetoRechazar {
 			s.add("hayek", "hayek", retado);
 
 		} catch (RemoteException | JugadorNoExisteException | JugadorYaExisteException |JugadorYaRegistradoException e) {
-			fail("No esperaba fallar aquI");
 			e.printStackTrace();
+			fail("No esperaba fallar aquI");
 		}
 	}
 	

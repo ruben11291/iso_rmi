@@ -17,8 +17,8 @@ import client.exceptions.TableroGanadoException;
 
 public class JugadorTest {
 	
-	Jugador j1 = new Jugador("pepe@gmail.com","pepe");
-	Jugador j2 = new Jugador("juan@gmail.com","juan");
+	Jugador j1 = new Jugador("pep","pepe");
+	Jugador j2 = new Jugador("juan","juan");
 	Tablero9x9 tablero;
 	
 	@Before
@@ -36,14 +36,14 @@ public class JugadorTest {
 		try{
 			try {
 				j2.poner(0, 0, 0, 0);
-				fail("Debería de haber excepcion");
+				fail("Se esperaba excepción");
 			} catch (NoEstaJugandoException | CoordenadasNoValidasException
 					| MovimientoNoValidoException | PartidaFinalizadaException
 					| CasillaOcupadaException | TableroGanadoException
 					| TableroEmpateException e) {
-				fail("No deberia de haber excepcion");
+				fail("No se esperaba excepción");
 			}
-		}catch(NoTienesElTurnoException e){
+		} catch(NoTienesElTurnoException e){
 			assertTrue(tablero.getJugadorConElTurno().equals(j1));
 			try {
 				j1.poner(0, 0, 0, 0);
@@ -52,7 +52,7 @@ public class JugadorTest {
 					| MovimientoNoValidoException | PartidaFinalizadaException
 					| CasillaOcupadaException | TableroGanadoException
 					| TableroEmpateException e1) {
-				fail("No deberia de haber excepcion");
+				fail("No se esperaba excepción");
 			}
 			assertTrue(tablero.getJugadorConElTurno().equals(j2));
 		}
