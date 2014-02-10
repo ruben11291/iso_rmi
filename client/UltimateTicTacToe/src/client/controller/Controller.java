@@ -2,8 +2,6 @@ package client.controller;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
-import java.util.Vector;
-
 import client.domain.FTERD;
 import client.exceptions.*;
 import client.presentation.*;
@@ -11,6 +9,7 @@ import client.presentation.*;
 public class Controller implements IController {
 	private static Controller self;
 	private IJuego juego;
+	
 	IListaJugadores lista;
 	ILogin login;
 	IRegistro registro;
@@ -30,47 +29,73 @@ public class Controller implements IController {
 			self = new Controller();
 		return self;
 	}
-		
 	
+	@Override
+	public void setRegistro(IRegistro registro) {
+		this.registro = registro;
+	}
+
+	@Override
+	public void setLista(IListaJugadores lista) {
+		this.lista = lista;	
+	}
+
+	@Override
+	public void setJuego(IJuego juego) {
+		this.juego =juego;
+	}
+
+	@Override
+	public void setLogin(ILogin login) {
+		this.login = login;
+	}
+		
 	public void ponerMovimiento(int cT, int fT, int cC, int fC) {
-		System.out.println("Comprobar movimiento válido");
 		try {
 			this.modelo.poner(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
-		}catch (NoEstaJugandoException e) {
+		}
+		catch (NoEstaJugandoException e) {
 			System.out.println("El oponente no está jugando.");
 			e.printStackTrace();
-		} catch (CoordenadasNoValidasException e) {
+		} 
+		catch (CoordenadasNoValidasException e) {
 			System.out.println("Coordenadas no válidas.");
 			e.printStackTrace();
-		}catch (MovimientoNoValidoException e1){
+		}
+		catch (MovimientoNoValidoException e1){
 			this.juego.movimientoInvalido(cT, fT, cC, fC);
 			System.out.println("Movimiento no válido");
-		}catch (NoTienesElTurnoException e2) {
-			// TODO: INFORMAR A LA INTERFAZ
+		}
+		catch (NoTienesElTurnoException e2) {
 			System.out.println("No tienes el turno.");
-		}catch (CasillaOcupadaException e3){
+		}
+		catch (CasillaOcupadaException e3){
 			System.out.println("Casilla ocupada.");
-		}catch (TableroGanadoException e4) {
+		}
+		catch (TableroGanadoException e4) {
 			System.out.println("Excepción: " + e4.getEmail() + " " + e4.getcT() + " " + e4.getfT());
 			this.juego.tableroGanado(e4.getEmail(), e4.getcT(), e4.getfT());
 			this.juego.ponerFicha(this.modelo.getEmailJugador(),cT, fT, cC, fC);
-		}catch (PartidaFinalizadaException  e5) {
+		}
+		catch (PartidaFinalizadaException  e5) {
 			this.juego.ponerFicha(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 			this.juego.partidaFinalizada(e5.getEmail());
+			
 			if(!e5.getEmpate())
 				this.juego.tableroGanado(e5.getEmail(), e5.getCol(), e5.getFila());
 			else
 				this.juego.tableroEmpatado(e5.getCol(),e5.getFila());
-		}catch (TableroEmpateException  e6) {
+		}
+		catch (TableroEmpateException  e6) {
 				this.juego.ponerFicha(this.modelo.getEmailJugador(), cT, fT, cC, fC);
 				this.juego.tableroEmpatado(e6.getcT(),e6.getfT());
-		}catch (RemoteException e) {
+		}
+		catch (RemoteException e) {
 			e.printStackTrace();
 		} 
 	}
 	
-	// TODO: Capturar las excepciones de partida finalizada  y tablero lleno
 	@Override
 	public void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC, int fC) {
 		this.juego.ponerFicha(realizaMov, cT, fT, cC, fC);
@@ -85,7 +110,6 @@ public class Controller implements IController {
 			login.recibirRespuestaLogin(error);
 		}
 		catch(JugadorNoExisteException e){
-			//crear ventana de error
 			System.out.println("JUGADOR "+e.toString()+" NO EXISTE EXCEPTION");
 			this.login.jugadorNoExiste();
 		}
@@ -93,14 +117,15 @@ public class Controller implements IController {
 			System.out.println("JUGADOR "+e2.toString()+" YA EXISTE EN EL SERVER");
 			this.login.jugadorYaExiste();
 		}
-		
 	}
+	
 	@Override
 	public void enviarDatosRegistro(String email, String passwd) {
 		try{
 			modelo.registrarJugador(email, passwd);
 			registro.respuestaRegistro(false);
-		}catch(JugadorYaRegistradoException e){
+		}
+		catch(JugadorYaRegistradoException e){
 			registro.respuestaRegistro(true);
 		}
 	}
@@ -109,35 +134,17 @@ public class Controller implements IController {
 	public void enviarListaJugadores(Hashtable <String, Integer> jugadores) {
 		lista.recibirRespuestaLista(jugadores);
 	}
+	
 	@Override
 	public void retarJugador(String oponente) {
 		try {
 			modelo.retar(oponente);
-		} catch (RemoteException e) {
+		}
+		catch (RemoteException e) {
 			this.excepcionRemota();
 		}
 	}
-	@Override
-	public void setRegistro(IRegistro registro) {
-		this.registro = registro;
-	}
-
-	@Override
-	public void setLista(IListaJugadores lista) {
-		this.lista = lista;
-		
-	}
-
-	@Override
-	public void setJuego(IJuego juego) {
-		this.juego =juego;
-	}
-
-	@Override
-	public void setLogin(ILogin login) {
-		this.login = login;
-	}
-
+	
 	public void cerrarSesion() {
 		if (this.juego !=null) {
 			this.cerrarPartida();
@@ -165,7 +172,6 @@ public class Controller implements IController {
 		}
 	}
 	
-
 	@Override
 	public void respuestaReto(String retador, String retado, boolean respuesta) {
 		this.lista.recibirRespuestaReto(this.modelo.getEmailJugador(), retador, retado, respuesta);
@@ -176,7 +182,8 @@ public class Controller implements IController {
 		try {
 			System.out.println("Respuesta enviada a la fachada: " + respuesta + ", " + retador);
 			this.modelo.enviarRespuestaReto(respuesta, retador);
-		} catch (RemoteException e) {
+		}
+		catch (RemoteException e) {
 			this.excepcionRemota();
 		}
 	}
@@ -195,7 +202,6 @@ public class Controller implements IController {
 	public void avisoCerrarSesion() {
 		this.login.avisoCerrarSesion();
 	}
-
 
 	@Override
 	public void tableroGanadoPorOponente(String email, int getcT, int getfT) {
@@ -216,30 +222,24 @@ public class Controller implements IController {
 			this.juego.partidaFinalizada(email);
 		}
 	}
+	
 	@Override
 	public void tableroEmpatado(int col, int fila) {
 		this.juego.tableroEmpatado(col,fila);
 		
 	}
+	
 	@Override
 	public void excepcionRemota() {
 		if(this.juego != null){
 			juego.excepcionRemota();
 			login.mostrar();
-	}
+		}
 		else if(this.lista != null){
 			lista.excepcionRemota();
 			login.mostrar();
 		}
 		else if (this.login != null)
 			login.excepcionRemota();
-		
 	}
-
-
-
-
-
-	
-	
 }

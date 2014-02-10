@@ -1,10 +1,5 @@
 package client.presentation;
 
-import java.net.InetAddress;
-
-import javax.swing.JOptionPane;
-
-import client.presentation.StartupWindow;
 
 public class UltimateTicTacToe {
 

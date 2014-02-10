@@ -1,20 +1,14 @@
 package client.communications;
 
 import java.net.MalformedURLException;
-import java.rmi.AccessException;
-import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.ExportException;
-
+import server.exportable.communications.IServer;
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
 import client.exceptions.JugadorYaRegistradoException;
 import client.exportable.communications.ICliente;
-import server.exportable.communications.IServer;
 
 public class Proxy {
 	private static Proxy yo;
@@ -22,9 +16,9 @@ public class Proxy {
 	  
 	private Proxy() throws RemoteException, NotBoundException {
 		try{
-			this.server=(IServer) Naming.lookup("rmi://localhost:3002/servidor");//172.19.177.184
+			this.server=(IServer) Naming.lookup("rmi://localhost:3002/servidor");
 		}catch(MalformedURLException e){
-			e.printStackTrace();//No se va a producir
+			e.printStackTrace();  //No se va a producir
 		}
 
 	}
@@ -36,43 +30,44 @@ public class Proxy {
 	}
 	
 	//////////// COMUNICACION CON EL SERVIDOR//////////////////
-	//registrar en el sistema
+	
+	// Registrar en el sistema
 	public void register(String email, String passwd) throws RemoteException,JugadorYaRegistradoException {
-		// TODO Auto-generated method stub
 		server.register(email, passwd);
 	}
 	
-	//darse de alta en el sistema
+	// Darse de alta en el sistema
 	public void add(String email, String passwd, ICliente cliente) throws RemoteException, JugadorNoExisteException, JugadorYaExisteException{
 		server.add(email, passwd, cliente);
 	}
 	
-	//darse de baja del sistema
+	// Darse de baja del sistema
 	public void delete(String email) throws RemoteException {
 		server.delete(email);
 	}
 	
-	//retar a un jugador
+	// Retar a un jugador
 	public void retar(String emailRetador, String emailRetado) throws RemoteException {
 		server.retar(emailRetador, emailRetado);
 	}
 	
-	//realizar movimiento
+	// Realizar movimiento
 	public void poner(String email, int cT, int fT, int cC, int fC, int idPartida) throws RemoteException {
 		server.poner(idPartida,email, cT, fT, cC, fC);
 	}	
 	
+	// Enviar respuesta a una peticion de reto
 	public void envioRespuestaPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException{
-		System.out.println("Respuesta a server");
 		server.respuestaAPeticionDeReto(retador, retado, respuesta);
 	}
-
+	
+	// Abandonar una partida
 	public void abandonoPartida(String email) throws RemoteException {
 		server.abandonoPartida(email);
 	}
-
+	
+	// Fin de partida
 	public void partidaFinalizada(int id) throws RemoteException {
-		// TODO Auto-generated method stub
 		server.partidaFinalizada(id);
 	}
 }

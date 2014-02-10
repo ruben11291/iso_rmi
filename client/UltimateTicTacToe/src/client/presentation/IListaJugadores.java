@@ -1,7 +1,6 @@
 package client.presentation;
 
 import java.util.Hashtable;
-import java.util.Vector;
 
 public interface IListaJugadores {
 	public void recibirRespuestaReto(String self, String retador, String retado, boolean respuesta);

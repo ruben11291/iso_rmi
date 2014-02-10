@@ -5,10 +5,8 @@ import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -16,14 +14,14 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import client.exceptions.JugadorNoExisteException;
-import client.exceptions.JugadorYaExisteException;
-import client.exceptions.JugadorYaRegistradoException;
-import client.exportable.communications.ICliente;
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
 import server.exportable.communications.IServer;
+import client.exceptions.JugadorNoExisteException;
+import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
+import client.exportable.communications.ICliente;
 
 
 public class Server extends UnicastRemoteObject implements IServer {
@@ -32,13 +30,11 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private FTERD fachada;
 	private static Server servo;
 	private Hashtable <String, ICliente>stubs;
-	private Registry r;
-	
 	protected Server() throws RemoteException, UnknownHostException {
 		super();
-//		this.ip="localhost";
+
 		this.ip = InetAddress.getLocalHost().getHostAddress();
-		//System.out.println(ip);
+
 		this.puerto=3002;
 		this.fachada=FTERD.get();
 		this.stubs = new Hashtable <String, ICliente>();
@@ -51,16 +47,13 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	public void conectar() throws RemoteException, MalformedURLException {
-		r = LocateRegistry.createRegistry(this.puerto);
-		//Registry r = LocateRegistry.getRegistry(this.puerto);
+		LocateRegistry.createRegistry(this.puerto);
+
 		try {
 			Naming.bind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
-//			r.bind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
 		}
 		catch (AlreadyBoundException eABE) {
 			;
-			//Naming.rebind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
-//			r.rebind("rmi://" + this.ip + ":" + this.puerto + "/servidor", this);
 		}
 		System.out.println("Servidor escuchando" + this.puerto);
 	}
@@ -80,10 +73,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 	
 	public void add(String email, String passwd) throws JugadorNoExisteException {
-//		if(this.stubs.containsKey(email)) throw new JugadorYaExisteException(email);
-//		Jugador jugador=new Jugador(email);
 		this.fachada.add(email, passwd);
-//		this.stubs.put(email, cliente);
 		System.out.println("Jugador añadido "+email+" en servidor ");
 		this.actualizarListaDeJugadores();
 	}
@@ -104,14 +94,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 				listaJugadores.put(tablero.getJugadorB().getEmail(), 1);			
 		}
 		
-//		Set entrySet = listaJugadores.entrySet();
-//		// Obtain an Iterator for the entries Set
-//		Iterator it = entrySet.iterator();
-//		// Iterate through Hashtable entries
-//		System.out.println("Lista de jugadores: ");
-//		while(it.hasNext())
-//			System.out.println(it.next());
-		
 		Enumeration<ICliente> lista=this.stubs.elements();
 		while (lista.hasMoreElements()) {
 			ICliente t=lista.nextElement();
@@ -122,16 +104,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 			}
 		}
 	}
-
-//	private Vector<String> getEmailJugadores(Hashtable<String, ICliente> stubs2) {
-//		Vector <String> emailJugadores = new Vector <String>();
-//		Enumeration<String> lista=stubs2.keys();
-//		while (lista.hasMoreElements()) {
-//			String t=lista.nextElement();
-//			emailJugadores.add(t);
-//		}
-//		return emailJugadores;
-//	}
 
 	// Para cerrar sesion
 	public void delete(String email) throws RemoteException {
@@ -147,8 +119,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void abandonoPartida(String email) {
 		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidaDelJugador(email);
+		
 		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si también abandona cliente2 entonces
 		//al llegar aquí avisarA será vacio
+		
 		if(!avisarA.isEmpty()){
 			//avisar al jugador que su oponente ha cerrado sesion
 			Enumeration<String> emailes=avisarA.keys();
@@ -173,7 +147,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 		try {
 			this.fachada.register(jugador);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLIntegrityConstraintViolationException e) {
 			throw new JugadorYaRegistradoException(email);
@@ -183,20 +156,16 @@ public class Server extends UnicastRemoteObject implements IServer {
 		}
 	}
 
-	
-	////////???????????????///////////////
 	public Hashtable<String, Jugador> getJugadores() throws RemoteException {
 		return this.fachada.getJugadores();
 	}
 
-	//////////??????????/////////////////
 	public Hashtable<Integer, Tablero9x9> getTableros() throws RemoteException {
 		return this.fachada.getTableros();
 	}
 
 	@Override
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws RemoteException {
-		System.out.println("Llega movimiento");
 		this.fachada = FTERD.get();
 		Jugador oponente =  this.fachada.poner(idPartida, email, cT, fT, cC, fC);
 		this.enviarMovimientoAOponente(idPartida, oponente.getEmail(), cT, fT, cC, fC);
@@ -210,9 +179,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public Vector<String> getClientesEnEspera() throws RemoteException {
 		Vector<String> result=new Vector<String>();
-//		for (Tablero9x9 tablero : this.fachada.getTablerosLibres()) {
-//			result.add(tablero.getJugadorA().getEmail());
-//		}
 		return result;
 	}
 
@@ -250,17 +216,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return this.fachada;
 		
 	}
-
-//	/* Este metodo se ha creado para las pruebas de la comunicacion*/
-//	public void desconectar() throws RemoteException, MalformedURLException, NotBoundException {
-////		Naming.unbind();
-////		UnicastRemoteObject.unexportObject(r, true);
-//		Registry r = LocateRegistry.getRegistry(this.ip, this.puerto);
-////		r.unbind("rmi://" + this.ip + ":" + this.puerto + "/servidor");
-//		Naming.unbind("rmi://" + this.ip + ":" + this.puerto + "/servidor");
-////		UnicastRemoteObject.unexportObject();
-//	}
-
+	
 	@Override
 	public void enviarMovimientoAOponente(int idPartida, String oponente, int cT, int fT, int cC, int fC) throws RemoteException {
 		System.out.println("Enviar movimiento a oponente: " + oponente);
@@ -274,7 +230,4 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void partidaFinalizada(int idPartida) throws RemoteException {
 		this.fachada.eliminarPartidaFinalizada(idPartida);
 	}
-
-
-	
 }

@@ -50,11 +50,30 @@ public class Tablero9x9 {
 	public void setId(int id){
 		this.id = id;
 	}
+	
 	public int getId(){
 		return this.id;
 	}
+	
 	public Jugador getJugadorConElTurno() {
 		return this.jugadorConElTurno;
+	}
+	
+	public void setJugadorA(Jugador a) {
+		this.jugadorA = a;
+		setJugadorConelTurno(this.jugadorA);
+	}
+	
+	public void setJugadorB(Jugador b) {
+		this.jugadorB = b;
+	}
+
+	public Jugador getJugadorA() {
+		return jugadorA;
+	}
+
+	public Jugador getJugadorB() {
+		return jugadorB;
 	}
 
 	public boolean hayVencedor() {
@@ -69,6 +88,7 @@ public class Tablero9x9 {
 		
 		if (!hayVencedor()) {
 			for (int i = 0; i < 3 && vencedor.equals(""); i++) {
+				
 				// Comprueba si hay alguna combinación ganadora vertical
 				if ((this.tablerillos[i][0].getVencedor().equals(a) || tablerillos[i][0].getEmpate()) && 
 						(this.tablerillos[i][1].getVencedor().equals(a) || tablerillos[i][1].getEmpate()) &&
@@ -78,6 +98,7 @@ public class Tablero9x9 {
 						(this.tablerillos[i][1].getVencedor().equals(b) || tablerillos[i][1].getEmpate()) &&
 						(this.tablerillos[i][2].getVencedor().equals(b) || tablerillos[i][2].getEmpate())) {
 					vencedor = b;
+					
 				// Comprueba si hay alguna combinación ganadora horizontal
 				} else if (this.tablerillos[i][0].getEmpate() && this.tablerillos[i][1].getEmpate() && this.tablerillos[i][2].getEmpate()) {
 					vencedor = this.getJugadorConElTurno().getEmail();
@@ -92,64 +113,31 @@ public class Tablero9x9 {
 				} else if (this.tablerillos[0][i].getEmpate() && this.tablerillos[1][i].getEmpate() && this.tablerillos[2][i].getEmpate()) {
 					vencedor = this.getJugadorConElTurno().getEmail();
 				}
-//				// Comprueba si hay alguna combinación ganadora vertical
-//				if (this.tablerillos[i][0].getVencedor().equals(this.tablerillos[i][1].getVencedor())
-//					&& this.tablerillos[i][1].getVencedor().equals(this.tablerillos[i][2].getVencedor())
-//					&& !this.tablerillos[i][2].getVencedor().equals("")) {
-//					if (this.tablerillos[i][0].getVencedor().equals(this.jugadorA.getEmail()))
-//						vencedor = a;
-//					else
-//						vencedor = b;
-//					i = 4;
-//				// Comprueba si hay alguna combinación ganadora horizontal
-//				} else if (this.tablerillos[0][i].getVencedor().equals(this.tablerillos[1][i].getVencedor())
-//					&& this.tablerillos[1][i].getVencedor().equals(this.tablerillos[2][i].getVencedor())
-//					&& !this.tablerillos[2][i].getVencedor().equals("")) {
-//					if (this.tablerillos[0][i].getVencedor().equals(this.jugadorA.getEmail()))
-//						vencedor = a;
-//					else
-//						vencedor = b;
-//					i = 4;
-				}
 			}
-			// Comprueba si hay alguna combinación ganadora diagonal
-			if (vencedor.equals("")) {
-				if ((this.tablerillos[0][0].getVencedor().equals(a) || tablerillos[0][0].getEmpate()) && 
-						(this.tablerillos[1][1].getVencedor().equals(a) || tablerillos[1][1].getEmpate()) &&
-						(this.tablerillos[2][2].getVencedor().equals(a) || tablerillos[2][2].getEmpate())) {
-					vencedor = a;
-				} else if ((this.tablerillos[0][0].getVencedor().equals(b) || tablerillos[0][0].getEmpate()) && 
-						(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
-						(this.tablerillos[2][2].getVencedor().equals(b) || tablerillos[2][2].getEmpate())) {
-					vencedor = b;
-				} else if (this.tablerillos[0][0].getEmpate() && this.tablerillos[1][1].getEmpate() && this.tablerillos[2][2].getEmpate()) {
-					vencedor = this.getJugadorConElTurno().getEmail();
-				} else if ((this.tablerillos[2][0].getVencedor().equals(a) || tablerillos[2][0].getEmpate()) && 
-						(this.tablerillos[1][1].getVencedor().equals(a) || tablerillos[1][1].getEmpate()) &&
-						(this.tablerillos[0][2].getVencedor().equals(a) || tablerillos[0][2].getEmpate())) {
-					vencedor = a;
-				} else if ((this.tablerillos[2][0].getVencedor().equals(b) || tablerillos[2][0].getEmpate()) && 
-						(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
-						(this.tablerillos[0][2].getVencedor().equals(b) || tablerillos[0][2].getEmpate())) {
-					vencedor = b;
-				} else if (this.tablerillos[2][0].getEmpate() && this.tablerillos[1][1].getEmpate() && this.tablerillos[0][2].getEmpate()) {
-					vencedor = this.getJugadorConElTurno().getEmail();
-//				if (this.tablerillos[0][0].getVencedor().equals(this.tablerillos[1][1].getVencedor())
-//					&& this.tablerillos[1][1].getVencedor().equals(this.tablerillos[2][2].getVencedor())
-//					&& !this.tablerillos[2][2].getVencedor().equals("")) {
-//					if (this.tablerillos[2][2].getVencedor().equals(this.jugadorA.getEmail()))
-//						vencedor = a;
-//					else
-//						vencedor = b;
-//				} else if (this.tablerillos[2][0].getVencedor().equals(this.tablerillos[1][1].getVencedor())
-//					&& this.tablerillos[1][1].getVencedor().equals(this.tablerillos[0][2].getVencedor())
-//					&& !this.tablerillos[0][2].getVencedor().equals("")) {
-//					if (this.tablerillos[0][2].getVencedor().equals(this.jugadorA.getEmail()))
-//						vencedor = a;
-//					else
-//						vencedor = b;
-//				}
-			}
+		}
+				// Comprueba si hay alguna combinación ganadora diagonal
+		if (vencedor.equals("")) {
+			if ((this.tablerillos[0][0].getVencedor().equals(a) || tablerillos[0][0].getEmpate()) && 
+					(this.tablerillos[1][1].getVencedor().equals(a) || tablerillos[1][1].getEmpate()) &&
+					(this.tablerillos[2][2].getVencedor().equals(a) || tablerillos[2][2].getEmpate())) {
+				vencedor = a;
+			} else if ((this.tablerillos[0][0].getVencedor().equals(b) || tablerillos[0][0].getEmpate()) && 
+					(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
+					(this.tablerillos[2][2].getVencedor().equals(b) || tablerillos[2][2].getEmpate())) {
+				vencedor = b;
+			} else if (this.tablerillos[0][0].getEmpate() && this.tablerillos[1][1].getEmpate() && this.tablerillos[2][2].getEmpate()) {
+				vencedor = this.getJugadorConElTurno().getEmail();
+			} else if ((this.tablerillos[2][0].getVencedor().equals(a) || tablerillos[2][0].getEmpate()) && 
+					(this.tablerillos[1][1].getVencedor().equals(a) || tablerillos[1][1].getEmpate()) &&
+					(this.tablerillos[0][2].getVencedor().equals(a) || tablerillos[0][2].getEmpate())) {
+				vencedor = a;
+			} else if ((this.tablerillos[2][0].getVencedor().equals(b) || tablerillos[2][0].getEmpate()) && 
+					(this.tablerillos[1][1].getVencedor().equals(b) || tablerillos[1][1].getEmpate()) &&
+					(this.tablerillos[0][2].getVencedor().equals(b) || tablerillos[0][2].getEmpate())) {
+				vencedor = b;
+			} else if (this.tablerillos[2][0].getEmpate() && this.tablerillos[1][1].getEmpate() && this.tablerillos[0][2].getEmpate()) {
+				vencedor = this.getJugadorConElTurno().getEmail();
+			}	
 		}
 		setVencedor(vencedor);
 	}
@@ -163,12 +151,12 @@ public class Tablero9x9 {
 	}
 	
 	public void comprobarMovimiento(int cT, int fT, int cC, int fC) throws CoordenadasNoValidasException, MovimientoNoValidoException, CasillaOcupadaException {
-		System.out.println("Tablero colocar");
+
 		if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
 			throw new CoordenadasNoValidasException(cT, fT, cC, fC);
 		if (this.tablerillos[cT][fT].getCasillas()[cC][fC].getValor() != 0)
 			throw new CasillaOcupadaException(cT, fT, cC, fC);
-		System.out.println("Columna tablero peq. anterior: " + last_cC + ". Fila tablero peq. anterior: " + last_fC + ". Columna tablero grande actual: " + cT + ". Fila tabler ogrande actual: " + fT);
+	
 		if (this.last_fC != -1)
 			if (this.last_cC != cT || this.last_fC != fT)
 				if (!this.tablerillos[this.last_cC][this.last_fC].isFull())
@@ -184,7 +172,7 @@ public class Tablero9x9 {
 			
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
 		this.cambiarTurno();
-		System.out.println("¿Vencedor?: " + tablerillo.getVencedor());
+		
 		if (!tablerillo.getVencedor().equals("")) {
 			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
 			if (!this.vencedor.equals(""))
@@ -209,24 +197,6 @@ public class Tablero9x9 {
 			this.jugadorConElTurno = this.jugadorB;
 		else
 			this.jugadorConElTurno = this.jugadorA;
-	}
-
-	public void setJugadorA(Jugador a) {
-		this.jugadorA = a;
-		setJugadorConelTurno(this.jugadorA);
-	}
-	
-	public void setJugadorB(Jugador b) {
-		this.jugadorB = b;
-		
-	}
-
-	public Jugador getJugadorA() {
-		return jugadorA;
-	}
-
-	public Jugador getJugadorB() {
-		return jugadorB;
 	}
 
 	public String toString(){

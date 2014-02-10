@@ -2,10 +2,6 @@ package client.domain;
 
 public class Tablero3x3 {
 	
-	public Casilla[][] getCasillas() {
-		return casillas;
-	}
-
 	private Casilla[][] casillas;
 	private String vencedor;	
 	private boolean empate;
@@ -20,9 +16,31 @@ public class Tablero3x3 {
 		this.vencedor = "";	
 		this.empate = false;
 	}
+	
+	public Casilla[][] getCasillas() {
+		return casillas;
+	}
+	
+	public String getVencedor() {
+		return this.vencedor;
+	}
+	
+	private void setVencedor(String vencedor) {
+		this.vencedor = vencedor;
+	}
 
 	public void colocar(int cC, int fC, int valor){
 		this.casillas[cC][fC].setValor(valor);
+	}
+	
+
+	public void setEmpate(boolean empate) {
+		this.empate = empate;
+		
+	}
+	public boolean getEmpate() {
+		return this.empate;
+		
 	}
 
 	public boolean isFull() {
@@ -49,6 +67,7 @@ public class Tablero3x3 {
 		String vencedor = "";
 		if (!hayVencedor()) {
 			for (int i = 0; i < 3; i++) {
+				
 				// Comprueba si hay alguna combinación ganadora vertical
 				if (this.casillas[i][0].getValor() == this.casillas[i][1].getValor() 
 					&& this.casillas[i][1].getValor() == this.casillas[i][2].getValor()
@@ -58,6 +77,7 @@ public class Tablero3x3 {
 					else
 						vencedor = b;
 					i = 4;
+					
 				// Comprueba si hay alguna combinación ganadora horizontal
 				} else if (this.casillas[0][i].getValor() == this.casillas[1][i].getValor() 
 					&& this.casillas[1][i].getValor() == this.casillas[2][i].getValor()
@@ -69,6 +89,7 @@ public class Tablero3x3 {
 					i = 4;
 				}
 			}
+			
 			// Comprueba si hay alguna combinación ganadora diagonal
 			if (vencedor.equals("")) {
 				if (this.casillas[0][0].getValor() == this.casillas[1][1].getValor()
@@ -90,15 +111,7 @@ public class Tablero3x3 {
 		}
 		setVencedor(vencedor);
 	}
-	
-	public String getVencedor() {
-		return this.vencedor;
-	}
-	
-	private void setVencedor(String vencedor) {
-		this.vencedor = vencedor;
-	}
-	
+
 	@Override
 	public String toString(){
 		String r = "";
@@ -108,14 +121,5 @@ public class Tablero3x3 {
 			}
 		}
 		return r;
-	}
-
-	public void setEmpate(boolean empate) {
-		this.empate = empate;
-		
-	}
-	public boolean getEmpate() {
-		return this.empate;
-		
 	}
 }

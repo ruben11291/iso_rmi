@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import server.domain.Casilla;
-import server.domain.Jugador;
 import server.domain.Tablero3x3;
 import server.domain.Tablero9x9;
 

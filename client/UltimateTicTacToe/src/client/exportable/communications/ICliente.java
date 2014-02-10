@@ -3,7 +3,6 @@ package client.exportable.communications;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
-import java.util.Vector;
 
 public interface ICliente extends Remote{
 	
