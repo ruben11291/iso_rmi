@@ -7,8 +7,8 @@
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Registrarse \\
-
+\textbf{Caso de uso} & \textbf{Registrarse} \\
+& \\
 \textbf{Precondición} & No está registrado \\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -21,7 +21,8 @@
 \end{enumerate} \\
 
 \textbf{Poscondición} & Un nuevo usuario existe en el sistema.\\
-
+& \\
+& \\
 \textbf{Precondición} & Ya está registrado\\
 \textbf{Escenario alternativo} & \begin{enumerate}
  \item El usuario pulsa el botón de registrarse en la ventana de inicio.
@@ -41,8 +42,8 @@
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Iniciar sesión \\
-
+\textbf{Caso de uso} & \textbf{Iniciar sesión} \\
+& \\
 \textbf{Precondición} & Usuario registrado y aún no logeado \\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -54,7 +55,8 @@
 
 \textbf{Poscondición} & Se ejecuta el caso de uso ``Ver lista de jugadores''
 \\
-
+& \\
+& \\
 \textbf{Precondición} & Datos de acceso incorrectos\\
 \textbf{Escenario alternativo} & \begin{enumerate}
 \item El usuario introduce su email y contraseña en la ventana de inicio.
@@ -63,7 +65,8 @@
 \item Se informa al usuario que los datos de acceso son incorrectos.
 \end{enumerate}\\
 \textbf{Poscondición} &Usuario no logeado.\\
-
+& \\
+& \\
 \textbf{Precondición} & Usuario ya logeado.\\
 \textbf{Escenario alternativo}& \begin {enumerate}
 \item El usuario introduce su email y contraseña en la ventana de inicio.
@@ -80,8 +83,8 @@
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Cerrar sesión \\
-
+\textbf{Caso de uso} & \textbf{Cerrar sesión} \\
+& \\
 \textbf{Precondición} & Sesión iniciada \\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -94,6 +97,8 @@
 \textbf{Poscondición} & El usuario deja de estar activo en el servidor y deja de aparecer
 en la lista de jugadores.\\
 
+& \\
+& \\
 \textbf{Precondición} & Sesión iniciada y jugador en partida \\
 
 \textbf{Escenario alternativo} & \begin{enumerate}
@@ -113,8 +118,8 @@ en la lista de jugadores.
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Salir de la partida \\
-
+\textbf{Caso de uso} &\textbf{Salir de la partida} \\
+& \\
 \textbf{Precondición} & Estar conectado a una partida.\\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -133,8 +138,8 @@ en la lista de jugadores.
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Retar jugador \\
-
+\textbf{Caso de uso} & \textbf{Retar jugador} \\
+& \\
 \textbf{Precondición} & Sesión iniciada y oponente en el sistema \\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -152,8 +157,8 @@ en la lista de jugadores.
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Aceptar reto \\
-
+\textbf{Caso de uso} & \textbf{Aceptar reto} \\
+& \\
 \textbf{Precondición} & Sesión iniciada y petición de reto realizada\\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -163,7 +168,8 @@ en la lista de jugadores.
 \end{enumerate} \\
 
 \textbf{Poscondición} & Se crea una partida.\\
-
+& \\
+& \\
 \textbf{Precondición} & Sesión iniciada y petición de reto realizada\\
 \textbf{Escenario alternativo} & \begin{enumerate}
 \item Se abre ventana emergente de invitación a partida.
@@ -180,8 +186,8 @@ en la lista de jugadores.
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Realizar movimiento válido \\
-
+\textbf{Caso de uso} & \textbf {Realizar movimiento válido} \\
+& \\
 \textbf{Precondición} & Existencia de una partida \\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -192,7 +198,8 @@ en la lista de jugadores.
 \end{enumerate} \\
 
 \textbf{Poscondición} & Tablero modificado.\\
-
+& \\
+& \\
 \textbf{Precondición} & Realizar movimiento no válido\\
 \textbf{Escenario alternativo} & \begin{enumerate}
 \item El usuario coloca una pieza en el tablero de juego.
@@ -211,8 +218,8 @@ en la lista de jugadores.
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Ver la lista de jugadores \\
-
+\textbf{Caso de uso} & \textbf{Ver la lista de jugadores} \\
+& \\
 \textbf{Precondición} & Iniciar sesión \\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -222,7 +229,8 @@ usuarios conectados del servidor.
 \end{enumerate} \\
 
 \textbf{Poscondición} & La lista de jugadores está disponible para el usuario.\\
-
+ & \\
+& \\
 \textbf{Precondición} & Jugador ya iniciado sesión y otro jugador se conecta.\\
 \textbf{Escenario alternativo} & \begin{enumerate}
 \item El servidor envía al usuario la lista de jugadores actualizada.
@@ -237,8 +245,8 @@ usuarios conectados del servidor.
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Enviar petición de Reto\\
-
+\textbf{Caso de uso} & \textbf{Enviar petición de Reto}\\
+& \\
 \textbf{Precondición} & Usuarios logeados en el sistea y petición de reto realizada. \\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -258,8 +266,8 @@ usuarios conectados del servidor.
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Registrar un movimiento \\
-
+\textbf{Caso de uso} & \textbf{Registrar un movimiento} \\
+& \\
 \textbf{Precondición} & Iniciar sesión, Unirse a una partida y Conectarse a una
 partida \\
 
@@ -279,8 +287,8 @@ partida''.\\
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Responder a solicitud de reto \\
-
+\textbf{Caso de uso} & \textbf{Responder a solicitud de reto} \\
+& \\
 \textbf{Precondición} & Iniciar sesión\\
 
 \textbf{Escenario general} & \begin{enumerate}
@@ -302,8 +310,8 @@ partida''.\\
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Realizar Movimiento \\
-
+\textbf{Caso de uso} & \textbf{Realizar Movimiento} \\
+& \\
 \textbf{Precondición} & El usuario debe haberse unido a una partida y estar
 conectado a ella. \\
 
