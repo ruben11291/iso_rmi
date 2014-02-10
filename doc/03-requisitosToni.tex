@@ -9,7 +9,7 @@
 
 \textbf{Caso de uso} & Registrarse \\
 
-\textbf{Precondición} & Ninguna \\
+\textbf{Precondición} & No está registrado \\
 
 \textbf{Escenario general} & \begin{enumerate}
 \item El usuario pulsa el botón de registrarse en la ventana de inicio.
@@ -20,7 +20,18 @@
 \item La ventana de inicio informa al usuario del éxito de la operación.
 \end{enumerate} \\
 
-\textbf{Poscondición} & Un nuevo usuario existe en el sistema.
+\textbf{Poscondición} & Un nuevo usuario existe en el sistema.\\
+
+\textbf{Precondición} & Ya está registrado\\
+\textbf{Escenario alternativo} & \begin{enumerate}
+ \item El usuario pulsa el botón de registrarse en la ventana de inicio.
+\item Se muestra la ventana de registro.
+\item El usuario introduce su email y contraseña en la ventana de registro.
+\item El usuario pulsa el botón de confirmación.
+\item Se espera confirmación por parte del servidor.
+\item La ventana de inicio informa al usuario que ya se encuenta registrado.\\
+\end{itemize}
+\textbf{Poscondición}& No se registra el usuario de nuevo.
 
 \end{tabularx}
 }
@@ -32,7 +43,7 @@
 
 \textbf{Caso de uso} & Iniciar sesión \\
 
-\textbf{Precondición} & Usuario registrado \\
+\textbf{Precondición} & Usuario registrado y aún no logeado \\
 
 \textbf{Escenario general} & \begin{enumerate}
 \item El usuario introduce su email y contraseña en la ventana de inicio.
@@ -44,9 +55,23 @@
 \textbf{Poscondición} & Se ejecuta el caso de uso ``Ver lista de jugadores''
 \\ \\
 
-\textbf{Escenario alternativo} & Puede ocurrir que los datos de acceso no sean
-correctos, en cuyo caso se aborta la operación y se vuelve al estado inicial.
+\textbf{Precondición} & Datos de acceso incorrectos\\
+\textbf{Escenario alternativo} & \begin{enumerate}
+\item El usuario introduce su email y contraseña en la ventana de inicio.
+\item El usuario pulsa el botón de ``Iniciar sesión''.
+\item Se espera validación por parte del servidor.
+\item Se informa al usuario que los datos de acceso son incorrectos.
+\end{itemize}\\
+\textbf{Poscondición} &Usuario no logeado.\\
 
+\textbf{Precondición} & Usuario ya logeado.\\
+\textbf{Escenario alternativo}& \begin {enumerate}
+\item El usuario introduce su email y contraseña en la ventana de inicio.
+\item El usuario pulsa el botón de ``Iniciar sesión''.
+\item Se espera validación por parte del servidor.
+\item Se informa al usuario que ya está logeado.
+\end{itemize}\\
+\textb{Poscondición}& Usuario no logeado de nuevo.\\
 \end{tabularx}
 }
 
@@ -110,12 +135,12 @@ en la lista de jugadores.
 
 \textbf{Caso de uso} & Retar jugador \\
 
-\textbf{Precondición} & Sesión iniciada \\
+\textbf{Precondición} & Sesión iniciada y oponente en el sistema \\
 
 \textbf{Escenario general} & \begin{enumerate}
 \item El usuario selecciona un jugador de la lista y pulsa ``Retar''.
 \item Se manda la petición al servidor que a su vez se lo comunica al oponente.
-
+\item El servidor busca al oponente y le envia la solicitud de reto.
 \end{enumerate} \\
 
 \textbf{Poscondición} & Usuario espera confirmación del oponente.
@@ -129,26 +154,33 @@ en la lista de jugadores.
 
 \textbf{Caso de uso} & Aceptar reto \\
 
-\textbf{Precondición} & Sesión iniciada \\
+\textbf{Precondición} & Sesión iniciada y petición de reto realizada\\
 
 \textbf{Escenario general} & \begin{enumerate}
 \item Se abre ventana emergente de invitación a partida.
 \item El usuario pulsa el botón de aceptar.
-
+\item Se notifica al servidor de la aceptación.
 \end{enumerate} \\
 
-\textbf{Poscondición} & Se crea una partida.
+\textbf{Poscondición} & Se crea una partida.\\
 
-\end{tabularx}
+\textbf{Precondición} & Sesión iniciada y petición de reto realizada\\
+\textbf{Escenario alternativo} & \begin{enumerate}
+\item Se abre ventana emergente de invitación a partida.
+\item El usuario pulsa el botón de cancelar.
+\item Se notifica al servidor de la cancelación.
+\end{tabularx}\\
+
+\textbf{Poscondición}& No se crea partida y se vuelve a la GUI de la lista de jugadores.\\
 }
 
 \subsection{Realizar movimiento}
 {\footnotesize
 \begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
 
-\textbf{Caso de uso} & Realizar movimiento \\
+\textbf{Caso de uso} & Realizar movimiento válido \\
 
-\textbf{Precondición} & En una partida \\
+\textbf{Precondición} & Existencia de una partida \\
 
 \textbf{Escenario general} & \begin{enumerate}
 \item El usuario coloca una pieza en el tablero de juego.
@@ -159,7 +191,8 @@ en la lista de jugadores.
 
 \textbf{Poscondición} & Tablero modificado.\\
 
-\textbf{Escenario general} & \begin{enumerate}
+\textbf{Precondición} & Realizar movimiento no válido\\
+\textbf{Escenario alternativo} & \begin{enumerate}
 \item El usuario coloca una pieza en el tablero de juego.
 \item Se comprueba la validez del movimiento.
 \item Se informa al usuario de que el movimiento no es válido.
@@ -186,8 +219,13 @@ usuarios conectados del servidor.
 
 \end{enumerate} \\
 
-\textbf{Poscondición} & La lista de jugadores está disponible para el usuario.
+\textbf{Poscondición} & La lista de jugadores está disponible para el usuario.\\
 
+\textbf{Precondición} & Jugador ya iniciado sesión y otro jugador se conecta.\\
+\textbf{Escenario alternativo} & \begin{enumerate}
+\item El servidor envía al usuario la lista de jugadores actualizada.
+\end{itemize}\\
+\textbf{Poscondición}& Ambos jugadores con la lista de jugadores actualizada.\\
 \end{tabularx}
 }
 
