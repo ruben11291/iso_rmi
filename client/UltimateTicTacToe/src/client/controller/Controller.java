@@ -16,6 +16,10 @@ public class Controller implements IController {
 	IRegistro registro;
 	FTERD modelo;
 	
+	public FTERD getModelo() {
+		return modelo;
+	}
+
 	private Controller(){
 		try{
 			this.modelo = new FTERD();
@@ -131,6 +135,10 @@ public class Controller implements IController {
 	@Override
 	public void setJuego(IJuego juego) {
 		this.juego =juego;
+	}
+
+	public IJuego getJuego() {
+		return juego;
 	}
 
 	@Override

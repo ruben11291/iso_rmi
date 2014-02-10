@@ -24,6 +24,10 @@ public class FTERD {
 		this.retosSolicitados = new Vector<String>();
 	}
 
+	public Vector<String> getRetosSolicitados() {
+		return retosSolicitados;
+	}
+
 	public String getEmailJugador(){
 		if(jugador != null) 
 			return this.jugador.getEmail();
@@ -156,8 +160,8 @@ public class FTERD {
 		System.out.println("Procede de: proxy servidor. Retador: " + retador + " Retado: " + retado + " Respuesta:" + respuesta);
 		System.out.println(this.retosSolicitados.toString());
 		if(this.retosSolicitados.contains(retado)){
+			this.retosSolicitados.remove(retado);
 			if(respuesta){
-				this.retosSolicitados.remove(retado);
 				creaPartida(retador,retado,idPartida);
 			}
 			Controller cntrl = Controller.get();
@@ -226,6 +230,5 @@ public class FTERD {
 
 	public void partidaFinalizada() {
 		this.tablero = null;
-	}
-	
+	}	
 }

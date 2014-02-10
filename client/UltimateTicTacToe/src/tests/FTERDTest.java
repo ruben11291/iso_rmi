@@ -2,45 +2,81 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import client.communications.Cliente;
+import client.controller.Controller;
 import client.domain.FTERD;
 import client.domain.Jugador;
 import client.domain.Tablero9x9;
+import client.exceptions.JugadorNoExisteException;
+import client.exceptions.JugadorYaExisteException;
+import client.exceptions.JugadorYaRegistradoException;
+import client.presentation.PlayerListWindow;
 
 
 ///TODO: todos los test
 
 public class FTERDTest {
 
-	public FTERD fachada1;
-	public FTERD fachada2;
+	private Controller control1, control2;
+
+	@Before
 	public void setUp(){
-		try {
-		 fachada1 = new FTERD();
-		 fachada2 = new FTERD();
+		FuncionesAuxiliaresTests.borrarBD();
+		this.control1 = Controller.get();
+		this.control2 = Controller.get();
 		
-		} catch (Exception e) {
-			fail("No se esperaba excepcion");
+		try {
+			this.control1.getModelo().registrarJugador("nobita", "");
+			this.control2.getModelo().registrarJugador("doraemon", "");
+		} catch (JugadorYaRegistradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.control1.getModelo().autenticar("nobita", "");
+			this.control2.getModelo().autenticar("doraemon", "");
+		} catch (JugadorNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JugadorYaExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.control1.setLista(new PlayerListWindow("nobita"));
+		this.control1.setLista(new PlayerListWindow("doraemon"));
+	}
+	
+	@Test
+	public void testRetarYAceptado() {
+		System.out.println("Test retar");
+		try {
+			this.control1.getModelo().retar("doraemon");
+			assertTrue(this.control1.getModelo().getRetosSolicitados().contains("doraemon"));
+			this.control2.enviarRespuestaReto(true, "nobita");
+			assertFalse(this.control1.getModelo().getRetosSolicitados().contains("doraemon"));
+			assertTrue(this.control1.getJuego() != null);
+		} catch (RemoteException e) {
+			assertFalse(this.control1.getModelo().getRetosSolicitados().contains("doraemon"));
 		}
 	}
+	
 	@Test
-	public void testCrearPartida() {
-//		Cliente c1 = new Cliente(fachada1);
-//		Cliente c2 = new Cliente(fachada2);
-		
-		fachada1.autenticarTest("musolini@uclm.es", "");
-		fachada2.autenticarTest("hitler@uclm.es", "");
-		
-		//c2.
-		Tablero9x9 tablero = new Tablero9x9(1000);
-		
-//		
-//		tablero.setJugadorA(j1);
-//		tablero.setJugadorB(j2);
-//		tablero.setJugadorConelTurno(j1);
-	//	this.tableros.put(retador, tablero);
+	public void testRetarYRechazado() {
+		System.out.println("Test retar");
+		try {
+			this.control1.getModelo().retar("doraemon");
+			assertTrue(this.control1.getModelo().getRetosSolicitados().contains("doraemon"));
+			this.control2.enviarRespuestaReto(false, "nobita");
+			assertFalse(this.control1.getModelo().getRetosSolicitados().contains("doraemon"));
+			assertTrue(this.control1.getJuego() == null);
+		} catch (RemoteException e) {
+			assertFalse(this.control1.getModelo().getRetosSolicitados().contains("doraemon"));
+		}
 	}
-
 }
