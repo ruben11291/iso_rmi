@@ -9,11 +9,10 @@ import client.presentation.*;
 public class Controller implements IController {
 	private static Controller self;
 	private IJuego juego;
-	
-	IListaJugadores lista;
-	ILogin login;
-	IRegistro registro;
-	FTERD modelo;
+	private IListaJugadores lista;
+	private ILogin login;
+	private IRegistro registro;
+	private FTERD modelo;
 	
 	public FTERD getModelo() {
 		return modelo;
@@ -32,6 +31,10 @@ public class Controller implements IController {
 		if (self == null)
 			self = new Controller();
 		return self;
+	}
+	
+	public IJuego getJuego() {
+		return juego;
 	}
 	
 	@Override
