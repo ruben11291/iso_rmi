@@ -18,9 +18,6 @@ import client.exceptions.JugadorYaExisteException;
 import client.exceptions.JugadorYaRegistradoException;
 import client.presentation.PlayerListWindow;
 
-
-///TODO: todos los test
-
 public class FTERDTest {
 
 	private Controller control1, control2;
