@@ -79,6 +79,15 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	}
 	
+	public void add(String email, String passwd) throws JugadorNoExisteException {
+//		if(this.stubs.containsKey(email)) throw new JugadorYaExisteException(email);
+//		Jugador jugador=new Jugador(email);
+		this.fachada.add(email, passwd);
+//		this.stubs.put(email, cliente);
+		System.out.println("Jugador añadido "+email+" en servidor ");
+		this.actualizarListaDeJugadores();
+	}
+	
 	private void actualizarListaDeJugadores(){
 		Vector <String> jugadores = this.fachada.getEmailsJugadores();
 		Hashtable <String, Integer> listaJugadores = new Hashtable<String, Integer>();
