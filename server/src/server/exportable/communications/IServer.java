@@ -2,15 +2,12 @@ package server.exportable.communications;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Hashtable;
 import java.util.Vector;
 
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
 import client.exceptions.JugadorYaRegistradoException;
 import client.exportable.communications.ICliente;
-import server.domain.Jugador;
-import server.domain.Tablero9x9;
 
 public interface IServer extends Remote {
 	public void add(String email, String passwd, ICliente cliente) throws RemoteException, JugadorNoExisteException, JugadorYaExisteException;

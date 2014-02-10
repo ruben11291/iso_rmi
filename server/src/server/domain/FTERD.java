@@ -1,16 +1,13 @@
 package server.domain;
 
-import java.net.UnknownHostException;
-import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import client.exceptions.JugadorNoExisteException;
-import server.communications.Server;
 import server.persistence.DAOAutenticar;
 import server.persistence.DAOTablero;
+import client.exceptions.JugadorNoExisteException;
 
 public class FTERD {
 	private static FTERD yo;
@@ -78,20 +75,7 @@ public class FTERD {
 					e.printStackTrace();
 				}			
 	
-				oponente = partida.getOpenenteDE(email);
-				
-	//			Server s;
-	//			System.out.println(email);
-	//			try {
-	//				s = Server.get();
-	//				s.enviarMovimientoAOponente(idPartida, oponente.getEmail(), cT, fT, cC, fC);
-	//			} catch (RemoteException e) {
-	//				// TODO Auto-generated catch block
-	//				e.printStackTrace();
-	//			} catch (UnknownHostException e) {
-	//				// TODO Auto-generated catch block
-	//				e.printStackTrace();
-	//			}		
+				oponente = partida.getOpenenteDE(email);	
 
 			}
 		}
@@ -153,17 +137,6 @@ public class FTERD {
 		return retosEnEspera;
 	}
 	
-//	public Vector<Tablero9x9> getTablerosLibres() {
-//		Vector<Tablero9x9> result=new Vector<Tablero9x9>();
-//		Enumeration<Tablero9x9> lista=this.tableros.elements();
-//		while (lista.hasMoreElements()) {
-//			Tablero9x9 t=lista.nextElement();
-//			if (t.getJugadorB()==null)
-//				result.add(t);
-//		}
-//		return result;
-//		
-//	}
 
 	public Jugador getJugador(String email) {
 		return this.jugadores.get(email);

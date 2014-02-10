@@ -22,9 +22,6 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import client.controller.Controller;
-import client.exceptions.MovimientoNoValidoException;
-import client.exceptions.NoTienesElTurnoException;
-
 import java.awt.Font;
 
 public class GameWindow extends JFrame implements IJuego {
@@ -63,7 +60,6 @@ public class GameWindow extends JFrame implements IJuego {
 	private JLabel minimapLabel;
 	private JLabel ply1;
 	private JLabel ply2;
-	private JLabel notification;
 	private JLabel ply2name;
 	private JLabel ply1name;
 	private JLabel player1;
@@ -945,14 +941,8 @@ public class GameWindow extends JFrame implements IJuego {
 		tableroJuego[8][8].setBounds(550, 624, 53, 60);
 		StartupPanel.add(tableroJuego[8][8]);
 		this.coordenadas.put(tableroJuego[8][8], new Coordenada(8,8));
-
-		
-		
-		
 		
 		/*-------------------------------------------------------------------------------------*/
-		
-		
 		
 		mapLabel = new JLabel();
 		mapLabel.setBackground(Color.WHITE);
@@ -975,13 +965,15 @@ public class GameWindow extends JFrame implements IJuego {
 		
 		player1 = new JLabel();
 		player2 = new JLabel();
-		if (self.equals(retador)) {
-			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
-			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
-		} else {
-			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
-			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
-		}
+		player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
+		player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+//		if (self.equals(retador)) {
+//			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
+//			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+//		} else {
+//			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+//			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
+//		}
 		player1.setBounds(697, 119, 65, 60);
 		StartupPanel.add(player1);		
 		player2.setBounds(697, 191, 55, 53);
@@ -1100,7 +1092,6 @@ public class GameWindow extends JFrame implements IJuego {
 	//Evento para pintar las fichas, primero se mira si ya se ha pinchado sobre esa casilla
 	 private void FichaMouseClicked(java.awt.event.MouseEvent e, JLabel j) {
 
-		 System.out.println("COMPROBAR MOVIMIENTO VALIDO");
 		 int cTableroG,fTableroG, cTableroP, fTableroP;
 		 cTableroG = this.coordenadas.get(j).getx() % 3;
 		 fTableroG = (int)(this.coordenadas.get(j).getx() / 3);
@@ -1113,23 +1104,21 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void partidaFinalizada(String email) {
-		System.out.println("GANADOR : "+email);
 		PartidaFinalizadaThread thread = new PartidaFinalizadaThread(email, this);
 		thread.start();
 	}
 
-		 
-
-
 	@Override
 	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {
-		System.out.println("En poner ficha: " + cT + " " + fT + " " + cC + " " + fC);
+		
 		if (email.equals(this.ply1name.getText()))
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
 		else
 			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+		
 		if (this.lastMove != null)
 			this.lastMove.setBorder(null);
+		
 		this.lastMove = this.tableroJuego[cT + fT * 3][cC + fC * 3];
 		this.lastMove.setBorder(BorderFactory.createLineBorder(Color.green, 3));
 		this.cambiarTurno();
@@ -1139,13 +1128,13 @@ public class GameWindow extends JFrame implements IJuego {
 		if (this.turnoPly1.isVisible()) {
 			this.turnoPly1.setVisible(false);
 			this.turnoPly2.setVisible(true);
-		} else {
+		} 
+		else {
 			this.turnoPly1.setVisible(true);
 			this.turnoPly2.setVisible(false);			
 		}		
 	}
 	
-
 	@Override
 	public void cerrar() {
 		this.dispose();
@@ -1159,7 +1148,7 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void tableroGanado(String email, int col, int fila) {
-		System.out.println("Tablero ganado col[" + col + "] fila[" + fila + "] interfaz: " + this.ply1name.getText() + " " + email);
+		
 		if (email.equals(this.ply1name.getText()))
 			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/OSym.png")));
 		else
@@ -1168,7 +1157,7 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void tableroEmpatado(int col, int fila) {
-		System.out.println("Tablero empatado col[" + col + "] fila[" + fila + "]");
+		
 		this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/empate.png")));	
 	}
 
@@ -1180,10 +1169,9 @@ public class GameWindow extends JFrame implements IJuego {
 
 	@Override
 	public void movimientoInvalido(int cT, int fT, int cC, int fC) {
-		System.out.println("Pintando label");
+		
 		this.wrongMove = this.tableroJuego[cT + fT * 3][cC + fC * 3];
-//		this.tableroJuego[cT + fT * 3][cC + fC * 3].setBackground(Color.red);
-//		this.tableroJuego[cT + fT * 3][cC + fC * 3].setOpaque(true);
+
         final Timer timer = new Timer(10, null);
 
         ActionListener listener = new ActionListener() {
@@ -1230,7 +1218,6 @@ class PartidaFinalizadaThread extends Thread {
 		this.gw = gw;
 	}
 	
-	
 	@Override
 	public void run() {
 		try {
@@ -1240,6 +1227,5 @@ class PartidaFinalizadaThread extends Thread {
 			System.out.println(e);
 		}
 	}
-	
 }
 

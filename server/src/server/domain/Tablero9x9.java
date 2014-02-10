@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import server.persistence.DAOTablero;
 
 public class Tablero9x9 {
-	//	private Jugador jugadorConElTurno;
+
 	/*
 	 * Jugador A juega con +1
 	 * Jugador B juega con -1
@@ -28,9 +28,6 @@ public class Tablero9x9 {
 		this.jugadorB=null;
 	}
 
-//	public Jugador getJugadorConElTurno() {
-//		return this.jugadorConElTurno;
-//	}
 
 	/**
 	 * cT = columna Tablero
@@ -44,32 +41,18 @@ public class Tablero9x9 {
 	public void colocar(String email, int cT, int fT, int cC, int fC)throws SQLException, ClassNotFoundException {
 		
 		int ficha = 0;
+	
+		//Quien ha hecho el movimiento?
+		if (this.jugadorA.getEmail().equals(email))
+			ficha = 1;
+		if (this.jugadorB.getEmail().equals(email))
+			ficha = -1;
 		
-		//if (cT<0 || cT>2 || fT<0 || fT>2 || cC<0 || cC>2 || fC<0 || fC>2)
-		//	throw new CoordenadasNoValidasException(cT, fT, cC, fC);
-		//else{
-			//Quien ha hecho el movimiento?
-			if (this.jugadorA.getEmail().equals(email))
-				ficha = 1;
-			if (this.jugadorB.getEmail().equals(email))
-				ficha = -1;
-			
-			Tablero3x3 tablerillo=this.subTableros[cT][fT];
-			int idCasilla = tablerillo.colocar(cC, fC, ficha);
-			DAOTablero.nuevoMovimiento(email, idCasilla, ficha);
-			
-//			cambiarTurno();
-		//}
+		Tablero3x3 tablerillo=this.subTableros[cT][fT];
+		int idCasilla = tablerillo.colocar(cC, fC, ficha);
+		DAOTablero.nuevoMovimiento(email, idCasilla, ficha);
+
 	}
-
-//	private void cambiarTurno() {
-//		this.ultimoValor=-this.ultimoValor;
-//		this.jugadorConElTurno = this.jugadorConElTurno==this.jugadorA ? this.jugadorB : this.jugadorA; 
-//	}
-
-//	public void setJugadorConElTurno(Jugador jugador) {
-//		this.jugadorConElTurno=jugador;
-//	}
 
 	public void setJugadorA(Jugador a) {
 		this.jugadorA=a;

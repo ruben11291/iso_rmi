@@ -1,13 +1,15 @@
 package client.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -20,20 +22,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 import client.controller.Controller;
-
-import java.awt.Color;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Vector;
-import javax.swing.SwingConstants;
 
 public class PlayerListWindow extends JFrame implements WindowListener, IListaJugadores {
 	
@@ -83,7 +77,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			mGameInfoPanel.setVisible(false);
 			mGameInfoPanel = null;
 		}
-;
+		
 		this.getContentPane().add(this.getGameListToolBar(), BorderLayout.NORTH);
 		this.getContentPane().add(this.getGameListPanel(), BorderLayout.CENTER);
 		mGameListToolBar.setVisible(true);
@@ -91,7 +85,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	}
 
 	private JToolBar getGameListToolBar() {
-		// TODO Auto-generated method stub
 		if (mGameListPanel == null) {
 			mGameListToolBar = new JToolBar();
 			
@@ -99,7 +92,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			createGameButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
 					"image/ttoe.png")));
-//			createGameButton.setBackground(new Color(143,188,143));
+
 			createGameButton.setForeground(Color.BLACK);
 			createGameButton.addMouseListener(new CreateGameMouseAdapter(this));
 			
@@ -111,7 +104,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			logoutButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
 					"image/logout.png")));
-//			logoutButton.setBackground(new Color(143,188,143));
+
 			logoutButton.setForeground(Color.BLACK);
 			logoutButton.addMouseListener(new LogoutMouseAdapter(this));
 			mGameListToolBar.add(logoutButton);
@@ -217,7 +210,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		@Override
 		public void mouseClicked(MouseEvent evt) {
 			System.out.println("Haciendo logout...");
-			//Aquí todo lo de guardar los datos, las partidas y demás
 			
 			final int confirm = JOptionPane.showConfirmDialog(
 				mGameListPanel,
@@ -248,7 +240,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 	@Override
 	public void windowClosing(WindowEvent e) {
 		System.out.println("Haciendo logout...");
-		//Aquí todo lo de guardar los datos, las partidas y demás
 		
 		final int confirm = JOptionPane.showConfirmDialog(
 			mGameListPanel,
@@ -268,26 +259,21 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		
 	}
 
-
 	@Override
 	public void windowDeiconified(WindowEvent e) {
 
 		
 	}
 
-
 	@Override
 	public void windowIconified(WindowEvent e) {
 		
 	}
 
-
 	@Override
 	public void windowOpened(WindowEvent e) {
 		
 	}
-
-	
 
 	@Override
 	public void recibirRespuestaLista(Hashtable <String, Integer> jugadores) {
@@ -319,7 +305,6 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 		if (respuesta) {
 			iniciarPartida(self, retador, retado);
 		} else {
-			System.out.println(retado + " ha rechazado el reto.");
 			JOptionPane.showMessageDialog(null, retado + " ha rechazado el reto.", "Respuesta reto", JOptionPane.ERROR_MESSAGE);
 		}
 		
@@ -363,7 +348,7 @@ class ConfirmDialogThread extends Thread {
 	  @Override
 	  public void run() {
 			final int confirm = JOptionPane.showConfirmDialog(null, retador + " te ha retado, ¿aceptas?", "¡Te han retado!", JOptionPane.YES_NO_OPTION);
-			System.out.println("Respuesta: " + confirm);
+		
 			Controller cntl = Controller.get();
 			if (confirm == 0) cntl.enviarRespuestaReto(true, retador);
 			else cntl.enviarRespuestaReto(false, retador);

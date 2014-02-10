@@ -2,10 +2,10 @@ package client.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -17,15 +17,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
 import client.controller.Controller;
-import client.presentation.UltimateTicTacToe;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Font;
 
 public class StartupWindow extends JFrame implements ILogin {
 
@@ -126,11 +122,6 @@ public class StartupWindow extends JFrame implements ILogin {
 		StartupPanel.add(RegisterButton);
 		StartupPanel.add(mapLabel);
 		this.setLocationRelativeTo(null);
-
-	}
-
-	private String getEmail() {
-		return EmailTextField.getText();
 
 	}
 

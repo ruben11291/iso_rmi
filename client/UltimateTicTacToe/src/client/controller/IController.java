@@ -1,8 +1,6 @@
 package client.controller;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
-import java.util.Vector;
-
 import client.exceptions.*;
 import client.presentation.*;
 
@@ -23,8 +21,7 @@ public interface IController {
 	public void avisoCerrarSesion();
 	public void respuestaReto(String retador, String retado, boolean respuesta);
 	public void iniciarPartida(String retador, String retado);
-	public void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC,
-			int fC);
+	public void ponerMovimientoEnemigo(String realizaMov, int cT, int fT, int cC,int fC);
 	public void tableroGanadoPorOponente(String email, int getcT, int getfT);
 	public void partidaGanadaPorOponente(String email);
 	public void partidaFinalizada(String email);

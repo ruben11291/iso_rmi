@@ -7,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,18 +18,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import client.controller.Controller;
-import client.exceptions.JugadorYaExisteException;
-import client.exceptions.JugadorYaRegistradoException;
 
 public class RegisterDialog extends JDialog implements IRegistro {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5128501222928885944L;
 	private JPanel registerPanel;
 	private JButton CancelButton, AcceptButton;
