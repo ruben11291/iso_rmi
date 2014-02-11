@@ -100,11 +100,62 @@ El resto de secciones profundizan en el conocimiento del sistema.
  \input{03-requisitosToni.tex}
 %\input{03-requisitos_apl.tex}
 \clearpage
-
-\includepdf[pages=4-, pagecommand={}]{quienloborreloMato.pdf}
+\fancyhf{}
+\includepdf[pages=4-23, pagecommand={}]{quienloborreloMato.pdf}
 \setcounter{page}{\value{page}}
 \clearpage
+%\pagestyle{fancy}
+\lhead{\nouppercase{\leftmark}}
+\chead{}
+\rhead{}
+\setcounter{section}{7}
 \section{Pruebas de los casos de uso}
+
+\subsection{Pruebas para el servidor}
+
+Las pruebas para el sistema del servidor se han hecho de tal forma que puedan ser ejecutadas de forma independiente. No necesita ningún cliente. El paquete test.communications contiene un cliente construido específicamente para las pruebas y consiste en un modelo simplificado de la clase Cliente del sistema cliente.
+
+\begin{itemize}
+\item Paquete \emph{src.server.tests}
+
+\begin{center}
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+
+\textbf{Caso de Uso} & \textbf{Test} \\
+& \\
+Registrar Usuario & TestDAOJugador\\
+Autenticar & TestDAOJugador\\
+Cerrar Sesión & TestCerrarSesion\\
+Registrar Moviminento & TestDAOMovimiento\\
+Enviar movimiento a jugador & TestReto\\
+Enviar respuesta a reto & TestReto\\
+\end{tabularx}
+}
+\end{center}
+
+\item Paquete \emph{src.server.tests.communications}.
+\begin{center}
+{\footnotesize
+\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
+\textbf{Caso de Uso} & \textbf{Test} \\
+& \\
+Registrar Usuario & TestDAOJugador\\
+Autenticar & TestDAOJugador\\
+Cerrar Sesión & TestCerrarSesion\\
+Registrar Moviminento & TestDAOMovimiento\\
+Enviar movimiento a jugador & TestReto\\
+Enviar respuesta a reto & TestReto\\
+\end{tabularx}
+}
+\end{center}
+\end{itemize}
+
+Los test no prueban la comunicación entre clientes, solo la funcionalidad del servidor a partir de la fachada del servidor (clase FTERD, ver Diagrama de clases del servidor).
+\clearpage
+
+\subsection{Pruebas para el cliente}
+
 
 % \pagenumbering{arabic}
 
