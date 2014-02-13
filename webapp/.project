@@ -37,7 +37,13 @@
 		<link>
 			<name>src_server</name>
 			<type>2</type>
-			<location>/home/kalelf/git/practicaiso2/server/src</location>
+			<locationURI>SRC_SERVER</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>SRC_SERVER</name>
+			<value>$%7BPARENT-1-PROJECT_LOC%7D/server/src</value>
+		</variable>
+	</variableList>
 </projectDescription>
