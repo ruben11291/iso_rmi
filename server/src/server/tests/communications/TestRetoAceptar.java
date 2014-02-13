@@ -31,8 +31,7 @@ public class TestRetoAceptar {
 			s = Server.get();
 			s.conectar();
 		} catch (RemoteException | UnknownHostException  | MalformedURLException e) {
-			;
-			//fail("Esperaba conectar el servidor");
+			fail("Esperaba conectar el servidor");
 			//e.printStackTrace();
 		}
 		
@@ -46,9 +45,11 @@ public class TestRetoAceptar {
 			s.add("keynes", "keynes", retador);
 			s.add("hayek", "hayek", retado);
 
-		} catch (RemoteException | JugadorNoExisteException | JugadorYaExisteException | JugadorYaRegistradoException e) {
+		} catch (RemoteException  e) {
 			fail("No esperaba fallar aquI");
 			e.printStackTrace();
+		} catch(JugadorNoExisteException | JugadorYaExisteException | JugadorYaRegistradoException e){
+			fail("No esperaba fallar al registrar y autenticar");
 		}
 	}
 	

@@ -30,7 +30,7 @@ public class ClienteParaTest extends UnicastRemoteObject implements ICliente {
 	private IServer server;
 	private String ipDelServidor;
 	private String ipDelCliente;
-	private int puertoDelServidor=3001;
+	private int puertoDelServidor=3002;
 	private int puertoDelCliente = 400;;
 
 	public ClienteParaTest() throws RemoteException{
