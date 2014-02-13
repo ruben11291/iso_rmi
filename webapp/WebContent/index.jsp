@@ -5,26 +5,21 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Ultimate Tic-Tac-Toe</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/signin.css" rel="stylesheet">
 	</head>
 	<body>
-		<form action="Identificar.action" method="post">
-			<table border="1">
-				<tr>
-					<td>Correo electronico:</td>
-					<td><input type="text" name="email" maxlength="30" size="20"></td>
-				</tr>
-				
-				<tr>
-					<td>Contraseña:</td>
-					<td><input type="password" name="passwd" maxlength="30" size="20"></td>
-				</tr>
-				
-				<tr>
-					<td colspan="2">
-						<input type="submit" value="Entrar">
-					</td>
-				</tr>
-			</table>
-		</form>
+    <div class="container">
+
+      <form class="form-signin" role="form" action="Identificar.action" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+        <input type="password" name="passwd" class="form-control" placeholder="Password" required>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+    </div>
 	</body>
 </html>
