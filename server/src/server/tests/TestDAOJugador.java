@@ -35,7 +35,7 @@ public class TestDAOJugador {
 	}
 		
 	@Test
-	public void test2Autenticar() throws ClassNotFoundException, SQLException{
+	public void test2AutenticarYCerrarSesion() throws ClassNotFoundException, SQLException{
 		Jugador j = new Jugador("javierMarchan@uclm.es","javi");
 		FTERD fachada = FTERD.get();
 		try{
@@ -45,7 +45,6 @@ public class TestDAOJugador {
 			Hashtable<String, Jugador> jugadores = fachada.getJugadores();
 			assertTrue(jugadores.containsKey("javierMarchan@uclm.es"));
 			
-			j.delete();
 		}
 		catch (JugadorNoExisteException jne){
 			fail("Esperaba autenticar");
@@ -55,8 +54,45 @@ public class TestDAOJugador {
 			fail("No se esperaba exception" + e.toString());
 		}
 		
+		fachada.delete(j.getEmail());
+		Hashtable<String, Jugador> jugadores = fachada.getJugadores();
+		assertTrue(jugadores.isEmpty());
 		
-		
+		j.delete();
 	}
+	
+	
+	@Test
+	public void test3AutenticarDosVeces() throws ClassNotFoundException, SQLException{
+		Jugador j = new Jugador("javierMarchan@uclm.es","javi");
+		FTERD fachada = FTERD.get();
+		try{
+			j.insert();
+			fachada.add(j.getEmail(),"javi");
+			
+			Hashtable<String, Jugador> jugadores = fachada.getJugadores();
+			assertTrue(jugadores.containsKey("javierMarchan@uclm.es"));
+		}
+		catch (JugadorNoExisteException jne){
+			fail("Esperaba autenticar");
+		}
+		catch(Exception e){
+			j.delete();
+			fail("No se esperaba exception" + e.toString());
+		}
+		
+		// Se intenta autenticar otra vez con el mismo usuario
+		try {
+			fachada.add(j.getEmail(), j.getPasswd());
+			fail("Esperaba fallar al autenticar dos veces con el mismo usuario");
+		} catch (JugadorNoExisteException e) {
+			Hashtable<String, Jugador> jugadores = fachada.getJugadores();
+			assertTrue(jugadores.containsKey("javierMarchan@uclm.es"));
+			assertTrue(jugadores.size()==1);
+		}
+			
+	}
+	
+	
 
 }

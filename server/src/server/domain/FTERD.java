@@ -29,6 +29,9 @@ public class FTERD {
 	}
 	
 	public void add(String email, String passwd) throws JugadorNoExisteException{
+		if (jugadores.containsKey(email)) throw new JugadorNoExisteException(email);
+		// Habria que crear una nueva excepcion y volverla a importar
+		
 		try {
 			if (DAOAutenticar.autenticar(email, passwd)) {
 				if (jugadores==null) {
@@ -44,11 +47,7 @@ public class FTERD {
 			throw new JugadorNoExisteException(email);
 		}
 	}
-	
-	public void add(Jugador j) {
 		
-	}
-	
 	public void delete(String email) {
 		if (jugadores != null) {
 			this.jugadores.remove(email);

@@ -1,27 +1,49 @@
 package server.tests;
 
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import junit.framework.TestCase;
+
+import org.junit.Before;
+
 import server.domain.FTERD;
 import server.domain.Jugador;
 import server.domain.Tablero9x9;
+import client.exceptions.JugadorNoExisteException;
 
-public class TestReto {
+public class TestReto extends TestCase{
+	
+	FTERD fachada = FTERD.get();
+	Jugador jugadorA = new Jugador("stalin@gmail.com","stalin");
+	Jugador jugadorB = new Jugador("hitler@gmail.com","hitler");
+	
+	@Before
+	public void setUp(){
+		FuncionesAuxiliaresTests.borrarBD();
+
+		/* Registrar a los jugadores*/
+		try {
+			jugadorA.insert();
+			jugadorB.insert();
+		} catch (ClassNotFoundException | SQLException e) {
+			fail("No esperaba fallar al registrar los jugadores");
+		}
+		
+		/* Iniciar sesion*/
+		try {
+			fachada.add(jugadorA.getEmail(), jugadorA.getPasswd());
+			fachada.add(jugadorB.getEmail(), jugadorB.getPasswd());
+		} catch (JugadorNoExisteException e) {
+			fail("Esperaba que el jugador estuviese registrado");
+		}
+
+	}
 
 	@org.junit.Test
 	public void testRetarYAceptarReto() throws ClassNotFoundException, SQLException {
-		FTERD fachada = FTERD.get();
-		Jugador jugadorA = new Jugador("stalin@gmail.com","stalin");
-		Jugador jugadorB = new Jugador("hitler@gmail.com","hitler");
-		
-		/* Iniciar sesion*/
-		fachada.add(jugadorA);
-		fachada.add(jugadorB);
 		
 		fachada.retar(jugadorA.getEmail(), jugadorB.getEmail());
 		assertTrue(fachada.getRetosEnEspera().size() == 1);
@@ -43,29 +65,15 @@ public class TestReto {
 			fail("No esperaba fallar al obtener la partida");
 		}
 	}
-	
 
 	@org.junit.Test
 	public void testRetarYRechazarReto() throws ClassNotFoundException, SQLException {
-		FTERD fachada = FTERD.get();
-		Jugador jugadorA = new Jugador("stalin@gmail.com","stalin");
-		Jugador jugadorB = new Jugador("hitler@gmail.com","stalin");
-		
-		/* Iniciar sesion*/
-		fachada.add(jugadorA);
-		fachada.add(jugadorB);
-		
 		fachada.retar(jugadorA.getEmail(), jugadorB.getEmail());
 		assertTrue(fachada.getRetosEnEspera().size() == 1);
 		
 		fachada.respuestaAPeticionDeReto(jugadorA.getEmail(), jugadorB.getEmail(), false);
 		assertTrue(fachada.getRetosEnEspera().isEmpty() == true);
 		assertTrue(fachada.getTableros().size() == 0);
-		
 	}
-	
-	
-	
-
 
 }
