@@ -1,4 +1,4 @@
-package cliente.main;
+package client.main;
 
 
 import client.presentation.StartupWindow;
