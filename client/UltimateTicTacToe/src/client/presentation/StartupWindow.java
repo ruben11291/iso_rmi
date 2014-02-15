@@ -110,7 +110,7 @@ public class StartupWindow extends JFrame implements ILogin {
 
 		mapLabel = new JLabel();
 		mapLabel.setIcon(new ImageIcon(
-			this.getClass().getClassLoader().getResource("image/utt.png")));
+			this.getClass().getClassLoader().getResource("client/image/utt.png")));
 		mapLabel.setBounds(0, 0, 455, 254);
 
 		StartupPanel.add(NoticeLabel);

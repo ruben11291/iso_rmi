@@ -947,32 +947,32 @@ public class GameWindow extends JFrame implements IJuego {
 		mapLabel = new JLabel();
 		mapLabel.setBackground(Color.WHITE);
 		mapLabel.setIcon(new ImageIcon(
-					this.getClass().getClassLoader().getResource("image/boarde.png")));
+					this.getClass().getClassLoader().getResource("client/image/boarde.png")));
 		mapLabel.setBounds(39, 126, 564, 556);
 		mapLabel.setOpaque(true);
 				
 		StartupPanel.add(mapLabel);
 		
 		ultimate = new JLabel();
-		ultimate.setIcon(new ImageIcon(GameWindow.class.getResource("/image/ultimate.png")));
+		ultimate.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/ultimate.png")));
 		ultimate.setBounds(12, 28, 459, 73);
 		StartupPanel.add(ultimate);
 		
 		tictactoe = new JLabel();
-		tictactoe.setIcon(new ImageIcon(GameWindow.class.getResource("/image/tictactoe.png")));
+		tictactoe.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/tictactoe.png")));
 		tictactoe.setBounds(466, 42, 496, 53);
 		StartupPanel.add(tictactoe);
 		
 		player1 = new JLabel();
 		player2 = new JLabel();
-		player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
-		player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+		player1.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/player1.png")));
+		player2.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/player2.png")));
 //		if (self.equals(retador)) {
-//			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
-//			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
+//			player1.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/player1.png")));
+//			player2.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/player2.png")));
 //		} else {
-//			player1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player2.png")));
-//			player2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/player1.png")));
+//			player1.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/player2.png")));
+//			player2.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/player1.png")));
 //		}
 		player1.setBounds(697, 119, 65, 60);
 		StartupPanel.add(player1);		
@@ -1059,17 +1059,17 @@ public class GameWindow extends JFrame implements IJuego {
 
 		
 		minimapLabel = new JLabel();
-		minimapLabel.setIcon(new ImageIcon(GameWindow.class.getResource("/image/miniboard.png")));
+		minimapLabel.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/miniboard.png")));
 		minimapLabel.setBounds(644, 395, 299, 296);
 		StartupPanel.add(minimapLabel);
 		
 		turnoPly1 = new JLabel();
-		turnoPly1.setIcon(new ImageIcon(GameWindow.class.getResource("/image/arrow.png")));
+		turnoPly1.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/arrow.png")));
 		turnoPly1.setBounds(869, 126, 70, 45);
 		StartupPanel.add(turnoPly1);
 		
 		turnoPly2 = new JLabel();
-		turnoPly2.setIcon(new ImageIcon(GameWindow.class.getResource("/image/arrow.png")));
+		turnoPly2.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/arrow.png")));
 		turnoPly2.setBounds(868, 203, 70, 37);
 		turnoPly2.setVisible(false);
 		StartupPanel.add(turnoPly2);
@@ -1112,9 +1112,9 @@ public class GameWindow extends JFrame implements IJuego {
 	public void ponerFicha(String email, int cT, int fT, int cC, int fC) {
 		
 		if (email.equals(this.ply1name.getText()))
-			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/o.png")));
+			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/o.png")));
 		else
-			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(GameWindow.class.getResource("/image/x.png")));
+			this.tableroJuego[cT + fT * 3][cC + fC * 3].setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/x.png")));
 		
 		if (this.lastMove != null)
 			this.lastMove.setBorder(null);
@@ -1150,15 +1150,15 @@ public class GameWindow extends JFrame implements IJuego {
 	public void tableroGanado(String email, int col, int fila) {
 		
 		if (email.equals(this.ply1name.getText()))
-			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/OSym.png")));
+			this.tableroGlobal[col][fila].setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/OSym.png")));
 		else
-			this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/X2.png")));
+			this.tableroGlobal[col][fila].setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/X2.png")));
 	}
 
 	@Override
 	public void tableroEmpatado(int col, int fila) {
 		
-		this.tableroGlobal[col][fila].setIcon(new ImageIcon(GameWindow.class.getResource("/image/empate.png")));	
+		this.tableroGlobal[col][fila].setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("client/image/empate.png")));	
 	}
 
 	@Override

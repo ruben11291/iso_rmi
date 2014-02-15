@@ -90,8 +90,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			
 			createGameButton = new JButton("Retar");
 			createGameButton.setIcon(new ImageIcon(
-				this.getClass().getClassLoader().getResource(
-					"image/ttoe.png")));
+				this.getClass().getClassLoader().getResource("client/image/ttoe.png")));
 
 			createGameButton.setForeground(Color.BLACK);
 			createGameButton.addMouseListener(new CreateGameMouseAdapter(this));
@@ -103,7 +102,7 @@ public class PlayerListWindow extends JFrame implements WindowListener, IListaJu
 			logoutButton = new JButton("Cerrar sesión");
 			logoutButton.setIcon(new ImageIcon(
 				this.getClass().getClassLoader().getResource(
-					"image/logout.png")));
+					"client/image/logout.png")));
 
 			logoutButton.setForeground(Color.BLACK);
 			logoutButton.addMouseListener(new LogoutMouseAdapter(this));

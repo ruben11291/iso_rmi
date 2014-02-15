@@ -117,20 +117,20 @@ public class RegisterDialog extends JDialog implements IRegistro {
 		AcceptButton = new JButton("Aceptar");
 		AcceptButton.setIcon(new ImageIcon(
 			this.getClass().getClassLoader().getResource(
-			"image/ok.png")));
+			"client/image/ok.png")));
 		AcceptButton.setBounds(101, 232, 150, 35);
 		AcceptButton.addMouseListener(new AcceptDialogMouseAdapter(this, true));
 
 		CancelButton = new JButton("Cancelar");
 		CancelButton.setIcon(new ImageIcon(
 			this.getClass().getClassLoader().getResource(
-			"image/cancel.png")));
+			"client/image/cancel.png")));
 		CancelButton.setBounds(271, 232, 150, 35);
 		CancelButton.addMouseListener(new CancelDialogMouseAdapter(this, false));
 
 		mapLabel = new JLabel();
 		mapLabel.setIcon(new ImageIcon(
-			this.getClass().getClassLoader().getResource("image/utt.png")));
+			this.getClass().getClassLoader().getResource("client/image/utt.png")));
 		mapLabel.setBounds(0, 0, 491, 292);
 
 		registerPanel.add(EmailLabel);
