@@ -1,0 +1,2055 @@
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2723 units from cache.
+Compiling...
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   60% complete (ETR: 3 seconds)
+   70% complete (ETR: 2 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 10,13 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2725 units from cache.
+Compiling...
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   50% complete (ETR: 6 seconds)
+   60% complete (ETR: 5 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 15,22 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290159016.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290159016.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290159016_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290159871.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290159871.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290159871_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290184696.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290184696.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290184696_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290192509.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290192509.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290192509_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290194860.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290194860.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290194860_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290230193.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290230193.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290230193_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290233760.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290233760.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290233760_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290236409.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290236409.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290236409_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290239850.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290239850.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290239850_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290296882.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290296882.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290296882_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290403085.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290403085.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290403085_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290406409.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290406409.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290406409_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290408972.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290408972.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290408972_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290418985.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290418985.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290418985_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290425286.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290425286.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290425286_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290441014.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290441014.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290441014_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290441134.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290441134.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290441134_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290465375.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290465375.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290465375_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290470243.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290470243.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290470243_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290474674.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290474674.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290474674_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2725 units from cache.
+Compiling...
+   20% complete (ETR: 20 seconds)
+   20% complete (ETR: 20 seconds)
+   20% complete (ETR: 20 seconds)
+   30% complete (ETR: 22 seconds)
+   40% complete (ETR: 20 seconds)
+   50% complete (ETR: 17 seconds)
+   60% complete (ETR: 16 seconds)
+   70% complete (ETR: 14 seconds)
+   80% complete (ETR: 10 seconds)
+   90% complete (ETR: 5 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 43,79 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290637630.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290637630.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290637630_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290638145.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290638145.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290638145_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290643959.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290643959.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290643959_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290648922.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290648922.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290648922_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290652021.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290652021.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290652021_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290655236.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290655236.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290655236_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290663679.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290663679.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290663679_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290666661.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290666661.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290666661_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290669310.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290669310.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290669310_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290672542.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290672542.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,77 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290672542_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290689934.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290689934.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290689934_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290690038.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290690038.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290690038_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290699198.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290699198.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290699198_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290704302.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290704302.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290704302_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290706460.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290706460.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290706460_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290712584.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290712584.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290712584_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290715040.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290715040.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290715040_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290741956.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290741956.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290741956_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290746529.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290746529.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290746529_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290755152.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290755152.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290755152_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,82 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290774198.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290774198.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290774198_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290784204.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290784204.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290784204_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290787188.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290787188.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290787188_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290789913.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290789913.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290789913_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290796491.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290796491.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290796491_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290798461.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290798461.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290798461_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290799377.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290799377.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290799377_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290800272.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290800272.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290800272_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290800379.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290800379.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290800379_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290804867.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290804867.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290804867_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290806709.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290806709.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290806709_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,80 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290807605.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290807605.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290807605_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290809319.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290809319.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290809319_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290809425.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290809425.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290809425_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290813064.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290813064.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396290813064_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290815261.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290815261.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290815261_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290817447.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290817447.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290817447_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290821823.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290821823.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290821823_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290825497.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290825497.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290825497_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290828999.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290828999.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290828999_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290831013.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290831013.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290831013_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290846322.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290846322.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290846322_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290849265.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290849265.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290849265_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290852551.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290852551.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290852551_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290928848.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290928848.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290928848_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290937181.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290937181.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290937181_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290951095.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290951095.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290951095_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290955849.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290955849.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290955849_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290970697.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290970697.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290970697_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290977044.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290977044.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290977044_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290983710.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290983710.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290983710_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290990430.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290990430.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396290990430_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291012262.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291012262.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291012262_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291017101.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291017101.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291017101_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291023259.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291023259.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_designTime1396291023259_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291173394.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291173394.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291173394_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291182619.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291182619.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291182619_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291191366.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291191366.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291191366_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291198435.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291198435.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291198435_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291205609.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291205609.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291205609_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291233830.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291233830.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291233830_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291247580.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291247580.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291247580_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291252816.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291252816.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291252816_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291256126.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291256126.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291256126_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291257811.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291257811.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291257811_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291264701.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291264701.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291264701_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291271350.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291271350.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291271350_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291278320.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291278320.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_designTime1396291278320_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.HorizontalSplitPanel.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method horizontalSplitPanelThumb
+         Adding image 'com.google.gwt.user.client.ui.HorizontalSplitPanel.Resources.horizontalSplitPanelThumb'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,06 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.MenuBar.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method menuBarSubMenuIcon
+         Adding image 'com.google.gwt.user.client.ui.MenuBar.Resources.menuBarSubMenuIcon'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2725 units from cache.
+Compiling...
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   10% complete (ETR: 23 seconds)
+   10% complete (ETR: 23 seconds)
+   20% complete (ETR: 22 seconds)
+   30% complete (ETR: 17 seconds)
+   40% complete (ETR: 14 seconds)
+   50% complete (ETR: 10 seconds)
+   60% complete (ETR: 7 seconds)
+   70% complete (ETR: 5 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 20,27 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2725 units from cache.
+Compiling...
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   70% complete (ETR: 2 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 9,02 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.HorizontalSplitPanel.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method horizontalSplitPanelThumb
+         Adding image 'com.google.gwt.user.client.ui.HorizontalSplitPanel.Resources.horizontalSplitPanelThumb'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.MenuBar.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method menuBarSubMenuIcon
+         Adding image 'com.google.gwt.user.client.ui.MenuBar.Resources.menuBarSubMenuIcon'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,08 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,04 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   10% complete (ETR: 28 seconds)
+   10% complete (ETR: 28 seconds)
+   20% complete (ETR: 24 seconds)
+   30% complete (ETR: 19 seconds)
+   40% complete (ETR: 14 seconds)
+   50% complete (ETR: 10 seconds)
+   60% complete (ETR: 8 seconds)
+   70% complete (ETR: 6 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 2 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 20,76 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2725 units from cache.
+Compiling...
+   Compilation completed in 0,12 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,04 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.HorizontalSplitPanel.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method horizontalSplitPanelThumb
+         Adding image 'com.google.gwt.user.client.ui.HorizontalSplitPanel.Resources.horizontalSplitPanelThumb'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9.Tablero9x9UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,04 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero9x9_Tablero9x9UiBinderImpl_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3.Tablero3x3UiBinder
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,05 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding terd.web.client.Tablero3x3_Tablero3x3UiBinderImpl_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.MenuBar.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method menuBarSubMenuIcon
+         Adding image 'com.google.gwt.user.client.ui.MenuBar.Resources.menuBarSubMenuIcon'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   20% complete (ETR: 19 seconds)
+   20% complete (ETR: 19 seconds)
+   20% complete (ETR: 19 seconds)
+   30% complete (ETR: 16 seconds)
+   40% complete (ETR: 13 seconds)
+   50% complete (ETR: 10 seconds)
+   60% complete (ETR: 7 seconds)
+   70% complete (ETR: 5 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 19,05 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes

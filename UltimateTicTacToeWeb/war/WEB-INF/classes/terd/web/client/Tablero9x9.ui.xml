@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:terd.web.client">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:Grid>
+			<g:row>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t00"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t01"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t02"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t10"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t11"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t12"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t20"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t21"/>
+				</g:customCell>
+				<g:customCell>
+					<p1:Tablero3x3 ui:field="t22"/>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+	</g:HTMLPanel>
+</ui:UiBinder> 
