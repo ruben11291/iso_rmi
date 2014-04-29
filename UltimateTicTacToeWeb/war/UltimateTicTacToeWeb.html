@@ -1,62 +1,65 @@
-<!doctype html>
-<!-- The DOCTYPE declaration above will set the     -->
-<!-- browser's rendering engine into                -->
-<!-- "Standards Mode". Replacing this declaration   -->
-<!-- with a "Quirks Mode" doctype is not supported. -->
-
+<!--<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Ultimate Tic-Tac-Toe</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/signin.css" rel="stylesheet">
+		<script type="text/javascript" language="javascript" src="ultimatetictactoeweb/ultimatetictactoeweb.nocache.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+				<a class="navbar-brand" href="#">Ultimate Tic Tac Toe</a>
+				</div>
+				<div id="bs-example-navbar-collapse-5" class="collapse navbar-collapse"> 
+					<p class="navbar-text navbar-right"> Web App</p>
+				</div>
+			</div>
+		</nav>
+		<div class="logo">
+			<h1>Bienvenido al Ultimate Tic Tac Toe Web</h1>
+<!-- 			<p>Comienza una partida, juega con tus amigos y diviértete</p> -->
+			<div class="image"></div>
+			
+		</div>
 
-    <!--                                                               -->
-    <!-- Consider inlining CSS to reduce the number of requested files -->
-    <!--                                                               -->
-    <link type="text/css" rel="stylesheet" href="UltimateTicTacToeWeb.css">
-
-    <!--                                           -->
-    <!-- Any title is fine                         -->
-    <!--                                           -->
-    <title>Web Application Starter Project</title>
-    
-    <!--                                           -->
-    <!-- This script loads your compiled module.   -->
-    <!-- If you add any GWT meta tags, they must   -->
-    <!-- be added before this line.                -->
-    <!--                                           -->
-    <script type="text/javascript" language="javascript" src="ultimatetictactoeweb/ultimatetictactoeweb.nocache.js"></script>
-  </head>
-
-  <!--                                           -->
-  <!-- The body can have arbitrary html, or      -->
-  <!-- you can leave the body empty if you want  -->
-  <!-- to create a completely dynamic UI.        -->
-  <!--                                           -->
-  <body>
-
-    <!-- OPTIONAL: include this if you want history support -->
-    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
-    
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-    <noscript>
-      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-        Your web browser must have JavaScript enabled
-        in order for this application to display correctly.
-      </div>
-    </noscript>
-
-    <h1>Web Application Starter Project</h1>
-
-    <table align="center">
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
-      </tr>
-      <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
-      </tr>
-    </table>
-  </body>
+		
+		<div class="login">
+			<form class="form-signin" role="form" action="Identificar.action" method="post">
+				<input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+				<table class="flex-table password-signin">
+					<tbody>
+						<tr>
+							<td class="flex-table-primary">
+								<input type="password" name="passwd" class="form-control" placeholder="Password" required>
+							</td>
+							<td class="flex-table-secondary">
+								<button class="myButton" type="submit" id="log_button">Sign in</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<label class="checkbox">
+					<input type="checkbox" value="remember-me"> Remember me	
+				</label>
+			</form>
+		</div>
+	
+		<div class="register" >
+			<h3><strong>¿Eres Nuevo?</strong> Regístrate</h3>
+			<form class="form-signup" role="form" action="Registrar.action" method="post">
+				<input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+				<input type="password" name="passwd" class="form-control" placeholder="Password" required>
+				<input type="password" name="passwd" class="form-control" placeholder="Password" required>
+<!--				<input type="hidden" value="" name="context">
+				<input type="hidden" value="2636cf840e7efea948d2f279883a2fb624bdb88a" name="authenticity_token">-->
+				<button type="submit" class="button" id="register_button">Sign up for UTTOE</button>
+			</form>
+		</div>
+	</body>
 </html>
