@@ -4,5 +4,8 @@
 	<classpathentry kind="src" output="test-classes" path="test"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/toni/git/practicaiso2/client/UltimateTicTacToe/IServer.jar"/>
+	<classpathentry kind="lib" path="/home/toni/git/practicaiso2/UltimateTicTacToeWeb/Exceptions.jar"/>
+	<classpathentry kind="lib" path="/home/toni/git/practicaiso2/UltimateTicTacToeWeb/IClient.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

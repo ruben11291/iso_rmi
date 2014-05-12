@@ -1,5 +1,7 @@
 package terd.web.shared;
 
-public class WTablero {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class WTablero implements IsSerializable {
 
 }

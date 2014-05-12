@@ -78,7 +78,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.actualizarListaDeJugadores();
 	}
 	
-	private void actualizarListaDeJugadores(){
+	public Hashtable<String, Integer> getListaJugadores() throws RemoteException {
 		Vector <String> jugadores = this.fachada.getEmailsJugadores();
 		Hashtable <String, Integer> listaJugadores = new Hashtable<String, Integer>();
 		for (String jugador : jugadores) {
@@ -93,12 +93,15 @@ public class Server extends UnicastRemoteObject implements IServer {
 			if (listaJugadores.containsKey(tablero.getJugadorB().getEmail()))
 				listaJugadores.put(tablero.getJugadorB().getEmail(), 1);			
 		}
-		
+		return listaJugadores;
+	}
+	
+	private void actualizarListaDeJugadores(){
 		Enumeration<ICliente> lista=this.stubs.elements();
 		while (lista.hasMoreElements()) {
 			ICliente t=lista.nextElement();
 			try {
-				t.recibirListaDeJugadores(listaJugadores);
+				t.recibirListaDeJugadores(getListaJugadores());
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

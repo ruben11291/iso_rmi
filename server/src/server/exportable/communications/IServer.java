@@ -2,6 +2,7 @@ package server.exportable.communications;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import client.exceptions.JugadorNoExisteException;
@@ -20,5 +21,6 @@ public interface IServer extends Remote {
 	public Vector<String> getClientesEnEspera() throws RemoteException;
 	public void enviarMovimientoAOponente(int idPartida, String oponente, int cT, int fT, int cC, int fC) throws RemoteException;
 	public void partidaFinalizada(int idPartida) throws RemoteException;
+	public Hashtable<String, Integer> getListaJugadores() throws RemoteException;
 }
 

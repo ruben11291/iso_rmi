@@ -2,7 +2,9 @@ package terd.web.shared;
 
 import java.util.Vector;
 
-public class WJugador {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class WJugador implements IsSerializable {
 
 	private String name;
 	private Vector <WTablero> tables;
@@ -19,4 +21,7 @@ public class WJugador {
 		this.name = name;
 	}
 	
+	public WJugador(String name) {
+		this.name = name;
+	}
 }

@@ -1,15 +1,20 @@
 package terd.web.client;
 
+import java.util.Hashtable;
+import java.util.Vector;
+
 import terd.web.shared.FieldVerifier;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -49,10 +54,16 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
+//		final TextBox login_email = TextBox.wrap(Document.get().getElementById("login_email"));
+//		final TextBox login_passwd = TextBox.wrap(Document.get().getElementById("login_passwd"));
+//		final Element username = DOM.getElementById("login_email");
+//		final Element password = DOM.getElementById("login_passwd");
+//		final TextBox login_email = (username == null ? new TextBox() : TextBox.wrap(username));
+//		final PasswordTextBox login_passwd = (password == null ? new PasswordTextBox() : PasswordTextBox.wrap(password));
 		final Button register_button = Button.wrap(Document.get().getElementById("register_button"));
+		final Button login_button = Button.wrap(Document.get().getElementById("login_button"));
 		
-		class RegisterButtonHandler implements ClickHandler, KeyUpHandler{
+		class LoginButtonHandler implements ClickHandler, KeyUpHandler{
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
@@ -62,13 +73,33 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				register_button.setVisible(false);
+				sendNameToServer();
 				
 			}
-			
-		}
-		RegisterButtonHandler handler_register_button = new RegisterButtonHandler();
-		register_button.addClickHandler(handler_register_button);		
+			private void sendNameToServer() {
+			// Then, we send the input to the server.
+			register_button.setEnabled(false);
+			greetingService.conectar("angel", "angel",
+					new AsyncCallback<Vector<String>>() {
+						@Override
+						public void onFailure(Throwable caught) {
+							System.out.println("fallo: " + caught);
+						}
+
+						@Override
+						public void onSuccess(Vector<String> result) {
+							System.out.println(result);
+						}
+					});
+			}
+		}	
+		
+		
+		
+		LoginButtonHandler handler_register_button = new LoginButtonHandler();
+		login_button.addClickHandler(handler_register_button);
+		
+		
 		
 		/*final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
