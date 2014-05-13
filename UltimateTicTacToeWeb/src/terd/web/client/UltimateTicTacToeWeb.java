@@ -54,12 +54,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-//		final TextBox login_email = TextBox.wrap(Document.get().getElementById("login_email"));
-//		final TextBox login_passwd = TextBox.wrap(Document.get().getElementById("login_passwd"));
-//		final Element username = DOM.getElementById("login_email");
-//		final Element password = DOM.getElementById("login_passwd");
-//		final TextBox login_email = (username == null ? new TextBox() : TextBox.wrap(username));
-//		final PasswordTextBox login_passwd = (password == null ? new PasswordTextBox() : PasswordTextBox.wrap(password));
+		final TextBox login_email = TextBox.wrap(Document.get().getElementById("login_email"));
+		final TextBox login_passwd = TextBox.wrap(Document.get().getElementById("login_passwd"));
 		final Button register_button = Button.wrap(Document.get().getElementById("register_button"));
 		final Button login_button = Button.wrap(Document.get().getElementById("login_button"));
 		
