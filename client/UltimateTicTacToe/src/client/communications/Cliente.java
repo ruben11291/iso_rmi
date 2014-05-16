@@ -31,6 +31,7 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
 		try {
 			this.ip = InetAddress.getLocalHost().getHostAddress();
 			
+			
 		} catch (UnknownHostException e1) {
 			e1.printStackTrace();
 		}

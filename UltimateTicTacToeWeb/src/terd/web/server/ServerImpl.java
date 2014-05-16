@@ -54,13 +54,17 @@ public class ServerImpl extends RemoteServiceServlet implements
 			System.out.println("login éxito");
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("remote exception");
 			e1.printStackTrace();
 		} catch (JugadorNoExisteException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("jn exception");
 			e1.printStackTrace();
 		} catch (JugadorYaExisteException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("jy exception");
 			e1.printStackTrace();
+			
 		}
 		
 		WJugador j = new WJugador(jugador);

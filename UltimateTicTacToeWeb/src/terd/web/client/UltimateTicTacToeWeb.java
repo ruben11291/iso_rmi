@@ -54,10 +54,53 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final TextBox login_email = TextBox.wrap(Document.get().getElementById("login_email"));
-		final TextBox login_passwd = TextBox.wrap(Document.get().getElementById("login_passwd"));
-		final Button register_button = Button.wrap(Document.get().getElementById("register_button"));
-		final Button login_button = Button.wrap(Document.get().getElementById("login_button"));
+
+		// Add the nameField and sendButton to the RootPanel
+		// Use RootPanel.get() to get the entire body element
+		
+		
+		final Button btnNewButton = new Button("Log in");
+		RootPanel.get("sendButtonContainer").add(btnNewButton);
+//		rootPanel.add(btnNewButton, 341, 120);
+		
+		final TextBox textBox = new TextBox();
+		RootPanel.get("nameFieldContainer").add(textBox);
+		
+		
+		final TextBox textBox_1 = new TextBox();
+		RootPanel.get("nameFieldPassContainer").add(textBox_1);
+//		rootPanel.add(textBox_1, 274, 70);
+
+		// Create the popup dialog box
+		final DialogBox dialogBox = new DialogBox();
+		dialogBox.setText("Remote Procedure Call");
+		dialogBox.setAnimationEnabled(true);
+		final Button closeButton = new Button("Close");
+		// We can set the id of a widget by accessing its Element
+		closeButton.getElement().setId("closeButton");
+		final Label textToServerLabel = new Label();
+		final HTML serverResponseLabel = new HTML();
+		VerticalPanel dialogVPanel = new VerticalPanel();
+		dialogVPanel.addStyleName("dialogVPanel");
+		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
+		dialogVPanel.add(textToServerLabel);
+		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
+		dialogVPanel.add(serverResponseLabel);
+		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
+		dialogVPanel.add(closeButton);
+		dialogBox.setWidget(dialogVPanel);
+
+		// Add a handler to close the DialogBox
+		closeButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				dialogBox.hide();
+				btnNewButton.setEnabled(true);
+				btnNewButton.setFocus(true);
+			}
+		});
+
+		// Create a handler for the sendButton and nameField
+
 		
 		class LoginButtonHandler implements ClickHandler, KeyUpHandler{
 
@@ -69,13 +112,15 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				sendNameToServer();
+				btnNewButton.setEnabled(true);
+				btnNewButton.setFocus(true);
+				login();
 				
 			}
-			private void sendNameToServer() {
+			private void login() {
 			// Then, we send the input to the server.
-			register_button.setEnabled(false);
-			greetingService.conectar("angel", "angel",
+		
+			greetingService.conectar(textBox.getText(), textBox_1.getText(),
 					new AsyncCallback<Vector<String>>() {
 						@Override
 						public void onFailure(Throwable caught) {
@@ -93,7 +138,68 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		
 		
 		LoginButtonHandler handler_register_button = new LoginButtonHandler();
-		login_button.addClickHandler(handler_register_button);
+		btnNewButton.addClickHandler(handler_register_button);
+	}
+	
+	
+//	/**
+//	 * The message displayed to the user when the server cannot be reached or
+//	 * returns an error.
+//	 */
+//	private static final String SERVER_ERROR = "An error occurred while "
+//			+ "attempting to contact the server. Please check your network "
+//			+ "connection and try again.";
+//
+//	/**
+//	 * Create a remote service proxy to talk to the server-side Greeting service.
+//	 */
+//	private final ServerAsync greetingService = GWT
+//			.create(Server.class);
+//
+//	/**
+//	 * This is the entry point method.
+//	 */
+//	public void onModuleLoad() {
+//		final TextBox login_email = TextBox.wrap(Document.get().getElementById("login_email"));
+//		final TextBox login_passwd = TextBox.wrap(Document.get().getElementById("login_passwd"));
+//		final Button register_button = Button.wrap(Document.get().getElementById("register_button"));
+//		final Button login_button = Button.wrap(Document.get().getElementById("login_button"));
+//		
+//		class LoginButtonHandler implements ClickHandler, KeyUpHandler{
+//
+//			@Override
+//			public void onKeyUp(KeyUpEvent event) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				login();
+//				
+//			}
+//			private void login() {
+//			// Then, we send the input to the server.
+//			register_button.setEnabled(false);
+//			greetingService.conectar(login_email.getText(), login_passwd.getText(),
+//					new AsyncCallback<Vector<String>>() {
+//						@Override
+//						public void onFailure(Throwable caught) {
+//							System.out.println("fallo: " + caught);
+//						}
+//
+//						@Override
+//						public void onSuccess(Vector<String> result) {
+//							System.out.println(result);
+//						}
+//					});
+//			}
+//		}	
+//		
+//		
+//		
+//		LoginButtonHandler handler_register_button = new LoginButtonHandler();
+//		login_button.addClickHandler(handler_register_button);
 		
 		
 		
@@ -240,4 +346,4 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 //		sendButton.addClickHandler(handler);
 //		nameField.addKeyUpHandler(handler);
 	}
-}
+
