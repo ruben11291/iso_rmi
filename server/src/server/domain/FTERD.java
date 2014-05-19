@@ -3,6 +3,7 @@ package server.domain;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Vector;
 
 import server.persistence.DAOAutenticar;
@@ -14,12 +15,13 @@ public class FTERD {
 	private Hashtable<String, Jugador> jugadores;
 	private Hashtable<Integer, Tablero9x9> tableros;
 	private Hashtable<String, String> retosEnEspera;
-	
+	private Hashtable <String, Boolean> retosContestados;
 	
 	private FTERD() {
 		this.jugadores =     new Hashtable<String, Jugador>();
 		this.tableros  =     new Hashtable<Integer, Tablero9x9>();
-		this.retosEnEspera = new Hashtable<String, String>(); 
+		this.retosEnEspera = new Hashtable<String, String>();
+		this.retosContestados = new Hashtable<String, Boolean>();
 	}
 	
 	public static FTERD get() {
@@ -92,7 +94,7 @@ public class FTERD {
 				(retosEnEspera.get(retador)).equals(retado) ){
 			
 			retosEnEspera.remove(retador);
-		
+
 			if (respuesta){
 				Jugador jugadorA = this.getJugador(retador);
 				Jugador jugadorB = this.getJugador(retado);
@@ -135,7 +137,10 @@ public class FTERD {
 	public Hashtable<String, String> getRetosEnEspera(){
 		return retosEnEspera;
 	}
-	
+
+	public Hashtable<String, Boolean> getRetosContestados() {
+		return retosContestados;
+	}
 
 	public Jugador getJugador(String email) {
 		return this.jugadores.get(email);

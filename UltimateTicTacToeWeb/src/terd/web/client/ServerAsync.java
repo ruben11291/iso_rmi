@@ -21,4 +21,12 @@ public interface ServerAsync {
 	void getRetos(String login_name, AsyncCallback<Vector<String>> asyncCallback);
 
 	void getListaJugadores(AsyncCallback<Vector<String>> asyncCallback);
+
+	void recibirRespuestaReto(String login_name,
+			AsyncCallback<Boolean> asyncCallback);
+
+	void poner(int idPartida, String email, int cT, int fT, int cC, int fC,
+			AsyncCallback<Void> callback);
+
+	void getMovimiento(String oponente, AsyncCallback<Integer> asyncCallback);
 }

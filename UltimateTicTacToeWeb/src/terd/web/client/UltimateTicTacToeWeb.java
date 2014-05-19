@@ -45,8 +45,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	 * returns an error.
 	 */
 	
-	private String login_name;
-	private Timer t;
+	private String login_name, retado, oponente;
+	private Timer t1, t2, t3;
 	
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
@@ -61,6 +61,23 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	/**
 	 * This is the entry point method.
 	 */
+	
+	private void refrescarTablero() {
+		greetingService.getMovimiento(oponente, new AsyncCallback<Integer>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error al refrescar tablero: " + caught.toString());
+			}
+
+			@Override
+			public void onSuccess(Integer result) {
+				System.out.println("fjañsdklfjalk");
+			}
+			
+		});				
+	}
+	
 	public void onModuleLoad() {
 
 		// Add the nameField and sendButton to the RootPanel
@@ -78,16 +95,23 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		final TextBox textBox_1 = new TextBox();
 		RootPanel.get("nameFieldPassContainer").add(textBox_1);
 		
+		final Tablero9x9 tablero9x9 = new Tablero9x9();
+		rootPanel.add(tablero9x9, 118, 47);
+		tablero9x9.setSize("100px", "100px");
+		tablero9x9.setVisible(false);
+		
 		final ListBox listBox = new ListBox();
+		
 		listBox.addDoubleClickHandler(new DoubleClickHandler() {
 			public void onDoubleClick(DoubleClickEvent event) {
+				retado = listBox.getItemText(listBox.getSelectedIndex());
 				retarJugador();
 			}
 			
 			private void retarJugador() {
 			// Then, we send the input to the server.
 		
-			greetingService.retarJugador(login_name, listBox.getItemText(listBox.getSelectedIndex()),
+			greetingService.retarJugador(login_name, retado,
 					new AsyncCallback<Vector<String>>() {
 						@Override
 						public void onFailure(Throwable caught) {
@@ -96,11 +120,61 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 						@Override
 						public void onSuccess(Vector<String> result) {
+							t2 = new Timer() {
+								
+								@Override
+								public void run() {
+									refrescarRespuestaReto();
+								}
 
+							};
+							t2.scheduleRepeating(1000);
 						}
 					});
 			}
+			
+			private void refrescarRespuestaReto() {
+				greetingService.recibirRespuestaReto(login_name, new AsyncCallback<Boolean>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						System.out.println("Error al refrescar respuesta reto: " + caught);
+					}
+
+					@Override
+					public void onSuccess(Boolean result) {
+						if (result != null) {
+							if (result) {
+							// ABRIR TABLERO
+								tablero9x9.setVisible(true);
+								listBox.setVisible(false);
+								btnNewButton.setVisible(false);
+								textBox.setVisible(false);
+								textBox_1.setVisible(false);
+								oponente = retado;
+								t3 = new Timer() {
+									
+									@Override
+									public void run() {
+										// TODO Auto-generated method stub
+										refrescarTablero();
+									}
+
+								};
+								t3.scheduleRepeating(2000);
+								
+							} else {
+								Window.alert(retado + " ha rechazado tu reto.");
+							}
+						}
+					}
+					
+				});
+				
+			}
+			
 		});
+		
 		rootPanel.add(listBox, 10, 45);
 		listBox.setSize("102px", "263px");
 		listBox.setVisibleItemCount(5);
@@ -170,7 +244,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 							listBox.setVisible(true);
 							for (String r : result)
 								listBox.addItem(r);
-							t = new Timer() {
+							t1 = new Timer() {
 								
 								@Override
 								public void run() {
@@ -180,7 +254,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 								}
 
 							};
-							t.scheduleRepeating(3000);
+							t1.scheduleRepeating(3000);
 						}
 					});
 			}
@@ -201,7 +275,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						for (String r : result) {
 							if (!respuesta)
 								respuesta = Window.confirm(r + " te ha retado");
-							
+							if (respuesta) oponente = r;
 							greetingService.respuestaAPeticionDeReto(r, login_name, respuesta, -1, new AsyncCallback<Boolean>() {
 
 								@Override
@@ -212,8 +286,23 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 								@Override
 								public void onSuccess(Boolean result) {
-									// TODO Auto-generated method stub
-									
+									if (result) {
+										tablero9x9.setVisible(true);
+										listBox.setVisible(false);
+										btnNewButton.setVisible(false);
+										textBox.setVisible(false);
+										textBox_1.setVisible(false);
+										t3 = new Timer() {
+											
+											@Override
+											public void run() {
+												// TODO Auto-generated method stub
+												refrescarTablero();
+											}
+
+										};
+										t3.scheduleRepeating(2000);
+									}
 								}
 							});
 						}
@@ -246,5 +335,6 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		LoginButtonHandler handler_register_button = new LoginButtonHandler();
 		btnNewButton.addClickHandler(handler_register_button);
 	}
+	
 	}
 

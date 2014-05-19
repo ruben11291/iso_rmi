@@ -5,6 +5,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class Tablero9x9 extends Composite {
 	
@@ -22,6 +25,7 @@ public class Tablero9x9 extends Composite {
 	@UiField Tablero3x3 t20;
 	@UiField Tablero3x3 t21;
 	@UiField Tablero3x3 t22;
+	@UiField Grid grid;
 
 	interface Tablero9x9UiBinder extends UiBinder<Widget, Tablero9x9> {
 	}
@@ -48,4 +52,12 @@ public class Tablero9x9 extends Composite {
 	}
 
 	
+	@UiHandler("grid")
+	void onGridClick(ClickEvent event) {
+		System.out.println(event.getRelativeElement());
+		System.out.println(event.getX());
+		System.out.println(event.getY());
+		
+
+	}
 }

@@ -4,8 +4,8 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel>
-		<g:Grid>
+	<g:HTMLPanel width="450px" height="450px">
+		<g:Grid ui:field="grid" width="450px" height="450px">
 			<g:row>
 				<g:customCell>
 					<p1:Tablero3x3 ui:field="t00"/>

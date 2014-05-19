@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Vector;
 
 import server.domain.FTERD;
@@ -30,6 +31,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private FTERD fachada;
 	private static Server servo;
 	private Hashtable <String, ICliente>stubs;
+	private Hashtable<String, Integer> movimientosHechos;
+	
 	protected Server() throws RemoteException, UnknownHostException {
 		super();
 
@@ -38,6 +41,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.puerto=3002;
 		this.fachada=FTERD.get();
 		this.stubs = new Hashtable <String, ICliente>();
+		this.movimientosHechos = new Hashtable <String, Integer>();
 	}
 	
 	public static Server get() throws RemoteException, UnknownHostException {
@@ -204,14 +208,20 @@ public class Server extends UnicastRemoteObject implements IServer {
 		//Mandar a respuesta a retador. Si la respuestas ha sido positiva le manda un idPartida valido
 		//Si ha sido negativa le mando un idPartida invalido (= -1)
 		ICliente IRetador = this.stubs.get(retador);
-		IRetador.respuestaAPeticionDeReto(retador, retado, respuesta, idPartida);
+		
+		if (IRetador != null) {
+			IRetador.respuestaAPeticionDeReto(retador, retado, respuesta, idPartida);
+		} else {
+			this.fachada.getRetosContestados().put(retador, respuesta);
+		}
 		
 		//Solo si el jugador retado ha aceptado el reto, el servidor le manda el idPartida con el
 		//que van a jugar.
 		//Si el jugador retado NO ha aceptado el reto no espera ningun mensaje der servidor
 		if(respuesta){
 			ICliente IRetado = this.stubs.get(retado);
-			IRetado.iniciarPartida(idPartida, retador, retado);
+			if (IRetado != null)
+				IRetado.iniciarPartida(idPartida, retador, retado);
 		}
 		this.actualizarListaDeJugadores();
 	}
@@ -227,8 +237,22 @@ public class Server extends UnicastRemoteObject implements IServer {
 		System.out.println("Enviar movimiento a oponente: " + oponente);
 		ICliente c = this.stubs.get(oponente);
 		String realizadoPor = this.fachada.getTableros().get(idPartida).getOpenenteDE(oponente).getEmail();
-		c.poner(idPartida, realizadoPor, cT, fT, cC, fC);
+		if (c != null) {
+			c.poner(idPartida, realizadoPor, cT, fT, cC, fC);
+		} else {
+			movimientosHechos.put(realizadoPor, fT*9*3 + cT*9 + fC*3 + cC);
+		}
 		
+	}
+	
+	@Override
+	public int getMovimientosHechos(String oponente) {
+		int movimiento;
+		if (movimientosHechos.get(oponente) == null)
+			movimiento = -1;
+		else
+			movimiento = movimientosHechos.remove(oponente);
+		return movimiento;
 	}
 
 	@Override
@@ -237,7 +261,15 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 	
 	@Override
-	public  Hashtable<String, String> getRetosEnEspera() {
+	public Hashtable<String, String> getRetosEnEspera() throws RemoteException {
 		return this.fachada.getRetosEnEspera();
+	}
+	
+	@Override
+	public Boolean getRespuestaReto(String retador) throws RemoteException {
+		Boolean respuesta;
+		respuesta = this.fachada.getRetosContestados().get(retador);
+		this.fachada.getRetosContestados().remove(retador);
+		return respuesta;
 	}
 }

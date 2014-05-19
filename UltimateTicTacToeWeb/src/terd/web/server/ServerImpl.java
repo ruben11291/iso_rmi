@@ -156,4 +156,28 @@ public class ServerImpl extends RemoteServiceServlet implements
 		return lista;
 	}
 
+	@Override
+	public Boolean recibirRespuestaReto(String login_name) throws Exception {
+		return this.servidorRMI.getRespuestaReto(login_name);
+	}
+	
+	@Override
+	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC) throws Exception {
+		this.servidorRMI.poner(idPartida, email, cT, fT, cC, fC);
+	}
+
+	@Override
+	public int getMovimiento(String oponente) throws Exception {
+		int movimiento = this.servidorRMI.getMovimientosHechos(oponente);
+		int resto;
+		if (movimiento != -1) {
+			System.out.println("fT: " + movimiento / 27);
+			resto = movimiento % 27;
+			System.out.println("fC: " + (movimiento / 3) % 3);
+			System.out.println("cT: " + resto / 9);
+			System.out.println("cC: " + resto % 9);
+		}
+		return movimiento;
+	}
+
 }

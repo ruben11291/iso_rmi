@@ -4,39 +4,39 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel>
-		<g:Grid width="221px" height="167px">
+	<g:HTMLPanel >
+		<g:Grid >
 			<g:row>
 				<g:customCell>
-					<g:Image ui:field="i00"/>
+					<g:Image ui:field="i00" url="image/wood.jpg" />
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i01"/>
+					<g:Image ui:field="i01" url="image/wood.jpg"  />
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i02"/>
+					<g:Image ui:field="i02" url="image/wood.jpg"  />
 				</g:customCell>
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<g:Image ui:field="i10"/>
+					<g:Image ui:field="i10" url="image/wood.jpg"  />
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i11"/>
+					<g:Image ui:field="i11" url="image/wood.jpg"  />
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i12"/>
+					<g:Image ui:field="i12" url="image/wood.jpg"  />
 				</g:customCell>
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<g:Image ui:field="i20"/>
+					<g:Image ui:field="i20" url="image/wood.jpg"  />
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i21"/>
+					<g:Image ui:field="i21" url="image/wood.jpg"  />
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i22"/>
+					<g:Image ui:field="i22" url="image/wood.jpg"  />
 				</g:customCell>
 			</g:row>
 		</g:Grid>
