@@ -38,6 +38,9 @@ public class Tablero3x3 extends Composite {
 		fields[2][0]=i20;
 		fields[2][1]=i21;
 		fields[2][2]=i22;
+		i00 = new Image();
+		i00.setUrl("/home/toni/git/practicaiso2/client/UltimateTicTacToe/src/client/image/x.png");
+		i00.setVisible(true);
 	}
 
 }

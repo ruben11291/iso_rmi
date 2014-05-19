@@ -22,5 +22,6 @@ public interface IServer extends Remote {
 	public void enviarMovimientoAOponente(int idPartida, String oponente, int cT, int fT, int cC, int fC) throws RemoteException;
 	public void partidaFinalizada(int idPartida) throws RemoteException;
 	public Hashtable<String, Integer> getListaJugadores() throws RemoteException;
+	public Hashtable<String, String> getRetosEnEspera() throws RemoteException;
 }
 

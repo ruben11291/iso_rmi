@@ -58,15 +58,16 @@ public class Server extends UnicastRemoteObject implements IServer {
 		System.out.println("Servidor escuchando" + this.puerto);
 	}
 
-	/**** Métodos remotos ****/
+	/**** M��todos remotos ****/
 	
 	/////ADD Player///
 	public void add(String email, String passwd, ICliente cliente) throws RemoteException,JugadorNoExisteException , JugadorYaExisteException{
 		if(this.stubs.containsKey(email)) throw new JugadorYaExisteException(email);
 		Jugador jugador=new Jugador(email);
 		this.fachada.add(email, passwd);
-		this.stubs.put(email, cliente);
-		System.out.println("Jugador añadido "+email+" en servidor ");
+		if (cliente != null)
+			this.stubs.put(email, cliente);
+		System.out.println("Jugador a��adido "+email+" en servidor ");
 		this.actualizarListaDeJugadores();
 		
 
@@ -74,7 +75,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	public void add(String email, String passwd) throws JugadorNoExisteException {
 		this.fachada.add(email, passwd);
-		System.out.println("Jugador añadido "+email+" en servidor ");
+		System.out.println("Jugador a��adido "+email+" en servidor ");
 		this.actualizarListaDeJugadores();
 	}
 	
@@ -123,8 +124,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void abandonoPartida(String email) {
 		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidaDelJugador(email);
 		
-		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si también abandona cliente2 entonces
-		//al llegar aquí avisarA será vacio
+		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si tambi��n abandona cliente2 entonces
+		//al llegar aqu�� avisarA ser�� vacio
 		
 		if(!avisarA.isEmpty()){
 			//avisar al jugador que su oponente ha cerrado sesion
@@ -190,7 +191,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.fachada= FTERD.get();
 		this.fachada.retar(retador, retado);
 		ICliente IRetado = this.stubs.get(retado);
-		IRetado.notificarSolicitudReto(retador);
+		if (IRetado != null)
+			IRetado.notificarSolicitudReto(retador);
 	}
 
 	@Override
@@ -232,5 +234,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void partidaFinalizada(int idPartida) throws RemoteException {
 		this.fachada.eliminarPartidaFinalizada(idPartida);
+	}
+	
+	@Override
+	public  Hashtable<String, String> getRetosEnEspera() {
+		return this.fachada.getRetosEnEspera();
 	}
 }

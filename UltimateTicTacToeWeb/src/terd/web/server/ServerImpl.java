@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -13,6 +14,7 @@ import terd.web.shared.FieldVerifier;
 import terd.web.shared.WJugador;
 import client.exceptions.JugadorNoExisteException;
 import client.exceptions.JugadorYaExisteException;
+import client.exportable.communications.ICliente;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -38,6 +40,16 @@ public class ServerImpl extends RemoteServiceServlet implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public Vector<String> retarJugador(String retador, String retado) throws IllegalArgumentException {
+		try {
+			this.servidorRMI.retar(retador, retado);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public Vector<String> conectar(String jugador, String passwd) throws IllegalArgumentException {
@@ -103,4 +115,45 @@ public class ServerImpl extends RemoteServiceServlet implements
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
 	}
+
+	@Override
+	public boolean respuestaAPeticionDeReto(String retador, String retado,
+			boolean respuesta, int idPartida) {
+		// TODO Auto-generated method stub
+		try {
+			this.servidorRMI.respuestaAPeticionDeReto(retador, retado, respuesta);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return respuesta;
+	}
+
+	@Override
+	public Vector<String> getRetos(String login_name) throws Exception {
+		// TODO Auto-generated method stub
+		Hashtable<String, String> retos = this.servidorRMI.getRetosEnEspera();
+		Vector<String> resultado = new Vector();
+		Enumeration<String> e = retos.keys();
+		while (e.hasMoreElements()) {
+			String key = e.nextElement();
+			String retado = retos.get(key);
+			if (retado.equals(login_name))
+				resultado.add(key);
+		}
+		return resultado;
+	}
+
+	@Override
+	public Vector<String> getListaJugadores() throws Exception {
+		Vector<String> lista = new Vector();
+		Hashtable<String, Integer> retos;
+		retos = this.servidorRMI.getListaJugadores();
+		Enumeration<String> e = retos.keys();
+		while (e.hasMoreElements()) {
+			lista.add(e.nextElement());
+		}
+		return lista;
+	}
+
 }
