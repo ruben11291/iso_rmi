@@ -18,9 +18,6 @@ import client.exportable.communications.ICliente;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-/**
- * The server side implementation of the RPC service.
- */
 @SuppressWarnings("serial")
 public class ServerImpl extends RemoteServiceServlet implements
 		Server {
@@ -31,13 +28,10 @@ public class ServerImpl extends RemoteServiceServlet implements
 		try {
 			this.servidorRMI=(IServer) Naming.lookup("rmi://localhost:3002/servidor");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -46,7 +40,6 @@ public class ServerImpl extends RemoteServiceServlet implements
 		try {
 			this.servidorRMI.retar(retador, retado);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -65,15 +58,12 @@ public class ServerImpl extends RemoteServiceServlet implements
 			this.servidorRMI.add(jugador, passwd, null);
 			System.out.println("login éxito");
 		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
 			System.out.println("remote exception");
 			e1.printStackTrace();
 		} catch (JugadorNoExisteException e1) {
-			// TODO Auto-generated catch block
 			System.out.println("jn exception");
 			e1.printStackTrace();
 		} catch (JugadorYaExisteException e1) {
-			// TODO Auto-generated catch block
 			System.out.println("jy exception");
 			e1.printStackTrace();
 			
@@ -85,45 +75,17 @@ public class ServerImpl extends RemoteServiceServlet implements
 		try {
 			listaJugadores = new Vector(this.servidorRMI.getListaJugadores().keySet());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("fin conectar");
 		return listaJugadores;
-//		String serverInfo = getServletContext().getServerInfo();
-//		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-
-//		// Escape data from the client to avoid cross-site script vulnerabilities.
-//		jugador = escapeHtml(jugador);
-//		userAgent = escapeHtml(userAgent);
-//
-//		return "Hello, " + jugador + "!<br><br>I am running " + serverInfo
-//				+ ".<br><br>It looks like you are using:<br>" + userAgent;
-	}
-
-	/**
-	 * Escape an html string. Escaping data received from the client helps to
-	 * prevent cross-site script vulnerabilities.
-	 * 
-	 * @param html the html string to escape
-	 * @return the escaped string
-	 */
-	private String escapeHtml(String html) {
-		if (html == null) {
-			return null;
-		}
-		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
-				.replaceAll(">", "&gt;");
 	}
 
 	@Override
-	public boolean respuestaAPeticionDeReto(String retador, String retado,
-			boolean respuesta, int idPartida) {
-		// TODO Auto-generated method stub
+	public boolean respuestaAPeticionDeReto(String retador, String retado, boolean respuesta, int idPartida) {
 		try {
 			this.servidorRMI.respuestaAPeticionDeReto(retador, retado, respuesta);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return respuesta;
@@ -131,7 +93,6 @@ public class ServerImpl extends RemoteServiceServlet implements
 
 	@Override
 	public Vector<String> getRetos(String login_name) throws Exception {
-		// TODO Auto-generated method stub
 		Hashtable<String, String> retos = this.servidorRMI.getRetosEnEspera();
 		Vector<String> resultado = new Vector();
 		Enumeration<String> e = retos.keys();
@@ -178,6 +139,21 @@ public class ServerImpl extends RemoteServiceServlet implements
 			System.out.println("cC: " + resto % 9);
 		}
 		return movimiento;
+	}
+	
+	/**
+	 * Escape an html string. Escaping data received from the client helps to
+	 * prevent cross-site script vulnerabilities.
+	 * 
+	 * @param html the html string to escape
+	 * @return the escaped string
+	 */
+	private String escapeHtml(String html) {
+		if (html == null) {
+			return null;
+		}
+		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+				.replaceAll(">", "&gt;");
 	}
 
 }

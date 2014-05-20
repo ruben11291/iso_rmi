@@ -36,34 +36,24 @@ import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
 public class UltimateTicTacToeWeb implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	
+
 	private String login_name, retado, oponente;
-	private Timer t1, t2, t3;
+	private Timer listaTimer, retosTimer, respuestaRetosTimer, tableroTimer;
+	private Button loginButton;
+	private TextBox emailText;
+	private TextBox passwdText;
+	private Tablero9x9 tablero;
+	private ListBox listaJugadores;
 	
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final ServerAsync greetingService = GWT
-			.create(Server.class);
-
-	/**
-	 * This is the entry point method.
-	 */
+	private final ServerAsync UTTTService = GWT.create(Server.class);
 	
 	private void refrescarTablero() {
-		greetingService.getMovimiento(oponente, new AsyncCallback<Integer>() {
+		UTTTService.getMovimiento(oponente, new AsyncCallback<Integer>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -72,268 +62,213 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 			@Override
 			public void onSuccess(Integer result) {
-				System.out.println("fjañsdklfjalk");
+				// ACTUALIZAR TABLERO
+				System.out.println(result);
 			}
 			
 		});				
 	}
 	
-	public void onModuleLoad() {
+	private void refrescarRespuestaReto() {
+		UTTTService.recibirRespuestaReto(login_name, new AsyncCallback<Boolean>() {
 
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		
-		final Button btnNewButton = new Button("Log in");
-		RootPanel rootPanel = RootPanel.get("sendButtonContainer");
-		rootPanel.add(btnNewButton);
-//		rootPanel.add(btnNewButton, 341, 120);
-		
-		final TextBox textBox = new TextBox();
-		RootPanel.get("nameFieldContainer").add(textBox);
-		
-		
-		final TextBox textBox_1 = new TextBox();
-		RootPanel.get("nameFieldPassContainer").add(textBox_1);
-		
-		final Tablero9x9 tablero9x9 = new Tablero9x9();
-		rootPanel.add(tablero9x9, 118, 47);
-		tablero9x9.setSize("100px", "100px");
-		tablero9x9.setVisible(false);
-		
-		final ListBox listBox = new ListBox();
-		
-		listBox.addDoubleClickHandler(new DoubleClickHandler() {
-			public void onDoubleClick(DoubleClickEvent event) {
-				retado = listBox.getItemText(listBox.getSelectedIndex());
-				retarJugador();
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println("Error al refrescar respuesta reto: " + caught);
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				if (result != null) {
+					if (result) {
+						tablero.setVisible(true);
+						listaJugadores.setVisible(false);
+						loginButton.setVisible(false);
+						emailText.setVisible(false);
+						passwdText.setVisible(false);
+						oponente = retado;
+						tableroTimer = new Timer() {
+							
+							@Override
+							public void run() {
+								refrescarTablero();
+							}
+	
+						};
+						tableroTimer.scheduleRepeating(2000);
+						
+					} else {
+						Window.alert(retado + " ha rechazado tu reto.");
+					}
+				}
 			}
 			
-			private void retarJugador() {
-			// Then, we send the input to the server.
+		});
 		
-			greetingService.retarJugador(login_name, retado,
-					new AsyncCallback<Vector<String>>() {
+	}
+	
+	private void refrescarRetos() {
+		UTTTService.getRetos(login_name, new AsyncCallback<Vector<String>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error al refrescar retos: " + caught.toString());
+			}
+
+			@Override
+			public void onSuccess(Vector<String> result) {
+				boolean respuesta = false;
+				for (String r : result) {
+					if (!respuesta)
+						respuesta = Window.confirm(r + " te ha retado");
+					if (respuesta) oponente = r;
+					UTTTService.respuestaAPeticionDeReto(r, login_name, respuesta, -1, new AsyncCallback<Boolean>() {
+
 						@Override
 						public void onFailure(Throwable caught) {
-							System.out.println("fallo: " + caught);
+							
 						}
 
 						@Override
-						public void onSuccess(Vector<String> result) {
-							t2 = new Timer() {
-								
-								@Override
-								public void run() {
-									refrescarRespuestaReto();
-								}
-
-							};
-							t2.scheduleRepeating(1000);
-						}
-					});
-			}
-			
-			private void refrescarRespuestaReto() {
-				greetingService.recibirRespuestaReto(login_name, new AsyncCallback<Boolean>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						System.out.println("Error al refrescar respuesta reto: " + caught);
-					}
-
-					@Override
-					public void onSuccess(Boolean result) {
-						if (result != null) {
+						public void onSuccess(Boolean result) {
 							if (result) {
-							// ABRIR TABLERO
-								tablero9x9.setVisible(true);
-								listBox.setVisible(false);
-								btnNewButton.setVisible(false);
-								textBox.setVisible(false);
-								textBox_1.setVisible(false);
-								oponente = retado;
-								t3 = new Timer() {
-									
+								retosTimer.cancel();
+								tablero.setVisible(true);
+								listaJugadores.setVisible(false);
+								loginButton.setVisible(false);
+								emailText.setVisible(false);
+								passwdText.setVisible(false);
+								tableroTimer = new Timer() {									
 									@Override
 									public void run() {
-										// TODO Auto-generated method stub
 										refrescarTablero();
 									}
 
 								};
-								t3.scheduleRepeating(2000);
-								
-							} else {
-								Window.alert(retado + " ha rechazado tu reto.");
+								tableroTimer.scheduleRepeating(2000);
 							}
 						}
-					}
-					
-				});
-				
-			}
-			
-		});
-		
-		rootPanel.add(listBox, 10, 45);
-		listBox.setSize("102px", "263px");
-		listBox.setVisibleItemCount(5);
-		listBox.setVisible(false);
-		
-//		rootPanel.add(textBox_1, 274, 70);
-
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Remote Procedure Call");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label textToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
-
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-				btnNewButton.setEnabled(true);
-				btnNewButton.setFocus(true);
-			}
-		});
-
-		// Create a handler for the sendButton and nameField
-
-		
-		class LoginButtonHandler implements ClickHandler, KeyUpHandler{
-
-			@Override
-			public void onKeyUp(KeyUpEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onClick(ClickEvent event) {
-				btnNewButton.setEnabled(true);
-				btnNewButton.setFocus(true);
-				login();
-				
-			}
-			private void login() {
-			// Then, we send the input to the server.
-		
-			greetingService.conectar(textBox.getText(), textBox_1.getText(),
-					new AsyncCallback<Vector<String>>() {
-						@Override
-						public void onFailure(Throwable caught) {
-							System.out.println("fallo: " + caught);
-						}
-
-						@Override
-						public void onSuccess(Vector<String> result) {
-							login_name = textBox.getText();
-							listBox.setVisible(true);
-							for (String r : result)
-								listBox.addItem(r);
-							t1 = new Timer() {
-								
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
-									refrescarRetos();
-									refrescarListaJugadores();
-								}
-
-							};
-							t1.scheduleRepeating(3000);
-						}
 					});
-			}
-			private void refrescarRetos() {
-				// TODO Auto-generated method stub
-				greetingService.getRetos(login_name, new AsyncCallback<Vector<String>>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("Error al refrescar retos: " + caught.toString());
-					}
-
-					@Override
-					public void onSuccess(Vector<String> result) {
-						// TODO Auto-generated method stub
-						boolean respuesta = false;
-						for (String r : result) {
-							if (!respuesta)
-								respuesta = Window.confirm(r + " te ha retado");
-							if (respuesta) oponente = r;
-							greetingService.respuestaAPeticionDeReto(r, login_name, respuesta, -1, new AsyncCallback<Boolean>() {
-
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
-
-								@Override
-								public void onSuccess(Boolean result) {
-									if (result) {
-										tablero9x9.setVisible(true);
-										listBox.setVisible(false);
-										btnNewButton.setVisible(false);
-										textBox.setVisible(false);
-										textBox_1.setVisible(false);
-										t3 = new Timer() {
-											
-											@Override
-											public void run() {
-												// TODO Auto-generated method stub
-												refrescarTablero();
-											}
-
-										};
-										t3.scheduleRepeating(2000);
-									}
-								}
-							});
-						}
-					}
-					
-				});
+				}
 			}
 			
-			private void refrescarListaJugadores() {
-				greetingService.getListaJugadores(new AsyncCallback<Vector<String>>() {
+		});
+	}
+	
+	private void refrescarListaJugadores() {
+		UTTTService.getListaJugadores(new AsyncCallback<Vector<String>>() {
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("Error al refrescar lista de jugadores: " + caught.toString());
-					}
-
-					@Override
-					public void onSuccess(Vector<String> result) {
-						// TODO Auto-generated method stub
-						listBox.clear();
-						for (String r : result)
-							listBox.addItem(r);
-					}
-					
-				});				
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error al refrescar lista de jugadores: " + caught.toString());
 			}
-		}
+
+			@Override
+			public void onSuccess(Vector<String> result) {
+				listaJugadores.clear();
+				for (String r : result)
+					listaJugadores.addItem(r);
+			}
+			
+		});				
+	}
+	
+	private void login() {
+		UTTTService.conectar(emailText.getText(), passwdText.getText(),
+			new AsyncCallback<Vector<String>>() {
+				@Override
+				public void onFailure(Throwable caught) {
+					System.out.println("Error al hacer login: " + caught);
+				}
+
+				@Override
+				public void onSuccess(Vector<String> result) {
+					login_name = emailText.getText();
+					listaJugadores.setVisible(true);
+					for (String r : result)
+						listaJugadores.addItem(r);
+					listaTimer = new Timer() {
+						
+						@Override
+						public void run() {
+							refrescarListaJugadores();
+						}
+
+					};
+					listaTimer.scheduleRepeating(3000);
+					retosTimer = new Timer() {
+
+						@Override
+						public void run() {
+							refrescarRetos();
+						}
+						
+					};
+					retosTimer.scheduleRepeating(3000);
+				}
+			});
+	}
+	
+	private void retarJugador() {
+		UTTTService.retarJugador(login_name, retado,
+			new AsyncCallback<Vector<String>>() {
+				@Override
+				public void onFailure(Throwable caught) {
+					System.out.println("Error al retar jugador: " + caught);
+				}
+
+				@Override
+				public void onSuccess(Vector<String> result) {
+					respuestaRetosTimer = new Timer() {
+						
+						@Override
+						public void run() {
+							refrescarRespuestaReto();
+						}
+
+					};
+					respuestaRetosTimer.scheduleRepeating(1000);
+				}
+			});
+	}
+	
+	public void onModuleLoad() {
 		
-		LoginButtonHandler handler_register_button = new LoginButtonHandler();
-		btnNewButton.addClickHandler(handler_register_button);
+		loginButton = new Button("Log in");
+		RootPanel rootPanel = RootPanel.get("sendButtonContainer");
+		rootPanel.add(loginButton);
+		loginButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				loginButton.setEnabled(true);
+				loginButton.setFocus(true);
+				login();
+			}
+		});
+		
+		emailText = new TextBox();
+		RootPanel.get("nameFieldContainer").add(emailText);
+		
+		passwdText = new TextBox();
+		RootPanel.get("nameFieldPassContainer").add(passwdText);
+		
+		tablero = new Tablero9x9();
+		rootPanel.add(tablero, 118, 47);
+		tablero.setSize("100px", "100px");
+		tablero.setVisible(false);
+		
+		listaJugadores = new ListBox();
+		listaJugadores.addDoubleClickHandler(new DoubleClickHandler() {
+			public void onDoubleClick(DoubleClickEvent event) {
+				retado = listaJugadores.getItemText(listaJugadores.getSelectedIndex());
+				retarJugador();
+			}
+		});
+		
+		rootPanel.add(listaJugadores, 10, 45);
+		listaJugadores.setSize("102px", "263px");
+		listaJugadores.setVisibleItemCount(5);
+		listaJugadores.setVisible(false);
+
 	}
 	
 	}
