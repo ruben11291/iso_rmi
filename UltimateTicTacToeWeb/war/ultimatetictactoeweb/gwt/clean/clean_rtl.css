@@ -242,7 +242,7 @@ select {
 .gwt-DisclosurePanel .header,
 .gwt-DisclosurePanel .header a,
 .gwt-DisclosurePanel .header td {
-  text-decoration: none;  /* Remove underline from header */
+  text-decoration: none;  Remove underline from header
   color: black; 
   cursor: pointer;
   cursor: hand;
@@ -865,7 +865,7 @@ select {
   padding-top: 6px;
 }
 .gwt-TabBar .gwt-TabBarFirst {
-  width: 5px;  /* first tab distance from the left */
+  width: 5px;  first tab distance from the left
 }
 .gwt-TabBar .gwt-TabBarRest {
 }
@@ -905,7 +905,7 @@ select {
   padding-top: 6px;
 }
 .gwt-DecoratedTabBar .gwt-TabBarFirst {
-  width: 5px;  /* first tab distance from the left */
+  width: 5px;  first tab distance from the left
 }
 .gwt-DecoratedTabBar .gwt-TabBarRest {
 }

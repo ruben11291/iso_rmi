@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	    <div class="login">
+			<form class="form-signin" role="form" action="Identificar.action" method="post">
+				<input type="email" name="email" class="form-control" placeholder="Email address"></input>
+				<table class="flex-table password-signin">
+					<tbody>
+						<tr>
+							<td class="flex-table-primary">
+								<input type="password" name="passwd" class="form-control" placeholder="Password"></input>
+							</td>
+							<td class="flex-table-secondary">
+								<button class="myButton" name="submit" type="submit">Sign in</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<label class="checkbox">
+					<input type="checkbox" value="remember-me"> Remember me	</input>
+				</label>
+			</form>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -42,7 +42,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	private Timer listaTimer, retosTimer, respuestaRetosTimer, tableroTimer;
 	private Button loginButton;
 	private TextBox emailText;
-	private TextBox passwdText;
+	private PasswordTextBox passwdText;
 	private Tablero9x9 tablero;
 	private ListBox listaJugadores;
 	
@@ -234,7 +234,11 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 	public void onModuleLoad() {
 		
+		//Login l = new Login();		
 		loginButton = new Button("Log in");
+		loginButton.setStyleName("myButton");
+
+//		RootPanel.get("menu_login").add(l);
 		RootPanel rootPanel = RootPanel.get("sendButtonContainer");
 		rootPanel.add(loginButton);
 		loginButton.addClickHandler(new ClickHandler() {
@@ -248,9 +252,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		emailText = new TextBox();
 		RootPanel.get("nameFieldContainer").add(emailText);
 		
-		passwdText = new TextBox();
+		passwdText = new PasswordTextBox();
 		RootPanel.get("nameFieldPassContainer").add(passwdText);
-		
+
 		tablero = new Tablero9x9();
 		rootPanel.add(tablero, 118, 47);
 		tablero.setSize("100px", "100px");
@@ -270,6 +274,5 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		listaJugadores.setVisible(false);
 
 	}
-	
 	}
 
