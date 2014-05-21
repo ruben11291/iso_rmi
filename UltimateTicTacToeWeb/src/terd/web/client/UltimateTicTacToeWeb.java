@@ -40,7 +40,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 	private String login_name, retado, oponente;
 	private Timer listaTimer, retosTimer, respuestaRetosTimer, tableroTimer;
-	private Button loginButton;
+	private Button loginButton, abandonarButton;
 	private TextBox emailText;
 	private PasswordTextBox passwdText;
 	private Tablero9x9 tablero;
@@ -51,6 +51,21 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			+ "connection and try again.";
 
 	private final ServerAsync UTTTService = GWT.create(Server.class);
+	
+	private void abandonarPartida() {
+		UTTTService.abandonarPartida(login_name, new AsyncCallback() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				
+			}
+			
+			@Override
+			public void onSuccess(Object result) {
+				
+			}
+		});
+	}
 	
 	private void refrescarTablero() {
 		UTTTService.getMovimiento(oponente, new AsyncCallback<Integer>() {
@@ -256,6 +271,20 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				loginButton.setEnabled(true);
 				loginButton.setFocus(true);
 				login();
+			}
+		});
+		
+		abandonarButton = new Button("Abandonar partida");
+		abandonarButton.setStyleName("myButton");
+		
+		rootPanel.add(abandonarButton, 10, 327);
+		abandonarButton.setSize("100px", "49px");
+		abandonarButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				abandonarButton.setEnabled(false);
+				abandonarPartida();
 			}
 		});
 		

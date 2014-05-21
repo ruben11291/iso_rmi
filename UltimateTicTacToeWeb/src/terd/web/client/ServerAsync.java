@@ -26,4 +26,6 @@ public interface ServerAsync {
 			AsyncCallback<Void> callback);
 
 	void getMovimiento(String oponente, AsyncCallback<Integer> asyncCallback);
+
+	void abandonarPartida(String login_name, AsyncCallback asyncCallback);
 }
