@@ -40,7 +40,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 	private String login_name, retado, oponente;
 	private Timer listaTimer, retosTimer, respuestaRetosTimer, tableroTimer;
-	private Button loginButton, abandonarButton;
+	private Button loginButton, abandonarButton, cerrarButton;
 	private TextBox emailText;
 	private PasswordTextBox passwdText;
 	private Tablero9x9 tablero;
@@ -53,6 +53,12 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	private final ServerAsync UTTTService = GWT.create(Server.class);
 	
 	private void abandonarPartida() {
+		tablero.setVisible(false);
+		abandonarButton.setVisible(false);
+		listaJugadores.setVisible(true);
+		oponente = "";
+		retado = "";
+		retosTimer.run();
 		UTTTService.abandonarPartida(login_name, new AsyncCallback() {
 
 			@Override
@@ -60,6 +66,30 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				
 			}
 			
+			@Override
+			public void onSuccess(Object result) {
+				
+			}
+		});
+	}
+	
+	private void cerrarSesion() {
+		tablero.setVisible(false);
+		abandonarButton.setVisible(false);
+		listaJugadores.setVisible(false);
+		loginButton.setVisible(true);
+		emailText.setVisible(true);
+		passwdText.setVisible(true);
+		login_name = "";
+		oponente = "";
+		retado = "";
+		UTTTService.cerrarSesion(login_name, new AsyncCallback() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				
+			}
+
 			@Override
 			public void onSuccess(Object result) {
 				
@@ -80,13 +110,25 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				// ACTUALIZAR TABLERO
 				System.out.println(result);
 				int resto;
-				if (result != -1) {
+				switch (result) {
+				case -1:
+					break;
+				case -2:
+					Window.alert("Oponente ha abandonado.");
+					tablero.setVisible(false);
+					abandonarButton.setVisible(false);
+					listaJugadores.setVisible(true);
+					oponente = "";
+					retado = "";
+					break;
+				default:
 					System.out.println("fT: " + result / 27);
 					resto = result % 27;
 					System.out.println("fC: " + (result / 3) % 3);
 					System.out.println("cT: " + resto / 9);
 					System.out.println("cC: " + resto % 9);
 					tablero.update(result/27, result / 3, resto/9, resto%9, 1);//hay que decidir que elemento va a ser quien
+						
 				}
 					
 			}
@@ -288,6 +330,18 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			}
 		});
 		
+		cerrarButton = new Button("Cerrar sesión");
+		rootPanel.add(cerrarButton, 679, 10);
+		cerrarButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				cerrarButton.setEnabled(false);
+				cerrarSesion();
+			}
+		});
+
+		
 		emailText = new TextBox();
 		RootPanel.get("nameFieldContainer").add(emailText);
 		
@@ -310,6 +364,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		rootPanel.add(listaJugadores, 10, 45);
 		listaJugadores.setSize("102px", "263px");
 		listaJugadores.setVisibleItemCount(5);
+		
 		listaJugadores.setVisible(false);
 
 	}

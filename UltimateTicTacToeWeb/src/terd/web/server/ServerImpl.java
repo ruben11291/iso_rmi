@@ -152,4 +152,9 @@ public class ServerImpl extends RemoteServiceServlet implements
 		this.servidorRMI.abandonoPartida(login_name);
 	}
 
+	@Override
+	public void cerrarSesion(String login_name) throws Exception {
+		this.servidorRMI.delete(login_name);
+	}
+
 }

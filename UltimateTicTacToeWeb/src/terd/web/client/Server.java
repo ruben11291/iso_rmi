@@ -27,4 +27,6 @@ public interface Server extends RemoteService {
 	int getMovimiento(String oponente) throws Exception;
 
 	void abandonarPartida(String login_name) throws Exception;
+
+	void cerrarSesion(String login_name) throws Exception;
 }

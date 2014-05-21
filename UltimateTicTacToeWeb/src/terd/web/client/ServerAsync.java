@@ -28,4 +28,6 @@ public interface ServerAsync {
 	void getMovimiento(String oponente, AsyncCallback<Integer> asyncCallback);
 
 	void abandonarPartida(String login_name, AsyncCallback asyncCallback);
+
+	void cerrarSesion(String login_name, AsyncCallback asyncCallback);
 }
