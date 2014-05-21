@@ -62,7 +62,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		System.out.println("Servidor escuchando" + this.puerto);
 	}
 
-	/**** M��todos remotos ****/
+	/**** M������todos remotos ****/
 	
 	/////ADD Player///
 	public void add(String email, String passwd, ICliente cliente) throws RemoteException,JugadorNoExisteException , JugadorYaExisteException{
@@ -71,7 +71,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.fachada.add(email, passwd);
 		if (cliente != null)
 			this.stubs.put(email, cliente);
-		System.out.println("Jugador a��adido "+email+" en servidor ");
+		System.out.println("Jugador a������adido "+email+" en servidor ");
 		this.actualizarListaDeJugadores();
 		
 
@@ -79,7 +79,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	public void add(String email, String passwd) throws JugadorNoExisteException {
 		this.fachada.add(email, passwd);
-		System.out.println("Jugador a��adido "+email+" en servidor ");
+		System.out.println("Jugador a������adido "+email+" en servidor ");
 		this.actualizarListaDeJugadores();
 	}
 	
@@ -128,8 +128,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void abandonoPartida(String email) {
 		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidaDelJugador(email);
 		
-		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si tambi��n abandona cliente2 entonces
-		//al llegar aqu�� avisarA ser�� vacio
+		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si tambi������n abandona cliente2 entonces
+		//al llegar aqu������ avisarA ser������ vacio
 		
 		if(!avisarA.isEmpty()){
 			//avisar al jugador que su oponente ha cerrado sesion
@@ -137,17 +137,20 @@ public class Server extends UnicastRemoteObject implements IServer {
 			while (emailes.hasMoreElements()) {
 				String e = emailes.nextElement();
 				ICliente c = this.stubs.get(e);
-				try {
-					c.OponenteHaAbandonadoPartida();
-				} catch (RemoteException e1) {
-					System.out.println("Error en comunicacion con cliente :" +e);
-					this.stubs.remove(e);//eliminamos de stubs
+				if (c != null) {
+					try {
+						c.OponenteHaAbandonadoPartida();
+					} catch (RemoteException e1) {
+						System.out.println("Error en comunicacion con cliente :" +e);
+						this.stubs.remove(e);//eliminamos de stubs
+					}
+				} else {
+					movimientosHechos.put(email, -2);
 				}
-	
 			}
 		}
 		this.actualizarListaDeJugadores();
-	}	
+	}
 	
 	///Registar jugador///
 	public void register(String email, String passwd) throws RemoteException, JugadorYaRegistradoException {

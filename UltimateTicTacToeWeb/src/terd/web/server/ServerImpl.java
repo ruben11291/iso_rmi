@@ -56,7 +56,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 
 		try {
 			this.servidorRMI.add(jugador, passwd, null);
-			System.out.println("login éxito");
+			System.out.println("login ��xito");
 		} catch (RemoteException e1) {
 			System.out.println("remote exception");
 			e1.printStackTrace();
@@ -154,6 +154,11 @@ public class ServerImpl extends RemoteServiceServlet implements
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
+	}
+
+	@Override
+	public void abandonarPartida(String login_name) throws Exception {
+		this.servidorRMI.abandonoPartida(login_name);
 	}
 
 }
