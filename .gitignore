@@ -6,6 +6,3 @@ doc/*.toc
 doc/*.backup
 bin/
 *~
-
-
-/UltimateTicTacToeWeb
