@@ -129,16 +129,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 
 	@Override
 	public int getMovimiento(String oponente) throws Exception {
-		int movimiento = this.servidorRMI.getMovimientosHechos(oponente);
-		int resto;
-		if (movimiento != -1) {
-			System.out.println("fT: " + movimiento / 27);
-			resto = movimiento % 27;
-			System.out.println("fC: " + (movimiento / 3) % 3);
-			System.out.println("cT: " + resto / 9);
-			System.out.println("cC: " + resto % 9);
-		}
-		return movimiento;
+		return this.servidorRMI.getMovimientosHechos(oponente);
 	}
 	
 	/**

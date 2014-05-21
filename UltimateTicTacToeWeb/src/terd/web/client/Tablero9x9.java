@@ -51,13 +51,14 @@ public class Tablero9x9 extends Composite {
 		this.idTablero = idTablero;
 	}
 
-	
 	@UiHandler("grid")
 	void onGridClick(ClickEvent event) {
 		System.out.println(event.getRelativeElement());
 		System.out.println(event.getX());
 		System.out.println(event.getY());
-		
-
+	}
+	
+	void update(int fT,int cT,int fC,int cC, int player){
+		this.tables[fT][cT].update(fC,cC,player);
 	}
 }

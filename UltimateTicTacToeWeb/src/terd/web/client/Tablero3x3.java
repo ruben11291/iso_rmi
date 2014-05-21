@@ -2,6 +2,7 @@ package terd.web.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
@@ -10,6 +11,7 @@ import com.google.gwt.user.client.ui.Image;
 public class Tablero3x3 extends Composite {
 	
 	private Image[][]fields= new Image[3][3];
+	private  String []urls = {"image/o.png", "image/x.png"};
 	
 	private static Tablero3x3UiBinder uiBinder = GWT
 			.create(Tablero3x3UiBinder.class);
@@ -22,7 +24,6 @@ public class Tablero3x3 extends Composite {
 	@UiField Image i20;
 	@UiField Image i21;
 	@UiField Image i22;
-
 	
 	interface Tablero3x3UiBinder extends UiBinder<Widget, Tablero3x3> {
 	}
@@ -38,9 +39,18 @@ public class Tablero3x3 extends Composite {
 		fields[2][0]=i20;
 		fields[2][1]=i21;
 		fields[2][2]=i22;
-		i00 = new Image();
-		i00.setUrl("/home/toni/git/practicaiso2/client/UltimateTicTacToe/src/client/image/x.png");
-		i00.setVisible(true);
+		
+		for (int i=0;i<3;i++){
+			for( int j=0;j<3;j++){
+				fields[i][j] = new Image(this.urls[0]);
+				fields[i][j].setVisible(true);
+			}
+		}
+	}
+
+	public void update(int cC,int fC,int player) {
+		this.fields[cC][fC].setUrl(this.urls[player]);
+		
 	}
 
 }

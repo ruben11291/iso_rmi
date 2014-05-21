@@ -64,6 +64,16 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			public void onSuccess(Integer result) {
 				// ACTUALIZAR TABLERO
 				System.out.println(result);
+				int resto;
+				if (result != -1) {
+					System.out.println("fT: " + result / 27);
+					resto = result % 27;
+					System.out.println("fC: " + (result / 3) % 3);
+					System.out.println("cT: " + resto / 9);
+					System.out.println("cC: " + resto % 9);
+					tablero.update(result/27, result / 3, resto/9, resto%9, 1);//hay que decidir que elemento va a ser quien
+				}
+					
 			}
 			
 		});				
