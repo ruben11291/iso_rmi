@@ -38,7 +38,7 @@ import com.google.gwt.event.dom.client.DoubleClickEvent;
 
 public class UltimateTicTacToeWeb implements EntryPoint {
 
-	private String login_name, retado, oponente;
+	private String loginName, retado, oponente;
 	private Timer listaTimer, retosTimer, respuestaRetosTimer, tableroTimer;
 	private Button loginButton, abandonarButton, cerrarButton;
 	private TextBox emailText;
@@ -52,14 +52,56 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 	private final ServerAsync UTTTService = GWT.create(Server.class);
 	
-	private void abandonarPartida() {
+	private void trasFinalizarPartida() {
 		tablero.setVisible(false);
 		abandonarButton.setVisible(false);
 		listaJugadores.setVisible(true);
 		oponente = "";
 		retado = "";
-		retosTimer.run();
-		UTTTService.abandonarPartida(login_name, new AsyncCallback() {
+		tableroTimer.cancel();
+		retosTimer.scheduleRepeating(3000);
+		System.out.println("Tras finalizar partida");
+	}
+	private void trasCerrarSesion() {
+		tableroTimer.cancel();
+		retosTimer.cancel();
+		listaTimer.cancel();
+		tablero.setVisible(false);
+		abandonarButton.setVisible(false);
+		listaJugadores.setVisible(false);
+		cerrarButton.setVisible(false);
+		loginButton.setVisible(true);
+		emailText.setVisible(true);
+		passwdText.setVisible(true);
+		loginName = "";
+		oponente = "";
+		System.out.println("Tras cerrar sesión");
+	}
+	
+	private void trasRetoAceptado() {
+		retosTimer.cancel();
+		tableroTimer.scheduleRepeating(2000);
+		tablero.setVisible(true);
+		abandonarButton.setVisible(true);
+		listaJugadores.setVisible(false);
+		retado = "";
+		System.out.println("Tras reto aceptado");
+	}
+	
+	private void trasLogin() {
+		loginName = emailText.getText();
+		listaJugadores.setVisible(true);
+		loginButton.setVisible(false);
+		emailText.setVisible(false);
+		passwdText.setVisible(false);
+		cerrarButton.setVisible(true);
+		retosTimer.scheduleRepeating(3000);
+		listaTimer.scheduleRepeating(3000);
+		System.out.println("Tras login");
+	}
+	
+	private void abandonarPartida() {
+		UTTTService.abandonarPartida(loginName, new AsyncCallback() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -71,19 +113,11 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				
 			}
 		});
+		trasFinalizarPartida();
 	}
 	
 	private void cerrarSesion() {
-		tablero.setVisible(false);
-		abandonarButton.setVisible(false);
-		listaJugadores.setVisible(false);
-		loginButton.setVisible(true);
-		emailText.setVisible(true);
-		passwdText.setVisible(true);
-		login_name = "";
-		oponente = "";
-		retado = "";
-		UTTTService.cerrarSesion(login_name, new AsyncCallback() {
+		UTTTService.cerrarSesion(loginName, new AsyncCallback() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -95,6 +129,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				
 			}
 		});
+		trasCerrarSesion();
 	}
 	
 	private void refrescarTablero() {
@@ -107,21 +142,15 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 			@Override
 			public void onSuccess(Integer result) {
-				// ACTUALIZAR TABLERO
-				System.out.println(result);
-				int resto;
 				switch (result) {
 				case -1:
 					break;
 				case -2:
 					Window.alert("Oponente ha abandonado.");
-					tablero.setVisible(false);
-					abandonarButton.setVisible(false);
-					listaJugadores.setVisible(true);
-					oponente = "";
-					retado = "";
+					trasFinalizarPartida();
 					break;
 				default:
+					int resto;
 					System.out.println("fT: " + result / 27);
 					resto = result % 27;
 					System.out.println("fC: " + (result / 3) % 3);
@@ -137,7 +166,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	
 	private void refrescarRespuestaReto() {
-		UTTTService.recibirRespuestaReto(login_name, new AsyncCallback<Boolean>() {
+		UTTTService.recibirRespuestaReto(loginName, new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -148,11 +177,6 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			public void onSuccess(Boolean result) {
 				if (result != null) {
 					if (result) {
-						tablero.setVisible(true);
-						listaJugadores.setVisible(false);
-						loginButton.setVisible(false);
-						emailText.setVisible(false);
-						passwdText.setVisible(false);
 						oponente = retado;
 						tableroTimer = new Timer() {
 							
@@ -162,7 +186,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 							}
 	
 						};
-						tableroTimer.scheduleRepeating(2000);
+//						tableroTimer.scheduleRepeating(2000);
+						trasRetoAceptado();
 						
 					} else {
 						Window.alert(retado + " ha rechazado tu reto.");
@@ -175,7 +200,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	
 	private void refrescarRetos() {
-		UTTTService.getRetos(login_name, new AsyncCallback<Vector<String>>() {
+		UTTTService.getRetos(loginName, new AsyncCallback<Vector<String>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -189,7 +214,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					if (!respuesta)
 						respuesta = Window.confirm(r + " te ha retado");
 					if (respuesta) oponente = r;
-					UTTTService.respuestaAPeticionDeReto(r, login_name, respuesta, -1, new AsyncCallback<Boolean>() {
+					UTTTService.respuestaAPeticionDeReto(r, loginName, respuesta, -1, new AsyncCallback<Boolean>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -199,12 +224,6 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						@Override
 						public void onSuccess(Boolean result) {
 							if (result) {
-								retosTimer.cancel();
-								tablero.setVisible(true);
-								listaJugadores.setVisible(false);
-								loginButton.setVisible(false);
-								emailText.setVisible(false);
-								passwdText.setVisible(false);
 								tableroTimer = new Timer() {									
 									@Override
 									public void run() {
@@ -212,7 +231,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 									}
 
 								};
-								tableroTimer.scheduleRepeating(2000);
+//								tableroTimer.scheduleRepeating(2000);
+								trasRetoAceptado();
 							}
 						}
 					});
@@ -250,10 +270,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 				@Override
 				public void onSuccess(Vector<String> result) {
-					login_name = emailText.getText();
-					listaJugadores.setVisible(true);
-					for (String r : result)
-						listaJugadores.addItem(r);
+//					listaJugadores.clear();
+//					for (String r : result)
+//						listaJugadores.addItem(r);
 					listaTimer = new Timer() {
 						
 						@Override
@@ -262,7 +281,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						}
 
 					};
-					listaTimer.scheduleRepeating(3000);
+//					listaTimer.scheduleRepeating(3000);
 					retosTimer = new Timer() {
 
 						@Override
@@ -271,13 +290,14 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						}
 						
 					};
-					retosTimer.scheduleRepeating(3000);
+//					retosTimer.scheduleRepeating(3000);
+					trasLogin();
 				}
 			});
 	}
 	
 	private void retarJugador() {
-		UTTTService.retarJugador(login_name, retado,
+		UTTTService.retarJugador(loginName, retado,
 			new AsyncCallback<Vector<String>>() {
 				@Override
 				public void onFailure(Throwable caught) {
@@ -329,6 +349,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				abandonarPartida();
 			}
 		});
+		abandonarButton.setVisible(false);
 		
 		cerrarButton = new Button("Cerrar sesión");
 		rootPanel.add(cerrarButton, 679, 10);
@@ -340,7 +361,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				cerrarSesion();
 			}
 		});
-
+		cerrarButton.setVisible(false);
 		
 		emailText = new TextBox();
 		RootPanel.get("nameFieldContainer").add(emailText);

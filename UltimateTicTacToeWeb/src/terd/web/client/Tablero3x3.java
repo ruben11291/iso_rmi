@@ -42,7 +42,6 @@ public class Tablero3x3 extends Composite {
 		
 		for (int i=0;i<3;i++){
 			for( int j=0;j<3;j++){
-//				fields[i][j] = new Image(this.urls[0]);
 				fields[i][j].setVisible(true);
 			}
 		}
@@ -50,9 +49,7 @@ public class Tablero3x3 extends Composite {
 
 	public void update(int cC,int fC,int player) {
 		System.out.println("Updating board: " + cC + " " + fC + " " + player);
-		this.fields[cC][fC].setUrl(this.urls[player]);
-//		this.fields[cC][fC].setVisible(false);
-		
+		this.fields[cC][fC].setUrl(this.urls[player]);		
 	}
 
 }
