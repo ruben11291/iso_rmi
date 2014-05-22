@@ -1,4 +1,5 @@
 .gwt*
 gwt-unitCache/*
 war/WEB-INF/classes/terd/web/client/*.class
+war/WEB-INF/classes/terd/web/server/*.class
 
