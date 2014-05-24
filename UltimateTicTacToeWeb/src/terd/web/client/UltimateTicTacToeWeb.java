@@ -3,6 +3,8 @@ package terd.web.client;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import javax.servlet.http.HttpServletRequest;
+
 import terd.web.shared.FieldVerifier;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -46,6 +48,11 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	private PasswordTextBox passwdText;
 	private Tablero9x9 tablero;
 	private ListBox listaJugadores;
+
+
+
+
+
 
 
 

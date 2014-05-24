@@ -260,16 +260,16 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	@Override
 	public Vector<Integer> getMovimientosHechos(String oponente) {
-		Vector<Integer> a = new Vector<Integer>();
+		Vector<Integer> mov = new Vector<Integer>();
 		if (movimientosHechos.get(oponente) == null){
-			a.add(-1);
-			a.add(0);
-			a.add(0);
-			a.add(0);
+			mov.add(-1);
+			mov.add(0);
+			mov.add(0);
+			mov.add(0);
 		}
 		else
-			a = movimientosHechos.remove(oponente);
-		return a;
+			mov= movimientosHechos.remove(oponente);
+		return mov;
 //		int movimiento;
 //		if (movimientosHechos.get(oponente) == null)
 //			movimiento = -1;
