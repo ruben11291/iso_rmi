@@ -5,40 +5,40 @@
 	
 	</ui:style>
 	<g:HTMLPanel >
-		<g:Grid >
+		<g:Grid width="187px" height="183px" >
 			<g:row>
 				<g:customCell>
-<!-- 					<g:Image ui:field="i00" url="image/wood.jpg" /> -->
-					<g:Image ui:field="i00" url="image/wood.jpg"/>
+<!-- 					<g:Image ui:field="i00" url="image/void.png" /> -->
+					<g:Image ui:field="i00" url="image/void.png"/>
 
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i01" url="image/wood.jpg"/>
+					<g:Image ui:field="i01" url="image/void.png"/>
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i02" url="image/wood.jpg"/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Image ui:field="i10" url="image/wood.jpg"/>
-				</g:customCell>
-				<g:customCell>
-					<g:Image ui:field="i11" url="image/wood.jpg"/>
-				</g:customCell>
-				<g:customCell>
-					<g:Image ui:field="i12" url="image/wood.jpg"/>
+					<g:Image ui:field="i02" url="image/void.png"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<g:Image ui:field="i20" url="image/wood.jpg"/>
+					<g:Image ui:field="i10" url="image/void.png"/>
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i21" url="image/wood.jpg"/>
+					<g:Image ui:field="i11" url="image/void.png"/>
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i22" url="image/wood.jpg"/>
+					<g:Image ui:field="i12" url="image/void.png"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Image ui:field="i20" url="image/void.png"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="i21" url="image/void.png"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="i22" url="image/void.png"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>

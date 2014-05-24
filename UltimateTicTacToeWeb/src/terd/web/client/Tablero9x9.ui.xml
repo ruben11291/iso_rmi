@@ -5,38 +5,38 @@
 	
 	</ui:style>
 	<g:HTMLPanel width="450px" height="450px">
-		<g:Grid ui:field="grid" width="450px" height="450px">
+		<g:Grid ui:field="grid" width="565px" height="557px" styleName="tablero">
 			<g:row>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t00"/>
+					<p1:Tablero3x3 ui:field="t00" height="183px" width="186px"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t01"/>
+					<p1:Tablero3x3 ui:field="t01" height="183px" width="186px"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t02"/>
+					<p1:Tablero3x3 ui:field="t02" height="182px"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t10"/>
+					<p1:Tablero3x3 ui:field="t10" height="183px"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t11"/>
+					<p1:Tablero3x3 ui:field="t11" height="183px"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t12"/>
+					<p1:Tablero3x3 ui:field="t12" height="183px"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t20"/>
+					<p1:Tablero3x3 ui:field="t20" height="183px"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t21"/>
+					<p1:Tablero3x3 ui:field="t21" height="183px"/>
 				</g:customCell>
 				<g:customCell>
-					<p1:Tablero3x3 ui:field="t22"/>
+					<p1:Tablero3x3 ui:field="t22" height="183px"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>

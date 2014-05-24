@@ -5,10 +5,18 @@ body {
 
 }
 
-.encabezado{
+.titulo{
+	margin-left:auto;
+	margin-right:auto;
 	font-weight:bold;
 	text-align:center;
 	color:black;
+	background-color:white;
+	height:1.5em;
+	padding-top:3px;
+	width:13em; 
+	border:3px solid #000000;
+	word-wrap:break-word;
 }
 h3{
 	background-color:white;
@@ -233,4 +241,7 @@ h3{
 .button:active {
 	position:relative;
 	top:1px;
+}
+.tablero {
+	background-image: url("image/boarde.png");
 }

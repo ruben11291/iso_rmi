@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.user.client.Command;
 
 public class UltimateTicTacToeWeb implements EntryPoint {
 
@@ -370,8 +371,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		RootPanel.get("nameFieldPassContainer").add(passwdText);
 
 		tablero = new Tablero9x9();
-		rootPanel.add(tablero, 118, 47);
-		tablero.setSize("100px", "100px");
+//		rootPanel.add(tablero, 118, 47);
+//		tablero.setSize("100px", "100px");
+		RootPanel.get("boardGame").add(tablero);
 		tablero.setVisible(false);
 		
 		listaJugadores = new ListBox();
