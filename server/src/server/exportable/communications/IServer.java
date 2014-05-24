@@ -24,6 +24,6 @@ public interface IServer extends Remote {
 	public Hashtable<String, Integer> getListaJugadores() throws RemoteException;
 	public Hashtable<String, String> getRetosEnEspera() throws RemoteException;
 	public Boolean getRespuestaReto(String retador) throws RemoteException;
-	public int getMovimientosHechos(String oponente) throws RemoteException;
+	public Vector<Integer> getMovimientosHechos(String oponente) throws RemoteException;
 }
 

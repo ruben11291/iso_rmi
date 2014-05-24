@@ -1,0 +1,2 @@
+serviceClass: terd.web.client.Server
+path: 8ED6859D84C778AA4193A0D0076D772E.gwt.rpc

@@ -128,7 +128,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public int getMovimiento(String oponente) throws Exception {
+	public Vector<Integer> getMovimiento(String oponente) throws Exception {
 		return this.servidorRMI.getMovimientosHechos(oponente);
 	}
 	

@@ -31,7 +31,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private FTERD fachada;
 	private static Server servo;
 	private Hashtable <String, ICliente>stubs;
-	private Hashtable<String, Integer> movimientosHechos;
+	private Hashtable<String, Vector<Integer>> movimientosHechos;
 	
 	protected Server() throws RemoteException, UnknownHostException {
 		super();
@@ -41,7 +41,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.puerto=3002;
 		this.fachada=FTERD.get();
 		this.stubs = new Hashtable <String, ICliente>();
-		this.movimientosHechos = new Hashtable <String, Integer>();
+		this.movimientosHechos = new Hashtable <String, Vector<Integer>>();
 	}
 	
 	public static Server get() throws RemoteException, UnknownHostException {
@@ -145,7 +145,12 @@ public class Server extends UnicastRemoteObject implements IServer {
 						this.stubs.remove(e);//eliminamos de stubs
 					}
 				} else {
-					movimientosHechos.put(email, -2);
+					Vector <Integer> mov = new Vector<Integer>();
+					mov.add(-2);
+					mov.add(0);
+					mov.add(0);
+					mov.add(0);
+					movimientosHechos.put(email, mov);
 				}
 			}
 		}
@@ -243,19 +248,34 @@ public class Server extends UnicastRemoteObject implements IServer {
 		if (c != null) {
 			c.poner(idPartida, realizadoPor, cT, fT, cC, fC);
 		} else {
-			movimientosHechos.put(realizadoPor, fT*9*3 + cT*9 + fC*3 + cC);
+			Vector<Integer> mov = new Vector<Integer>();
+			mov.add(fT);
+			mov.add(cT);
+			mov.add(fC);
+			mov.add(cC);
+			movimientosHechos.put(realizadoPor, mov);
 		}
 		
 	}
 	
 	@Override
-	public int getMovimientosHechos(String oponente) {
-		int movimiento;
-		if (movimientosHechos.get(oponente) == null)
-			movimiento = -1;
+	public Vector<Integer> getMovimientosHechos(String oponente) {
+		Vector<Integer> a = new Vector<Integer>();
+		if (movimientosHechos.get(oponente) == null){
+			a.add(-1);
+			a.add(0);
+			a.add(0);
+			a.add(0);
+		}
 		else
-			movimiento = movimientosHechos.remove(oponente);
-		return movimiento;
+			a = movimientosHechos.remove(oponente);
+		return a;
+//		int movimiento;
+//		if (movimientosHechos.get(oponente) == null)
+//			movimiento = -1;
+//		else
+//			movimiento = movimientosHechos.remove(oponente);
+//		return movimiento;
 	}
 
 	@Override

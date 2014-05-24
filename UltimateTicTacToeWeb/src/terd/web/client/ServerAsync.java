@@ -25,7 +25,7 @@ public interface ServerAsync {
 	void poner(int idPartida, String email, int cT, int fT, int cC, int fC,
 			AsyncCallback<Void> callback);
 
-	void getMovimiento(String oponente, AsyncCallback<Integer> asyncCallback);
+	void getMovimiento(String oponente, AsyncCallback<Vector<Integer>> asyncCallback);
 
 	void abandonarPartida(String login_name, AsyncCallback asyncCallback);
 

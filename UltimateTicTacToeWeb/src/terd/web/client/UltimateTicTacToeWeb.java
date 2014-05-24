@@ -46,7 +46,10 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	private PasswordTextBox passwdText;
 	private Tablero9x9 tablero;
 	private ListBox listaJugadores;
-	
+
+
+
+
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
@@ -134,7 +137,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	
 	private void refrescarTablero() {
-		UTTTService.getMovimiento(oponente, new AsyncCallback<Integer>() {
+		UTTTService.getMovimiento(oponente, new AsyncCallback<Vector<Integer>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -142,8 +145,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			}
 
 			@Override
-			public void onSuccess(Integer result) {
-				switch (result) {
+			public void onSuccess(Vector<Integer> result) {
+				
+				switch (result.get(0)) {
 				case -1:
 					break;
 				case -2:
@@ -151,13 +155,11 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					trasFinalizarPartida();
 					break;
 				default:
-					int resto;
-					System.out.println("fT: " + result / 27);
-					resto = result % 27;
-					System.out.println("fC: " + (result / 3) % 3);
-					System.out.println("cT: " + resto / 9);
-					System.out.println("cC: " + resto % 9);
-					tablero.update(result/27, result / 3, resto/9, resto%9, 1);//hay que decidir que elemento va a ser quien
+					System.out.println("fT: " + result.get(0));
+					System.out.println("fC: " + result.get(1));
+					System.out.println("cT: " + result.get(2));
+					System.out.println("cC: " + result.get(3));
+					tablero.update(result.get(0),result.get(1),result.get(2),result.get(3),1);//hay que decidir que elemento va a ser quien
 						
 				}
 					
