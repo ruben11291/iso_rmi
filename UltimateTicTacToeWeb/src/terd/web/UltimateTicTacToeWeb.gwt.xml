@@ -25,6 +25,4 @@
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client' />
 	<source path='shared' />
-
-	<entry-point class="terd.web.client.Tablero"></entry-point>
 </module>

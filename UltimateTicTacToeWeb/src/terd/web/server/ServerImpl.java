@@ -56,7 +56,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 
 		try {
 			this.servidorRMI.add(jugador, passwd, null);
-			System.out.println("login ��xito");
+			System.out.println("login exito");
 		} catch (RemoteException e1) {
 			System.out.println("remote exception");
 			e1.printStackTrace();
@@ -109,10 +109,15 @@ public class ServerImpl extends RemoteServiceServlet implements
 	public Vector<String> getListaJugadores() throws Exception {
 		Vector<String> lista = new Vector();
 		Hashtable<String, Integer> retos;
+		WJugador j = (WJugador) this.getThreadLocalRequest().getSession().getAttribute("jugador");
+		String name_self= j.getName();
+		System.out.println(name_self);
 		retos = this.servidorRMI.getListaJugadores();
 		Enumeration<String> e = retos.keys();
 		while (e.hasMoreElements()) {
-			lista.add(e.nextElement());
+			String names = e.nextElement();
+			if (!names.equals(name_self))
+				lista.add(names);
 		}
 		return lista;
 	}

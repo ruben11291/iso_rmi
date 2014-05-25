@@ -7,13 +7,19 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class WJugador implements IsSerializable {
 
 	private String name;
-	private Vector <WTablero> tables;
-	public Vector <WTablero> getTables() {
-		return tables;
+	private String email;
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public void setTables(Vector <WTablero> tables) {
-		this.tables = tables;
-	}
+	
+//	private Vector <WTablero> tables;
+//	public Vector <WTablero> getTables() {
+//		return tables;
+//	}
+//	public void setTables(Vector <WTablero> tables) {
+//		this.tables = tables;
+//	}
 	public String getName() {
 		return name;
 	}
@@ -23,5 +29,8 @@ public class WJugador implements IsSerializable {
 	
 	public WJugador(String name) {
 		this.name = name;
+	}
+	public String getEmail() {
+		return this.email;
 	}
 }

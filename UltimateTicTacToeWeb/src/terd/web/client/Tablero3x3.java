@@ -3,15 +3,23 @@ package terd.web.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiChild;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.Grid;
 
 public class Tablero3x3 extends Composite {
 	
 	private Image[][]fields= new Image[3][3];
+	private int [][]casillas = new int[3][3];
 	private  String []urls = {"image/o.png", "image/x.png"};
+	private String vencedor;	
+	private boolean empate;
 	
 	private static Tablero3x3UiBinder uiBinder = GWT
 			.create(Tablero3x3UiBinder.class);
@@ -24,6 +32,7 @@ public class Tablero3x3 extends Composite {
 	@UiField Image i20;
 	@UiField Image i21;
 	@UiField Image i22;
+	@UiField Grid grid;
 	
 	interface Tablero3x3UiBinder extends UiBinder<Widget, Tablero3x3> {
 	}
@@ -43,13 +52,110 @@ public class Tablero3x3 extends Composite {
 		for (int i=0;i<3;i++){
 			for( int j=0;j<3;j++){
 				fields[i][j].setVisible(true);
+				this.casillas[i][j]=0;
 			}
 		}
+		this.vencedor = "";	
+		this.empate = false;
 	}
 
-	public void update(int cC,int fC,int player) {
+	public void colocar(int cC,int fC,int player) {
 		System.out.println("Updating board: " + cC + " " + fC + " " + player);
-		this.fields[cC][fC].setUrl(this.urls[player]);		
+		this.fields[cC][fC].setUrl(this.urls[player]);	
+		this.casillas [cC][fC] = player;
 	}
 
+	
+	public String getVencedor() {
+		return this.vencedor;
+	}
+	
+	private void setVencedor(String vencedor) {
+		this.vencedor = vencedor;
+	}
+
+	public int [][] getCasillas(){
+		return this.casillas;
+	}
+
+	public void setEmpate(boolean empate) {
+		this.empate = empate;
+		
+	}
+	public boolean getEmpate() {
+		return this.empate;
+		
+	}
+
+	public boolean isFull() {
+		boolean isFull = true;
+		for(int fila=0; fila<3; fila++){
+			for(int col=0; col<3; col++){
+				if (this.casillas[col][fila]== 0) {
+					isFull = false;
+					col = fila = 3;
+				}
+			}
+		}
+		return isFull;
+	}	
+
+	public boolean hayVencedor() {
+		boolean hay = false;
+		if (!this.vencedor.equals(""))
+			hay = true;
+		return hay;
+	}
+	
+	public void comprobarVencedor(String a, String b) {
+		String vencedor = "";
+		if (!hayVencedor()) {
+			for (int i = 0; i < 3; i++) {
+				
+				// Comprueba si hay alguna combinación ganadora vertical
+				if (this.casillas[i][0] == this.casillas[i][1] 
+					&& this.casillas[i][1] == this.casillas[i][2]
+					&& this.casillas[i][2] != 0) {
+					if (this.casillas[i][0] == 1)
+						vencedor = a;
+					else
+						vencedor = b;
+					i = 4;
+					
+				// Comprueba si hay alguna combinación ganadora horizontal
+				} else if (this.casillas[0][i] == this.casillas[1][i] 
+					&& this.casillas[1][i] == this.casillas[2][i]
+					&& this.casillas[2][i] != 0) {
+					if (this.casillas[0][i] == 1)
+						vencedor = a;
+					else
+						vencedor = b;
+					i = 4;
+				}
+			}
+			
+			// Comprueba si hay alguna combinación ganadora diagonal
+			if (vencedor.equals("")) {
+				if (this.casillas[0][0] == this.casillas[1][1]
+					&& this.casillas[1][1]== this.casillas[2][2]
+					&& this.casillas[2][2]!= 0) {
+					if (this.casillas[2][2] == 1)
+						vencedor = a;
+					else
+						vencedor = b;
+				} else if (this.casillas[2][0] == this.casillas[1][1]
+					&& this.casillas[1][1] == this.casillas[0][2]
+					&& this.casillas[0][2] != 0) {
+					if (this.casillas[0][2] == 1)
+						vencedor = a;
+					else
+						vencedor = b;
+				}
+			}
+		}
+		setVencedor(vencedor);
+	}
+
+	
+//	
 }
