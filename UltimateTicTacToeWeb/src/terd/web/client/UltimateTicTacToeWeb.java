@@ -2,6 +2,10 @@ package terd.web.client;
 
 import java.util.Vector;
 
+import terd.web.client.exceptions.JugadorNoExisteException;
+import terd.web.client.exceptions.PartidaFinalizadaException;
+import terd.web.client.exceptions.TableroEmpateException;
+import terd.web.client.exceptions.TableroGanadoException;
 import terd.web.shared.WJugador;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -43,7 +47,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 	private void trasFinalizarPartida() {
 		tablero.setVisible(false);
-		tablero =null;
+		tablero.clear();
 		abandonarButton.setVisible(false);
 		listaJugadores.setVisible(true);
 		oponente = "";
@@ -57,7 +61,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		retosTimer.cancel();
 		listaTimer.cancel();
 		tablero.setVisible(false);
-		tablero = null;
+		tablero.clear();
 		abandonarButton.setVisible(false);
 		listaJugadores.setVisible(false);
 		cerrarButton.setVisible(false);
@@ -75,8 +79,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	
 	private void trasRetoAceptado() {
-		j_oponente = new WJugador(oponente);
-		tablero = new Tablero9x9(this);
+		j_oponente = new WJugador(oponente,2);
+	//	tablero = new Tablero9x9(this);
+		
 		tablero.setJugadorA(me);
 		tablero.setJugadorB(j_oponente);
 		tablero.setJugadorConelTurno(j_oponente);
@@ -92,7 +97,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 	private void trasLogin() {
 		loginName = emailText.getText();
-		this.me = new WJugador(loginName);
+		this.me = new WJugador(loginName,1);
 		j_oponente = j_retado = null;
 		retado = oponente = "";
 		listaJugadores.setVisible(true);
@@ -164,10 +169,20 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				
 					
 					try {
-						tablero.colocar(result.get(0),result.get(1),result.get(2),result.get(3));
-					
-					} catch (Exception e) {
+						tablero.colocar(result.get(0),result.get(1),result.get(2),result.get(3),j_oponente.getNum());
+						Window.alert("COLOCADA");
+					} catch (PartidaFinalizadaException e) {
 						// TODO Auto-generated catch block
+						Window.alert("Partida finalizada. Vencedor :"+j_oponente.getName());
+						trasFinalizarPartida();
+						e.printStackTrace();
+					} catch (TableroGanadoException e) {
+						// TODO Auto-generated catch block
+						//Pintar en el tablero pequenyo
+						e.printStackTrace();
+					} catch (TableroEmpateException e) {
+						Window.alert("Partida finalizada en empate");
+						trasFinalizarPartida();
 						e.printStackTrace();
 					}
 					
@@ -334,7 +349,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	
 	public void onModuleLoad() {
-		
+	
 		//Login l = new Login();		
 		loginButton = new Button("Log in");
 		loginButton.setStyleName("myButton");
@@ -386,6 +401,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		RootPanel.get("nameFieldPassContainer").add(passwdText);
 
 		tablero = new Tablero9x9(this);
+		
 //		rootPanel.add(tablero, 118, 47);
 //		tablero.setSize("100px", "100px");
 		RootPanel.get("boardGame").add(tablero);
@@ -415,6 +431,12 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 	public void mostrar_msg_movimiento(String msg){
 		Window.alert(msg);
+	}
+	public void notifica_movimiento(int cT, int fT, int cC, int fC) {
+		//Hacer esta llamada. El servidor routea dependiendo del email no?
+		//UTTTService.poner(0, me.getName(), cT, fT, cC, fC, callback);//REVISAR ID PARTIDA YA QUE NO ME HA DADO TIEMPO
+		Window.alert("Se ha enviado el mov. a oponente. TODO");
+		
 	}
 }	
 

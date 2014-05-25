@@ -1,5 +1,7 @@
 package terd.web.server;
 
+
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -10,10 +12,9 @@ import java.util.Vector;
 
 import server.exportable.communications.IServer;
 import terd.web.client.Server;
+import client.exceptions.*;
 import terd.web.shared.FieldVerifier;
 import terd.web.shared.WJugador;
-import client.exceptions.JugadorNoExisteException;
-import client.exceptions.JugadorYaExisteException;
 import client.exportable.communications.ICliente;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -69,7 +70,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 			
 		}
 		
-		WJugador j = new WJugador(jugador);
+		WJugador j = new WJugador(jugador,1);
 		this.getThreadLocalRequest().getSession().setAttribute("jugador", j);
 		Vector listaJugadores = null;
 		try {

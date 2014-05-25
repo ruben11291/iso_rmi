@@ -20,6 +20,7 @@ public class Tablero3x3 extends Composite {
 	private  String []urls = {"image/o.png", "image/x.png"};
 	private String vencedor;	
 	private boolean empate;
+	private String old_path;
 	
 	private static Tablero3x3UiBinder uiBinder = GWT
 			.create(Tablero3x3UiBinder.class);
@@ -57,11 +58,14 @@ public class Tablero3x3 extends Composite {
 		}
 		this.vencedor = "";	
 		this.empate = false;
+		
+		this.old_path = this.fields[0][0].getUrl();
+		System.out.println(this.old_path);
 	}
 
 	public void colocar(int cC,int fC,int player) {
 		System.out.println("Updating board: " + cC + " " + fC + " " + player);
-		this.fields[cC][fC].setUrl(this.urls[player]);	
+		this.fields[cC][fC].setUrl(this.urls[player-1]);//+1 ya que yo obtengo la url de imagen en 0 y 1 y los jugadores se consideran en 1 y 2	
 		this.casillas [cC][fC] = player;
 	}
 
@@ -154,6 +158,12 @@ public class Tablero3x3 extends Composite {
 			}
 		}
 		setVencedor(vencedor);
+	}
+	public void clear() {
+		for(int i=0;i<3;i++)
+			for (int j=0;j<3;j++)
+				this.fields[i][j].setUrl(this.old_path);
+		
 	}
 
 	

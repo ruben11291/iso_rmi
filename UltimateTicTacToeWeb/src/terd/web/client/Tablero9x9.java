@@ -1,7 +1,8 @@
 package terd.web.client;
 
+import terd.web.client.exceptions.MovimientoNoValidoException;
 import terd.web.shared.WJugador;
-
+import terd.web.client.exceptions.*;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -41,7 +42,7 @@ public class Tablero9x9 extends Composite {
 	interface Tablero9x9UiBinder extends UiBinder<Widget, Tablero9x9> {
 	}
 
-	public Tablero9x9(UltimateTicTacToeWeb ultimateTicTacToeWeb) {
+	public Tablero9x9(UltimateTicTacToeWeb ultimateTicTacToeWeb)  {
 		initWidget(uiBinder.createAndBindUi(this));
 		tables[0][0]=t00;
 		tables[0][1]=t01;
@@ -72,43 +73,49 @@ public class Tablero9x9 extends Composite {
 	void onGridClick(ClickEvent event) {
 		HTMLTable.Cell tableroGrande = ((Grid) event.getSource()).getCellForEvent(event);
 		HTMLTable.Cell tableroPequeno = (tables[tableroGrande.getRowIndex()][tableroGrande.getCellIndex()].grid.getCellForEvent(event));
-		poner_movimiento(tableroGrande.getCellIndex(),tableroGrande.getRowIndex(), tableroPequeno.getCellIndex(), tableroPequeno.getRowIndex());
+		try {
+			poner_movimiento(tableroGrande.getRowIndex(),tableroGrande.getCellIndex(), tableroPequeno.getRowIndex(), tableroPequeno.getCellIndex());
+		} catch (NoTienesElTurnoException e) {
+			prx.mostrar_msg_movimiento("No tienes el turno");
+		}
 	//	Window.alert(a.getCellIndex()+" "+a.getRowIndex()+ " "+b.getCellIndex()+" "+.getRowIndex());
 		
 	}
 	
 	private void poner_movimiento(int cT, int fT, int cC,
-			int fC) {
+			int fC) throws NoTienesElTurnoException {
 		
-//		try {
-//			comprobarMovimiento(cT, fT, cC, fC);
-//			colocar(cT, fT, cC, fC);
-//		} catch (CoordenadasNoValidasException e) {
-//			prx.mostrar_msg_movimiento(e.toString());
-//			e.printStackTrace();
-//		} catch (MovimientoNoValidoException e) {
-//			prx.mostrar_msg_movimiento(e.toString());
-//			e.printStackTrace();
-//		} catch (CasillaOcupadaException e) {
-//			
-//			//e.printStackTrace();
-//		} catch (PartidaFinalizadaException e) {
-//			prx.mostrar_msg_movimiento(e.toString());
-//			e.printStackTrace();
-//		} catch (TableroGanadoException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (TableroEmpateException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		try{
-			comprobarMovimiento(cT, fT, cC, fC);
-			colocar(cT,fT,cC,fC);
-		} catch (Exception e){
-			
-	}
+		if (!this.jugadorConElTurno.getName().equals(this.jugadorA.getName())){
+				throw new NoTienesElTurnoException();
 		}
+		else{
+		try {
+			System.out.println("MIO");
+			comprobarMovimiento(cT, fT, cC, fC);
+			this.prx.notifica_movimiento(cT,fT,cC,fC);
+			System.out.println("MIO2");
+			colocar(cT, fT, cC, fC, this.jugadorA.getNum());
+			System.out.println("MIO3");
+		} catch (CoordenadasNoValidasException e) {
+			prx.mostrar_msg_movimiento(e.toString());
+		} catch (MovimientoNoValidoException e) {
+			prx.mostrar_msg_movimiento(e.toString());
+		} catch (CasillaOcupadaException e) {
+			
+			//e.printStackTrace();
+		} catch (PartidaFinalizadaException e) {
+			prx.mostrar_msg_movimiento(e.toString());
+			e.printStackTrace();
+		} catch (TableroGanadoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TableroEmpateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	
+		
 		
 		
 	}
@@ -159,7 +166,7 @@ public class Tablero9x9 extends Composite {
 					
 				// Comprueba si hay alguna combinación ganadora horizontal
 				} else if (this.tables[i][0].getEmpate() && this.tables[i][1].getEmpate() && this.tables[i][2].getEmpate()) {
-					vencedor = this.getJugadorConElTurno().getEmail();
+					vencedor = this.getJugadorConElTurno().getName();
 				} else if ((this.tables[0][i].getVencedor().equals(a) || tables[0][i].getEmpate()) && 
 						(this.tables[1][i].getVencedor().equals(a) || tables[1][i].getEmpate()) &&
 						(this.tables[2][i].getVencedor().equals(a) || tables[2][i].getEmpate())) {
@@ -169,7 +176,7 @@ public class Tablero9x9 extends Composite {
 						(this.tables[2][i].getVencedor().equals(b) || tables[2][i].getEmpate())) {
 					vencedor = b;
 				} else if (this.tables[0][i].getEmpate() && this.tables[1][i].getEmpate() && this.tables[2][i].getEmpate()) {
-					vencedor = this.getJugadorConElTurno().getEmail();
+					vencedor = this.getJugadorConElTurno().getName();
 				}
 			}
 		}
@@ -184,7 +191,7 @@ public class Tablero9x9 extends Composite {
 					(this.tables[2][2].getVencedor().equals(b) || tables[2][2].getEmpate())) {
 				vencedor = b;
 			} else if (this.tables[0][0].getEmpate() && this.tables[1][1].getEmpate() && this.tables[2][2].getEmpate()) {
-				vencedor = this.getJugadorConElTurno().getEmail();
+				vencedor = this.getJugadorConElTurno().getName();
 			} else if ((this.tables[2][0].getVencedor().equals(a) || tables[2][0].getEmpate()) && 
 					(this.tables[1][1].getVencedor().equals(a) || tables[1][1].getEmpate()) &&
 					(this.tables[0][2].getVencedor().equals(a) || tables[0][2].getEmpate())) {
@@ -194,7 +201,7 @@ public class Tablero9x9 extends Composite {
 					(this.tables[0][2].getVencedor().equals(b) || tables[0][2].getEmpate())) {
 				vencedor = b;
 			} else if (this.tables[2][0].getEmpate() && this.tables[1][1].getEmpate() && this.tables[0][2].getEmpate()) {
-				vencedor = this.getJugadorConElTurno().getEmail();
+				vencedor = this.getJugadorConElTurno().getName();
 			}	
 		}
 		setVencedor(vencedor);
@@ -221,25 +228,28 @@ public class Tablero9x9 extends Composite {
 					throw new MovimientoNoValidoException(cT, fT, cC, fC);
 	}
 	
-	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException {
+	public void colocar(int cT, int fT, int cC, int fC, int player) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException {
+		System.out.println("ENTRO");
 		Tablero3x3 tablerillo = this.tables[cT][fT];
-		tablerillo.colocar(cC, fC, this.ultimoValor);
+		tablerillo.colocar(cC, fC, player);
+		System.out.println("ENTRO2");
+
 		if (tablerillo.getVencedor().equals(""))
-			tablerillo.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
-		this.ultimoValor *= -1;
+			tablerillo.comprobarVencedor(this.jugadorA.getName(), this.jugadorB.getName());
 			
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
 		this.cambiarTurno();
-		
+		System.out.println("ENTRO3");
+
 		if (!tablerillo.getVencedor().equals("")) {
-			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
+			this.comprobarVencedor(this.jugadorA.getName(), this.jugadorB.getName());
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor, cT, fT);
 			throw new TableroGanadoException(tablerillo.getVencedor(), cT, fT);
 		}
 		if(tablerillo.getVencedor().equals("") && tablerillo.isFull()){
 			tablerillo.setEmpate(true);
-			this.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
+			this.comprobarVencedor(this.jugadorA.getName(), this.jugadorB.getName());
 			if (!this.vencedor.equals(""))
 				throw new PartidaFinalizadaException(this.vencedor, cT, fT, true);
 			throw new TableroEmpateException(cT,fT);
@@ -257,9 +267,12 @@ public class Tablero9x9 extends Composite {
 			this.jugadorConElTurno = this.jugadorA;
 	}
 
+	public void clear() {
+		for(int i =0;i<3;i++)
+			for (int j=0;j<3;j++)
+				this.tables[i][j].clear();
+		
+	}
+
 	
-//	
-//	void colocar(int fT,int cT,int fC,int cC, int player){
-//		this.tables[fT][cT].colocar(fC,cC,player);
-//	}
 }
