@@ -244,7 +244,6 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			public void onSuccess(Integer result) {
 				if (result != null) {
 					if (result != -1) {
-						Window.alert(result.toString());
 						oponente = retado;
 						tablero.setIdTablero(result);
 						tableroTimer = new Timer() {
@@ -392,9 +391,6 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	
 	public void enviarMovimiento(int cT, int fT, int cC, int fC) {
-		//Hacer esta llamada. El servidor routea dependiendo del email no?
-		//UTTTService.poner(0, me.getName(), cT, fT, cC, fC, callback);//REVISAR ID PARTIDA YA QUE NO ME HA DADO TIEMPO
-		Window.alert("Se ha enviado el mov. a oponente. TODO");
 		UTTTService.poner(tablero.getIdTablero(), loginName, cT, fT, cC, fC, new AsyncCallback() {
 			@Override
 			public void onFailure(Throwable caught) {
@@ -477,8 +473,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				int cT, fT, cC, fC;
+				Tablero3x3 [][] tablerillos = tablero.getTablerillos();
 				HTMLTable.Cell tableroGrande = ((Grid) event.getSource()).getCellForEvent(event);
-				HTMLTable.Cell tableroPequeno = (tablero.getTablerillos()[tableroGrande.getRowIndex()][tableroGrande.getCellIndex()].grid.getCellForEvent(event));
+				HTMLTable.Cell tableroPequeno = (tablerillos[tableroGrande.getCellIndex()][tableroGrande.getRowIndex()].getGrid().getCellForEvent(event));
 				fT = tableroGrande.getRowIndex();
 				cT = tableroGrande.getCellIndex();
 				fC = tableroPequeno.getRowIndex();

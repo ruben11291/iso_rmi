@@ -28,10 +28,6 @@ public class Tablero9x9 extends Composite {
 		return tablerillos;
 	}
 
-	public void setTablerillos(Tablero3x3[][] tablerillos) {
-		this.tablerillos = tablerillos;
-	}
-
 	private static Tablero9x9UiBinder uiBinder = GWT
 			.create(Tablero9x9UiBinder.class);
 	@UiField Tablero3x3 t00;
@@ -44,6 +40,7 @@ public class Tablero9x9 extends Composite {
 	@UiField Tablero3x3 t21;
 	@UiField Tablero3x3 t22;
 	@UiField Grid grid;
+	
 	public Grid getGrid() {
 		return grid;
 	}
@@ -80,20 +77,6 @@ public class Tablero9x9 extends Composite {
 	public void setIdTablero(int idTablero) {
 		this.idTablero = idTablero;
 	}
-
-//	@UiHandler("grid")
-//	void onGridClick(ClickEvent event) {
-//		HTMLTable.Cell tableroGrande = ((Grid) event.getSource()).getCellForEvent(event);
-//		HTMLTable.Cell tableroPequeno = (tables[tableroGrande.getRowIndex()][tableroGrande.getCellIndex()].grid.getCellForEvent(event));
-//		try {
-//			poner_movimiento(tableroGrande.getRowIndex(),tableroGrande.getCellIndex(), tableroPequeno.getRowIndex(), tableroPequeno.getCellIndex());
-//		} catch (NoTienesElTurnoException e) {
-//			prx.mostrar_msg_movimiento("No tienes el turno");
-//		}
-//	//	Window.alert(a.getCellIndex()+" "+a.getRowIndex()+ " "+b.getCellIndex()+" "+.getRowIndex());
-//		
-//	}
-	
 
 	public Jugador getJugadorConElTurno() {
 		return this.jugadorConElTurno;

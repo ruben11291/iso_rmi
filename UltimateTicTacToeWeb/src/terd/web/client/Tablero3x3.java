@@ -16,6 +16,9 @@ import com.google.gwt.user.client.ui.Grid;
 public class Tablero3x3 extends Composite {
 	
 	private Image[][]fields= new Image[3][3];
+	public Image[][] getFields() {
+		return fields;
+	}
 	private int [][]casillas = new int[3][3];
 	private  String []urls = {"image/x.png", "image/o.png"};
 	private String vencedor;	
@@ -34,6 +37,10 @@ public class Tablero3x3 extends Composite {
 	@UiField Image i21;
 	@UiField Image i22;
 	@UiField Grid grid;
+	
+	public Grid getGrid() {
+		return grid;
+	}
 	
 	interface Tablero3x3UiBinder extends UiBinder<Widget, Tablero3x3> {
 	}
@@ -68,7 +75,6 @@ public class Tablero3x3 extends Composite {
 			this.fields[cC][fC].setUrl(this.urls[0]);
 		else
 			this.fields[cC][fC].setUrl(this.urls[1]);
-//		this.fields[cC][fC].setUrl(this.urls[player-1]);//+1 ya que yo obtengo la url de imagen en 0 y 1 y los jugadores se consideran en 1 y 2	
 		this.casillas [cC][fC] = player;
 	}
 
