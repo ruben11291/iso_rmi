@@ -248,7 +248,12 @@ h3{
 	border-width: 7px;
 	background-color: rgb(250,250,210);
 /* 	background-image: url("image/boarde.png"); */
+}
 
+.reciente{
+	border-style: groove;
+	border-width: 3px;
+	border-color: red;
 }
 .tablero3x3{
 	border-style: solid;
