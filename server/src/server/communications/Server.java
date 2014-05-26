@@ -62,7 +62,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		System.out.println("Servidor escuchando" + this.puerto);
 	}
 
-	/**** M������todos remotos ****/
+	/**** M������������������todos remotos ****/
 	
 	/////ADD Player///
 	public void add(String email, String passwd, ICliente cliente) throws RemoteException,JugadorNoExisteException , JugadorYaExisteException{
@@ -71,7 +71,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		this.fachada.add(email, passwd);
 		if (cliente != null)
 			this.stubs.put(email, cliente);
-		System.out.println("Jugador a������adido "+email+" en servidor ");
+		System.out.println("Jugador a������������������adido "+email+" en servidor ");
 		this.actualizarListaDeJugadores();
 		
 
@@ -79,7 +79,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	public void add(String email, String passwd) throws JugadorNoExisteException {
 		this.fachada.add(email, passwd);
-		System.out.println("Jugador a������adido "+email+" en servidor ");
+		System.out.println("Jugador a������������������adido "+email+" en servidor ");
 		this.actualizarListaDeJugadores();
 	}
 	
@@ -90,7 +90,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 			listaJugadores.put(jugador, 0);
 		}
 		Enumeration <Tablero9x9> tableros = this.fachada.getTableros().elements();
-		System.out.println(jugadores.toString());
+//		System.out.println(jugadores.toString());
 		while (tableros.hasMoreElements()){
 			Tablero9x9 tablero = tableros.nextElement();
 			if (listaJugadores.containsKey(tablero.getJugadorA().getEmail()))
@@ -128,8 +128,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void abandonoPartida(String email) {
 		Hashtable<String, Integer> avisarA = this.fachada.eliminarPartidaDelJugador(email);
 		
-		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si tambi������n abandona cliente2 entonces
-		//al llegar aqu������ avisarA ser������ vacio
+		//Si cliente1 abandona se elimina la partida y se avisa a cliente2, si tambi������������������n abandona cliente2 entonces
+		//al llegar aqu������������������ avisarA ser������������������ vacio
 		
 		if(!avisarA.isEmpty()){
 			//avisar al jugador que su oponente ha cerrado sesion
@@ -208,7 +208,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 
 	@Override
-	public void respuestaAPeticionDeReto(String retador, String retado,
+	public int respuestaAPeticionDeReto(String retador, String retado,
 			boolean respuesta) throws RemoteException {
 		this.fachada = FTERD.get();
 		int idPartida = this.fachada.respuestaAPeticionDeReto(retador, retado, respuesta);
@@ -220,7 +220,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		if (IRetador != null) {
 			IRetador.respuestaAPeticionDeReto(retador, retado, respuesta, idPartida);
 		} else {
-			this.fachada.getRetosContestados().put(retador, respuesta);
+			this.fachada.getRetosContestados().put(retador, idPartida);
 		}
 		
 		//Solo si el jugador retado ha aceptado el reto, el servidor le manda el idPartida con el
@@ -232,6 +232,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 				IRetado.iniciarPartida(idPartida, retador, retado);
 		}
 		this.actualizarListaDeJugadores();
+		return idPartida;
 	}
 
 	/* Este metodo se ha creado para las pruebas de la comunicacion*/
@@ -289,10 +290,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 	
 	@Override
-	public Boolean getRespuestaReto(String retador) throws RemoteException {
-		Boolean respuesta;
-		respuesta = this.fachada.getRetosContestados().get(retador);
+	public int getRespuestaReto(String retador) throws RemoteException {
+		int idPartida;
+		idPartida = this.fachada.getRetosContestados().get(retador);
 		this.fachada.getRetosContestados().remove(retador);
-		return respuesta;
+		return idPartida;
 	}
 }

@@ -2,20 +2,29 @@ package terd.web.client;
 
 import java.util.Vector;
 
+import terd.web.client.exceptions.CasillaOcupadaException;
+import terd.web.client.exceptions.CoordenadasNoValidasException;
 import terd.web.client.exceptions.JugadorNoExisteException;
+import terd.web.client.exceptions.MovimientoNoValidoException;
+import terd.web.client.exceptions.NoEstaJugandoException;
+import terd.web.client.exceptions.NoTienesElTurnoException;
 import terd.web.client.exceptions.PartidaFinalizadaException;
 import terd.web.client.exceptions.TableroEmpateException;
 import terd.web.client.exceptions.TableroGanadoException;
-import terd.web.shared.WJugador;
+import terd.web.client.Jugador;
+import terd.web.client.Tablero9x9;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -26,12 +35,13 @@ import com.google.gwt.event.dom.client.DoubleClickEvent;
 public class UltimateTicTacToeWeb implements EntryPoint {
 
 	private String loginName, retado, oponente;
-	private WJugador me,j_retado,j_oponente;
+	private Jugador jugador;
 	private Timer listaTimer, retosTimer, respuestaRetosTimer, tableroTimer;
 	private Button loginButton, abandonarButton, cerrarButton,registrarButton;
 	private TextBox emailText;
 	private PasswordTextBox passwdText;
 	private Tablero9x9 tablero;
+	private TableroGlobal tableroGlobal;
 	private ListBox listaJugadores;
 
 
@@ -45,7 +55,21 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 
 	
+	private void creaPartida(String retador, String retado){
+		Jugador j1 = new Jugador(retador,"");
+		Jugador j2 = new Jugador(retado,"");
+		
+		this.tablero.setJugadorA(j1);
+		this.tablero.setJugadorB(j2);
+		this.tablero.setJugadorConelTurno(j1);
+		this.tablero = tablero;
+		j1.setTablero(this.tablero);
+		j2.setTablero(this.tablero);
+		tableroGlobal.setVisible(true);
+	}
+	
 	private void trasFinalizarPartida() {
+		tableroGlobal.setVisible(false);
 		tablero.setVisible(false);
 		tablero.clear();
 		abandonarButton.setVisible(false);
@@ -57,6 +81,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		System.out.println("Tras finalizar partida");
 	}
 	private void trasCerrarSesion() {
+		tableroGlobal.setVisible(false);
 		tableroTimer.cancel();
 		retosTimer.cancel();
 		listaTimer.cancel();
@@ -70,23 +95,20 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		emailText.setVisible(true);
 		passwdText.setVisible(true);
 		loginName = "";
-		me = null;
-		j_oponente = null;
-		j_retado = null;
 		oponente = "";
 		retado= "";
-		System.out.println("Tras cerrar sesión");
+		System.out.println("Tras cerrar sesi��n");
 	}
 	
-	private void trasRetoAceptado() {
-		j_oponente = new WJugador(oponente,2);
-	//	tablero = new Tablero9x9(this);
+	private void trasRetoAceptado(String string) {
+		if (retado.equals("")) {
+			creaPartida(oponente, loginName);
+		} else {
+			creaPartida(loginName, retado);
+			respuestaRetosTimer.cancel();
+		}
 		
-		tablero.setJugadorA(me);
-		tablero.setJugadorB(j_oponente);
-		tablero.setJugadorConelTurno(j_oponente);
 		retado = "";
-		j_retado = null;
 		retosTimer.cancel();
 		tableroTimer.scheduleRepeating(2000);
 		tablero.setVisible(true);
@@ -97,8 +119,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 	private void trasLogin() {
 		loginName = emailText.getText();
-		this.me = new WJugador(loginName,1);
-		j_oponente = j_retado = null;
+		jugador = new Jugador(loginName, "");
 		retado = oponente = "";
 		listaJugadores.setVisible(true);
 		loginButton.setVisible(false);
@@ -162,29 +183,46 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					trasFinalizarPartida();
 					break;
 				default:
-					System.out.println("fT: " + result.get(0));
-					System.out.println("fC: " + result.get(1));
-					System.out.println("cT: " + result.get(2));
-					System.out.println("cC: " + result.get(3));
+					int fT, fC, cT, cC;
+					fT = result.get(0);
+					cT = result.get(1);
+					fC = result.get(2);
+					cC = result.get(3);
 				
 					
 					try {
-						tablero.colocar(result.get(0),result.get(1),result.get(2),result.get(3),j_oponente.getNum());
-						Window.alert("COLOCADA");
+						if (loginName.equals(tablero.getJugadorA().getEmail())) {
+							tablero.getJugadorB().poner(cT, fT, cC, fC);
+						} else {
+							tablero.getJugadorA().poner(cT, fT, cC, fC);
+						}
+//						enviarMovimiento(cT, fT, cC, fC);
+					} catch (NoTienesElTurnoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoEstaJugandoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (CoordenadasNoValidasException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (MovimientoNoValidoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					} catch (PartidaFinalizadaException e) {
 						// TODO Auto-generated catch block
-						Window.alert("Partida finalizada. Vencedor :"+j_oponente.getName());
-						trasFinalizarPartida();
+						e.printStackTrace();
+					} catch (CasillaOcupadaException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (TableroGanadoException e) {
 						// TODO Auto-generated catch block
-						//Pintar en el tablero pequenyo
 						e.printStackTrace();
 					} catch (TableroEmpateException e) {
-						Window.alert("Partida finalizada en empate");
-						trasFinalizarPartida();
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+//						tablero.colocar(result.get(0),result.get(1),result.get(2),result.get(3));
 					
 					
 				}
@@ -195,18 +233,20 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	
 	private void refrescarRespuestaReto() {
-		UTTTService.recibirRespuestaReto(loginName, new AsyncCallback<Boolean>() {
+		UTTTService.recibirRespuestaReto(loginName, new AsyncCallback<Integer>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				System.out.println("Error al refrescar respuesta reto: " + caught);
+//				System.out.println("Error al refrescar respuesta reto: " + caught);
 			}
 
 			@Override
-			public void onSuccess(Boolean result) {
+			public void onSuccess(Integer result) {
 				if (result != null) {
-					if (result) {
+					if (result != -1) {
+						Window.alert(result.toString());
 						oponente = retado;
+						tablero.setIdTablero(result);
 						tableroTimer = new Timer() {
 							
 							@Override
@@ -216,7 +256,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 						};
 //						tableroTimer.scheduleRepeating(2000);
-						trasRetoAceptado();
+						trasRetoAceptado("TuEresElRetador");
 						
 					} else {
 						Window.alert(retado + " ha rechazado tu reto.");
@@ -242,8 +282,10 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				for (String r : result) {
 					if (!respuesta)
 						respuesta = Window.confirm(r + " te ha retado");
-					if (respuesta) oponente = r;
-					UTTTService.respuestaAPeticionDeReto(r, loginName, respuesta, -1, new AsyncCallback<Boolean>() {
+					if (respuesta) {
+						oponente = r;
+					}
+					UTTTService.respuestaAPeticionDeReto(r, loginName, respuesta, new AsyncCallback<Integer>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -251,8 +293,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						}
 
 						@Override
-						public void onSuccess(Boolean result) {
-							if (result) {
+						public void onSuccess(Integer result) {
+							if (result != -1) {
+								tablero.setIdTablero(result);
 								tableroTimer = new Timer() {									
 									@Override
 									public void run() {
@@ -261,7 +304,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 								};
 //								tableroTimer.scheduleRepeating(2000);
-								trasRetoAceptado();
+								trasRetoAceptado("TuEresElRetado");
 							}
 						}
 					});
@@ -348,6 +391,24 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			});
 	}
 	
+	public void enviarMovimiento(int cT, int fT, int cC, int fC) {
+		//Hacer esta llamada. El servidor routea dependiendo del email no?
+		//UTTTService.poner(0, me.getName(), cT, fT, cC, fC, callback);//REVISAR ID PARTIDA YA QUE NO ME HA DADO TIEMPO
+		Window.alert("Se ha enviado el mov. a oponente. TODO");
+		UTTTService.poner(tablero.getIdTablero(), loginName, cT, fT, cC, fC, new AsyncCallback() {
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(SERVER_ERROR);
+			}
+
+			@Override
+			public void onSuccess(Object result) {
+			
+			}
+		});
+		
+	}
+	
 	public void onModuleLoad() {
 	
 		//Login l = new Login();		
@@ -382,7 +443,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		});
 		abandonarButton.setVisible(false);
 		
-		cerrarButton = new Button("Cerrar sesión");
+		cerrarButton = new Button("Cerrar sesi��n");
 		rootPanel.add(cerrarButton, 679, 10);
 		cerrarButton.addClickHandler(new ClickHandler() {
 			
@@ -400,12 +461,62 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		passwdText = new PasswordTextBox();
 		RootPanel.get("nameFieldPassContainer").add(passwdText);
 
-		tablero = new Tablero9x9(this);
+		tableroGlobal = new TableroGlobal();
+		RootPanel.get("boardResult").add(tableroGlobal);
+		tableroGlobal.setVisible(false);
+		
+		tablero = new Tablero9x9();
 		
 //		rootPanel.add(tablero, 118, 47);
 //		tablero.setSize("100px", "100px");
 		RootPanel.get("boardGame").add(tablero);
 		tablero.setVisible(false);
+		
+		tablero.getGrid().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				int cT, fT, cC, fC;
+				HTMLTable.Cell tableroGrande = ((Grid) event.getSource()).getCellForEvent(event);
+				HTMLTable.Cell tableroPequeno = (tablero.getTablerillos()[tableroGrande.getRowIndex()][tableroGrande.getCellIndex()].grid.getCellForEvent(event));
+				fT = tableroGrande.getRowIndex();
+				cT = tableroGrande.getCellIndex();
+				fC = tableroPequeno.getRowIndex();
+				cC = tableroPequeno.getCellIndex();
+				try {
+					if (loginName.equals(tablero.getJugadorA().getEmail())) {
+						tablero.getJugadorA().poner(cT, fT, cC, fC);
+					} else {
+						tablero.getJugadorB().poner(cT, fT, cC, fC);
+					}
+					enviarMovimiento(cT, fT, cC, fC);
+				} catch (NoTienesElTurnoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoEstaJugandoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CoordenadasNoValidasException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MovimientoNoValidoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (PartidaFinalizadaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CasillaOcupadaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (TableroGanadoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (TableroEmpateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		listaJugadores = new ListBox();
 		listaJugadores.addDoubleClickHandler(new DoubleClickHandler() {
@@ -428,15 +539,6 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		listaJugadores.setVisible(false);
 
 	}
-	
-	public void mostrar_msg_movimiento(String msg){
-		Window.alert(msg);
-	}
-	public void notifica_movimiento(int cT, int fT, int cC, int fC) {
-		//Hacer esta llamada. El servidor routea dependiendo del email no?
-		//UTTTService.poner(0, me.getName(), cT, fT, cC, fC, callback);//REVISAR ID PARTIDA YA QUE NO ME HA DADO TIEMPO
-		Window.alert("Se ha enviado el mov. a oponente. TODO");
-		
-	}
+
 }	
 

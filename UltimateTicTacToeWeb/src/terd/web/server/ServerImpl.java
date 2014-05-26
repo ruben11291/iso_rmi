@@ -83,13 +83,14 @@ public class ServerImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public boolean respuestaAPeticionDeReto(String retador, String retado, boolean respuesta, int idPartida) {
+	public Integer respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) {
+		int idPartida = -1;
 		try {
-			this.servidorRMI.respuestaAPeticionDeReto(retador, retado, respuesta);
+			idPartida = this.servidorRMI.respuestaAPeticionDeReto(retador, retado, respuesta);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return respuesta;
+		return idPartida;
 	}
 
 	@Override
@@ -124,8 +125,9 @@ public class ServerImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public Boolean recibirRespuestaReto(String login_name) throws Exception {
-		return this.servidorRMI.getRespuestaReto(login_name);
+	public Integer recibirRespuestaReto(String login_name) throws Exception {
+		int respuesta = this.servidorRMI.getRespuestaReto(login_name);
+		return respuesta;
 	}
 	
 	@Override

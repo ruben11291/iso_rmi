@@ -15,13 +15,13 @@ public class FTERD {
 	private Hashtable<String, Jugador> jugadores;
 	private Hashtable<Integer, Tablero9x9> tableros;
 	private Hashtable<String, String> retosEnEspera;
-	private Hashtable <String, Boolean> retosContestados;
+	private Hashtable <String, Integer> retosContestados;
 	
 	private FTERD() {
 		this.jugadores =     new Hashtable<String, Jugador>();
 		this.tableros  =     new Hashtable<Integer, Tablero9x9>();
 		this.retosEnEspera = new Hashtable<String, String>();
-		this.retosContestados = new Hashtable<String, Boolean>();
+		this.retosContestados = new Hashtable<String, Integer>();
 	}
 	
 	public static FTERD get() {
@@ -138,7 +138,7 @@ public class FTERD {
 		return retosEnEspera;
 	}
 
-	public Hashtable<String, Boolean> getRetosContestados() {
+	public Hashtable<String, Integer> getRetosContestados() {
 		return retosContestados;
 	}
 

@@ -13,14 +13,14 @@ public interface ServerAsync {
 			AsyncCallback<Vector<String>> asyncCallback);
 	
 	void respuestaAPeticionDeReto(String retador, String retado,
-			boolean respuesta, int idPartida, AsyncCallback<Boolean> callback) throws IllegalArgumentException;
+			boolean respuesta, AsyncCallback<Integer> callback) throws IllegalArgumentException;
 
 	void getRetos(String login_name, AsyncCallback<Vector<String>> asyncCallback);
 
 	void getListaJugadores(AsyncCallback<Vector<String>> asyncCallback);
 
 	void recibirRespuestaReto(String login_name,
-			AsyncCallback<Boolean> asyncCallback);
+			AsyncCallback<Integer> asyncCallback);
 
 	void poner(int idPartida, String email, int cT, int fT, int cC, int fC,
 			AsyncCallback<Void> callback);

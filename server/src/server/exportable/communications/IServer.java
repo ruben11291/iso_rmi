@@ -13,7 +13,7 @@ public interface IServer extends Remote {
 	public void delete(String email) throws RemoteException;
 	public void register(String email, String passwd) throws RemoteException, JugadorYaRegistradoException;
 	public void retar(String retador, String retado) throws RemoteException;
-	public void respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException;
+	public int respuestaAPeticionDeReto(String retador, String retado, boolean respuesta) throws RemoteException;
 	public void poner(int idPartida, String email, int cT, int fT, int cC, int fC)throws RemoteException;
 	public void abandonoPartida(String email) throws RemoteException;
 	public Vector<String> getClientesEnEspera() throws RemoteException;
@@ -21,7 +21,7 @@ public interface IServer extends Remote {
 	public void partidaFinalizada(int idPartida) throws RemoteException;
 	public Hashtable<String, Integer> getListaJugadores() throws RemoteException;
 	public Hashtable<String, String> getRetosEnEspera() throws RemoteException;
-	public Boolean getRespuestaReto(String retador) throws RemoteException;
+	public int getRespuestaReto(String retador) throws RemoteException;
 	public Vector<Integer> getMovimientosHechos(String oponente) throws RemoteException;
 }
 

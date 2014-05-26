@@ -17,10 +17,10 @@ public class Tablero3x3 extends Composite {
 	
 	private Image[][]fields= new Image[3][3];
 	private int [][]casillas = new int[3][3];
-	private  String []urls = {"image/o.png", "image/x.png"};
+	private  String []urls = {"image/x.png", "image/o.png"};
 	private String vencedor;	
 	private boolean empate;
-	private String old_path;
+	private String casillaVacia;
 	
 	private static Tablero3x3UiBinder uiBinder = GWT
 			.create(Tablero3x3UiBinder.class);
@@ -41,13 +41,13 @@ public class Tablero3x3 extends Composite {
 	public Tablero3x3() {
 		initWidget(uiBinder.createAndBindUi(this));
 		fields[0][0]=i00;
-		fields[0][1]=i01;
-		fields[0][2]=i02;
-		fields[1][0]=i10;
+		fields[0][1]=i10;
+		fields[0][2]=i20;
+		fields[1][0]=i01;
 		fields[1][1]=i11;
-		fields[1][2]=i12;
-		fields[2][0]=i20;
-		fields[2][1]=i21;
+		fields[1][2]=i21;
+		fields[2][0]=i02;
+		fields[2][1]=i12;
 		fields[2][2]=i22;
 		
 		for (int i=0;i<3;i++){
@@ -59,13 +59,16 @@ public class Tablero3x3 extends Composite {
 		this.vencedor = "";	
 		this.empate = false;
 		
-		this.old_path = this.fields[0][0].getUrl();
-		System.out.println(this.old_path);
+		this.casillaVacia = this.fields[0][0].getUrl();
 	}
 
-	public void colocar(int cC,int fC,int player) {
+	public void colocar(int cC, int fC, int player) {
 		System.out.println("Updating board: " + cC + " " + fC + " " + player);
-		this.fields[cC][fC].setUrl(this.urls[player-1]);//+1 ya que yo obtengo la url de imagen en 0 y 1 y los jugadores se consideran en 1 y 2	
+		if (player == -1)
+			this.fields[cC][fC].setUrl(this.urls[0]);
+		else
+			this.fields[cC][fC].setUrl(this.urls[1]);
+//		this.fields[cC][fC].setUrl(this.urls[player-1]);//+1 ya que yo obtengo la url de imagen en 0 y 1 y los jugadores se consideran en 1 y 2	
 		this.casillas [cC][fC] = player;
 	}
 
@@ -116,7 +119,7 @@ public class Tablero3x3 extends Composite {
 		if (!hayVencedor()) {
 			for (int i = 0; i < 3; i++) {
 				
-				// Comprueba si hay alguna combinación ganadora vertical
+				// Comprueba si hay alguna combinaci��n ganadora vertical
 				if (this.casillas[i][0] == this.casillas[i][1] 
 					&& this.casillas[i][1] == this.casillas[i][2]
 					&& this.casillas[i][2] != 0) {
@@ -126,7 +129,7 @@ public class Tablero3x3 extends Composite {
 						vencedor = b;
 					i = 4;
 					
-				// Comprueba si hay alguna combinación ganadora horizontal
+				// Comprueba si hay alguna combinaci��n ganadora horizontal
 				} else if (this.casillas[0][i] == this.casillas[1][i] 
 					&& this.casillas[1][i] == this.casillas[2][i]
 					&& this.casillas[2][i] != 0) {
@@ -138,7 +141,7 @@ public class Tablero3x3 extends Composite {
 				}
 			}
 			
-			// Comprueba si hay alguna combinación ganadora diagonal
+			// Comprueba si hay alguna combinaci��n ganadora diagonal
 			if (vencedor.equals("")) {
 				if (this.casillas[0][0] == this.casillas[1][1]
 					&& this.casillas[1][1]== this.casillas[2][2]
@@ -162,7 +165,7 @@ public class Tablero3x3 extends Composite {
 	public void clear() {
 		for(int i=0;i<3;i++)
 			for (int j=0;j<3;j++)
-				this.fields[i][j].setUrl(this.old_path);
+				this.fields[i][j].setUrl(this.casillaVacia);
 		
 	}
 
