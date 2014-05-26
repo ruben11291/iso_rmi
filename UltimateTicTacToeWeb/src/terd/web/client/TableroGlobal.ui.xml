@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:Grid styleName="tablero_global" width="240px" height="241px">
+			<g:row>
+				<g:customCell>
+					<g:Image ui:field="gi00" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="gi01" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="gi02" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Image ui:field="gi10" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="gi11" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="gi12" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Image ui:field="gi20" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="gi21" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="gi22" url="image/voidglobal.png" styleName="casilla_tableroG"/>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+	</g:HTMLPanel>
+</ui:UiBinder> 

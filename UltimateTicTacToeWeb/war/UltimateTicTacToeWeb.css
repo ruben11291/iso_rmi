@@ -242,6 +242,8 @@ h3{
 	position:relative;
 	top:1px;
 }
+
+/*CSS PARA EL TABLERO DE JUEGO*/
 .tablero {
 	border-style: solid;
 	border-color: black;
@@ -249,14 +251,28 @@ h3{
 	background-color: rgb(250,250,210);
 /* 	background-image: url("image/boarde.png"); */
 }
-
-.reciente{
-	border-style: groove;
-	border-width: 3px;
-	border-color: red;
-}
 .tablero3x3{
 	border-style: solid;
 	border-color: rgb(16,78,139);
 	border-width: 4px;
+}
+
+/*CSS PARA EL TABLERO GLOBAL*/
+.tablero_global{
+	border-style: solid;
+	border-color: rgb(16,78,139);
+	border-width: 4px;
+}
+.casilla_tableroG{
+	border-style: solid;
+	border-color: rgb(0,134,139);
+	border-width: 4px;
+	background-color: rgb(250,250,210);
+}
+
+/*MARCO PARA EL ULTIMO MOVIMIENTO*/
+.reciente{
+	border-style: groove;
+	border-width: 3px;
+	border-color: red;
 }
