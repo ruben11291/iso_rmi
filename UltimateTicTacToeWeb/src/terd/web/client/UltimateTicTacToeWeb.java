@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.user.client.ui.Image;
 
 public class UltimateTicTacToeWeb implements EntryPoint {
 
@@ -43,7 +44,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	private Tablero9x9 tablero;
 	private TableroGlobal tableroGlobal;
 	private ListBox listaJugadores;
-
+	private Image image;
 
 
 	private final ServerAsync UTTTService = GWT.create(Server.class);
@@ -540,6 +541,11 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		rootPanel.add(listaJugadores, 34, 156);
 		listaJugadores.setSize("102px", "263px");
 		listaJugadores.setVisibleItemCount(5);
+		
+		 image = new Image("image/log.png");
+//		rootPanel.add(image, 307, 88);
+		RootPanel.get("logo").add(image);
+		image.setSize("339px", "341px");
 		
 		listaJugadores.setVisible(false);
 

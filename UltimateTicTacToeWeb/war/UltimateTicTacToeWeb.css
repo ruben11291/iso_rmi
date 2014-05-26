@@ -8,12 +8,14 @@ body {
 .titulo{
 	margin-left:auto;
 	margin-right:auto;
+	font-size:50px;
 	font-weight:bold;
 	text-align:center;
 	color:black;
-	background-color:white;
+/* 	background-color:white; */
+	background-image: url("image/ttoe.jpg");
 	height:1.5em;
-	padding-top:3px;
+	padding-top:7px;
 	width:13em; 
 	border:3px solid #000000;
 	word-wrap:break-word;
@@ -275,4 +277,8 @@ h3{
 	border-style: groove;
 	border-width: 3px;
 	border-color: red;
+}
+.imagen{
+	opacity:0.8;
+	filer:alpha(opacity=80);
 }
