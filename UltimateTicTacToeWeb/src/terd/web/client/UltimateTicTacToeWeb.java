@@ -47,12 +47,13 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 
 	private final ServerAsync UTTTService = GWT.create(Server.class);
-	private Button button;
 
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
-
+	private TextBox emailRegistro;
+	private PasswordTextBox passwdRegistro;
+	private PasswordTextBox repPasswdRegistro;
 
 	
 	private void creaPartida(String retador, String retado){
@@ -415,7 +416,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 //		RootPanel.get("menu_login").add(l);
 		RootPanel rootPanel = RootPanel.get("sendButtonContainer");
 		rootPanel.add(loginButton);
-		rootPanel.add(registrarButton);
+//		rootPanel.add(registrarButton);
+		RootPanel.get("registerButton").add(registrarButton);
 		loginButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				loginButton.setEnabled(true);
@@ -450,6 +452,18 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			}
 		});
 		cerrarButton.setVisible(false);
+		
+		emailRegistro = new TextBox();
+		RootPanel.get("emailRegistro").add(emailRegistro);
+//		rootPanel.add(emailRegistro);
+		
+		passwdRegistro = new PasswordTextBox();
+//		rootPanel.add(passwdRegistro);
+		RootPanel.get("passwordRegistro").add(passwdRegistro);
+		
+		repPasswdRegistro = new PasswordTextBox();
+//		rootPanel.add(repPasswdRegistro, 382, 85);
+		RootPanel.get("repPasswordRegistro").add(repPasswdRegistro);
 		
 		emailText = new TextBox();
 		RootPanel.get("nameFieldContainer").add(emailText);
@@ -527,15 +541,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		listaJugadores.setSize("102px", "263px");
 		listaJugadores.setVisibleItemCount(5);
 		
-		button = new Button("Log in");
-		button.setText("Registrar");
-		button.setStyleName("myButton");
-		rootPanel.add(button, 0, 85);
-		button.setSize("82px", "30px");
-		
 		listaJugadores.setVisible(false);
 
 	}
-
 }	
 
