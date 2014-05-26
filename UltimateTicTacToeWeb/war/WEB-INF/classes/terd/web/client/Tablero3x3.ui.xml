@@ -5,40 +5,40 @@
 	
 	</ui:style>
 	<g:HTMLPanel >
-		<g:Grid width="187px" height="183px" ui:field="grid" >
+		<g:Grid width="166px" height="166px" ui:field="grid" styleName="tablero3x3" >
 			<g:row>
 				<g:customCell>
 <!-- 					<g:Image ui:field="i00" url="image/void.png" /> -->
-					<g:Image ui:field="i00" url="image/void.png"/>
+					<g:Image ui:field="i00" url="image/void.png" styleName="tablero3x3"/>
 
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i01" url="image/void.png"/>
+					<g:Image ui:field="i01" url="image/void.png" styleName="tablero3x3"/>
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i02" url="image/void.png"/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Image ui:field="i10" url="image/void.png"/>
-				</g:customCell>
-				<g:customCell>
-					<g:Image ui:field="i11" url="image/void.png"/>
-				</g:customCell>
-				<g:customCell>
-					<g:Image ui:field="i12" url="image/void.png"/>
+					<g:Image ui:field="i02" url="image/void.png" styleName="tablero3x3"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<g:Image ui:field="i20" url="image/void.png"/>
+					<g:Image ui:field="i10" url="image/void.png" styleName="tablero3x3"/>
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i21" url="image/void.png"/>
+					<g:Image ui:field="i11" url="image/void.png" styleName="tablero3x3"/>
 				</g:customCell>
 				<g:customCell>
-					<g:Image ui:field="i22" url="image/void.png"/>
+					<g:Image ui:field="i12" url="image/void.png" styleName="tablero3x3"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Image ui:field="i20" url="image/void.png" styleName="tablero3x3" />
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="i21" url="image/void.png" styleName="tablero3x3"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Image ui:field="i22" url="image/void.png" styleName="tablero3x3"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>
