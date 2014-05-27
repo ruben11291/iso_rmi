@@ -38,17 +38,7 @@ public class Jugador implements IsSerializable {
 			throw new NoTienesElTurnoException();
 		
 		this.tablero.comprobarMovimiento(cT, fT, cC, fC);
-		try {
-			this.tablero.colocar(cT, fT, cC, fC);
-		} catch (PartidaFinalizadaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TableroGanadoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TableroEmpateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.tablero.colocar(cT, fT, cC, fC);
+
 	}
 }

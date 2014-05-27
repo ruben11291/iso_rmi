@@ -2,6 +2,7 @@ package terd.web.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
@@ -45,4 +46,17 @@ public class TableroGlobal extends Composite {
 			}
 		}
 	}
+	
+	public void setTableroGanado(int fila, int col, int jugador) {
+		switch (jugador) {
+		case -1:
+			fields[fila][col].setUrl("image/OSym.png");
+			break;
+		case 0:
+			fields[fila][col].setUrl("image/empate.png");
+		case 1:
+			fields[fila][col].setUrl("image/X2.png");
+		}
+	}
 }
+

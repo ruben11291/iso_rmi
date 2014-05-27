@@ -2,7 +2,6 @@ body {
   padding-top: 20px;
   padding-bottom: w0px;
   background-image:url("image/future.jpg");
-  
 }
 
 .titulo{
@@ -301,6 +300,15 @@ h3{
 	border-style: solid;
 	border-color: #104E8B;
 }
+
+.labelSesion{
+	font-size: 20px;
+	font-family: 'Play', sans-serif;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
 .imagen{
 	opacity:0.8;
 	filer:alpha(opacity=80);
