@@ -12,6 +12,12 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 public class TableroGlobal extends Composite {
 	
 	private Image[][]fields= new Image[3][3];
+	private int [][]casillas = new int[3][3];
+	
+	public int[][] getCasillas() {
+		return casillas;
+	}
+
 	private static TableroGlobalUiBinder uiBinder = GWT
 			.create(TableroGlobalUiBinder.class);
 	@UiField Image gi00;
@@ -43,19 +49,34 @@ public class TableroGlobal extends Composite {
 		for (int i=0;i<3;i++){
 			for( int j=0;j<3;j++){
 				fields[i][j].setVisible(true);
+				this.casillas[i][j]=0;
 			}
 		}
+
 	}
 	
 	public void setTableroGanado(int fila, int col, int jugador) {
 		switch (jugador) {
 		case -1:
 			fields[fila][col].setUrl("image/OSym.png");
+			casillas[fila][col] = -1;
 			break;
 		case 0:
 			fields[fila][col].setUrl("image/empate.png");
+			casillas[fila][col] = 2;
 		case 1:
 			fields[fila][col].setUrl("image/X2.png");
+			casillas[fila][col] = 1;
+		}
+	}
+	
+	public void reiniciar() {
+		for (int i=0;i<3;i++){
+			for( int j=0;j<3;j++){
+				fields[i][j].setVisible(true);
+				fields[i][j].setUrl("image/voidglobal.png");
+				this.casillas[i][j]=0;
+			}
 		}
 	}
 }

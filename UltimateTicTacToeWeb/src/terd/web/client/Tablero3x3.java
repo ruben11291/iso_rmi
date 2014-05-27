@@ -23,7 +23,7 @@ public class Tablero3x3 extends Composite {
 	private  String []urls = {"image/x.png", "image/o.png"};
 	private String vencedor;	
 	private boolean empate;
-	private String casillaVacia;
+	private String casillaVacia = "image/void.png";
 	
 	private static Tablero3x3UiBinder uiBinder = GWT
 			.create(Tablero3x3UiBinder.class);
@@ -65,8 +65,7 @@ public class Tablero3x3 extends Composite {
 		}
 		this.vencedor = "";	
 		this.empate = false;
-		
-		this.casillaVacia = this.fields[0][0].getUrl();
+
 	}
 
 	public void colocar(int cC, int fC, int player) {
@@ -170,8 +169,13 @@ public class Tablero3x3 extends Composite {
 	}
 	public void clear() {
 		for(int i=0;i<3;i++)
-			for (int j=0;j<3;j++)
+			for (int j=0;j<3;j++) {
 				this.fields[i][j].setUrl(this.casillaVacia);
+				this.casillas[i][j] = 0;
+			}
+		
+		this.vencedor = "";	
+		this.empate = false;
 		
 	}
 

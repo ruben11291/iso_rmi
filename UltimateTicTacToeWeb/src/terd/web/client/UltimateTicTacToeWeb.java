@@ -81,6 +81,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		tableroGlobal.setVisible(false);
 		tablero.setVisible(false);
 		tablero.clear();
+		tableroGlobal.reiniciar();
 		jugador1.setVisible(false);
 		jugador2.setVisible(false);
 		turno1.setVisible(false);
@@ -100,6 +101,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		listaTimer.cancel();
 		tablero.setVisible(false);
 		tablero.clear();
+		tableroGlobal.reiniciar();
 		jugador1.setVisible(false);
 		jugador2.setVisible(false);
 		turno1.setVisible(false);
@@ -238,7 +240,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (PartidaFinalizadaException e) {
-						if (e.getEmpate()) {
+						if (e.getEmpate() && tableroGlobal.getCasillas()[fT][cT] == 0) {
 							tableroGlobal.setTableroGanado(fT, cT, 0);
 						} else {
 							if (loginName.equals(tablero.getJugadorA().getEmail())) {
@@ -253,14 +255,18 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (TableroGanadoException e) {
+						if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 						if (loginName.equals(tablero.getJugadorA().getEmail())) {
 							tableroGlobal.setTableroGanado(fT, cT, 1);
 						} else {
 							tableroGlobal.setTableroGanado(fT, cT, -1);
 						}
+						}
 						cambiarTurno();
 					} catch (TableroEmpateException e) {
+						if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 						tableroGlobal.setTableroGanado(fT, cT, 0);
+						}
 						cambiarTurno();
 					}					
 				}
@@ -601,19 +607,15 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					enviarMovimiento(cT, fT, cC, fC);
 					cambiarTurno();
 				} catch (NoTienesElTurnoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("No tienes el turno");
 				} catch (NoEstaJugandoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("No está jugando");
 				} catch (CoordenadasNoValidasException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Coordenadas no válidas");
 				} catch (MovimientoNoValidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Movimiento no válido");
 				} catch (PartidaFinalizadaException e) {
-					if (e.getEmpate()) {
+					if (e.getEmpate() && tableroGlobal.getCasillas()[fT][cT] == 0) {
 						tableroGlobal.setTableroGanado(fT, cT, 0);
 					} else {
 						if (loginName.equals(tablero.getJugadorA().getEmail())) {
@@ -626,18 +628,21 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					Window.alert("Enhorabuena, has ganado la partida.");
 					trasFinalizarPartida();
 				} catch (CasillaOcupadaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Casilla ocupada");
 				} catch (TableroGanadoException e) {
+					if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 					if (loginName.equals(tablero.getJugadorA().getEmail())) {
 						tableroGlobal.setTableroGanado(fT, cT, -1);
 					} else {
 						tableroGlobal.setTableroGanado(fT, cT, 1);
 					}
+					}
 					enviarMovimiento(cT, fT, cC, fC);
 					cambiarTurno();
 				} catch (TableroEmpateException e) {
+					if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 					tableroGlobal.setTableroGanado(fT, cT, 0);
+					}
 					enviarMovimiento(cT, fT, cC, fC);
 					cambiarTurno();
 				}
@@ -652,7 +657,6 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		 	}
 		 });
 		 
-//		rootPanel.add(listaJugadores, 392, 104);
 		 RootPanel.get("listaJugadores").add(listaJugadores);
 		 listaJugadores.setSize("339px", "362px");
 		 listaJugadores.setVisibleItemCount(5);
@@ -660,12 +664,10 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		 listaJugadores.setVisible(false);
 		
 		 logo = new Image("image/unnamed.png");
-//		rootPanel.add(image, 307, 88);
 		RootPanel.get("logo").add(logo);
 		logo.setSize("339px", "341px");
 		
 		listaJ = new Label("Lista de Jugadores");
-//		rootPanel.add(listaJ, 622, 675);
 		RootPanel.get("labelLista").add(listaJ);
 		listaJ.setStyleName("labelLista");
 		listaJ.setVisible(false);
@@ -675,12 +677,12 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		RootPanel.get("labelSesion").add(labelSesion);
 		labelSesion.setVisible(false);
 
-		jugador1 = new Label("ANTONIO");
+		jugador1 = new Label("");
 		jugador1.setStyleName("labelSesion");
 		RootPanel.get("labelJugador1").add(jugador1);
 		jugador1.setVisible(false);
 		
-		jugador2 = new Label("ANGEL");
+		jugador2 = new Label("");
 		jugador2.setStyleName("labelSesion");
 		RootPanel.get("labelJugador2").add(jugador2);
 		jugador2.setVisible(false);

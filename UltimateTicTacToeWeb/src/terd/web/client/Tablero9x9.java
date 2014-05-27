@@ -189,8 +189,9 @@ public class Tablero9x9 extends Composite {
 	public void colocar(int cT, int fT, int cC, int fC) throws PartidaFinalizadaException, TableroGanadoException, TableroEmpateException {
 		Tablero3x3 tablerillo = this.tablerillos[cT][fT];
 		tablerillo.colocar(cC, fC, this.ultimoValor);
-		if (tablerillo.getVencedor().equals(""))
+		if (tablerillo.getVencedor().equals("")) {
 			tablerillo.comprobarVencedor(this.jugadorA.getEmail(), this.jugadorB.getEmail());
+		}
 		this.ultimoValor *= -1;
 			
 		this.last_cT = cT; this.last_fT = fT; this.last_cC = cC; this.last_fC = fC;
@@ -227,7 +228,11 @@ public class Tablero9x9 extends Composite {
 			for (int j=0;j<3;j++)
 				this.tablerillos[i][j].clear();
 		
+		this.ultimoValor = 1;
+//		this.jugadorA= null;
+//		this.jugadorB = null;
+		this.last_cT = this.last_fT = this.last_cC = this.last_fC = -1;
+		this.vencedor = "";
+		
 	}
-
-	
 }

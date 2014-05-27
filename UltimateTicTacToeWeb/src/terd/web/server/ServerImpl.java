@@ -11,10 +11,10 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import server.exportable.communications.IServer;
+import terd.web.client.Jugador;
 import terd.web.client.Server;
 import client.exceptions.*;
 import terd.web.shared.FieldVerifier;
-import terd.web.shared.WJugador;
 import client.exportable.communications.ICliente;
 
 import com.google.gwt.user.client.Window;
@@ -53,11 +53,6 @@ public class ServerImpl extends RemoteServiceServlet implements
 		} catch (JugadorYaRegistradoException e) {
 			throw new JugadorYaRegistradoException(email);
 		}
-			//Window.alert("El jugador ya está registrado");
-//		} catch (Exception e){
-//			Window.alert("Algo falló. Vuelva a intentarlo");
-//		}
-		
 	}
 	
 	public Vector<String> conectar(String jugador, String passwd) throws IllegalArgumentException {
@@ -84,7 +79,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 			
 		}
 		
-		WJugador j = new WJugador(jugador,1);
+		Jugador j = new Jugador(jugador, "");
 		this.getThreadLocalRequest().getSession().setAttribute("jugador", j);
 		Vector listaJugadores = null;
 		try {
@@ -125,8 +120,8 @@ public class ServerImpl extends RemoteServiceServlet implements
 	public Vector<String> getListaJugadores() throws Exception {
 		Vector<String> lista = new Vector();
 		Hashtable<String, Integer> retos;
-		WJugador j = (WJugador) this.getThreadLocalRequest().getSession().getAttribute("jugador");
-		String name_self= j.getName();
+		Jugador j = (Jugador) this.getThreadLocalRequest().getSession().getAttribute("jugador");
+		String name_self= j.getEmail();
 		System.out.println(name_self);
 		retos = this.servidorRMI.getListaJugadores();
 		Enumeration<String> e = retos.keys();
@@ -154,6 +149,16 @@ public class ServerImpl extends RemoteServiceServlet implements
 		return this.servidorRMI.getMovimientosHechos(oponente);
 	}
 	
+	@Override
+	public void abandonarPartida(String login_name) throws Exception {
+		this.servidorRMI.abandonoPartida(login_name);
+	}
+
+	@Override
+	public void cerrarSesion(String login_name) throws Exception {
+		this.servidorRMI.delete(login_name);
+	}
+	
 	/**
 	 * Escape an html string. Escaping data received from the client helps to
 	 * prevent cross-site script vulnerabilities.
@@ -168,15 +173,4 @@ public class ServerImpl extends RemoteServiceServlet implements
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
 	}
-
-	@Override
-	public void abandonarPartida(String login_name) throws Exception {
-		this.servidorRMI.abandonoPartida(login_name);
-	}
-
-	@Override
-	public void cerrarSesion(String login_name) throws Exception {
-		this.servidorRMI.delete(login_name);
-	}
-
 }
