@@ -462,7 +462,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 	private void login() {
 		
-		if (emailText.getText().equals("") && !passwdText.getText().equals("") && emailText.getText()!=null && passwdText.getText()!=null){
+		if (!emailText.getText().equals("") && !passwdText.getText().equals("") && emailText.getText()!=null && passwdText.getText()!=null){
 			UTTTService.conectar(emailText.getText(), passwdText.getText(),
 				new AsyncCallback<Vector<String>>() {
 					@Override

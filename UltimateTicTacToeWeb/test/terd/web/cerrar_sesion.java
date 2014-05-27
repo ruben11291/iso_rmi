@@ -1,16 +1,17 @@
-package com.example.tests;
+package terd.web;
 
 import com.thoughtworks.selenium.*;
 import java.util.regex.Pattern;
 
-public class passw_incorrecto extends SeleneseTestCase {
+public class cerrar_sesion extends SeleneseTestCase {
 	public void setUp() throws Exception {
 		setUp("http://127.0.0.1:8888/", "*chrome");
 	}
-	public void testPassw_incorrecto() throws Exception {
+	public void testCerrar_sesion() throws Exception {
 		selenium.open("/UltimateTicTacToeWeb.html?gwt.codesvr=127.0.0.1:9997");
-		selenium.type("css=input.gwt-PasswordTextBox", "ramon");
+		selenium.type("css=input.gwt-TextBox", "pepe");
+		selenium.type("css=input.gwt-PasswordTextBox", "pepe");
 		selenium.click("css=#sendButtonContainer > button.myButton");
-		assertEquals("Usuario ya logueado o no registrado en el sistema", selenium.getAlert());
+		selenium.click("css=button.myButton");
 	}
 }
