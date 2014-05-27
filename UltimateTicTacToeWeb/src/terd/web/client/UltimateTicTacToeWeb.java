@@ -51,7 +51,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	private PasswordTextBox passwdRegistro;
 	private PasswordTextBox repPasswdRegistro;
 	private Label listaJ, labelSesion, jugador1, jugador2;
-
+	private Image _old=null;
 	private final ServerAsync UTTTService = GWT.create(Server.class);
 
 	private static final String SERVER_ERROR = "An error occurred while "
@@ -75,6 +75,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		j1.setTablero(this.tablero);
 		j2.setTablero(this.tablero);
 		tableroGlobal.setVisible(true);
+		_old=null;
 	}
 	
 	private void trasFinalizarPartida() {
@@ -93,6 +94,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		retado = "";
 		tableroTimer.cancel();
 		retosTimer.scheduleRepeating(3000);
+		_old=null;
 	}
 	private void trasCerrarSesion() {
 		tableroGlobal.setVisible(false);
@@ -122,6 +124,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		loginName = "";
 		oponente = "";
 		retado= "";
+		_old=null;
 	}
 	
 	private void trasRetoAceptado(String string) {
@@ -226,7 +229,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						} else {
 							tablero.getJugadorA().poner(cT, fT, cC, fC);
 						}
-						cambiarTurno();
+						cambiarTurno(cT, fT, cC, fC);
+
 					} catch (NoTienesElTurnoException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -262,12 +266,14 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 							tableroGlobal.setTableroGanado(fT, cT, -1);
 						}
 						}
-						cambiarTurno();
+						cambiarTurno(cT, fT, cC, fC);
+
 					} catch (TableroEmpateException e) {
 						if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 						tableroGlobal.setTableroGanado(fT, cT, 0);
 						}
-						cambiarTurno();
+					
+						cambiarTurno(cT, fT, cC, fC);
 					}					
 				}
 					
@@ -276,7 +282,22 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		});				
 	}
 	
-	private void cambiarTurno() {
+	private void cambiarTurno(int cT,int fT,int cC,int fC) {
+		if (_old == null){
+			_old= ((tablero.getTablerillos()[cT][fT].getFields())[cC][fC]);
+//			_new = _old;
+			_old.setStyleName("tablero3x3", false);
+			_old.setStyleName("reciente", true);
+		}
+		else{
+			_old.setStyleName("reciente", false);
+			_old.setStyleName("tablero3x3", true);
+			_old =((tablero.getTablerillos()[cT][fT].getFields())[cC][fC]);
+//			_new.setStyleName("tablero3x3", true);
+			_old.setStyleName("reciente", true);
+			_old.setStyleName("tablero3x3", false);
+//			((tablero.getTablerillos()[fT][cT].getFields())[fC][cC]).setStyleName("reciente", true);
+		}
 		if (turno1.isVisible()) {
 			turno1.setVisible(false);
 			turno2.setVisible(true);
@@ -605,7 +626,9 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						tablero.getJugadorB().poner(cT, fT, cC, fC);
 					}
 					enviarMovimiento(cT, fT, cC, fC);
-					cambiarTurno();
+					
+					cambiarTurno(cT, fT, cC, fC);
+
 				} catch (NoTienesElTurnoException e) {
 					System.out.println("No tienes el turno");
 				} catch (NoEstaJugandoException e) {
@@ -638,13 +661,17 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					}
 					}
 					enviarMovimiento(cT, fT, cC, fC);
-					cambiarTurno();
+					
+					cambiarTurno(cT, fT, cC, fC);
+
 				} catch (TableroEmpateException e) {
 					if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 					tableroGlobal.setTableroGanado(fT, cT, 0);
 					}
 					enviarMovimiento(cT, fT, cC, fC);
-					cambiarTurno();
+					
+					cambiarTurno(cT, fT, cC, fC);
+
 				}
 			}
 		});
