@@ -76,6 +76,10 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		j1.setTablero(this.tablero);
 		j2.setTablero(this.tablero);
 		tableroGlobal.setVisible(true);
+		if (_old!=null){
+			_old.setStyleName("reciente", false);
+			_old.setStyleName("tablero3x3", true);
+		}
 		_old=null;
 	}
 	
@@ -95,6 +99,10 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		retado = "";
 		tableroTimer.cancel();
 		retosTimer.scheduleRepeating(3000);
+		if (_old!=null){
+			_old.setStyleName("reciente", false);
+			_old.setStyleName("tablero3x3", true);
+		}
 		_old=null;
 	}
 	private void trasCerrarSesion() {
@@ -125,6 +133,10 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		loginName = "";
 		oponente = "";
 		retado= "";
+		if (_old!=null){
+			_old.setStyleName("reciente", false);
+			_old.setStyleName("tablero3x3", true);
+		}
 		_old=null;
 	}
 	
@@ -255,7 +267,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 							}
 						}
 						Window.alert(e.getEmail() + " ha ganado la partida.");
-						trasFinalizarPartida();
+						abandonarPartida();
+//						trasFinalizarPartida();
 					} catch (CasillaOcupadaException e) {
 						// TODO Auto-generated catch block
 //						e.printStackTrace();
@@ -449,52 +462,56 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	
 	private void login() {
 		
-		UTTTService.conectar(emailText.getText(), passwdText.getText(),
-			new AsyncCallback<Vector<String>>() {
-				@Override
-				public void onFailure(Throwable caught) {
-					try{
-						throw caught;
+		if (emailText.getText().equals("") && !passwdText.getText().equals("") && emailText.getText()!=null && passwdText.getText()!=null){
+			UTTTService.conectar(emailText.getText(), passwdText.getText(),
+				new AsyncCallback<Vector<String>>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						try{
+							throw caught;
+						}
+						catch (JugadorNoExisteException e){
+							Window.alert("Usuario no registrado en el sistema");
+						}
+						catch (JugadorYaExisteException e){
+							Window.alert("Usuario ya logueado en el sistema");
+						}
+						catch ( Throwable e) {
+							Window.alert("Usuario ya logueado o no registrado en el sistema");
+					     }
 					}
-					catch (JugadorNoExisteException e){
-						Window.alert("Usuario no registrado en el sistema");
-					}
-					catch (JugadorYaExisteException e){
-						Window.alert("Usuario ya logueado en el sistema");
-					}
-					catch ( Throwable e) {
-						Window.alert("Usuario ya logueado o no registrado en el sistema");
-				     }
+			
 								
 //					System.out.println("Error al hacer login: " + caught);
-				}
+				
 
-				@Override
-				public void onSuccess(Vector<String> result) {
-//					listaJugadores.clear();
-//					for (String r : result)
-//						listaJugadores.addItem(r);
-					listaTimer = new Timer() {
-						
-						@Override
-						public void run() {
-							refrescarListaJugadores();
-						}
-
-					};
-//					listaTimer.scheduleRepeating(3000);
-					retosTimer = new Timer() {
-
-						@Override
-						public void run() {
-							refrescarRetos();
-						}
-						
-					};
-//					retosTimer.scheduleRepeating(3000);
-					trasLogin();
-				}
+					@Override
+					public void onSuccess(Vector<String> result) {
+	//					listaJugadores.clear();
+	//					for (String r : result)
+	//						listaJugadores.addItem(r);
+						listaTimer = new Timer() {
+							
+							@Override
+							public void run() {
+								refrescarListaJugadores();
+							}
+	
+						};
+	//					listaTimer.scheduleRepeating(3000);
+						retosTimer = new Timer() {
+	
+							@Override
+							public void run() {
+								refrescarRetos();
+							}
+							
+						};
+	//					retosTimer.scheduleRepeating(3000);
+						trasLogin();
+					}
 			});
+		}
 	}
 	
 	private void retarJugador() {
