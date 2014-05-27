@@ -55,28 +55,27 @@ public class ServerImpl extends RemoteServiceServlet implements
 		}
 	}
 	
-	public Vector<String> conectar(String jugador, String passwd) throws IllegalArgumentException {
+	public Vector<String> conectar(String jugador, String passwd) throws Exception{
 		// Verify that the input is valid. 
-		if (!FieldVerifier.isValidName(jugador)) {
-			// If the input is not valid, throw an IllegalArgumentException back to
-			// the client.
-			throw new IllegalArgumentException(
-					"Name must be at least 4 characters long");
-		}
+//		if (!FieldVerifier.isValidName(jugador)) {
+//			// If the input is not valid, throw an IllegalArgumentException back to
+//			// the client.
+//			throw new IllegalArgumentException(
+//					"Name must be at least 4 characters long");
+//		}
 
 		try {
 			this.servidorRMI.add(jugador, passwd, null);
-			System.out.println("login exito");
+//			System.out.println("login exito");
 		} catch (RemoteException e1) {
-			System.out.println("remote exception");
-			e1.printStackTrace();
-		} catch (JugadorNoExisteException e1) {
-			System.out.println("jn exception");
-			e1.printStackTrace();
-		} catch (JugadorYaExisteException e1) {
-			System.out.println("jy exception");
-			e1.printStackTrace();
-			
+			throw new RemoteException();
+		}catch (JugadorYaExisteException e) {
+			throw new terd.web.client.exceptions.JugadorYaExisteException(jugador);
+		
+		}catch (JugadorNoExisteException e) {
+			throw new terd.web.client.exceptions.JugadorNoExisteException(jugador);
+		} catch (Exception e1) {
+			throw new Exception();
 		}
 		
 		Jugador j = new Jugador(jugador, "");
@@ -87,7 +86,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("fin conectar");
+//		System.out.println("fin conectar");
 		return listaJugadores;
 	}
 
@@ -122,7 +121,7 @@ public class ServerImpl extends RemoteServiceServlet implements
 		Hashtable<String, Integer> retos;
 		Jugador j = (Jugador) this.getThreadLocalRequest().getSession().getAttribute("jugador");
 		String name_self= j.getEmail();
-		System.out.println(name_self);
+//		System.out.println(name_self);
 		retos = this.servidorRMI.getListaJugadores();
 		Enumeration<String> e = retos.keys();
 		while (e.hasMoreElements()) {
@@ -166,11 +165,5 @@ public class ServerImpl extends RemoteServiceServlet implements
 	 * @param html the html string to escape
 	 * @return the escaped string
 	 */
-	private String escapeHtml(String html) {
-		if (html == null) {
-			return null;
-		}
-		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
-				.replaceAll(">", "&gt;");
-	}
+	
 }

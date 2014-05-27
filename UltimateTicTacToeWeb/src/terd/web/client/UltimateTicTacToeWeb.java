@@ -5,6 +5,7 @@ import java.util.Vector;
 import terd.web.client.exceptions.CasillaOcupadaException;
 import terd.web.client.exceptions.CoordenadasNoValidasException;
 import terd.web.client.exceptions.JugadorNoExisteException;
+import terd.web.client.exceptions.JugadorYaExisteException;
 import terd.web.client.exceptions.JugadorYaRegistradoException;
 import terd.web.client.exceptions.MovimientoNoValidoException;
 import terd.web.client.exceptions.NoEstaJugandoException;
@@ -163,7 +164,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		labelSesion.setVisible(true);
 		retosTimer.scheduleRepeating(3000);
 		listaTimer.scheduleRepeating(3000);
-		System.out.println("Tras login");
+//		System.out.println("Tras login");
 	}
 	
 	private void abandonarPartida() {
@@ -233,16 +234,16 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 					} catch (NoTienesElTurnoException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+//						e.printStackTrace();
 					} catch (NoEstaJugandoException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+//						e.printStackTrace();
 					} catch (CoordenadasNoValidasException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+//						e.printStackTrace();
 					} catch (MovimientoNoValidoException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+//						e.printStackTrace();
 					} catch (PartidaFinalizadaException e) {
 						if (e.getEmpate() && tableroGlobal.getCasillas()[fT][cT] == 0) {
 							tableroGlobal.setTableroGanado(fT, cT, 0);
@@ -257,7 +258,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 						trasFinalizarPartida();
 					} catch (CasillaOcupadaException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+//						e.printStackTrace();
 					} catch (TableroGanadoException e) {
 						if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 						if (loginName.equals(tablero.getJugadorA().getEmail())) {
@@ -452,7 +453,20 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			new AsyncCallback<Vector<String>>() {
 				@Override
 				public void onFailure(Throwable caught) {
-					System.out.println("Error al hacer login: " + caught);
+					try{
+						throw caught;
+					}
+					catch (JugadorNoExisteException e){
+						Window.alert("Usuario no registrado en el sistema");
+					}
+					catch (JugadorYaExisteException e){
+						Window.alert("Usuario ya logueado en el sistema");
+					}
+					catch ( Throwable e) {
+						Window.alert("Usuario ya logueado o no registrado en el sistema");
+				     }
+								
+//					System.out.println("Error al hacer login: " + caught);
 				}
 
 				@Override
@@ -488,7 +502,8 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			new AsyncCallback<Vector<String>>() {
 				@Override
 				public void onFailure(Throwable caught) {
-					System.out.println("Error al retar jugador: " + caught);
+//					System.out.println("Error al retar jugador: " + caught);
+					Window.alert("Error al retar jugador "+retado);
 				}
 
 				@Override
@@ -630,13 +645,13 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					cambiarTurno(cT, fT, cC, fC);
 
 				} catch (NoTienesElTurnoException e) {
-					System.out.println("No tienes el turno");
+//					System.out.println("No tienes el turno");
 				} catch (NoEstaJugandoException e) {
-					System.out.println("No está jugando");
+//					System.out.println("No está jugando");
 				} catch (CoordenadasNoValidasException e) {
-					System.out.println("Coordenadas no válidas");
+//					System.out.println("Coordenadas no válidas");
 				} catch (MovimientoNoValidoException e) {
-					System.out.println("Movimiento no válido");
+//					System.out.println("Movimiento no válido");
 				} catch (PartidaFinalizadaException e) {
 					if (e.getEmpate() && tableroGlobal.getCasillas()[fT][cT] == 0) {
 						tableroGlobal.setTableroGanado(fT, cT, 0);
@@ -651,7 +666,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 					Window.alert("Enhorabuena, has ganado la partida.");
 					trasFinalizarPartida();
 				} catch (CasillaOcupadaException e) {
-					System.out.println("Casilla ocupada");
+//					System.out.println("Casilla ocupada");
 				} catch (TableroGanadoException e) {
 					if (tableroGlobal.getCasillas()[fT][cT] == 0) {
 					if (loginName.equals(tablero.getJugadorA().getEmail())) {

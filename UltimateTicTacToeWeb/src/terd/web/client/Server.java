@@ -1,15 +1,14 @@
 package terd.web.client;
 
-import java.rmi.RemoteException;
-import java.util.Hashtable;
 import java.util.Vector;
+
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("greet")
 public interface Server extends RemoteService {
-	Vector<String> conectar(String name, String passwd) throws IllegalArgumentException;
+	Vector<String> conectar(String name, String passwd) throws Exception;
 
 	Vector<String> retarJugador(String retador, String retado) throws IllegalArgumentException;
 

@@ -6,8 +6,7 @@ import java.util.Vector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ServerAsync {
-	void conectar(String jugador, String passwd, AsyncCallback<Vector<String>> callback)
-			throws IllegalArgumentException;
+	void conectar(String jugador, String passwd, AsyncCallback<Vector<String>> callback);
 
 	void retarJugador(String retador, String retado,
 			AsyncCallback<Vector<String>> asyncCallback);
