@@ -17,6 +17,7 @@ import terd.web.shared.FieldVerifier;
 import terd.web.shared.WJugador;
 import client.exportable.communications.ICliente;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
@@ -44,6 +45,19 @@ public class ServerImpl extends RemoteServiceServlet implements
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void registrar(String email, String pwd) throws RemoteException, JugadorYaRegistradoException {
+		try {
+			this.servidorRMI.register(email, pwd);
+		} catch (JugadorYaRegistradoException e) {
+			throw new JugadorYaRegistradoException(email);
+		}
+			//Window.alert("El jugador ya está registrado");
+//		} catch (Exception e){
+//			Window.alert("Algo falló. Vuelva a intentarlo");
+//		}
+		
 	}
 	
 	public Vector<String> conectar(String jugador, String passwd) throws IllegalArgumentException {

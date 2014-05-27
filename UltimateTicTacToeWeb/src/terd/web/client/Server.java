@@ -28,4 +28,6 @@ public interface Server extends RemoteService {
 	void abandonarPartida(String login_name) throws Exception;
 
 	void cerrarSesion(String login_name) throws Exception;
+	
+	void registrar(String email, String pwd) throws Exception;
 }

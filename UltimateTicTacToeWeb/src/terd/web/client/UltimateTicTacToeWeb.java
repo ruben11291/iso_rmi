@@ -5,6 +5,7 @@ import java.util.Vector;
 import terd.web.client.exceptions.CasillaOcupadaException;
 import terd.web.client.exceptions.CoordenadasNoValidasException;
 import terd.web.client.exceptions.JugadorNoExisteException;
+import terd.web.client.exceptions.JugadorYaRegistradoException;
 import terd.web.client.exceptions.MovimientoNoValidoException;
 import terd.web.client.exceptions.NoEstaJugandoException;
 import terd.web.client.exceptions.NoTienesElTurnoException;
@@ -94,8 +95,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	}
 	private void trasCerrarSesion() {
 		tableroGlobal.setVisible(false);
-		if (tableroTimer != null)
-			tableroTimer.cancel();
+		if (tableroTimer != null) tableroTimer.cancel();
 		retosTimer.cancel();
 		listaTimer.cancel();
 		tablero.setVisible(false);
@@ -379,7 +379,48 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		});				
 	}
 	
+	private void registrar(){
+		if (emailRegistro.getText().isEmpty() 
+				|| passwdRegistro.getText().equals("") 
+				|| repPasswdRegistro.getText().equals("")){
+			Window.alert("Totos los campos son obligatorios");
+		}
+		else{
+		
+			if ( ! passwdRegistro.getText().equals(repPasswdRegistro.getText())  ){
+				Window.alert("Las contraseñas deben coincidir");
+			}
+			else{
+			
+			UTTTService.registrar(emailRegistro.getText(), passwdRegistro.getText(),
+					new AsyncCallback() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							try{
+								throw caught;
+							}
+							catch (Throwable e) {
+								Window.alert("El jugador ya está registrado");
+						     }
+														
+						}
+
+						@Override
+						public void onSuccess(Object result) {
+							Window.alert("Usuario registrado");							
+						}
+				
+					});
+			}
+			
+	     }
+		
+		
+	}
+	
 	private void login() {
+		
 		UTTTService.conectar(emailText.getText(), passwdText.getText(),
 			new AsyncCallback<Vector<String>>() {
 				@Override
@@ -467,9 +508,18 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		RootPanel.get("registerButton").add(registrarButton);
 		loginButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				loginButton.setEnabled(true);
-				loginButton.setFocus(true);
+//				loginButton.setEnabled(true);
+//				loginButton.setFocus(true);
 				login();
+			}
+		});
+		
+		registrarButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+//				registrarButton.setFocus(true);
+				registrar();
+				
 			}
 		});
 		
