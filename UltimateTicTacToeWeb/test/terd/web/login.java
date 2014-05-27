@@ -1,4 +1,4 @@
-package com.example.tests;
+package terd.web;
 
 import com.thoughtworks.selenium.*;
 import java.util.regex.Pattern;
