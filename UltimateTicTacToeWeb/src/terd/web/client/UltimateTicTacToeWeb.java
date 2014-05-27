@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 
 public class UltimateTicTacToeWeb implements EntryPoint {
 
@@ -45,16 +46,17 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 	private TableroGlobal tableroGlobal;
 	private ListBox listaJugadores;
 	private Image image;
-
+	private TextBox emailRegistro;
+	private PasswordTextBox passwdRegistro;
+	private PasswordTextBox repPasswdRegistro;
+	private Label listaJ;
 
 	private final ServerAsync UTTTService = GWT.create(Server.class);
 
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
-	private TextBox emailRegistro;
-	private PasswordTextBox passwdRegistro;
-	private PasswordTextBox repPasswdRegistro;
+	
 
 	
 	private void creaPartida(String retador, String retado){
@@ -95,11 +97,16 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		loginButton.setVisible(true);
 		registrarButton.setVisible(true);
 		emailText.setVisible(true);
+		emailRegistro.setVisible(true);
+		passwdRegistro.setVisible(true);
+		repPasswdRegistro.setVisible(true);
+		image.setVisible(true);
+		listaJ.setVisible(false);
 		passwdText.setVisible(true);
 		loginName = "";
 		oponente = "";
 		retado= "";
-		System.out.println("Tras cerrar sesi��n");
+		System.out.println("Tras cerrar sesión");
 	}
 	
 	private void trasRetoAceptado(String string) {
@@ -127,6 +134,12 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		loginButton.setVisible(false);
 		emailText.setVisible(false);
 		passwdText.setVisible(false);
+		registrarButton.setVisible(false);
+		emailRegistro.setVisible(false);
+		passwdRegistro.setVisible(false);
+		repPasswdRegistro.setVisible(false);
+		image.setVisible(false);
+		listaJ.setVisible(true);
 		cerrarButton.setVisible(true);
 		retosTimer.scheduleRepeating(3000);
 		listaTimer.scheduleRepeating(3000);
@@ -529,25 +542,32 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 				}
 			}
 		});
-		
-		listaJugadores = new ListBox();
-		listaJugadores.addDoubleClickHandler(new DoubleClickHandler() {
-			public void onDoubleClick(DoubleClickEvent event) {
-				retado = listaJugadores.getItemText(listaJugadores.getSelectedIndex());
-				retarJugador();
-			}
-		});
-		
-		rootPanel.add(listaJugadores, 34, 156);
-		listaJugadores.setSize("102px", "263px");
-		listaJugadores.setVisibleItemCount(5);
+		 
+		 listaJugadores = new ListBox();
+		 listaJugadores.addDoubleClickHandler(new DoubleClickHandler() {
+		 	public void onDoubleClick(DoubleClickEvent event) {
+		 		retado = listaJugadores.getItemText(listaJugadores.getSelectedIndex());
+		 		retarJugador();
+		 	}
+		 });
+		 
+//		rootPanel.add(listaJugadores, 392, 104);
+		 RootPanel.get("listaJugadores").add(listaJugadores);
+		 listaJugadores.setSize("339px", "362px");
+		 listaJugadores.setVisibleItemCount(5);
+		 listaJugadores.setStyleName("lista");
+		 listaJugadores.setVisible(false);
 		
 		 image = new Image("image/log.png");
 //		rootPanel.add(image, 307, 88);
 		RootPanel.get("logo").add(image);
 		image.setSize("339px", "341px");
 		
-		listaJugadores.setVisible(false);
+		listaJ = new Label("Lista de Jugadores");
+//		rootPanel.add(listaJ, 622, 675);
+		RootPanel.get("labelLista").add(listaJ);
+		listaJ.setStyleName("labelLista");
+		listaJ.setVisible(false);
 
 	}
 }	
