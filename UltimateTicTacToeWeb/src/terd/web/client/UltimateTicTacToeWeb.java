@@ -79,6 +79,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		tablero.clear();
 		abandonarButton.setVisible(false);
 		listaJugadores.setVisible(true);
+		listaJ.setVisible(true);
 		oponente = "";
 		retado = "";
 		tableroTimer.cancel();
@@ -124,6 +125,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		tablero.setVisible(true);
 		abandonarButton.setVisible(true);
 		listaJugadores.setVisible(false);
+		listaJ.setVisible(false);
 		System.out.println("Tras reto aceptado");
 	}
 	
@@ -609,7 +611,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 		 listaJugadores.setStyleName("lista");
 		 listaJugadores.setVisible(false);
 		
-		 image = new Image("image/log.png");
+		 image = new Image("image/unnamed.png");
 //		rootPanel.add(image, 307, 88);
 		RootPanel.get("logo").add(image);
 		image.setSize("339px", "341px");
