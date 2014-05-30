@@ -41,4 +41,7 @@ public class Jugador implements IsSerializable {
 		this.tablero.colocar(cT, fT, cC, fC);
 
 	}
+	public String getPasswd(){
+		return this.passwd;
+	}
 }

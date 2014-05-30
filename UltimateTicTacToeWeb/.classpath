@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="/UltimateTicTacToeServer/IServer.jar"/>
 	<classpathentry kind="lib" path="/UltimateTicTacToeClient/IClient.jar"/>
 	<classpathentry kind="lib" path="/UltimateTicTacToeClient/Exceptions.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="/home/ruben/Descargas/selenium-server-standalone-2.42.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

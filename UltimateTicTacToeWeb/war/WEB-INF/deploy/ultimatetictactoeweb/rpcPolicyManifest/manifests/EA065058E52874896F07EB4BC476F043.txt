@@ -1,2 +1,0 @@
-serviceClass: terd.web.client.Server
-path: DB3BEEAB2723723A9B8FDB0778A5460B.gwt.rpc
