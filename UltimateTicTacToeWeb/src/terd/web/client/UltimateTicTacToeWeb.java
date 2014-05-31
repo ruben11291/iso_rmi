@@ -594,7 +594,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				abandonarButton.setEnabled(false);
+				//abandonarButton.setEnabled(false);
 				abandonarPartida();
 			}
 		});
