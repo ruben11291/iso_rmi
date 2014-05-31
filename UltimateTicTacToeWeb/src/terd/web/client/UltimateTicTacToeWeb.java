@@ -452,7 +452,7 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 
 						@Override
 						public void onSuccess(Object result) {
-							Window.alert("Usuario registrado");							
+						//	Window.alert("Usuario registrado");							
 						}
 				
 					});

@@ -36,6 +36,7 @@ public class RegisterLoginAndCloseSession {
 		assertTrue(selenium.isElementPresent("css=select.lista"));
 		assertTrue(selenium.isElementPresent("css=div.labelLista"));
 		assertTrue(selenium.isElementPresent("css=button.myButton"));
+		Thread.sleep(1000);
 		selenium.click("css=button.myButton");
 		Thread.sleep(1000);
 		assertTrue(selenium.isElementPresent("css=select.lista"));
@@ -45,6 +46,7 @@ public class RegisterLoginAndCloseSession {
 
 	@After
 	public void tearDown() throws Exception {
+		
 		selenium.stop();
 		FuncionesAuxiliaresTests.borrarBD();
 
