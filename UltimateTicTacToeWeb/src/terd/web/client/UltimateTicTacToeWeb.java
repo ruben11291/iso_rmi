@@ -23,6 +23,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
@@ -33,6 +34,8 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
@@ -638,6 +641,25 @@ public class UltimateTicTacToeWeb implements EntryPoint {
 //		tablero.setSize("100px", "100px");
 		RootPanel.get("boardGame").add(tablero);
 		tablero.setVisible(false);
+		
+		
+		Window.addWindowClosingHandler(new Window.ClosingHandler() {
+
+            @Override
+            public void onWindowClosing(ClosingEvent event) {
+
+            }
+
+        });
+
+        Window.addCloseHandler(new CloseHandler<Window>() {
+
+            @Override
+            public void onClose(CloseEvent<Window> event) {
+                cerrarSesion();
+            }
+        });
+		
 		
 		tablero.getGrid().addClickHandler(new ClickHandler() {
 			

@@ -12,9 +12,10 @@ public class RegisterAndLogin {
 
 	@Before
 	public void setUp() throws Exception {
+		FuncionesAuxiliaresTests.borrarBD();
+
 		selenium = new DefaultSelenium("localhost", 4444, "*chrome", "http://127.0.0.1:8888/");
 		selenium.start();
-		FuncionesAuxiliaresTests.borrarBD();
 	}
 
 	@Test
@@ -35,6 +36,10 @@ public class RegisterAndLogin {
 
 	@After
 	public void tearDown() throws Exception {
+		selenium.click("css=button.myButton");
+
 		selenium.stop();
+		FuncionesAuxiliaresTests.borrarBD();
+
 	}
 }
