@@ -2,79 +2,18 @@
 
 \subsection{Pruebas para la aplicación web}
 
- hecho de tal forma que puedan ser ejecutadas de forma independiente. No necesita ningún cliente. El paquete test.communications contiene un cliente construido específicamente para las pruebas y consiste en un modelo simplificado de la clase Cliente del sistema cliente.
+Los test de la aplicación web han sido llevado a cabo mediante el testbed \emph{Selenium}. Las pruebas que han podido ser cubiertas y reproducibles han sido:
 
 \begin{itemize}
-\item Paquete \emph{src.server.tests}
-
-\begin{center}
-{\footnotesize
-\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
-
-\textbf{Caso de Uso} & \textbf{Test} \\
-& \\
-Registrar Usuario & TestDAOJugador\\
-Autenticar & TestDAOJugador\\
-Cerrar Sesión & TestCerrarSesion\\
-Registrar moviminento & TestDAOMovimiento\\
-Enviar movimiento a jugador & TestReto\\
-Enviar respuesta a reto & TestReto\\
-\end{tabularx}
-}
-\end{center}
-
-Los test no prueban la comunicación entre clientes, solo la funcionalidad del servidor a partir de la fachada del servidor (clase FTERD, ver Diagrama de clases del servidor).
-
-\item Paquete \emph{src.server.tests.communications}.
-\begin{center}
-{\footnotesize
-\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
-\textbf{Caso de Uso} & \textbf{Test} \\
-& \\
-Cerrar sesión & TestCerrarSesion\\
-Registrar usuario & TestRegistrarYAnyadirJugador\\
-Autenticar & TestRegistrarYAnyadirJugador\\
-Enviar respuesta a reto & TesteRetoRechazar\\
-Enviar respuesta a reto & TestRetoAceptar\\
-\end{tabularx}
-}
-\end{center}
+\item Pruebas relacionadas con el login, posibles causas de error y de éxito.
+\item Pruebas relacionadas con el registro, posibles causas de error y de éxito.
+\item Pruebas relacionadas con el cierre de sesión, posibles causas de error y de éxito.
 \end{itemize}
 
-\clearpage
+Para poder realizar estas pruebas ha sido necesario introducir una clase \emph{Broker} para la comunicación con la base de datos y una clase auxiliar que contiene las operaciones de borrado de esta base de datos.
 
-\subsection{Pruebas para el cliente}
+Las pruebas relacionadas con la lógica de dominio por parte del cliente quedan cubiertas con las pruebas que se realizaron para el cliente web, ya que el código se ha cogido tal cual de esa implementación.
 
-Las pruebas del cliente son dependientes del servidor. Es decir, el test FTERDTest implica que se esté ejecutando el servidor para la posible evaluación del ``test-case''. Los demás ficheros de test no dependen de la ejecución del servidor, son independientes.
+Se ha intentado realizar una prueba respecto de la jugabilidad, pero al no ser reproducible, se ha descartado. Estas pruebas han sido llevadas a cabo de forma manual con mucha dedicación y esfuerzo, probando las múltiples posibilidades para poder llevar la cobertura al máximo posible.
 
-
-\begin{center}
-{\footnotesize
-\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
-
-\textbf{Caso de Uso} & \textbf{Test} \\
-& \\
-Registrar & FTERDTest\\
-Iniciar sesión & FTERDTest\\
-Cerrar sesión &FTERDTest \\
-Salir de la partida & FTERDTest\\
-Retar jugador &FTERDTest \\
-Aceptar reto&FTERDTest\\
-Realizar movimiento& Tablero9x9Test\\
-\end{tabularx}
-}
-\end{center}
-
-Existen también los test Tablero3x3Test, JugadorTest y Tablero9x9Test que evalúan los posibles escenarios del juego. Esto es, se evalúan las posibles situaciones de movimientos sobre el tablero y se comprueban los resultados de la ejecución.
-\begin{center}
-{\footnotesize
-\begin{tabularx}{0.95\textwidth}{p{0.2\textwidth}|X}
-
-\textbf{Test} & \textbf{Función} \\
-& \\
-Tablero3x3Test & Evalúa que se coloquen las fichas en el lugar correcto y el tablero empatado y ganado.\\
-Tablero9x9Test & Evalúa la correcta colocación de las fichas según las reglas del juego y que la victoria de los tableros, el empate total y la victoria del juego se realizen correctamente. \\
-JugadorTest &Evalúa que el jugador que pone una ficha, realmente ejecuta todo el procedimiento y coloca la ficha, si las reglas lo permiten. \\
-\end{tabularx}
-}
-\end{center}
+Las pruebas se encuentran en el paquete \emph{test.terd.web}.
