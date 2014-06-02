@@ -34,8 +34,7 @@ En la siguiente figura, se puede apreciar la arquitectura de la aplicación web,
 Como se puede apreciar en la Figura \ref{arq_sistema}, el servidor web está basado únicamente en una capa de comunicación ya que no posee dominio o persistencia alguna.
 
 \begin{itemize}
-  \item \emph{Comunicación:} La clase encargada de esta función es \emph{ServerImpl}. Implementa la interfaz \emph{Servidor} e \emph{ICliente}. Al extender de ``Remote Service'' proporciona servicios a los clientes web que los soliciten. Cuándo estos son solicitados, se envían al servidor de escritorio para que realmente sirva sus peticiones. Este envío es realizado mediante RMI. Para recibir la respuesta necesita implementar la interfaz \emph{ICliente} ya que el servidor de escritorio desconoce que es web, simplemente se trata como otro cliente cualquiera.
- del paquete de dominio.
+  \item \emph{Comunicación:} La clase encargada de esta función es \emph{ServerImpl}. Implementa la interfaz del Servidor Síncrono en la parte web y usa la interfaz del Servidor RMI, permitiendo la comunicación con otros clientes, tanto web como de escritorio.
 \end{itemize}
 
 \subsection{Arquitectura del Cliente web}
