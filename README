@@ -1,0 +1,8 @@
+Práctica de Ingeniería del Software II consistente en una aplicación cliente-servidor del juego tres en raya definitivo programado en Java. Hay dos clientes, uno de escritorio y otro web desarrollado también en Java con el framework GWT. La comunicación de los diversos clientes con el servidor se realiza mediante RMI.
+
+Autores:
+Javier Marchán Loro
+Ángel Peralta López
+Rubén Pérez Pascual
+Antonio Ruedas García
+
